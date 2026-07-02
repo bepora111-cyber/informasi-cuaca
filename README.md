@@ -1,8 +1,9 @@
 ---
-title: Informasi Cuaca
-emoji: ☀️
+title: Weather App
+emoji: 🌤️
 colorFrom: blue
-colorTo: indigo
+colorTo: cyan
 sdk: static
+app_file: index.html
 pinned: false
 ---
