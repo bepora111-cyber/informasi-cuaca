@@ -1,0 +1,5103 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informasi Cuaca</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    min-height:100vh;
+    padding:20px;
+    color:white;
+    background-image:url('https://lh3.googleusercontent.com/gps-cs-s/APNQkAGXzDf6jAqrxVqIt-StdTukOFbGz1GhCgbTUc4Cy9HvG0ZJ1Lk6GwKSemZ9SSBePQ6xFvAHl-g-2ExnhP111C7NhC2NnwS8JRjZyBT-UGeuFAIt_Pjh9ENi7PStSl_RU352jqAyHI6mGIdz=s1360-w1360-h1020-rw');
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+}
+
+h1{
+    text-align:center;
+    text-shadow:0 2px 5px black;
+    margin-top:10px;
+}
+
+h2{
+    text-align:center;
+    font-weight:normal;
+    margin-bottom:30px;
+    text-shadow:0 2px 5px black;
+}
+
+/* ==================== STYLE PERSEGI ROUNDED ==================== */
+.slider-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width:500px;
+    overflow:hidden;
+    margin:auto;
+}
+
+.slider-track-wrapper {
+    overflow: hidden;
+    width: 100%;
+    border-radius: 15px; /* Membuat sudut bingkai luar melengkung */
+    padding: 0;
+}
+
+.slider-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: 100%;
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-select: none;
+    cursor: grab;
+}
+.slider-track .box{
+    flex:0 0 calc(100% / 3);
+    max-width:calc(100% / 3);
+
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(10px);
+
+    border-radius:15px;
+    height:140px;
+    padding:15px;
+    text-align:left;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    align-items:center;
+    gap:0;
+    cursor:pointer;
+    overflow:hidden;
+
+    transform:scale(0.85);
+    opacity:0.6;
+    transition:all .4s ease;
+
+    border:1px solid rgba(255,255,255,.05);
+}
+.slider-track .box.active{
+    transform:scale(1);
+    opacity:1;
+    background:rgba(0,0,0,0.6);
+}
+
+.slider-track .box.side{
+    transform:scale(0.9);
+    opacity:0.8;
+    background:rgba(0,0,0,0.35);
+}
+.slider-track .box:hover {
+    transform: scale(1.02);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.box h3{
+    margin:0;
+    font-size:18px;
+    font-weight:bold;
+    width:100%;
+    text-align:left;
+}
+#precipProb-box h3,
+#wind-box h3{
+    font-size:clamp(11px,1.5vw,16px);
+    white-space:nowrap;
+}
+
+.value{
+    display:flex;
+    align-items:flex-end;
+    justify-content:flex-start;
+    gap:3px;
+    width:100%;
+
+    white-space:nowrap;
+    flex-wrap:nowrap;
+
+    font-size:25px;
+    font-weight:bold;
+}
+#cuaca{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:center;
+    text-align:left;
+    gap:6px;
+}
+
+#cuacaEmoji{
+    font-size:40px;
+    line-height:1;
+    transform: translateY(-15px);
+}
+
+#cuacaText{
+    font-size:16px;
+    line-height:1.2;
+    font-weight:bold;
+}
+#temp-box select,
+#wind-box select{
+    align-self:flex-start;
+    margin-bottom:8px;
+    padding:4px 8px;
+    border:none;
+    border-radius:6px;
+    font-size:12px;
+    background:rgba(255,255,255,0.15);
+    color:white;
+}
+#tempUnit,
+#windUnit{
+    background: rgba(255,255,255,0.15);
+    color: white;
+}
+
+#tempUnit option,
+#windUnit option{
+    background: #222;
+    color: white;
+}
+@media (max-width:768px){
+    #cuacaEmoji{
+        font-size:32px;
+    }
+
+    #cuacaText{
+        font-size:13px;
+        white-space: normal;
+        word-break: break-word;
+        line-height: 1.2;
+        text-align: left;
+    }
+}
+/* Indikator Titik & Strip */
+.slider-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+    margin-bottom: 40px; 
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dot.active {
+    width: 25px; 
+    height: 10px;
+    background: #74b9ff; 
+    border-radius: 5px;
+}
+
+/* ==================== LAYOUT PREDIKSI 7 HARI ==================== */
+.forecast{
+    margin-top:20px;
+    clear: both;
+}
+
+.forecast-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+    gap:15px;
+}
+
+.day{
+    position:relative;
+
+    background:rgba(0,0,0,0.35);
+    backdrop-filter:blur(10px);
+    border-radius:15px;
+
+    padding:15px;
+    text-align:center;
+
+    perspective:1000px;
+
+    height:180px;
+
+    overflow:visible;
+}
+.flip-inner{
+    position:relative;
+    width:100%;
+    height:100%;
+    transition:transform 1s;
+    transform-style:preserve-3d;
+}
+
+.flip-card.flip .flip-inner{
+    transform:rotateY(180deg);
+}
+
+.front,
+.back{
+    position:absolute;
+    inset:0;
+
+    border-radius:15px;
+
+    backface-visibility:hidden;
+    -webkit-backface-visibility:hidden;
+}
+
+.front{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    padding:15px;
+
+    background:rgba(0,0,0,.35);
+    backdrop-filter:blur(10px);
+}
+
+.back{
+    transform:rotateY(180deg);
+
+    overflow:hidden;
+    padding:0;
+}
+
+.weatherCanvas{
+    position:absolute;
+    inset:0;
+
+    width:100%;
+    height:100%;
+    display:block;
+}
+.icon{
+    font-size:30px;
+    margin:10px 0;
+}
+.front,
+.back{
+    position:absolute;
+    inset:0;
+
+    border-radius:15px;
+
+    backface-visibility:hidden;
+    -webkit-backface-visibility:hidden;
+
+    overflow:hidden;
+}
+
+/* Jam Digital Pojok */
+.datetime-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    text-align: right;
+    color: white;
+    font-family: sans-serif;
+    background: rgba(0, 0, 0, 0.4); 
+    padding: 10px 15px;
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+    z-index: 1000; 
+}
+
+#hari-tanggal { font-size: 16px; font-weight: 500; margin-bottom: 3px; }
+#jam-menit-detik { font-size: 22px; font-weight: bold; letter-spacing: 1px; }
+
+/* STYLE POP-UP MODAL GRAFIK */
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.modal-content {
+    background: rgba(25, 25, 25, 0.95);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 25px;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 500px;
+    max-height: 85vh;
+    overflow-y: auto; 
+    color: white;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+#modalTitle{
+    white-space: nowrap;
+    font-size: clamp(20px, 4vw, 28px);
+}
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+}
+.close-btn:hover { color: white; }
+#airLegend{
+    display:none;
+    width:100%;
+    clear:both;
+    text-align:left;
+    margin-top:20px;
+    padding-top:15px;
+    border-top:1px solid rgba(255,255,255,0.15);
+    font-size:14px;
+    color:#ddd;
+}
+
+/* Tambahkan di bawah sini */
+#airLegend table,
+#airLegend th,
+#airLegend td{
+    border:1px solid rgba(255,255,255,0.15);
+}
+
+#airLegend th{
+    background:rgba(255,255,255,0.08);
+}
+
+#airLegend td,
+#airLegend th{
+    padding:8px;
+}
+#airLegend table{
+    width:100%;
+    border-collapse:collapse;
+    text-align:center;
+    color:#ddd;
+    font-size:14px;
+}
+.blink-row{
+    animation: blinkRow 1s infinite;
+    font-weight: bold;
+}
+
+@keyframes blinkRow {
+    0%,100% {
+        background: rgba(255,255,255,0.25);
+    }
+    50% {
+        background: rgba(255,255,255,0.05);
+    }
+}
+
+.active-row {
+    animation: blinkRow 1s infinite;
+    font-weight: bold;
+
+}
+/* Responsive HP */
+@media (max-width: 768px) {
+    .datetime-container {
+        position: relative;
+        top: 0;
+        right: 0;
+        text-align: center;
+        margin: 15px auto 25px auto;
+        width: fit-content;
+    }
+    .forecast-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    .value {
+        font-size: clamp(8px, 2.5vw, 12px);
+    }
+
+    #aqi-box h3 {
+        font-size: 12px;
+        line-height: 1.2;
+    }
+}
+/* ================= DARK MODE OTOMATIS ================= */
+body.dark-mode{
+    background-image:
+        linear-gradient(rgba(0,0,0,0.65),
+                        rgba(0,0,0,0.65)),
+        url('https://lh3.googleusercontent.com/gps-cs-s/APNQkAGXzDf6jAqrxVqIt-StdTukOFbGz1GhCgbTUc4Cy9HvG0ZJ1Lk6GwKSemZ9SSBePQ6xFvAHl-g-2ExnhP111C7NhC2NnwS8JRjZyBT-UGeuFAIt_Pjh9ENi7PStSl_RU352jqAyHI6mGIdz=s1360-w1360-h1020-rw');
+}
+
+body.dark-mode .box,
+body.dark-mode .day,
+body.dark-mode .datetime-container,
+body.dark-mode .modal-content{
+    background: rgba(15,15,15,0.85);
+    border: 1px solid rgba(255,255,255,0.08);
+    backdrop-filter: blur(15px);
+}
+
+body.dark-mode .dot.active{
+    background: #ffffff;
+}
+body.dark-mode .box.active{
+    background: rgba(35,35,35,0.95);
+    border: 1px solid rgba(255,255,255,0.18);
+    box-shadow: 0 0 15px rgba(255,255,255,0.12);
+}
+
+body.dark-mode .box.side{
+    background: rgba(15,15,15,0.75);
+}
+body.dark-mode .box:not(.active):hover{
+    background: rgba(25,25,25,0.9);
+}
+#chartLegend{
+    margin-top:20px;
+    padding-top:15px;
+    border-top:1px solid rgba(255,255,255,0.15);
+    color:#ddd;
+    font-size:14px;
+}
+
+.legend-item{
+    display:grid;
+    grid-template-columns:60px 1fr;
+    align-items:center;
+    gap:12px;
+    margin-bottom:12px;
+}
+.legend-icon{
+    width:70px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-shrink:0;
+}
+.legend-item span:last-child{
+    white-space: nowrap;
+}
+.legend-line,
+.legend-dot{
+    flex-shrink: 0;
+}
+
+.legend-line{
+    width:50px;
+    height:4px;
+    border-radius:5px;
+}
+
+.legend-line.solid{
+    background:#74b9ff;
+}
+.legend-line.dashed{
+    width:60px;
+    height:4px;
+    position:relative;
+    overflow:hidden;
+    background:transparent;
+}
+
+.dash-flow{
+    position:absolute;
+    inset:0;
+    background:
+        repeating-linear-gradient(
+            90deg,
+            #74b9ff 0px,
+            #74b9ff 8px,
+            transparent 8px,
+            transparent 14px
+        );
+    background-size:14px 100%;
+    animation:dashMove 1.0s linear infinite;
+}
+
+@keyframes dashMove{
+    from{
+        background-position:0 0;
+    }
+    to{
+        background-position:14px 0;
+    }
+}
+
+.legend-dot{
+    width:14px;
+    height:14px;
+    border-radius:50%;
+    background:red;
+    box-shadow:0 0 10px red;
+    animation:blinkLegend 1s infinite;
+}
+
+@keyframes blinkLegend{
+    0%,100%{
+        opacity:1;
+    }
+    50%{
+        opacity:0.3;
+    }
+}
+@media (max-width: 768px){
+    .legend-item{
+        gap: 10px;
+    }
+
+    .slider-container {
+        max-width: 500px;
+    }
+
+    .legend-item span:last-child{
+        font-size: 13px;
+    }
+}
+.heat-cell{
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    transform: scale(1);
+}
+
+.heat-cell.active-hour{
+    animation: pulseCell 1s infinite ease-in-out;
+    z-index: 2;
+}
+.heat-cell{
+    position: relative;
+    overflow: hidden;
+}
+
+/* layer kaca */
+.heat-cell.glass-shimmer::before{
+    content:"";
+    position:absolute;
+    inset:-40%;
+    background: linear-gradient(
+        120deg,
+        transparent 30%,
+        rgba(255,255,255,0.25) 45%,
+        rgba(255,255,255,0.45) 50%,
+        rgba(255,255,255,0.25) 55%,
+        transparent 70%
+    );
+    transform: translateX(-60%) rotate(10deg);
+    animation: shimmerMove 2.2s infinite;
+    pointer-events:none;
+}
+
+@keyframes shimmerMove{
+    0%   { transform: translateX(-70%) rotate(10deg); }
+    100% { transform: translateX(70%) rotate(10deg); }
+}
+
+@keyframes pulseCell{
+    0%   { transform: scale(1);   box-shadow: 0 0 0 rgba(255,255,255,0); }
+    50%  { transform: scale(1.15); box-shadow: 0 0 15px rgba(255,255,255,0.25); }
+    100% { transform: scale(1);   box-shadow: 0 0 0 rgba(255,255,255,0); }
+}
+.heat-cell.glass-shimmer{
+    backdrop-filter: blur(6px);
+    background-clip: padding-box;
+}
+.skeleton{
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.08) 25%,
+            rgba(255,255,255,.18) 50%,
+            rgba(255,255,255,.08) 75%
+        );
+    background-size:200% 100%;
+    animation:skeleton 1.5s infinite;
+    color:transparent;
+    border-radius:8px;
+}
+
+@keyframes skeleton{
+    from{background-position:200% 0;}
+    to{background-position:-200% 0;}
+}
+.card{
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+
+    border:1px solid rgba(255,255,255,.15);
+
+    box-shadow:
+        0 8px 32px rgba(0,0,0,.2);
+
+    border-radius:20px;
+}
+.card{
+    position:relative;
+    overflow:hidden;
+}
+.card::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:50%;
+    height:100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.15),
+            transparent
+        );
+
+    animation:glassShine 8s infinite;
+}
+
+@keyframes glassShine{
+    to{
+        left:200%;
+    }
+}
+#warningBox{
+    display:none;
+    width:fit-content;
+    max-width:80%;
+    margin:15px auto;
+    padding:15px 20px;
+    border-radius:15px;
+    background:rgba(255,80,80,0.15);
+    backdrop-filter:blur(10px);
+    border:1px solid rgba(255,100,100,0.3);
+    color:#fff;
+    font-weight:bold;
+    text-align:center;
+    animation:warningPulse 2s infinite;
+    box-shadow:0 8px 25px rgba(0,0,0,0.25);
+}
+#heatmapLegend{
+    color:#ddd;
+    font-size:14px;
+}
+
+#heatmapLegendBox{
+    width:35px;
+    height:35px;
+    border-radius:10px;
+    position:relative;
+    overflow:hidden;
+
+    animation: pulseLegend 1s infinite ease-in-out;
+    box-shadow:0 0 15px rgba(255,255,255,.2);
+}
+
+@keyframes pulseLegend{
+    0%{
+        transform:scale(1);
+    }
+    50%{
+        transform:scale(1.2);
+    }
+    100%{
+        transform:scale(1);
+    }
+}
+#heatmapLegendBox::before{
+    content:"";
+    position:absolute;
+    inset:-40%;
+    background:linear-gradient(
+        120deg,
+        transparent 30%,
+        rgba(255,255,255,.25) 45%,
+        rgba(255,255,255,.45) 50%,
+        rgba(255,255,255,.25) 55%,
+        transparent 70%
+    );
+
+    animation: shimmerMove 2.2s infinite;
+}
+@keyframes shimmerMove{
+    from{
+        transform:translateX(-120%);
+    }
+    to{
+        transform:translateX(120%);
+    }
+}
+.unit-label{
+    align-self:flex-start;
+    padding:4px 8px;
+    border-radius:6px;
+    background:rgba(255,255,255,0.15);
+    color:white;
+    font-size:12px;
+    margin-bottom:8px;
+    pointer-events:none;
+}
+.box {
+    position: relative;
+    overflow: hidden;
+}
+
+/* canvas particle layer */
+.particle-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0.25;
+    z-index: 0;
+}
+
+.box .value,
+.box h3,
+.box select,
+.unit-label {
+    position: relative;
+    z-index: 2;
+}
+.wind-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0.35; /* < 50% sesuai permintaan */
+    z-index: 0;
+}
+@media (max-width:600px){
+    .slider-track{
+        padding: 0 25%;
+    }
+
+    .slider-track .box{
+        flex: 0 0 50%;
+        max-width: 50%;
+        height: 140px;
+        min-height: 140px;
+        padding: 15px;
+    }
+
+    .box h3{
+        font-size: clamp(8px, 2.5vw, 11px);
+        line-height: 1.2;
+        white-space: normal;
+        word-break: break-word;
+    }
+
+    #cuacaText{
+        font-size: 12px;
+        white-space: normal;
+        line-height: 1.2;
+    }
+
+    .value{
+        font-size: 12px;
+    }
+
+    @media (max-width:600px){
+    #precipProb-box h3,
+    #wind-box h3{
+        font-size: clamp(8px, 2vw, 10px) !important;
+        line-height: 1.1;
+    }
+
+
+    #pm25-box h3{
+        font-size: 18px !important;
+        line-height: 1.1;
+    }
+.wind-wrapper{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:4px;
+    width:100%;
+}
+
+/* angka */
+.wind-speed{
+    font-size:18px;
+    font-weight:bold;
+    line-height:1;
+}
+
+@media (max-width:600px){
+    .wind-direction{
+        display:none !important;
+    }
+}
+}
+}
+.forecast-summary-table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:15px;
+    color:#fff;
+    font-size:14px;
+    border:1px solid rgba(255,255,255,.35);
+}
+
+.forecast-summary-table th,
+.forecast-summary-table td{
+    border:1px solid rgba(255,255,255,.35);
+    padding:10px 12px;
+}
+
+.forecast-summary-table th{
+    background:rgba(255,255,255,.12);
+}
+
+@media(max-width:768px){
+    .forecast-summary-table{
+        font-size:13px;
+    }
+}
+.forecast-row{
+    transition:.4s;
+}
+
+.forecast-row td{
+    transition:.4s;
+}
+
+.forecast-row.active-row td{
+    background:rgba(255,40,40,.18);
+    border-top:2px solid #ff3b3b;
+    border-bottom:2px solid #ff3b3b;
+    box-shadow:
+        inset 0 0 12px rgba(255,0,0,.35),
+        0 0 12px rgba(255,0,0,.35);
+}
+
+.forecast-row.active-row td:first-child{
+    border-left:2px solid #ff3b3b;
+    border-radius:8px 0 0 8px;
+}
+
+.forecast-row.active-row td:last-child{
+    border-right:2px solid #ff3b3b;
+    border-radius:0 8px 8px 0;
+}
+.forecast-temp{
+    white-space: nowrap;
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 8px;
+}
+@media (max-width:768px){
+
+    .forecast-temp{
+        font-size:12px;
+        white-space:nowrap;
+    }
+
+}
+/* ================= GOLDEN HOUR ================= */
+
+body.golden-mode{
+    background-image:
+        linear-gradient(
+            rgba(255,170,60,0.18),
+            rgba(255,120,30,0.22)
+        ),
+        url('https://lh3.googleusercontent.com/gps-cs-s/APNQkAGXzDf6jAqrxVqIt-StdTukOFbGz1GhCgbTUc4Cy9HvG0ZJ1Lk6GwKSemZ9SSBePQ6xFvAHl-g-2ExnhP111C7NhC2NnwS8JRjZyBT-UGeuFAIt_Pjh9ENi7PStSl_RU352jqAyHI6mGIdz=s1360-w1360-h1020-rw');
+}
+
+body.golden-mode .box,
+body.golden-mode .day,
+body.golden-mode .datetime-container,
+body.golden-mode .modal-content{
+    background: rgba(90,55,20,0.55);
+    border: 1px solid rgba(255,200,120,0.25);
+    backdrop-filter: blur(15px);
+}
+
+body.golden-mode .box.active{
+    background: rgba(120,70,20,0.8);
+    box-shadow: 0 0 18px rgba(255,180,80,0.25);
+}
+
+body.golden-mode .dot.active{
+    background: #ffb84d;
+}
+.info-card{
+    position:relative;
+
+    width:100%;
+    min-height:170px;
+
+    border-radius:24px;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.18);
+}
+/* =========================
+   BACKGROUND IMAGE LAYERS
+========================= */
+
+.bg{
+
+    position:absolute;
+    inset:0;
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+
+    transition:opacity 1.5s ease;
+
+    will-change:opacity;
+}
+
+.bg1{
+
+    opacity:1;
+
+}
+
+.bg2{
+
+    opacity:0;
+
+}
+
+/* =========================
+   DARK OVERLAY
+========================= */
+
+.info-overlay{
+
+    position:absolute;
+    inset:0;
+
+    background:linear-gradient(
+        rgba(0,0,0,.70),
+        rgba(0,0,0,.80)
+    );
+
+    z-index:2;
+
+}
+
+/* =========================
+   TEXT
+========================= */
+
+.info-content{
+
+    position:absolute;
+    inset:0;
+
+    z-index:3;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    padding:20px 24px;
+
+    color:white;
+
+    text-align:center;
+
+    box-sizing:border-box;
+
+}
+
+.info-content p{
+
+    margin:0;
+
+    font-size:18px;
+
+    line-height:1.7;
+
+    max-width:90%;
+
+}
+#infoText{
+
+    opacity:1;
+
+    transition:opacity .3s ease;
+
+}
+#infoText::after{
+
+    content:"|";
+
+    display:inline-block;
+
+    margin-left:2px;
+
+    opacity:1;
+
+}
+#infoText.cursor-blink::after{
+
+    animation:blinkCursor .8s infinite;
+
+}
+@keyframes blinkCursor{
+
+    0%,50%{
+        opacity:1;
+    }
+
+    50.01%,100%{
+        opacity:0;
+    }
+
+}
+</style>
+</head>
+<body>
+
+<h1>Informasi Cuaca</h1>
+<h2>Kota Bandung</h2>
+
+<div class="datetime-container">
+    <div id="hari-tanggal">-</div>
+    <div id="jam-menit-detik">-</div>
+</div>
+<div id="warningBox"></div>
+<div class="slider-container">
+
+    <div class="slider-track-wrapper">
+        <div class="slider-track" id="sliderTrack">
+
+            <div class="box" id="cuaca-box">
+    <h3>Cuaca</h3>
+
+    <div id="cuaca">
+        <div id="cuacaEmoji"></div>
+        <div id="cuacaText"></div>
+    </div>
+</div>
+
+            <div class="box" id="temp-box" onclick="showDetail('temp')">
+    <h3>Temperatur</h3>
+
+    <select id="tempUnit"
+        onclick="event.stopPropagation()"
+        onchange="changeTemperatureUnit()">
+        <option value="C">°C</option>
+        <option value="F">°F</option>
+        <option value="R">°R</option>
+        <option value="K">K</option>
+    </select>
+
+    <div class="value" id="temp">-</div>
+</div>
+
+            <div class="box" id="humidity-box" onclick="showDetail('humidity')">
+    <h3>Kelembapan</h3>
+    <div class="unit-label">%</div>
+    <div class="value" id="humidity">-</div>
+</div>
+
+<div class="box" id="precipitation" onclick="showDetail('precip')">
+    <h3>Presipitasi</h3>
+    <div class="unit-label">mm</div>
+    <div class="value" id="precip">-</div>
+</div>
+            <div class="box" id="precipProb-box" onclick="showDetail('precipProb')">
+    <h3>Probabilitas Hujan</h3>
+    <div class="unit-label">%</div>
+    <div class="value" id="precipProb">-</div>
+</div>
+
+            <div class="box" id="wind-box" onclick="showDetail('wind')">
+                <canvas class="wind-canvas"></canvas>
+    <h3>Kecepatan Angin</h3>
+
+    <select id="windUnit"
+        onclick="event.stopPropagation()"
+        onchange="changeWindUnit()">
+        <option value="kmh">km/j</option>
+        <option value="ms">m/s</option>
+    </select>
+
+    <div class="value" id="wind">-</div>
+</div>
+
+            <div class="box" id="pm25-box" onclick="showDetail('pm25')">
+    <h3 style="font-size:20px;font-weight:bold;">PM2.5</h3>
+    <div class="unit-label">µg/m³</div>
+    <div class="value" id="pm25">-</div>
+</div>
+
+           <div class="box" id="pm10-box" onclick="showDetail('pm10')">
+    <h3 style="font-size:20px;font-weight:bold;">PM10</h3>
+    <div class="unit-label">µg/m³</div>
+    <div class="value" id="pm10">-</div>
+</div>
+
+           <div class="box" id="co-box" onclick="showDetail('co')">
+    <h3 style="font-size:20px;font-weight:bold;">CO</h3>
+    <div class="unit-label">µg/m³</div>
+    <div class="value" id="co">-</div>
+</div>
+
+            <div class="box" id="no2-box" onclick="showDetail('no2')">
+    <h3 style="font-size:20px;font-weight:bold;">NO₂</h3>
+    <div class="unit-label">µg/m³</div>
+    <div class="value" id="no2">-</div>
+</div>
+
+            <div class="box" id="so2-box" onclick="showDetail('so2')">
+    <h3 style="font-size:20px;font-weight:bold;">SO₂</h3>
+    <div class="unit-label">µg/m³</div>
+    <div class="value" id="so2">-</div>
+</div>
+
+            <div class="box" id="aqi-box" onclick="showDetail('aqi')">
+    <h3>Indeks<br>Kualitas Udara</h3>
+    <div class="value" id="aqi">-</div>
+</div>
+
+        </div>
+    </div>
+</div>
+
+</div> <!-- tutup slider-container -->
+
+<div class="slider-dots" id="sliderDots"></div>
+
+<h2 style="margin-bottom:20px;">Prediksi 7 Hari Ke Depan</h2>
+
+<div class="forecast">
+    <div class="forecast-grid" id="forecast"></div>
+</div>
+
+<!-- =========================
+     INFORMASI UMUM
+========================= -->
+
+<h2 style="margin:40px 0 20px;">Informasi Umum</h2>
+
+<div class="info-card">
+
+    <div class="bg bg1"></div>
+    <div class="bg bg2"></div>
+
+    <div class="info-overlay"></div>
+
+<div class="info-content">
+
+    <p id="infoText"></p>
+
+</div>
+
+</div>
+<!-- 3. STRUKTUR JENDELA POP-UP MODAL GRAFIK -->
+<div id="detailModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">×</span>
+        <h2 id="modalTitle">Detail Indikator</h2>
+        <p id="modalDescription" style="margin-bottom: 20px; font-size: 14px; color: #ddd; line-height: 1.4;"></p>
+        
+        <div class="chart-tabs" style="display: flex; gap: 8px; margin-bottom: 15px;">
+            <button id="btn-line" onclick="switchChart('line')" style="flex: 1; padding: 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.1); color: white; cursor: pointer; font-weight: bold; font-size: 12px; transition: 0.2s;">Line</button>
+            <button id="btn-surface" onclick="switchChart('surface')" style="flex: 1; padding: 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.4); color: #aaa; cursor: pointer; font-weight: bold; font-size: 12px; transition: 0.2s;">Area</button>
+            <button id="btn-surface3d" onclick="switchChart('surface3d')" style="flex: 1; padding: 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.4); color: #aaa; cursor: pointer; font-weight: bold; font-size: 12px; transition: 0.2s;">3D Surface</button>
+            <button id="btn-heatmap" onclick="switchChart('heatmap')" style="flex:1;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.2); background:rgba(0,0,0,0.4);color:#aaa;cursor:pointer;font-weight:bold;font-size:12px;transition:0.2s;">Heat Map</button>
+        </div>
+        
+        <h3 id="chartTitle">Grafik Data Per Jam (Hari Ini)</h3>
+
+        
+        <div id="container-2d" style="position: relative; width: 100%; height: 250px; margin-top: 15px;">
+            <canvas id="hourlyChart"></canvas>
+        </div>
+
+        <div id="container-3d" style="display:none; width:100%; height:250px; margin-top:15px; background:rgba(0,0,0,0.2); border-radius:10px;"></div>
+        <div id="container-heatmap"style="display:none; width:100%; margin-top:15px;">
+        </div>
+        <div id="heatmapLegend" style="display:none; margin-top:20px; justify-content:center; align-items:center; gap:12px">
+    <div id="heatmapLegendBox"></div>
+    <span>Data real time di jam tersebut</span>
+</div>
+    <div id="chartLegend">
+    <h4 style="text-align:center;margin-bottom:15px;color:white;">
+        Keterangan Grafik
+    </h4>
+
+    <div id="chartLegend">
+
+    <div class="legend-item">
+        <div class="legend-icon">
+            <div class="legend-line solid"></div>
+        </div>
+        <span>Data yang sudah terjadi</span>
+    </div>
+
+    <div class="legend-item">
+        <div class="legend-icon">
+            <div class="legend-line dashed">
+                <div class="dash-flow"></div>
+            </div>
+        </div>
+        <span>Data prediktif</span>
+    </div>
+
+    <div class="legend-item">
+        <div class="legend-icon">
+            <div class="legend-dot"></div>
+        </div>
+        <span>Data real time di jam tersebut</span>
+    </div>
+
+</div>
+    <!-- PINDAHKAN KE SINI -->
+    <div id="airLegend"
+         style="
+            display:none;
+            margin-top:20px;
+            padding-top:15px;
+            border-top:1px solid rgba(255,255,255,0.15);
+            font-size:14px;
+            color:#ddd;
+         ">
+    </div>
+</div>
+         
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css" rel="stylesheet" type="text/css" />
+
+<!-- 4. LOGIKA JAVASCRIPT GABUNGAN -->
+<script>
+let globalWeatherData = null;
+let globalAirData = null;
+let temperatureUnit = "C"; // C, F, R, K
+let windUnit = "kmh"; // kmh atau ms
+let myChart = null;
+let currentChartType = 'temp'; // Menyimpan indikator yang sedang aktif
+let currentChartStyle = 'line'; // Menyimpan tipe grafik yang sedang aktif (line / surface)
+let graph3d = null; // Menyimpan objek grafik 3D
+let dashOffset = 0;
+let flowOffset = 0;
+let lastHour = new Date().getHours();
+let forecastInterval = null;
+let skyNoiseCanvas = null;
+
+const particleInitState = {
+    pm25: false,
+    pm10: false,
+    co: false,
+    no2: false,
+    so2: false,
+    aqi: false
+};
+
+const weatherCode = {
+    0:"☀️ Cerah", 1:"🌤️ Sebagian Cerah", 2:"⛅ Berawan", 3:"☁️ Mendung",
+    45:"🌫️ Berkabut", 48:"🌫️ Berkabut", 51:"🌦️ Gerimis", 53:"🌦️ Gerimis",
+    55:"🌦️ Gerimis", 61:"🌧️ Hujan", 63:"🌧️ Hujan", 65:"🌧️ Hujan Lebat",
+    80:"🌦️ Hujan", 81:"🌧️ Hujan", 82:"⛈️ Hujan Lebat", 95:"⛈️ Badai"
+};
+
+const penjelasanIndikator = {
+    temp: "",
+    humidity: "Kelembapan adalah persentase kandungan uap air di udara. Kelembapan tinggi membuat gerah, sedangkan terlalu rendah membuat udara kering.",
+    precip: "Presipitasi mengukur jumlah air (hujan, gerimis) yang jatuh ke permukaan tanah dalam kurun waktu tertentu.",
+    precipProb: "Probabilitas Hujan menunjukkan besarnya peluang atau persentase kemungkinan terjadinya hujan hari ini.",
+    wind: "Kecepatan angin mengukur laju pergerakan udara, memengaruhi sirkulasi udara dan tingkat kesejukan lingkungan.",
+    pm25: "PM2.5 adalah partikel udara halus (≤ 2.5 mikrometer). Sangat kecil dan berbahaya karena bisa menembus paru-paru.",
+    pm10: "PM10 adalah partikel debu kasar (≤ 10 mikrometer). Dapat memicu iritasi saluran pernapasan luar.",
+    co: "Karbon Monoksida (CO) adalah gas tidak berbau hasil emisi kendaraan. Mengurangi kadar oksigen dalam darah jika berlebih.",
+    no2: "Nitrogen Dioksida (NO₂) utamanya berasal dari gas buang kendaraan. Dapat memicu polusi udara kronis dan mengganggu paru-paru.",
+    so2: "Sulfur Dioksida (SO₂) hasil pembakaran bahan bakar fosil. Menyebabkan asap kabut beracun dan iritasi tenggorokan.",
+    aqi: "AQI (Air Quality Index) adalah parameter gabungan internasional untuk mengukur status bersih atau tercemarnya udara."
+};
+function checkWarning(weather, air){
+    const hour = new Date().getHours();
+    let warning = "";
+
+    const rain =
+        weather.hourly.precipitation_probability[hour];
+
+    const wind =
+        weather.current.wind_speed_10m;
+
+    const aqi =
+        air.hourly.us_aqi[hour];
+
+    if(rain >= 80){
+        warning +=
+        "⛈️ Potensi hujan lebat.<br>";
+    }
+
+    if(wind >= 35){
+        warning +=
+        "🌪️ Angin kencang.<br>";
+    }
+
+    if(aqi >= 150){
+        warning +=
+        "⚠️ Kualitas udara tidak sehat.<br>";
+    }
+
+    const box =
+        document.getElementById("warningBox");
+
+    if(warning){
+        box.innerHTML = warning;
+        box.style.display = "block";
+    }
+    else{
+        box.style.display = "none";
+    }
+}
+function getAirEmoji(value, type){
+    let good, moderate, sensitive, unhealthy;
+    switch(type){
+        case "pm25": good = 12; moderate = 35; sensitive = 150; unhealthy = 250; break;
+        case "pm10": good = 54; moderate = 154; sensitive = 254; unhealthy = 354; break;
+        case "co": good = 4400; moderate = 9400; sensitive = 12400; unhealthy = 15400; break;
+        case "no2": good = 53; moderate = 100; sensitive = 360; unhealthy = 649; break;
+        case "so2": good = 35; moderate = 75; sensitive = 185; unhealthy = 304; break;
+        case "aqi": good = 50; moderate = 100; sensitive = 150; unhealthy = 200; break;
+    }
+    if (value <= good) return "🟢";
+    if (value <= moderate) return "🟡";
+    if (value <= sensitive) return "🟠";
+    if (value <= unhealthy) return "🔴";
+    return "⚫";
+}
+function getAirColor(value, type){
+    let good, moderate, sensitive, unhealthy;
+
+    switch(type){
+        case "pm25":
+            good = 12;
+            moderate = 35;
+            sensitive = 150;
+            unhealthy = 250;
+            break;
+
+        case "pm10":
+            good = 54;
+            moderate = 154;
+            sensitive = 254;
+            unhealthy = 354;
+            break;
+
+        case "co":
+            good = 4400;
+            moderate = 9400;
+            sensitive = 12400;
+            unhealthy = 15400;
+            break;
+
+        case "no2":
+            good = 53;
+            moderate = 100;
+            sensitive = 360;
+            unhealthy = 649;
+            break;
+
+        case "so2":
+            good = 35;
+            moderate = 75;
+            sensitive = 185;
+            unhealthy = 304;
+            break;
+
+        case "aqi":
+            good = 50;
+            moderate = 100;
+            sensitive = 150;
+            unhealthy = 200;
+            break;
+    }
+
+    if (value <= good) return "#00c853";
+    if (value <= moderate) return "#ffd600";
+    if (value <= sensitive) return "#ff9100";
+    if (value <= unhealthy) return "#ff1744";
+    return "#000000";
+}
+function updateAirLegend(type) {
+    const legend = document.getElementById("airLegend");
+
+    const ranges = {
+        pm25: [12,35,150,250,"µg/m³"],
+        pm10: [54,154,254,354,"µg/m³"],
+        co: [4400,9400,12400,15400,"µg/m³"],
+        no2: [53,100,360,649,"µg/m³"],
+        so2: [35,75,185,304,"µg/m³"],
+        aqi: [50,100,150,200,""]
+    };
+
+    if (!ranges[type]) {
+        legend.style.display = "none";
+        return;
+    }
+
+    const [
+        good,
+        moderate,
+        sensitive,
+        unhealthy,
+        unit
+    ] = ranges[type];
+
+    const currentValue = {
+        pm25: globalAirData.hourly.pm2_5?.[new Date().getHours()] ?? 0,
+        pm10: globalAirData.hourly.pm10?.[new Date().getHours()] ?? 0,
+        co: globalAirData.hourly.carbon_monoxide?.[new Date().getHours()] ?? 0,
+        no2: globalAirData.hourly.nitrogen_dioxide?.[new Date().getHours()] ?? 0,
+        so2: globalAirData.hourly.sulphur_dioxide?.[new Date().getHours()] ?? 0,
+        aqi: globalAirData.hourly.us_aqi?.[new Date().getHours()] ?? 0
+    }[type];
+
+    let activeCategory = "";
+
+    if (currentValue <= good)
+        activeCategory = "baik";
+    else if (currentValue <= moderate)
+        activeCategory = "sedang";
+    else if (currentValue <= sensitive)
+        activeCategory = "sensitif";
+    else if (currentValue <= unhealthy)
+        activeCategory = "tidakSehat";
+    else
+        activeCategory = "sangatTidakSehat";
+
+    legend.innerHTML = `
+    <h4 style="text-align:center;margin-bottom:15px;color:white;">
+        Penjelasan Indikator & Rentang Patokan
+    </h4>
+
+    <table>
+        <tr>
+            <th>Indikator</th>
+            <th>Rentang</th>
+        </tr>
+
+        <tr class="${activeCategory === 'baik' ? 'blink-row' : ''}">
+            <td>🟢 Baik</td>
+            <td>≤ ${good} ${unit}</td>
+        </tr>
+
+        <tr class="${activeCategory === 'sedang' ? 'blink-row' : ''}">
+            <td>🟡 Sedang</td>
+            <td>${good + 1} - ${moderate} ${unit}</td>
+        </tr>
+
+        <tr class="${activeCategory === 'sensitif' ? 'blink-row' : ''}">
+            <td>🟠 Sensitif</td>
+            <td>${moderate + 1} - ${sensitive} ${unit}</td>
+        </tr>
+
+        <tr class="${activeCategory === 'tidakSehat' ? 'blink-row' : ''}">
+            <td>🔴 Tidak Sehat</td>
+            <td>${sensitive + 1} - ${unhealthy} ${unit}</td>
+        </tr>
+
+        <tr class="${activeCategory === 'sangatTidakSehat' ? 'blink-row' : ''}">
+            <td>⚫ Sangat Tidak Sehat</td>
+            <td>> ${unhealthy} ${unit}</td>
+        </tr>
+    </table>
+    `;
+
+    legend.style.display = "block";
+}
+function updateDateTime() {
+    const sekarang = new Date();
+    const opsiHariTanggal = { weekday: 'long', year: 'numeric', month: '2-digit', day: '2-digit' };
+    let textHariTanggal = sekarang.toLocaleDateString('id-ID', opsiHariTanggal).replace(/-/g, '/');
+    const jam = String(sekarang.getHours()).padStart(2, '0');
+    const menit = String(sekarang.getMinutes()).padStart(2, '0');
+    const detik = String(sekarang.getSeconds()).padStart(2, '0');
+
+    document.getElementById('hari-tanggal').innerText = textHariTanggal;
+    document.getElementById('jam-menit-detik').innerText = `${jam}:${menit}:${detik}`;
+}
+setInterval(updateDateTime, 1000);
+updateDateTime();
+
+function animateNumberWithEmoji(elementId, emojiArray, emojiFinal, targetValue, unit = "") {
+    const el = document.getElementById(elementId);
+    if (!el) return;
+    const numericTarget = parseFloat(targetValue);
+    if (isNaN(numericTarget)) {
+        el.innerHTML = `${emojiFinal} ${targetValue}${unit}`;
+        return;
+    }
+    let currentIteration = 0;
+    const maxIterations = 10;
+    const interval = setInterval(() => {
+        let randomNum = Number.isInteger(numericTarget) ? Math.floor(Math.random() * (numericTarget * 1.5 || 100)) : (Math.random() * (numericTarget * 1.5 || 100)).toFixed(1);
+        const randomEmoji = emojiArray[Math.floor(Math.random() * emojiArray.length)];
+        el.innerHTML = `${randomEmoji} ${randomNum}${unit}`;
+        currentIteration++;
+        if (currentIteration >= maxIterations) {
+            clearInterval(interval);
+            el.innerHTML = `${emojiFinal} ${targetValue}${unit}`;
+        }
+    }, 50);
+}
+function safeSet(id, value) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.innerHTML = value;
+}
+async function loadData(){
+document.querySelectorAll('.value').forEach(el=>{
+    el.classList.add('skeleton');
+});
+particleInitState.pm25 = false;
+particleInitState.pm10 = false;
+particleInitState.co = false;
+particleInitState.no2 = false;
+particleInitState.so2 = false;
+particleInitState.aqi = false;
+document.querySelectorAll(".value").forEach(el=>{
+    el.innerHTML = "-";
+});;
+console.log("pm25-box:", document.getElementById("pm25-box"));
+console.log("pm10-box:", document.getElementById("pm10-box"));
+console.log("co-box:", document.getElementById("co-box"));
+console.log("no2-box:", document.getElementById("no2-box"));
+console.log("so2-box:", document.getElementById("so2-box"));
+console.log("aqi-box:", document.getElementById("aqi-box"));
+    try {
+        const weatherRes = await fetch("https://api.open-meteo.com/v1/forecast?latitude=-6.9175&longitude=107.6191&timezone=Asia%2FJakarta&current=temperature_2m,relative_humidity_2m,precipitation,weather_code,wind_speed_10m,wind_direction_10m&hourly=temperature_2m,relative_humidity_2m,precipitation,precipitation_probability,wind_speed_10m,wind_direction_10m&daily=weather_code,temperature_2m_max,temperature_2m_min&forecast_days=8");
+        const weather = await weatherRes.json();
+
+        const airRes = await fetch("https://air-quality-api.open-meteo.com/v1/air-quality?latitude=-6.9175&longitude=107.6191&timezone=Asia%2FJakarta&hourly=pm10,pm2_5,carbon_monoxide,nitrogen_dioxide,sulphur_dioxide,us_aqi");
+        const air = await airRes.json();
+        const hour = new Date().getHours();
+
+        globalWeatherData = weather;
+        globalAirData = air;
+
+        const cuaca =
+    weatherCode[weather.current.weather_code] || "-";
+
+const emoji =
+    cuaca.split(" ")[0];
+
+const text =
+    cuaca.replace(/^[^\s]+\s/, "");
+
+safeSet("cuacaEmoji", emoji);
+safeSet("cuacaText", text);
+        const tempPool = ["🌡️", "🥵", "🥶"], humidityPool = ["💧", "💦", "🏜️"], rainPool = ["☀️", "☁️", "🌧️", "⛈️"], windPool = ["🍃", "💨", "🌪️"], airPool = ["🟢", "🟡", "🟠", "🔴", "⚫"];
+
+        updateTemperatureDisplay();
+
+       const currentHour = new Date().getHours();;
+
+const precip = weather.hourly.precipitation?.[hour] ?? 0;
+
+let precipEmoji = precip > 0 ? "🌧️" : "☀️";
+
+const humidity = weather.current.relative_humidity_2m;
+safeSet("humidity", humidity);
+
+safeSet("precip", `${precip.toFixed(2)}`);
+        const prob = weather.hourly.precipitation_probability?.[hour] ?? 0;
+        let rainEmoji = prob >= 70 ? "⛈️" : (prob >= 40 ? "🌧️" : (prob >= 10 ? "☁️" : "☀️"));
+       safeSet("precipProb", prob);
+
+        updateWindDisplay();
+
+       const pm25 = air.hourly.pm2_5?.[hour] ?? 0;
+const pm25El = document.getElementById("pm25");
+if (pm25El) {
+    pm25El.innerHTML = pm25.toFixed(1);
+    pm25El.style.color = getAirColor(pm25, "pm25");
+}
+
+const pm10 = air.hourly.pm10?.[hour] ?? 0;
+const pm10El = document.getElementById("pm10");
+if (pm10El) {
+    pm10El.innerHTML = pm10.toFixed(1);
+    pm10El.style.color = getAirColor(pm10, "pm10");
+}
+
+const co = Math.round(air.hourly.carbon_monoxide?.[hour] ?? 0);
+const coEl = document.getElementById("co");
+if (coEl) {
+    coEl.innerHTML = co;
+    coEl.style.color = getAirColor(co, "co");
+}
+
+const no2 = Math.round(air.hourly.nitrogen_dioxide?.[hour] ?? 0);
+const no2El = document.getElementById("no2");
+if (no2El) {
+    no2El.innerHTML = no2;
+    no2El.style.color = getAirColor(no2, "no2");
+}
+
+const so2 = Math.round(air.hourly.sulphur_dioxide?.[hour] ?? 0);
+const so2El = document.getElementById("so2");
+if (so2El) {
+    so2El.innerHTML = so2;
+    so2El.style.color = getAirColor(so2, "so2");
+}
+
+const aqi = air.hourly.us_aqi?.[hour] ?? 0;
+const aqiEl = document.getElementById("aqi");
+if (aqiEl) {
+    aqiEl.innerHTML = aqi;
+    aqiEl.style.color = getAirColor(aqi, "aqi");
+}
+let html = ""; 
+for(let i = 1; i <= 7; i++){
+    const hari = new Date(weather.daily.time[i]).toLocaleDateString("id-ID", {
+        weekday: "long"
+    });
+
+    const cuaca = weatherCode[weather.daily.weather_code[i]] || "🌤️";
+    const icon = cuaca.split(" ")[0];
+    const text = cuaca.replace(/^[^\s]+\s/, "");
+
+    html += `
+<div class="day flip-card"
+     data-weather="${weather.daily.weather_code[i]}"
+     onclick="showForecastDetail(${i})"
+     style="cursor:pointer">
+
+    <div class="flip-inner">
+
+        <!-- Depan -->
+        <div class="front">
+
+            <h4>${hari}</h4>
+
+            <div class="icon">${icon}</div>
+
+            <div>${text}</div>
+
+            <div class="forecast-temp">
+    ${convertTemperature(weather.daily.temperature_2m_min[i]).toFixed(1)}${getTemperatureUnit()} -
+    ${convertTemperature(weather.daily.temperature_2m_max[i]).toFixed(1)}${getTemperatureUnit()}
+</div>
+
+        </div>
+
+        <!-- Belakang -->
+        <div class="back">
+
+            <canvas class="weatherCanvas"></canvas>
+
+        </div>
+
+    </div>
+
+</div>`;
+}
+const forecastEl = document.getElementById("forecast");
+if (forecastEl) forecastEl.innerHTML = html;
+
+initForecastWeather();
+
+checkWarning(weather, air);
+safeInitParticle("pm25-box", "pm25", "pm25", () =>
+        globalAirData?.hourly.pm2_5?.[new Date().getHours()] ?? 0
+    );
+
+    safeInitParticle("pm10-box", "pm10", "pm10", () =>
+        globalAirData?.hourly.pm10?.[new Date().getHours()] ?? 0
+    );
+
+    safeInitParticle("co-box", "co", "co", () =>
+        globalAirData?.hourly.carbon_monoxide?.[new Date().getHours()] ?? 0
+    );
+    safeInitParticle("no2-box", "no2", "no2", () =>
+        globalAirData?.hourly.nitrogen_dioxide?.[new Date().getHours()] ?? 0
+    );
+
+    safeInitParticle("so2-box", "so2", "so2", () =>
+        globalAirData?.hourly.sulphur_dioxide?.[new Date().getHours()] ?? 0
+    );
+
+    safeInitParticle("aqi-box", "aqi", "aqi", () =>
+        globalAirData?.hourly.us_aqi?.[new Date().getHours()] ?? 0
+    );
+    setTimeout(() => {
+    safeInitParticle("pm25-box","pm25","pm25",()=>globalAirData?.hourly.pm2_5?.[new Date().getHours()] ?? 0);
+    safeInitParticle("pm10-box","pm10","pm10",()=>globalAirData?.hourly.pm10?.[new Date().getHours()] ?? 0);
+    safeInitParticle("co-box","co","co",()=>globalAirData?.hourly.carbon_monoxide?.[new Date().getHours()] ?? 0);
+    safeInitParticle("no2-box","no2","no2",()=>globalAirData?.hourly.nitrogen_dioxide?.[new Date().getHours()] ?? 0);
+    safeInitParticle("so2-box","so2","so2",()=>globalAirData?.hourly.sulphur_dioxide?.[new Date().getHours()] ?? 0);
+    safeInitParticle("aqi-box","aqi","aqi",()=>globalAirData?.hourly.us_aqi?.[new Date().getHours()] ?? 0);
+}, 100);
+} catch (err) {
+    console.error(err);
+} finally {
+    document.querySelectorAll('.value').forEach(el => {
+        el.classList.remove('skeleton');
+    });
+}
+}
+initWindAnimation();
+
+function safeInitParticle(boxId, key, type, getValueFn) {
+
+    const box = document.getElementById(boxId);
+    if (!box || !globalAirData) return;
+
+    // jangan cuma cek canvas, cek state saja
+    if (particleInitState[key]) return;
+
+    initParticles(boxId, getValueFn, type);
+
+    particleInitState[key] = true;
+}
+function showDetail(type) {
+    if (!globalWeatherData || !globalAirData) return;
+    
+    currentChartType = type;
+    const modal = document.getElementById("detailModal");
+    modal.style.display = "flex";
+    document.getElementById("chartLegend").style.display = "block";
+
+    // Reset tombol ke pilihan 'line' setiap kali modal baru dibuka
+    currentChartStyle = 'line';
+    resetTabStyles();
+
+    renderChartData();
+}
+function showForecastDetail(dayIndex){
+    if(!globalWeatherData || !globalAirData) return;
+
+    const weather = globalWeatherData;
+    const air = globalAirData;
+
+    const start = dayIndex * 24;
+    const end = start + 24;
+
+    function rata(arr){
+        const data = arr.slice(start, end);
+        if(data.length === 0) return "-";
+        const jumlah = data.reduce((a,b)=>a+(b ?? 0),0);
+        return Math.round(jumlah / data.length);
+    }
+
+    // TULIS FUNGSI BARU INI DI BAWAHNYA:
+    function rataDesimal(arr, desimal = 2){
+        const data = arr.slice(start, end);
+        if(data.length === 0) return "-";
+        const jumlah = data.reduce((a,b)=>a+(b ?? 0),0);
+        return (jumlah / data.length).toFixed(desimal);
+    }
+    const tanggal = new Date(
+        weather.daily.time[dayIndex]
+    ).toLocaleDateString("id-ID",{
+        weekday:"long",
+        day:"numeric",
+        month:"long",
+        year:"numeric"
+    });
+    document.getElementById("chartLegend").style.display = "none";
+    document.getElementById("heatmapLegend").style.display = "none";
+    document.getElementById("modalTitle").innerText =
+        "Ringkasan " + tanggal;
+const suhuRata =
+    convertTemperature(
+        rata(weather.hourly.temperature_2m)
+    ).toFixed(1);
+    const pm25Avg = Number(rataDesimal(air.hourly.pm2_5));
+const pm10Avg = Number(rataDesimal(air.hourly.pm10));
+const coAvg = rata(air.hourly.carbon_monoxide);
+const no2Avg = rata(air.hourly.nitrogen_dioxide);
+const so2Avg = rata(air.hourly.sulphur_dioxide);
+    document.getElementById("modalDescription").innerHTML = `
+<table class="forecast-summary-table">
+    <tr>
+    <th>Indikator</th>
+    <th>Data</th>
+</tr>
+
+<tr class="forecast-row">
+    <td>🌤️ Cuaca</td>
+    <td>${weatherCode[weather.daily.weather_code[dayIndex]]}</td>
+</tr>
+
+<tr class="forecast-row">
+    <td>🌡️ Temperatur</td>
+    <td>${suhuRata} ${getTemperatureUnit()}</td>
+</tr>
+
+<tr class="forecast-row">
+    <td>💧 Kelembapan</td>
+    <td>${rata(weather.hourly.relative_humidity_2m)} %</td>
+</tr>
+
+<tr class="forecast-row">
+    <td>🌧️ Presipitasi</td>
+    <td>${rataDesimal(weather.hourly.precipitation)} mm</td>
+</tr>
+
+<tr class="forecast-row">
+    <td>⛈️ Probabilitas Hujan</td>
+    <td>${rata(weather.hourly.precipitation_probability)} %</td>
+</tr>
+
+<tr class="forecast-row">
+    <td>🍃 Kecepatan Angin</td>
+    <td>${convertWind(rata(weather.hourly.wind_speed_10m)).toFixed(1)} ${getWindUnit()}</td>
+</tr>
+
+<tr class="forecast-row">
+    <td>${getAirEmoji(pm25Avg,"pm25")} PM2.5</td>
+    <td>${pm25Avg} µg/m³</td>
+</tr>
+
+<tr class="forecast-row">
+    <td>${getAirEmoji(pm10Avg,"pm10")} PM10</td>
+    <td>${pm10Avg} µg/m³</td>
+</tr>
+
+<tr class="forecast-row">
+    <td>${getAirEmoji(coAvg,"co")} CO</td>
+    <td>${coAvg} µg/m³</td>
+</tr>
+
+<tr class="forecast-row">
+    <td>${getAirEmoji(no2Avg,"no2")} NO₂</td>
+    <td>${no2Avg} µg/m³</td>
+</tr>
+
+<tr class="forecast-row">
+    <td>${getAirEmoji(so2Avg,"so2")} SO₂</td>
+    <td>${so2Avg} µg/m³</td>
+</tr>
+
+<tr class="forecast-row">
+    <td>📊 AQI</td>
+    <td>${rata(air.hourly.us_aqi)}</td>
+</tr>
+</table>
+`;
+startForecastAnimation();
+
+const modal = document.getElementById("detailModal");
+modal.style.display = "flex";
+    document.querySelector(".chart-tabs").style.display = "none";
+document.getElementById("container-2d").style.display = "none";
+document.getElementById("container-3d").style.display = "none";
+document.getElementById("container-heatmap").style.display = "none";
+document.getElementById("container-heatmap").innerHTML = "none";
+document.getElementById("airLegend").style.display = "none";
+
+    document.getElementById("detailModal").style.display = "flex";
+    document.getElementById("chartTitle").style.display = "none";
+}
+
+function resetTabStyles() {
+    const tabs = ['line', 'surface', 'surface3d', 'heatmap'];
+    tabs.forEach(tab => {
+        const btn = document.getElementById(`btn-${tab}`);
+        if (tab === currentChartStyle) {
+            btn.style.background = 'rgba(255,255,255,0.1)';
+            btn.style.color = 'white';
+        } else {
+            btn.style.background = 'rgba(0,0,0,0.4)';
+            btn.style.color = '#aaa';
+        }
+    });
+}
+const blinkingPointPlugin = {
+    id: 'blinkingPoint',
+
+    afterDatasetsDraw(chart) {
+        if (!chart.data.datasets.length) return;
+
+        const currentHour = new Date().getHours();
+        const meta = chart.getDatasetMeta(0);
+
+        if (!meta.data[currentHour]) return;
+
+        const point = meta.data[currentHour];
+        const ctx = chart.ctx;
+
+        const alpha =
+            0.4 + 0.6 * ((Math.sin(Date.now() / 300) + 1) / 2);
+
+        ctx.save();
+        ctx.globalAlpha = alpha;
+
+        ctx.beginPath();
+        ctx.arc(
+            point.x,
+            point.y,
+            8,
+            0,
+            Math.PI * 2
+        );
+        ctx.fillStyle = "red";
+        ctx.fill();
+
+        ctx.restore();
+    }
+};
+Chart.register(blinkingPointPlugin);
+function renderChartData() {
+    let type = currentChartType;
+    let style = currentChartStyle;
+
+    if (style === 'heatmap') {
+    document.getElementById('container-2d').style.display='none';
+    document.getElementById('container-3d').style.display='none';
+    document.getElementById('container-heatmap').style.display='block';
+
+    document.getElementById('chartLegend').style.display='none';
+    document.getElementById('airLegend').style.display='block';
+    const airTypes = ['pm25','pm10','co','no2','so2','aqi'];
+    document.getElementById('modalDescription').style.display='block';
+
+    renderHeatMap(type);
+    return;
+}
+    // Tampilkan wadah yang sesuai (2D atau 3D)
+    if (style === 'surface3d') {
+    document.getElementById('container-2d').style.display = 'none';
+    document.getElementById('container-3d').style.display = 'block';
+    document.getElementById('container-heatmap').style.display = 'none';
+    document.getElementById("heatmapLegend").style.display = "none";
+    document.getElementById('chartLegend').style.display = 'none';
+    document.getElementById('airLegend').style.display = 'none';
+    document.getElementById('modalDescription').style.display = 'block';
+
+    render3DChart(type);
+    return;
+}
+    else {
+    document.getElementById('container-2d').style.display = 'block';
+    document.getElementById('container-3d').style.display = 'none';
+    document.getElementById('container-heatmap').style.display = 'none';
+    document.getElementById("heatmapLegend").style.display = "none";
+
+    document.getElementById('chartLegend').style.display = 'block';
+    document.getElementById('modalDescription').style.display = 'block';
+}
+
+    // --- LOGIKA GENERATE DATA 2D (LINE & SURFACE) ---
+    let titleText = "", unit = "", hourlyArray = [], timesArray = [], labelColor = "";
+
+    if (type === "temp") {
+    titleText =
+    `🌡️ Temperatur (${getTemperatureUnit()})`;
+    unit = getTemperatureUnit();
+    labelColor = "#ff7675";
+
+    hourlyArray =
+        globalWeatherData.hourly.temperature_2m.map(
+            t => convertTemperature(t)
+        );
+
+    timesArray =
+        globalWeatherData.hourly.time;
+}
+    else if (type === "humidity") { titleText = "💧 Kelembapan"; unit = "%"; labelColor = "#74b9ff"; hourlyArray = globalWeatherData.hourly.relative_humidity_2m; timesArray = globalWeatherData.hourly.time; }
+    else if (type === "precip") { titleText = "🌧️ Presipitasi"; unit = " mm"; labelColor = "#a29bfe"; hourlyArray = globalWeatherData.hourly.precipitation; timesArray = globalWeatherData.hourly.time; }
+    else if (type === "precipProb") { titleText = "⛈️ Probabilitas Hujan"; unit = "%"; labelColor = "#ffeaa7"; hourlyArray = globalWeatherData.hourly.precipitation_probability; timesArray = globalWeatherData.hourly.time; }
+    else if (type === "wind") {
+    titleText =
+        `🍃 Kecepatan Angin (${getWindUnit().trim()})`;
+
+    unit = getWindUnit();
+
+    labelColor = "#81ecec";
+
+    hourlyArray =
+        globalWeatherData.hourly.wind_speed_10m.map(
+            w => convertWind(w)
+        );
+
+    timesArray =
+        globalWeatherData.hourly.time;
+}
+    else if (type === "pm25") {
+    const value =
+        globalAirData.hourly.pm2_5[
+            new Date().getHours()
+        ] ?? 0;
+
+    const emoji = getAirEmoji(value, "pm25");
+
+    titleText = `${emoji} PM2.5`;
+    unit = " µg/m³";
+    labelColor = getAirColor(value, "pm25");
+
+    hourlyArray = globalAirData.hourly.pm2_5;
+    timesArray = globalAirData.hourly.time;
+}
+    
+    else if (type === "pm10") {
+    const value =
+        globalAirData.hourly.pm10[
+            new Date().getHours()
+        ] ?? 0;
+
+    const emoji = getAirEmoji(value, "pm10");
+
+    titleText = `${emoji} PM10`;
+    unit = " µg/m³";
+    labelColor = getAirColor(value, "pm10");
+    hourlyArray = globalAirData.hourly.pm10;
+    timesArray = globalAirData.hourly.time;
+}
+    
+    else if (type === "co") {
+    const value =
+        globalAirData.hourly.carbon_monoxide[
+            new Date().getHours()
+        ] ?? 0;
+
+    const emoji = getAirEmoji(value, "co");
+
+    titleText = `${emoji} Karbon Monoksida (CO)`;
+    unit = " µg/m³";
+    labelColor = getAirColor(value, "co");
+    hourlyArray = globalAirData.hourly.carbon_monoxide;
+    timesArray = globalAirData.hourly.time;
+}
+
+    else if (type === "no2") {
+    const value =
+        globalAirData.hourly.nitrogen_dioxide[
+            new Date().getHours()
+        ] ?? 0;
+
+    const emoji = getAirEmoji(value, "no2");
+
+    titleText = `${emoji} Nitrogen Dioksida (NO₂)`;
+    unit = " µg/m³";
+    labelColor = getAirColor(value, "no2");
+    hourlyArray = globalAirData.hourly.nitrogen_dioxide;
+    timesArray = globalAirData.hourly.time;
+}
+    
+   else if (type === "so2") {
+    const value =
+        globalAirData.hourly.sulphur_dioxide[
+            new Date().getHours()
+        ] ?? 0;
+
+    const emoji = getAirEmoji(value, "so2");
+
+    titleText = `${emoji} Sulfur Dioksida (SO₂)`;
+    unit = " µg/m³";
+    labelColor = getAirColor(value, "so2");
+    hourlyArray = globalAirData.hourly.sulphur_dioxide;
+    timesArray = globalAirData.hourly.time;
+}
+   
+    else if (type === "aqi") { titleText = "📊 Indeks Kualitas Udara"; unit = ""; const value =
+    globalAirData.hourly.us_aqi[
+        new Date().getHours()
+    ] ?? 0;
+labelColor = getAirColor(value, "aqi"); hourlyArray = globalAirData.hourly.us_aqi; timesArray = globalAirData.hourly.time; }
+
+    document.getElementById("modalTitle").innerText = titleText;
+    updateAirLegend(type);
+
+document.querySelector(".legend-line.solid")
+    .style.background = labelColor;
+
+document.querySelector(".dash-flow").style.background =
+`
+repeating-linear-gradient(
+    90deg,
+    transparent 0px,
+    transparent 8px,
+    ${labelColor} 8px,
+    ${labelColor} 16px
+)
+`;
+
+if (type === "temp") {
+    document.getElementById("modalDescription").innerText =
+        `Temperatur menunjukkan tingkat panas atau dinginnya udara di lokasi saat ini dihitung dalam satuan ${getTemperatureUnitName()}.`;
+} else {
+    document.getElementById("modalDescription").innerText =
+        penjelasanIndikator[type] || "";
+}
+
+   let chartLabels = [], chartData = [];
+for (let i = 0; i < 24; i++) {
+    if (hourlyArray[i] === undefined || !timesArray[i]) break;
+
+    chartLabels.push(new Date(timesArray[i]).toLocaleTimeString("id-ID", {
+        hour: "2-digit",
+        minute: "2-digit"
+    }));
+
+    if (type === "aqi") {
+    chartData.push(Math.round(hourlyArray[i]));
+} else {
+    chartData.push(Number(hourlyArray[i].toFixed(2)));
+}
+}
+
+    if (myChart) myChart.destroy();
+
+    let backgroundColorSetting =
+    style === 'surface'
+        ? labelColor + "88"
+        : labelColor + "15";
+
+    let borderWidthSetting =
+    style === 'surface'
+        ? 1.5
+        : 2;
+
+    setTimeout(() => {
+        const ctx = document.getElementById('hourlyChart').getContext('2d');
+        myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: chartLabels,
+                datasets: [{
+    label: titleText,
+    data: chartData,
+    borderColor: labelColor,
+    backgroundColor: backgroundColorSetting,
+    borderWidth: borderWidthSetting,
+    tension: 0.3,
+    fill: true,
+    pointRadius: 3,
+pointHoverRadius: 5,
+
+    segment: {
+        borderDash: ctx => {
+            const jamSekarang = new Date().getHours();
+
+            return ctx.p0DataIndex >= jamSekarang
+                ? [10, 8]
+                : [];
+        },
+
+        borderDashOffset: ctx => {
+            const jamSekarang = new Date().getHours();
+
+            return ctx.p0DataIndex >= jamSekarang
+                ? dashOffset
+                : 0;
+        }
+    }
+}]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                animations: { y: { duration: 600, easing: 'easeOutQuart', from: ctx.canvas.clientHeight } },
+                plugins: {
+    legend: {
+        display: false
+    },
+    tooltip: {
+        callbacks: {
+           label: function(context) {
+    let value;
+
+    if (
+        currentChartType === 'aqi' ||
+        currentChartType === 'co' ||
+        currentChartType === 'precipProb' ||
+        currentChartType === 'humidity'
+    ) {
+        value = Math.round(context.parsed.y);
+    } else {
+        value = Number(context.parsed.y).toFixed(2);
+    }
+
+    if (currentChartType === 'wind') {
+    const jam = context.dataIndex;
+
+    const direction =
+        globalWeatherData.hourly.wind_direction_10m[jam];
+
+    const arah =
+        getWindDirectionName(direction);
+
+    return [
+        `${titleText}: ${value}${unit}`,
+        `Arah Angin Dari: ${arah}`
+    ];
+}
+
+return `${titleText}: ${value}${unit}`;
+
+}
+        }        
+    }
+                }
+,
+scales: {
+                x: { grid: { display: false }, ticks: { color: '#bbb', font: { size: 10 } } },
+                y: {
+    grid: {
+        color: 'rgba(255,255,255,0.1)'
+    },
+    ticks: {
+    color: '#bbb',
+    callback: function(value) {
+        if (
+            currentChartType === 'precip' ||
+            currentChartType === 'wind'
+        ) {
+            return Number(value).toFixed(2);
+        }
+
+        return Math.round(value);
+    }
+    }
+}
+                }
+            }
+        });
+    }, 50);
+}
+
+// --- FUNGSI BARU UNTUK MERENDER GRAFIK 3D SURFACE ---
+function render3DChart(type) {
+
+    let hourlyArray;
+
+    // =========================
+    // 1. PILIH DATA SESUAI TYPE
+    // =========================
+    if (type === "temp") {
+        hourlyArray = globalWeatherData.hourly.temperature_2m.map(
+            t => convertTemperature(t)
+        );
+    }
+    else if (type === "humidity") {
+        hourlyArray = globalWeatherData.hourly.relative_humidity_2m;
+    }
+    else if (type === "precip") {
+        hourlyArray = globalWeatherData.hourly.precipitation;
+    }
+    else if (type === "precipProb") {
+        hourlyArray = globalWeatherData.hourly.precipitation_probability;
+    }
+    else if (type === "wind") {
+        hourlyArray = globalWeatherData.hourly.wind_speed_10m.map(
+            w => convertWind(w)
+        );
+    }
+    else {
+        hourlyArray = globalAirData.hourly[
+            type === "pm25" ? "pm2_5" :
+            type === "pm10" ? "pm10" :
+            type === "co" ? "carbon_monoxide" :
+            type === "no2" ? "nitrogen_dioxide" :
+            type === "so2" ? "sulphur_dioxide" :
+            "us_aqi"
+        ];
+    }
+
+    // =========================
+    // 2. BUAT DATA 3D GRID
+    // =========================
+    const data3d = new vis.DataSet();
+
+    let counter = 0;
+    const currentHour = new Date().getHours();
+
+    for (let x = 0; x < 24; x++) {
+    let val = Number(hourlyArray[x] || 0);
+    val = Number(val.toFixed(2));
+
+    const isFuture = x > currentHour;
+
+    for (let y = 0; y < 12; y++) {
+        let zEffect;
+
+        if (isFuture) {
+    const amplitude =
+        type === "co"
+            ? Math.min(val * 0.15, 150)
+            : 4;
+
+    const speed =
+        type === "co"
+            ? flowOffset * 2
+            : flowOffset;
+
+    zEffect =
+        val +
+        Math.sin(x + speed + y * 0.3) *
+        amplitude;
+    } else {
+    zEffect = val;
+    }
+        data3d.add({
+            id: counter++,
+            x: x,
+            y: y,
+            z: zEffect
+        });
+    }
+}
+    // =========================
+    // 3. INIT CHART JIKA BELUM ADA
+    // =========================
+    if (!graph3d) {
+        const container = document.getElementById('container-3d');
+
+        graph3d = new vis.Graph3d(container, data3d, {
+            width: '100%',
+            height: '100%',
+            style: 'surface',
+            showPerspective: true,
+            showGrid: true,
+            showShadow: false,
+            keepAspectRatio: false,
+            verticalRatio: 0.6,
+            backgroundColor: 'transparent',
+
+            dataColor: {
+                gradient: {
+                    0: '#74b9ff',
+                    0.5: '#a29bfe',
+                    1: '#ff7675'
+                }
+            },
+
+            xLabel: 'Jam (0-23)',
+            yLabel: 'Kedalaman',
+            zLabel: 'Nilai',
+            axisColor: '#ffffff',
+            gridColor: 'rgba(255,255,255,0.15)'
+        });
+
+    } else {
+        // =========================
+        // 4. UPDATE DATA (INI KUNCI)
+        // =========================
+        graph3d.setData(data3d);
+        graph3d.redraw(); // bikin lebih smooth
+    }
+}
+function renderHeatMap(type){
+
+    const container =
+        document.getElementById("container-heatmap");
+
+    container.innerHTML = "";
+
+    let data;
+
+    switch(type){
+        case "pm25":
+            data = globalAirData.hourly.pm2_5;
+            break;
+        case "pm10":
+            data = globalAirData.hourly.pm10;
+            break;
+        case "co":
+            data = globalAirData.hourly.carbon_monoxide;
+            break;
+        case "no2":
+            data = globalAirData.hourly.nitrogen_dioxide;
+            break;
+        case "so2":
+            data = globalAirData.hourly.sulphur_dioxide;
+            break;
+        case "aqi":
+            data = globalAirData.hourly.us_aqi;
+            break;
+        default:
+            container.innerHTML = "Heatmap hanya tersedia untuk kualitas udara.";
+            return;
+    }
+
+    container.style.display = "grid";
+    container.style.gridTemplateColumns = "repeat(6,1fr)";
+    container.style.gap = "8px";
+    document.getElementById("heatmapLegend")
+    .style.display = "flex";
+
+    const currentHour = new Date().getHours();
+
+    for(let i=0;i<24;i++){
+
+        const value = Number(data[i] || 0);
+
+        const box = document.createElement("div");
+
+        // 👉 PENTING: pakai class, bukan inline semua
+        box.className = "heat-cell";
+
+// hanya untuk air quality + AQI
+if (
+    type === "pm25" ||
+    type === "pm10" ||
+    type === "co" ||
+    type === "no2" ||
+    type === "so2" ||
+    type === "aqi"
+) {
+    box.classList.add("glass-shimmer");
+}
+
+        // 👉 ACTIVE HOUR
+        if(i === currentHour){
+            box.classList.add("active-hour");
+        }
+
+        box.style.height = "55px";
+        box.style.borderRadius = "10px";
+        box.style.display = "flex";
+        box.style.flexDirection = "column";
+        box.style.justifyContent = "center";
+        box.style.alignItems = "center";
+        box.style.color = "white";
+        box.style.fontSize = "12px";
+
+        box.style.background = getHeatColor(value, type, data);
+
+        box.innerHTML = `
+            <div>${String(i).padStart(2,'0')}:00</div>
+            <div>${value.toFixed(1)}</div>
+        `;
+
+        container.appendChild(box);
+    }
+    const currentValue =
+    Number(data[currentHour] || 0);
+
+const legendBox =
+    document.getElementById(
+        "heatmapLegendBox"
+    );
+
+legendBox.style.background =
+    getHeatColor(
+        currentValue,
+        type
+    );
+}
+function getHeatColor(value, type){
+
+    let ranges;
+
+    switch(type){
+        case "pm25":
+            ranges = [12,35,150,250];
+            break;
+
+        case "pm10":
+            ranges = [54,154,254,354];
+            break;
+
+        case "co":
+            ranges = [4400,9400,12400,15400];
+            break;
+
+        case "no2":
+            ranges = [53,100,360,649];
+            break;
+
+        case "so2":
+            ranges = [35,75,185,304];
+            break;
+
+        case "aqi":
+            ranges = [50,100,150,200];
+            break;
+
+        default:
+            return "#74b9ff";
+    }
+
+    const [good, moderate, sensitive, unhealthy] = ranges;
+
+    // 🟢 Hijau
+    if(value <= good){
+        const p = value / good;
+        return `hsl(120,100%,${65 - p*20}%)`;
+    }
+
+    // 🟡 Kuning
+    if(value <= moderate){
+        const p =
+            (value - good) /
+            (moderate - good);
+
+        return `hsl(55,100%,${65 - p*20}%)`;
+    }
+
+    // 🟠 Oranye
+    if(value <= sensitive){
+        const p =
+            (value - moderate) /
+            (sensitive - moderate);
+
+        return `hsl(30,100%,${65 - p*20}%)`;
+    }
+
+    // 🔴 Merah
+    if(value <= unhealthy){
+        const p =
+            (value - sensitive) /
+            (unhealthy - sensitive);
+
+        return `hsl(0,100%,${65 - p*20}%)`;
+    }
+
+    // ⚫ Sangat tidak sehat
+    return `hsl(0,0%,10%)`;
+}
+function closeModal() {
+    clearInterval(forecastInterval); // hentikan animasi tabel
+    document.getElementById("detailModal").style.display = "none";
+
+    document.querySelector(".chart-tabs").style.display = "flex";
+    document.getElementById("container-2d").style.display = "block";
+    document.getElementById("container-3d").style.display = "none";
+    document.getElementById("container-heatmap").style.display = "none";
+    document.getElementById("chartTitle").style.display = "block";
+    document.getElementById("airLegend").style.display = "none";
+}
+window.onclick = function(e) { if (e.target == document.getElementById("detailModal")) closeModal(); }
+
+loadData();
+setInterval(() => {
+    loadData();
+}, 60000);
+setInterval(() => {
+
+    document.querySelectorAll(".flip-card").forEach(card => {
+
+        card.classList.toggle("flip");
+
+    });
+
+}, 7000);
+// === LOGIKA SLIDER SYSTEM INDIKATOR ===
+let currentSlideIndex = 0;
+let slideTimer = null;
+const track = document.getElementById('sliderTrack');
+const boxes = document.querySelectorAll('.slider-track .box');
+const totalSlides = boxes.length;
+
+// 1. Membuat Titik & Strip secara otomatis sebanyak jumlah box
+function createPaginationDots() {
+    const dotsContainer = document.getElementById('sliderDots');
+    dotsContainer.innerHTML = ""; // Bersihkan wadah
+    
+    for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement('div');
+        dot.classList.add('dot');
+        if (i === 0) dot.classList.add('active'); // Set awal di box pertama
+        dot.setAttribute('onclick', `goToSlide(${i})`);
+        dotsContainer.appendChild(dot);
+    }
+}
+
+// 2. Fungsi untuk menggeser posisi track css
+function updateSliderPosition() {
+    const boxWidth = boxes[currentSlideIndex].offsetWidth;
+    const boxLeft = boxes[currentSlideIndex].offsetLeft;
+    const containerWidth = track.parentElement.offsetWidth;
+
+    let offset =
+    boxLeft - (containerWidth / 2) + (boxWidth / 2);
+
+const maxOffset =
+    track.scrollWidth - containerWidth;
+
+offset = Math.max(0, Math.min(offset, maxOffset));
+
+track.style.transform = `translateX(-${offset}px)`;
+
+    boxes.forEach(box=>{
+        box.classList.remove('active','side');
+    });
+
+    const prev =
+        (currentSlideIndex - 1 + totalSlides) % totalSlides;
+    const next =
+        (currentSlideIndex + 1) % totalSlides;
+
+    boxes[currentSlideIndex].classList.add('active');
+    boxes[prev].classList.add('side');
+    boxes[next].classList.add('side');
+
+    const dots =
+        document.querySelectorAll('.slider-dots .dot');
+
+    dots.forEach((dot,index)=>{
+        dot.classList.toggle(
+            'active',
+            index === currentSlideIndex
+        );
+    });
+}
+
+// 3. Fungsi Navigasi Panah (Kiri=-1, Kanan=1) - Mendukung Sistem Infinite Loop
+function moveSlide(direction) {
+    currentSlideIndex += direction;
+    
+    if (currentSlideIndex >= totalSlides) {
+        currentSlideIndex = 0; // Balik lagi ke Cuaca (Infinite forward)
+    } else if (currentSlideIndex < 0) {
+        currentSlideIndex = totalSlides - 1; // Lompat ke Indeks Udara (Infinite backward)
+    }
+    
+    updateSliderPosition();
+    resetSlideTimer(); // Reset detikan 5 detik biar tidak tabrakan pas di-klik manual
+}
+
+// 4. Fungsi jika Titik/Strip diklik langsung
+function goToSlide(index) {
+    currentSlideIndex = index;
+    updateSliderPosition();
+    resetSlideTimer();
+}
+
+// 5. Sistem Otomatis Bergeser Per 5 Detik
+function startSlideTimer() {
+    slideTimer = setInterval(() => {
+        moveSlide(1);
+    }, 5000); // 5000ms = 5 detik
+}
+
+function resetSlideTimer() {
+    clearInterval(slideTimer);
+    startSlideTimer();
+}
+function convertTemperature(celsius) {
+    switch (temperatureUnit) {
+        case "F":
+            return (celsius * 9/5 + 32);
+        case "R":
+            return (celsius * 4/5);
+        case "K":
+            return (celsius + 273.15);
+        default:
+            return celsius;
+    }
+}
+
+function changeTemperatureUnit() {
+    temperatureUnit =
+        document.getElementById("tempUnit").value;
+
+    updateTemperatureDisplay();
+    loadData();
+
+    if (
+        document.getElementById("detailModal").style.display === "flex" &&
+        currentChartType === "temp"
+    ) {
+        renderChartData();
+    }
+}
+function updateTemperatureDisplay() {
+    if (!globalWeatherData) return;
+
+    const celsius =
+        globalWeatherData.current.temperature_2m;
+
+    const value =
+        convertTemperature(celsius);
+
+    document.getElementById("temp").textContent =
+    `${value.toFixed(1)}`;
+}
+function getTemperatureUnit() {
+    switch (temperatureUnit) {
+        case "F":
+            return "°F";
+        case "R":
+            return "°R";
+        case "K":
+            return "K";
+        default:
+            return "°C";
+    }
+}
+function getTemperatureUnitName() {
+    switch (temperatureUnit) {
+        case "F":
+            return "Fahrenheit (°F)";
+        case "R":
+            return "Reamur (°R)";
+        case "K":
+            return "Kelvin (K)";
+        default:
+            return "Celcius (°C)";
+    }
+}
+function convertWind(speed) {
+    if (windUnit === "ms") {
+        return speed / 3.6;
+    }
+    return speed;
+}
+function getWindDirectionEmoji(deg) {
+    // ubah ke arah tujuan angin
+    deg = (deg + 180) % 360;
+
+    if (deg >= 337.5 || deg < 22.5) return "⬆️";
+    if (deg < 67.5) return "↗️";
+    if (deg < 112.5) return "➡️";
+    if (deg < 157.5) return "↘️";
+    if (deg < 202.5) return "⬇️";
+    if (deg < 247.5) return "↙️";
+    if (deg < 292.5) return "⬅️";
+    return "↖️";
+}
+
+function getWindDirectionName(deg) {
+    if (deg >= 337.5 || deg < 22.5)
+        return "Utara";
+
+    if (deg < 67.5)
+        return "Timur Laut";
+
+    if (deg < 112.5)
+        return "Timur";
+
+    if (deg < 157.5)
+        return "Tenggara";
+
+    if (deg < 202.5)
+        return "Selatan";
+
+    if (deg < 247.5)
+        return "Barat Daya";
+
+    if (deg < 292.5)
+        return "Barat";
+
+    return "Barat Laut";
+}
+function getWindUnit() {
+    return windUnit === "ms" ? " m/s" : " km/j";
+}
+function changeWindUnit() {
+    windUnit =
+        document.getElementById("windUnit").value;
+
+    updateWindDisplay();
+
+    if (
+        document.getElementById("detailModal").style.display === "flex" &&
+        currentChartType === "wind"
+    ) {
+        renderChartData();
+    }
+}
+function updateWindDisplay(){
+    if (!globalWeatherData) return;
+
+    const hour = new Date().getHours();
+
+    const speedRaw = globalWeatherData.hourly.wind_speed_10m[hour] ?? 0;
+    const dirDeg = globalWeatherData.hourly.wind_direction_10m[hour] ?? 0;
+
+    const speed = convertWind(speedRaw);
+    const unit = getWindUnit();
+
+    // hanya teks, tanpa emoji
+    const directionText = getWindDirectionName(dirDeg);
+
+   document.getElementById("wind").innerHTML = `
+    <div style="display:flex; flex-direction:column; align-items:flex-start; gap:4px; width:100%;">
+
+        <div style="font-size:18px; font-weight:bold;">
+            ${speed.toFixed(1)}
+        </div>
+
+        <div class="wind-direction" style="font-size:11px; opacity:0.75;">
+            Arah angin dari: ${directionText}
+        </div>
+
+    </div>
+`;
+        
+}
+function updateThemeByTime() {
+
+    const now = new Date();
+
+    const totalMinutes =
+        now.getHours() * 60 +
+        now.getMinutes();
+
+    // Golden Hour Pagi
+    const sunriseStart = 5 * 60 + 30;   // 05:30
+    const sunriseEnd   = 6 * 60 + 30;   // 06:30
+
+    // Golden Hour Sore
+    const sunsetStart  = 16 * 60 + 30;  // 16:30
+    const sunsetEnd    = 17 * 60 + 30;  // 17:30
+
+    // Hapus semua mode
+    document.body.classList.remove("golden-mode");
+    document.body.classList.remove("dark-mode");
+
+    // Golden Mode (pagi & sore)
+    if (
+        (totalMinutes >= sunriseStart && totalMinutes < sunriseEnd) ||
+        (totalMinutes >= sunsetStart && totalMinutes < sunsetEnd)
+    ) {
+
+        document.body.classList.add("golden-mode");
+
+    }
+
+    // Dark Mode
+    else if (
+        totalMinutes >= 18 * 60 ||
+        totalMinutes < sunriseStart
+    ) {
+
+        document.body.classList.add("dark-mode");
+
+    }
+
+    // Selain itu = mode normal
+}
+updateThemeByTime();
+setInterval(updateThemeByTime, 1000);
+// Inisialisasi awal slider saat halaman siap
+createPaginationDots();
+updateSliderPosition();
+startSlideTimer();
+let touchStartX = 0;
+let touchEndX = 0;
+
+track.addEventListener("touchstart", (e) => {
+    touchStartX = e.touches[0].clientX;
+});
+track.addEventListener("touchmove", (e) => {
+    e.preventDefault();
+}, { passive: false });
+track.addEventListener("touchend", (e) => {
+    touchEndX = e.changedTouches[0].clientX;
+
+    const jarak = touchEndX - touchStartX;
+
+    if (Math.abs(jarak) < 50) return;
+
+    if (jarak < 0) {
+        moveSlide(1); // geser kiri
+    } else {
+        moveSlide(-1); // geser kanan
+    }
+});
+// ================================
+// Animasi garis chart (Chart.js)
+// ================================
+setInterval(() => {
+    if (
+        myChart &&
+        document.getElementById("detailModal").style.display === "flex"
+    ) {
+        dashOffset -= 0.25;
+        myChart.update("none");
+    }
+}, 50);
+
+
+// ================================
+// Animasi flow/gelombang
+// ================================
+setInterval(() => {
+    flowOffset += 0.15;
+}, 50);
+
+
+// ================================
+// Refresh animasi 3D
+// (tidak membuat ulang data)
+// ================================
+setInterval(() => {
+    if (graph3d && currentChartStyle === "surface3d") {
+        render3DChart(currentChartType);
+    }
+}, 125);
+
+
+// ================================
+// Refresh data setiap 1 menit
+// ================================
+setInterval(() => {
+
+    loadData();
+
+    if (
+        document.getElementById("detailModal").style.display === "flex"
+    ) {
+
+        renderChartData();
+
+        if (
+            ["pm25", "pm10", "co", "no2", "so2", "aqi"]
+            .includes(currentChartType)
+        ) {
+            updateAirLegend(currentChartType);
+        }
+
+    }
+
+}, 60000);
+
+
+// ================================
+// Jika jam berganti
+// ================================
+setInterval(() => {
+
+    const nowHour = new Date().getHours();
+
+    if (nowHour !== lastHour) {
+
+        lastHour = nowHour;
+
+        loadData();
+
+        if (
+            document.getElementById("detailModal").style.display === "flex"
+        ) {
+            renderChartData();
+
+            if (
+                ["pm25", "pm10", "co", "no2", "so2", "aqi"]
+                .includes(currentChartType)
+            ) {
+                updateAirLegend(currentChartType);
+            }
+        }
+
+    }
+
+}, 1000);
+
+
+// ================================
+// Highlight jam pada Heatmap
+// ================================
+setInterval(() => {
+
+    const currentHour = new Date().getHours();
+
+    document.querySelectorAll(".heat-cell").forEach((cell, i) => {
+
+        if (i === currentHour) {
+            cell.classList.add("active-hour");
+        } else {
+            cell.classList.remove("active-hour");
+        }
+
+    });
+
+}, 60000);
+
+
+// ================================
+// Ganti jenis chart
+// ================================
+function switchChart(style) {
+
+    currentChartStyle = style;
+
+    resetTabStyles();
+
+    renderChartData();
+
+}
+function getIntensity(value, type) {
+
+    switch(type) {
+
+        case "pm25":
+            if (value <= 12) return 3;
+            if (value <= 35) return 10;
+            if (value <= 150) return 20;
+            if (value <= 250) return 30;
+            return 80;
+
+        case "pm10":
+            if (value <= 54) return 5;
+            if (value <= 154) return 12;
+            if (value <= 254) return 22;
+            if (value <= 354) return 35;
+            return 90;
+
+        case "co":
+            if (value <= 4400) return 6;
+            if (value <= 9400) return 15;
+            if (value <= 12400) return 25;
+            if (value <= 15400) return 38;
+            return 100;
+
+        case "no2":
+            if (value <= 53) return 6;
+            if (value <= 100) return 15;
+            if (value <= 360) return 25;
+            if (value <= 649) return 40;
+            return 100;
+
+        case "so2":
+            if (value <= 35) return 6;
+            if (value <= 75) return 12;
+            if (value <= 185) return 22;
+            if (value <= 304) return 38;
+            return 100;
+
+        case "aqi":
+            if (value <= 50) return 8;
+            if (value <= 100) return 20;
+            if (value <= 150) return 30;
+            if (value <= 200) return 45;
+            return 100;
+    }
+
+    return 10;
+}
+function initParticles(boxId, getValueFn, type) {
+    const box = document.getElementById(boxId);
+    if (!box) return;
+
+    let canvas = document.createElement("canvas");
+    canvas.className = "particle-canvas";
+    box.appendChild(canvas);
+
+    const ctx = canvas.getContext("2d");
+
+    function resize() {
+        canvas.width = box.clientWidth;
+        canvas.height = box.clientHeight;
+    }
+
+    resize();
+    window.addEventListener("resize", resize);
+
+    const particles = [];
+
+    function createParticle() {
+    return {
+        x: Math.random() * canvas.width,
+        y: canvas.height,
+        z: Math.random(), // kedalaman
+        size: Math.random() * 3 + 1,
+        speed: Math.random() * 1 + 0.5
+    };
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        const time = performance.now() * 0.001;
+        const value = getValueFn();
+const targetCount = getIntensity(value, type);
+        while (particles.length < targetCount) {
+            particles.push(createParticle());
+        }
+while (particles.length > targetCount) {
+    particles.pop();
+}
+        particles.forEach((p, i) => {
+
+    // bergerak ke atas
+    p.y -= p.speed * (0.5 + p.z);
+
+    // bergerak sedikit ke kiri-kanan
+    p.x += Math.sin(time * 2 + p.z * 10) * 0.2;
+
+    // jika keluar layar
+    if (p.y < 0) {
+        particles[i] = createParticle();
+    }
+
+    // agar tidak keluar samping
+    if (p.x < 0) p.x = canvas.width;
+    if (p.x > canvas.width) p.x = 0;
+           const scale = 0.45 + Math.pow(p.z, 1.5);
+const radius = p.size * scale;
+
+const gradient = ctx.createRadialGradient(
+    p.x - radius / 3,
+    p.y - radius / 3,
+    0,
+    p.x,
+    p.y,
+    radius
+);
+
+const alpha = 0.15 + p.z * 0.85;
+
+gradient.addColorStop(0, `rgba(255,255,255,${alpha})`);
+gradient.addColorStop(1, "rgba(255,255,255,0)");
+ctx.shadowBlur = radius * 3;
+ctx.shadowColor = "rgba(255,255,255,0.8)";
+
+ctx.beginPath();
+ctx.arc(
+    p.x,
+    p.y,
+    radius,
+    0,
+    Math.PI * 2
+);
+
+ctx.fillStyle = gradient;
+ctx.fill();
+
+ctx.shadowBlur = 0;
+        });
+
+        requestAnimationFrame(draw);
+    }
+
+    draw();
+}
+function initWindAnimation() {
+    const box = document.getElementById("wind-box");
+    const canvas = box.querySelector(".wind-canvas");
+    const ctx = canvas.getContext("2d");
+
+    function resize() {
+        canvas.width = box.clientWidth;
+        canvas.height = box.clientHeight;
+    }
+    resize();
+    window.addEventListener("resize", resize);
+
+    let particles = [];
+
+    function createParticle() {
+    return {
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+
+        // 🔥 depth lebih realistis (non-linear)
+        z: Math.pow(Math.random(), 1.8),
+
+        size: Math.random() * 2 + 1,
+        speed: Math.random() * 1.5 + 0.5,
+
+        waveOffset: Math.random() * Math.PI * 2,
+        waveSpeed: 0.02 + Math.random() * 0.03,
+        waveAmplitude: 0.5 + Math.random() * 1.5,
+
+        life: 0,
+        maxLife: 180 + Math.random() * 120,
+
+        rotationOffset: (Math.random() - 0.5) * 10
+    };
+}
+    function getWindAngle() {
+        return globalWeatherData?.current?.wind_direction_10m ?? 0;
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const windSpeed =
+    globalWeatherData?.current?.wind_speed_10m ?? 5;
+
+let target;
+
+if (windSpeed < 5) {
+    target = 15;
+}
+else if (windSpeed < 10) {
+    target = 25;
+}
+else if (windSpeed < 20) {
+    target = 40;
+}
+else if (windSpeed < 30) {
+    target = 55;
+}
+else {
+    target = 70;
+}
+
+// Tambah partikel jika kurang
+while (particles.length < target) {
+    particles.push(createParticle());
+}
+
+// Kurangi partikel jika berlebih
+while (particles.length > target) {
+    particles.pop();
+}
+        const angle = getWindAngle();
+        const rad = (angle * Math.PI) / 180;
+
+        // arah gerak partikel
+        const moveRad = rad + Math.PI;
+
+const dx = Math.sin(moveRad) * 2;
+const dy = -Math.cos(moveRad) * 2;
+const time = performance.now() / 1000;
+        particles.forEach((p, i) => {
+
+    p.life++;
+
+    const windSpeed =
+        (globalWeatherData?.current?.wind_speed_10m ?? 1);
+
+    const speedFactor = windSpeed / 10;
+
+    const angle = getWindAngle();
+    const rad = (angle * Math.PI) / 180;
+    const moveRad = rad + Math.PI;
+
+    const dx = Math.sin(moveRad);
+    const dy = -Math.cos(moveRad);
+
+    // 🔥 DEPTH CAMERA STYLE (lebih natural dari 0.5 + p.z)
+    const depth = 1 / (1 + p.z * 2.5);
+
+    // 🌪️ main movement
+    p.x += dx * p.speed * speedFactor * depth * 3;
+    p.y += dy * p.speed * speedFactor * depth * 3;
+
+    // 🌊 wave (lebih halus di jauh)
+    const wave =
+        Math.sin(time * p.waveSpeed + p.waveOffset) *
+        p.waveAmplitude *
+        depth;
+
+    p.x += Math.cos(rad) * wave;
+    p.y += Math.sin(rad) * wave;
+
+    // reset
+    if (
+        p.x < -20 || p.x > canvas.width + 20 ||
+        p.y < -20 || p.y > canvas.height + 20 ||
+        p.life >= p.maxLife
+    ) {
+        particles[i] = createParticle();
+        return;
+    }
+
+    // 🎯 VISUAL SCALE (lebih camera-like)
+    const scale = 0.3 + p.z * 1.2;
+
+    const len = 14 * scale;
+    const width = 5 * scale;
+
+    // 🌫️ fog + distance fade (INI UPGRADE PENTING)
+    const fog = 1 - p.z * 0.6;
+
+    let fade = 1;
+
+    if (p.life < 25) fade = p.life / 25;
+    else if (p.life > p.maxLife - 25)
+        fade = (p.maxLife - p.life) / 25;
+
+    const alpha =
+        (0.15 + p.z * 0.7) *
+        fade *
+        fog;
+
+    ctx.save();
+
+    ctx.translate(p.x, p.y);
+    ctx.scale(scale, scale);
+
+    ctx.rotate(
+        rad +
+        Math.PI +
+        (p.rotationOffset * Math.PI / 180)
+    );
+
+    // 🔥 shadow lebih subtle (biar tidak “meledak” di jauh)
+    ctx.shadowBlur = 8 * scale * (1 - p.z);
+    ctx.shadowColor = "rgba(255,255,255,0.5)";
+
+    ctx.globalAlpha = alpha;
+
+    // body
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(0, -len);
+    ctx.strokeStyle = "white";
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    // head
+    ctx.beginPath();
+    ctx.moveTo(0, -len);
+    ctx.lineTo(-width, -len + width);
+    ctx.lineTo(width, -len + width);
+    ctx.closePath();
+    ctx.fillStyle = "white";
+    ctx.fill();
+
+    ctx.restore();
+});
+        requestAnimationFrame(draw);
+    }
+    draw();
+}
+
+function startForecastAnimation(){
+
+    clearInterval(forecastInterval);
+
+    const rows = document.querySelectorAll(".forecast-row");
+
+    if(rows.length === 0) return;
+
+    rows.forEach(row => row.classList.remove("active-row"));
+
+    let index = 0;
+    rows[index].classList.add("active-row");
+
+    if(rows.length === 1) return;
+
+    forecastInterval = setInterval(() => {
+
+        rows[index].classList.remove("active-row");
+
+        index = (index + 1) % rows.length;
+
+        rows[index].classList.add("active-row");
+
+    }, 1000);
+
+}
+const weatherAnimations = [];
+const rainParticles = [];
+
+let animationPaused = false;
+document.addEventListener("visibilitychange", () => {
+    animationPaused = document.hidden;
+});
+
+const camera = {
+
+    x:0,
+
+    y:0,
+
+    z:0,
+
+    fov:450
+
+};
+function worldToScreen(x,y,z){
+
+const depth=z-camera.z;
+
+const scale=
+camera.fov/
+(camera.fov+depth);
+
+ return{
+
+    x:(x-camera.x*1.8)*scale,
+
+    y:(y-camera.y*1.8)*scale,
+
+    scale
+
+};
+
+}
+
+function initForecastWeather(){
+
+    weatherAnimations.length = 0;
+
+    document.querySelectorAll(".weatherCanvas").forEach(canvas=>{
+
+        const card = canvas.closest(".flip-card");
+        if(!card) return;
+
+        const rect = canvas.getBoundingClientRect();
+
+canvas.width = rect.width;
+canvas.height = rect.height;
+
+        weatherAnimations.push({
+    canvas,
+    ctx: canvas.getContext("2d"),
+    code: Number(card.dataset.weather)
+});
+
+initRain(weatherAnimations[weatherAnimations.length-1]);
+
+    });
+
+}
+function initRain(w){
+
+    rainParticles[w.code] = [];
+
+    let count = 150;
+
+// Gerimis
+if([51,53,55].includes(w.code))
+    count = 35;
+
+// Hujan ringan
+if([61].includes(w.code))
+    count = 90;
+
+// Hujan sedang
+if([63,80].includes(w.code))
+    count = 150;
+
+// Hujan lebat
+if([65,81,82].includes(w.code))
+    count = 250;
+
+// Badai
+if(w.code==95)
+    count = 350;
+
+    for(let i=0;i<count;i++){
+
+        rainParticles[w.code].push({
+    x: Math.random() * w.canvas.width,
+    y: Math.random() * w.canvas.height,
+
+    // 🔥 STEP 1: DEPTH Z
+    z:
+
+50+
+
+Math.random()*800,   // 0 = dekat, 1 = jauh
+
+    speed: 5 + Math.random() * 5,
+    len: 8 + Math.random() * 8
+});
+
+    }
+
+}
+let lastFrame = 0;
+const FPS = 18;
+const frameInterval = 1000 / FPS;
+
+function animateForecastWeather(now){
+
+    requestAnimationFrame(animateForecastWeather);
+
+    if(animationPaused){
+        return;
+    }
+
+    if(now - lastFrame < frameInterval){
+        return;
+    }
+
+    lastFrame = now;
+
+    // CAMERA MOVEMENT
+ camera.x = Math.sin(now * 0.001) * 25;
+camera.y = Math.cos(now * 0.0012) * 12;
+camera.z =
+Math.sin(now*0.0004)*40;
+
+    weatherAnimations.forEach(w => {
+
+        const ctx = w.ctx;
+        const width = w.canvas.width;
+        const height = w.canvas.height;
+
+        const rect = w.canvas.getBoundingClientRect();
+
+        if(
+            rect.bottom < 0 ||
+            rect.top > window.innerHeight
+        ){
+            return;
+        }
+
+        ctx.clearRect(0,0,width,height);
+
+        switch(w.code){
+
+            case 0:
+                drawSunny(w);
+                break;
+
+            case 1:
+                drawPartlyCloudy(w);
+                break;
+
+            case 2:
+            case 3:
+                drawCloudy(w);
+                break;
+
+            case 51:
+            case 53:
+            case 55:
+            case 61:
+            case 63:
+            case 65:
+            case 80:
+            case 81:
+            case 82:
+            case 95:
+                drawRain(w);
+                break;
+        }
+
+    });
+
+}
+function drawSunny(w){
+
+    const ctx = w.ctx;
+    const width = w.canvas.width;
+    const height = w.canvas.height;
+
+    // Posisi Matahari
+const cx = width / 2 - camera.x * 0.2;
+const cy = height / 2 - camera.y * 0.2;
+    const r = 28;
+
+    // Langit
+    drawPhysicalSky(
+        ctx,
+        width,
+        height,
+        "clear"
+    );
+
+    // Atmosfer
+    drawAtmosphereScattering(
+        ctx,
+        width,
+        height,
+        cx,
+        cy
+    );
+
+    // Sinar Matahari
+    drawVolumetricSunRays(
+        ctx,
+        cx,
+        cy,
+        r
+    );
+
+    // Matahari
+    drawSun(
+        ctx,
+        cx,
+        cy,
+        r
+    );
+
+    // Awan
+ drawCloud(
+    ctx,
+    width * 0.55,
+    height * 0.40,
+    1.2,
+    0.8,
+    cx,
+    cy
+);
+
+}
+function drawVolumetricSunRays(ctx, cx, cy, radius){
+
+    const time = Date.now() * 0.00006;
+
+    ctx.save();
+
+    ctx.translate(cx, cy);
+    ctx.rotate(time);
+
+    ctx.filter = "blur(1.5px)";
+    ctx.globalCompositeOperation = "screen";
+
+    const rayCount = 64;
+
+    for(let i = 0; i < rayCount; i++){
+
+        const angle = (Math.PI * 2 / rayCount) * i;
+
+        ctx.save();
+        ctx.rotate(angle);
+
+        // panjang sinar stabil
+        const noise =
+            Math.sin(i * 12.83) * 0.5 + 0.5;
+
+        const len =
+            radius +
+            90 +
+            noise * 45;
+
+        const alpha =
+            0.012 +
+            noise * 0.015;
+
+const grad = ctx.createLinearGradient(
+    -20,
+    -40,
+    20,
+    40
+);
+
+        grad.addColorStop(
+            0,
+            `rgba(255,250,215,${alpha})`
+        );
+
+        grad.addColorStop(
+            0.45,
+            `rgba(255,235,170,${alpha*0.55})`
+        );
+
+        grad.addColorStop(
+            1,
+            "rgba(255,220,120,0)"
+        );
+
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 1.4;
+
+        ctx.beginPath();
+        ctx.moveTo(radius,0);
+        ctx.lineTo(len,0);
+        ctx.stroke();
+
+        ctx.restore();
+    }
+
+    ctx.globalCompositeOperation = "source-over";
+    ctx.filter = "none";
+
+    ctx.restore();
+
+}
+function drawPhysicalSky(ctx, width, height, weather = "clear"){
+
+    const palette =
+        PHYSICAL_PALETTE[weather] ??
+        PHYSICAL_PALETTE.clear;
+
+const skyOffsetX = camera.x * 0.05;
+const skyOffsetY = camera.y * 0.03;
+const hazeShift = horizonHaze(camera.y, height);
+ const sky = ctx.createLinearGradient(
+    skyOffsetX,
+    skyOffsetY,
+    skyOffsetX,
+    height + skyOffsetY + hazeShift * 120
+);
+
+    sky.addColorStop(0, palette.skyTop);
+    sky.addColorStop(0.22, palette.skyUpper);
+    sky.addColorStop(0.48, palette.skyMiddle);
+    sky.addColorStop(0.80, palette.skyLower);
+    sky.addColorStop(1, palette.horizon);
+
+    ctx.fillStyle = sky;
+    ctx.fillRect(0,0,width,height);
+    const hazeOffsetY = hazeShift * 80;
+const horizon = ctx.createRadialGradient(
+    width/2 - skyOffsetX,
+    height*1.05 - skyOffsetY + hazeOffsetY,
+    10,
+
+    width/2 - skyOffsetX,
+    height*1.05 - skyOffsetY + hazeOffsetY,
+    width
+);
+
+horizon.addColorStop(
+    0,
+    "rgba(255,235,190,.45)"
+);
+
+horizon.addColorStop(
+    1,
+    "rgba(255,235,190,0)"
+);
+    ctx.fillStyle = horizon;
+    ctx.fillRect(
+        0,
+        0,
+        width,
+        height
+    );
+
+    const zenith = ctx.createLinearGradient(
+        0,
+        0,
+        0,
+        height
+    );
+
+    zenith.addColorStop(
+        0,
+        "rgba(0,40,90,.18)"
+    );
+
+    zenith.addColorStop(
+        .45,
+        "rgba(0,0,0,0)"
+    );
+
+    ctx.fillStyle = zenith;
+    ctx.fillRect(
+        0,
+        0,
+        width,
+        height
+    );
+
+    const haze = ctx.createLinearGradient(
+        0,
+        0,
+        0,
+        height
+    );
+
+    haze.addColorStop(
+        .55,
+        "rgba(255,255,255,0)"
+    );
+
+    haze.addColorStop(
+        1,
+        palette.haze
+    );
+
+    ctx.fillStyle = haze;
+    ctx.fillRect(
+        0,
+        0,
+        width,
+        height
+    );
+
+    const vignette = ctx.createRadialGradient(
+
+    width/2 - skyOffsetX,
+height/2 - skyOffsetY,
+        width*0.25,
+
+    width/2 - skyOffsetX,
+height/2 - skyOffsetY,
+        width
+
+    );
+
+    vignette.addColorStop(
+        0,
+        "rgba(0,0,0,0)"
+    );
+
+vignette.addColorStop(
+    1,
+    weather === "overcast"
+        ? "rgba(0,0,0,.22)"
+        : "rgba(0,0,0,.12)"
+);
+
+    ctx.fillStyle = vignette;
+    ctx.fillRect(
+        0,
+        0,
+        width,
+        height
+    );
+
+drawAtmosphereScattering(
+    ctx,
+    width,
+    height,
+    width * 0.28 - skyOffsetX,
+    height * 0.32 - skyOffsetY
+);
+
+    if(skyNoiseCanvas){
+
+        ctx.save();
+
+        ctx.globalAlpha = 0.08;
+
+        ctx.drawImage(
+            skyNoiseCanvas,
+            0,
+            0,
+            width,
+            height
+        );
+
+        ctx.restore();
+
+    }
+
+}
+function horizonHaze(cameraY, height) {
+    return (cameraY * 0.02) / height;
+}
+function drawAtmosphereScattering(ctx,width,height,sunX,sunY){
+const glow = ctx.createRadialGradient(
+
+    sunX,
+    sunY,
+    20,
+
+    sunX,
+    sunY,
+    width*0.9
+
+);
+
+glow.addColorStop(
+    0,
+    "rgba(255,240,190,.45)"
+);
+
+glow.addColorStop(
+    1,
+    "rgba(255,240,190,0)"
+);
+
+ctx.fillStyle = glow;
+ctx.fillRect(
+    0,
+    0,
+    width,
+    height
+);
+const atmosphere = ctx.createRadialGradient(
+
+    sunX,
+    sunY,
+    100,
+
+    sunX,
+    sunY,
+    width*1.2
+
+);
+
+atmosphere.addColorStop(
+    0,
+    "rgba(255,255,255,.12)"
+);
+
+atmosphere.addColorStop(
+    1,
+    "rgba(255,255,255,0)"
+);
+
+ctx.fillStyle = atmosphere;
+ctx.fillRect(
+    0,
+    0,
+    width,
+    height
+);
+const blue = ctx.createRadialGradient(
+
+    sunX,
+    sunY,
+    width*0.2,
+
+    sunX,
+    sunY,
+    width*1.3
+
+);
+
+blue.addColorStop(
+    0,
+    "rgba(120,180,255,.08)"
+);
+
+blue.addColorStop(
+    1,
+    "rgba(120,180,255,0)"
+);
+
+ctx.fillStyle = blue;
+ctx.fillRect(
+    0,
+    0,
+    width,
+    height
+);
+}
+function drawPartlyCloudy(w){
+
+    const ctx = w.ctx;
+    const width = w.canvas.width;
+    const height = w.canvas.height;
+
+    const time = Date.now() * 0.0002;
+
+ drawPhysicalSky(
+    ctx,
+    width,
+    height,
+    "partlyCloudy"
+);
+    // Matahari
+const sunX = width * 0.28 - camera.x * 0.15;
+const sunY = height * 0.32 - camera.y * 0.15;
+
+drawAtmosphereScattering(
+    ctx,
+    width,
+    height,
+    sunX,
+    sunY
+);
+
+drawSun(
+    ctx,
+    sunX,
+    sunY,
+    22
+);
+
+    // =========================
+// Awan belakang
+// =========================
+ctx.globalAlpha = 0.45;
+
+drawCloud(ctx, width * 0.40, height * 0.35, 1.5, 0.8);
+drawCloud(ctx, width * 0.60, height * 0.55, 1.1, 0.4);
+
+// =========================
+// Awan depan
+// =========================
+ctx.globalAlpha = 0.95;
+
+drawCloud(
+    ctx,
+    width * 0.60 + Math.sin(time * 1.2) * 15,
+    height * 0.55 + Math.cos(time * 0.6) * 2,
+    1.1
+);
+
+ctx.globalAlpha = 1;
+
+drawAtmosphereScattering(
+    ctx,
+    width,
+    height,
+    width*0.28,
+    height*0.32
+);
+}
+function drawSun(ctx, cx, cy, radius){
+
+    const time = Date.now() * 0.001;
+
+    // animasi halus
+    const r =
+        radius +
+        Math.sin(time * 2) * 1.5;
+
+    // ==========================================
+    // 1. OUTER BLOOM
+    // ==========================================
+
+    const bloom = ctx.createRadialGradient(
+        cx,
+        cy,
+        r * 0.5,
+
+        cx,
+        cy,
+        r * 6
+    );
+
+    bloom.addColorStop(0,"rgba(255,245,190,.45)");
+    bloom.addColorStop(.25,"rgba(255,235,150,.25)");
+    bloom.addColorStop(.55,"rgba(255,215,90,.10)");
+    bloom.addColorStop(1,"rgba(255,200,60,0)");
+
+    ctx.fillStyle = bloom;
+
+    ctx.beginPath();
+    ctx.arc(cx,cy,r*6,0,Math.PI*2);
+    ctx.fill();
+
+    // ==========================================
+    // 2. CORONA
+    // ==========================================
+
+    const corona = ctx.createRadialGradient(
+
+        cx,
+        cy,
+        r,
+
+        cx,
+        cy,
+        r*2.5
+
+    );
+
+    corona.addColorStop(0,"rgba(255,255,220,.75)");
+    corona.addColorStop(.6,"rgba(255,235,170,.22)");
+    corona.addColorStop(1,"rgba(255,220,120,0)");
+
+    ctx.fillStyle = corona;
+
+    ctx.beginPath();
+    ctx.arc(cx,cy,r*2.5,0,Math.PI*2);
+    ctx.fill();
+
+    // ==========================================
+    // 3. SUN DISC
+    // ==========================================
+
+    const disc = ctx.createRadialGradient(
+
+        cx-r*0.25,
+        cy-r*0.25,
+        r*0.05,
+
+        cx,
+        cy,
+        r
+
+    );
+
+    disc.addColorStop(0,"#fffde8");
+    disc.addColorStop(.15,"#fff8b8");
+    disc.addColorStop(.45,"#ffe97a");
+    disc.addColorStop(.75,"#ffd13c");
+    disc.addColorStop(1,"#ff9800");
+
+    ctx.fillStyle = disc;
+
+    ctx.beginPath();
+    ctx.arc(cx,cy,r,0,Math.PI*2);
+    ctx.fill();
+
+    // ==========================================
+    // 4. CORE HIGHLIGHT
+    // ==========================================
+
+    const core = ctx.createRadialGradient(
+
+        cx-r*0.25,
+        cy-r*0.25,
+        0,
+
+        cx-r*0.25,
+        cy-r*0.25,
+        r*0.35
+
+    );
+
+    core.addColorStop(0,"rgba(255,255,255,.95)");
+    core.addColorStop(1,"rgba(255,255,255,0)");
+
+    ctx.fillStyle = core;
+
+    ctx.beginPath();
+    ctx.arc(
+        cx-r*0.25,
+        cy-r*0.25,
+        r*0.35,
+        0,
+        Math.PI*2
+    );
+    ctx.fill();
+
+    // ==========================================
+    // 5. RIM GLOW
+    // ==========================================
+
+    ctx.save();
+
+    ctx.beginPath();
+    ctx.arc(cx,cy,r+1,0,Math.PI*2);
+
+    ctx.strokeStyle = "rgba(255,245,210,.55)";
+    ctx.lineWidth = Math.max(1,r*0.08);
+
+    ctx.shadowBlur = r*0.6;
+    ctx.shadowColor = "rgba(255,255,200,.8)";
+
+    ctx.stroke();
+
+    ctx.restore();
+
+}
+    
+function drawCloudy(w){
+
+    const ctx = w.ctx;
+    const width = w.canvas.width;
+    const height = w.canvas.height;
+
+    const time = Date.now() * 0.00008;
+
+    // =========================
+// Physical Sky
+// =========================
+
+let skyType = "clear";
+
+switch(w.code){
+
+    case 2:
+        skyType = "cloudy";
+        break;
+
+    case 3:
+        skyType = "overcast";
+        break;
+
+}
+
+
+drawPhysicalSky(
+    ctx,
+    width,
+    height,
+    skyType
+);
+ // =========================
+// CLOUD LAYERS
+// =========================
+
+if (w.code === 2) {
+
+    // =========================
+    // BERAWAN
+    // =========================
+
+    ctx.globalAlpha = 0.30;
+
+    drawCloud(
+        ctx,
+        width * 0.15 + Math.sin(time * 0.4) * 8,
+        35,
+        1.8,
+        900
+    );
+
+    ctx.globalAlpha = 0.60;
+
+drawCloud(
+    ctx,
+    width * 0.45 + Math.sin(time * 0.8) * 15,
+    50 + Math.cos(time * 0.45) * 2,
+    1.5,
+    500
+);
+
+    ctx.globalAlpha = 0.95;
+
+    drawCloud(
+        ctx,
+        width * 0.75 + Math.sin(time * 1.2) * 20,
+        65,
+        1.2,
+        120
+    );
+
+}
+else if (w.code === 3) {
+
+    // =========================
+    // MENDUNG
+    // =========================
+
+    ctx.globalAlpha = 0.25;
+
+    drawCloud(
+        ctx,
+        width * 0.10 + Math.sin(time * 0.30) * 6,
+        30,
+        2.0,
+        900
+    );
+
+    ctx.globalAlpha = 0.40;
+
+    drawCloud(
+        ctx,
+        width * 0.35 + Math.sin(time * 0.45) * 8,
+        45,
+        1.8,
+        700
+    );
+
+    ctx.globalAlpha = 0.55;
+
+    drawCloud(
+        ctx,
+        width * 0.60 + Math.sin(time * 0.60) * 10,
+        55,
+        1.6,
+        500
+    );
+
+    ctx.globalAlpha = 0.75;
+
+    drawCloud(
+        ctx,
+        width * 0.85 + Math.sin(time * 0.90) * 12,
+        65,
+        1.4,
+        300
+    );
+
+    ctx.globalAlpha = 0.95;
+
+    drawCloud(
+        ctx,
+        width * 0.50 + Math.sin(time * 1.20) * 15,
+        80,
+        1.2,
+        120
+    );
+
+}
+
+ctx.globalAlpha = 1;
+drawFog(w);
+}
+function drawFog(w){
+
+    const ctx = w.ctx;
+    const width = w.canvas.width;
+    const height = w.canvas.height;
+
+    const grad = ctx.createLinearGradient(0,0,0,height);
+
+    if(w.code==2){
+
+        grad.addColorStop(0,"rgba(255,255,255,0)");
+        grad.addColorStop(.65,"rgba(220,235,255,.04)");
+        grad.addColorStop(1,"rgba(220,235,255,.14)");
+
+    }else{
+
+        grad.addColorStop(0,"rgba(255,255,255,0)");
+        grad.addColorStop(.55,"rgba(190,200,210,.10)");
+        grad.addColorStop(1,"rgba(170,180,190,.28)");
+
+    }
+
+    ctx.fillStyle=grad;
+    ctx.fillRect(0,0,width,height);
+
+}
+function drawCloud(ctx, x, y, scale = 1, depth = 300, sunX = null, sunY = null) {
+
+    ctx.save();
+
+    // =========================
+    // CAMERA PERSPECTIVE
+    // =========================
+    const screen = worldToScreen(x, y, depth);
+
+    ctx.translate(screen.x, screen.y);
+
+const tilt = Math.max(
+    -0.03,
+    Math.min(0.03, camera.x * 0.0015)
+);
+
+ctx.rotate(tilt);
+
+const finalScale = screen.scale * scale;
+ctx.scale(finalScale, finalScale);
+
+    // =========================
+    // DEPTH EFFECT
+    // =========================
+    const depthFactor = Math.min(depth / 900, 1);
+
+    const blur = Math.min(depthFactor * 2.5, 2.5);
+    const alpha = 1 - depthFactor * 0.35;
+
+    ctx.filter = blur > 0.2 ? `blur(${blur}px)` : "none";
+    ctx.globalAlpha = alpha;
+
+    // CLOUD LIGHTING FACTOR (butuh sun position)
+let light = 0.5;
+
+if (sunX !== null && sunY !== null) {
+    const screen = worldToScreen(x, y, depth);
+    light = getLightFactor(screen.x, screen.y, sunX, sunY);
+}
+
+// helper kecil biar gampang mix brightness
+function shade(v, l) {
+    return Math.floor(v * l);
+}
+
+// brightness mapping
+const bright = 1.25 - light * 0.4; // sisi terang
+const dark   = 0.85 - light * 0.35; // sisi gelap
+
+const grad = ctx.createLinearGradient(0, -40, 0, 40);
+
+grad.addColorStop(0,   `rgb(${shade(255, bright)},${shade(255, bright)},${shade(255, bright)})`);
+grad.addColorStop(0.3, `rgb(${shade(242, bright)},${shade(242, bright)},${shade(242, bright)})`);
+grad.addColorStop(0.6, `rgb(${shade(224, dark)},${shade(224, dark)},${shade(224, dark)})`);
+grad.addColorStop(1,   `rgb(${shade(184, dark)},${shade(184, dark)},${shade(184, dark)})`);
+
+ctx.fillStyle = grad;
+
+    // =========================
+    // CLOUD BODY
+    // =========================
+    ctx.beginPath();
+
+    const blobs = [
+        [-58, 8, 15],
+        [-44, -4, 20],
+        [-26, -16, 24],
+        [-4, -22, 28],
+        [20, -18, 27],
+        [42, -8, 23],
+        [60, 4, 18],
+        [-18, 10, 22],
+        [16, 12, 20],
+        [46, 14, 16]
+    ];
+
+    for (const b of blobs) {
+        ctx.arc(b[0], b[1], b[2], 0, Math.PI * 2);
+    }
+
+    ctx.fill();
+
+    // =========================
+    // SHADOW BASE
+    // =========================
+    ctx.fillStyle = "rgba(0,0,0,0.12)";
+    ctx.beginPath();
+    ctx.ellipse(2, 22, 62, 14, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // =========================
+    // AMBIENT OCCLUSION (IMPROVED)
+    // =========================
+    ctx.save();
+
+    ctx.globalCompositeOperation = "multiply";
+
+    // soft radial AO layer (core shadow)
+    const aoGrad = ctx.createRadialGradient(
+        0, -5, 10,
+        0, 0, 70
+    );
+
+    aoGrad.addColorStop(0, "rgba(0,0,0,0.18)");
+    aoGrad.addColorStop(0.4, "rgba(0,0,0,0.10)");
+    aoGrad.addColorStop(1, "rgba(0,0,0,0)");
+
+    ctx.fillStyle = aoGrad;
+
+    ctx.beginPath();
+    ctx.arc(0, 0, 70, 0, Math.PI * 2);
+    ctx.fill();
+
+    // extra occlusion between blobs (fake depth gaps)
+    ctx.fillStyle = "rgba(0,0,0,0.08)";
+    ctx.beginPath();
+
+    ctx.arc(-30, -5, 18, 0, Math.PI * 2);
+    ctx.arc(5, -8, 22, 0, Math.PI * 2);
+    ctx.arc(30, 0, 16, 0, Math.PI * 2);
+
+    ctx.fill();
+
+    ctx.restore();
+
+    // =========================
+    // TOP HIGHLIGHT (SUN SIDE)
+    // =========================
+    ctx.strokeStyle = "rgba(255,255,255,0.5)";
+    ctx.lineWidth = 1.5;
+
+    ctx.beginPath();
+    ctx.arc(-6, -18, 30, Math.PI, Math.PI * 2);
+    ctx.stroke();
+
+    ctx.save();
+
+ctx.globalCompositeOperation = "screen";
+
+ctx.strokeStyle = "rgba(255,255,255,0.18)";
+ctx.lineWidth = 3;
+
+ctx.beginPath();
+ctx.arc(-8, -20, 34, Math.PI * 1.05, Math.PI * 1.95);
+ctx.stroke();
+
+ctx.restore();
+
+    ctx.restore();
+
+    // reset
+    ctx.filter = "none";
+    ctx.globalAlpha = 1;
+}
+function getLightFactor(cx, cy, sunX, sunY) {
+    const dx = cx - sunX;
+    const dy = cy - sunY;
+
+    const dist = Math.sqrt(dx*dx + dy*dy);
+
+    // arah cahaya (0 = terang, 1 = gelap)
+    const factor = Math.max(0, Math.min(1, dist / 600));
+
+    return factor;
+}
+function drawRain(w){
+
+    const ctx = w.ctx;
+    const width = w.canvas.width;
+    const height = w.canvas.height;
+
+    // Langit
+drawPhysicalSky(
+    ctx,
+    width,
+    height,
+    "rain"
+);
+    if(w.code==95){
+
+    if(Math.random()<0.008){
+
+        ctx.fillStyle="rgba(255,255,255,.35)";
+        ctx.fillRect(0,0,width,height);
+const horizon = ctx.createRadialGradient(
+
+    width/2,
+    height*1.05,
+    10,
+
+    width/2,
+    height*1.05,
+    width
+
+);
+
+horizon.addColorStop(
+    0,
+    "rgba(255,235,190,.45)"
+);
+
+horizon.addColorStop(
+    1,
+    "rgba(255,235,190,0)"
+);
+
+ctx.fillStyle = horizon;
+ctx.fillRect(
+    0,
+    0,
+    width,
+    height
+);
+    }
+
+}
+
+    // Awan
+    // =========================
+// Layer awan belakang
+// =========================
+const time = Date.now() * 0.00008;
+
+ctx.globalAlpha = 0.35;
+
+drawCloud(ctx, width * 0.15, 35, 1.8, 900);
+// =========================
+// Layer awan tengah
+// =========================
+ctx.globalAlpha = 0.65;
+
+drawCloud(
+    ctx,
+    width * 0.45,
+    48 + Math.cos(time * 0.45) * 2,
+    1.5,
+    500
+);
+
+
+// =========================
+// Layer awan depan
+// =========================
+ctx.globalAlpha = 0.95;
+
+drawCloud(ctx, width * 0.75, 60, 1.2, 120);
+
+ctx.globalAlpha = 1;
+    if(w.code==95){
+
+    if(Math.random()<0.01){
+
+        if(Math.random()<0.01){
+
+    drawLightning(
+        ctx,
+        width,
+        height
+    );
+
+    flashScene(
+        ctx,
+        width,
+        height
+    );
+
+}
+
+    }
+
+}
+
+    drawRainDrops(w);
+
+}
+function drawRainDrops(w){
+
+    const ctx = w.ctx;
+    const width = w.canvas.width;
+    const height = w.canvas.height;
+
+    const list = rainParticles[w.code];
+    if(!list) return;
+
+    list.forEach(p => {
+
+    // 🔥 DEPTH SYSTEM (STEP 2 CORE)
+    const depth = 1 - (p.z ?? 0.5);
+
+    const perspective=
+
+camera.fov/
+
+(camera.fov+p.z);
+
+const scale = 0.4 + perspective;
+const alpha = 0.2 + perspective;
+
+    // 🌫️ STEP 4 FIX: globalAlpha (taruh di sini, sebelum gambar)
+    let opacity = alpha;
+
+if([51,53,55].includes(w.code))
+    opacity *= 0.6;
+
+if([61].includes(w.code))
+    opacity *= 0.7;
+
+ctx.globalAlpha = opacity;
+
+    ctx.strokeStyle = "rgba(180,220,255,1)";
+    let thickness = 1.2;
+
+if([51,53,55].includes(w.code))
+    thickness = 0.5;
+
+if([61].includes(w.code))
+    thickness = 0.8;
+
+if([63,80].includes(w.code))
+    thickness = 1.2;
+
+if([65,81,82].includes(w.code))
+    thickness = 1.8;
+
+if(w.code==95)
+    thickness = 2.3;
+
+ctx.lineWidth = thickness * scale;
+
+    ctx.beginPath();
+    ctx.moveTo(p.x, p.y);
+    ctx.lineTo(
+        p.x - 4 * scale,
+        p.y + p.len * scale
+    );
+    ctx.stroke();
+
+    // 🌪️ GERAKAN PSEUDO 3D
+    const move =
+    1 +
+    (800 - p.z) / 800;
+
+p.x -= move;
+p.y += p.speed * move;
+
+    // 💥 SPLASH
+    if (p.y > height) {
+
+        ctx.globalAlpha = 1; // reset sementara untuk splash
+
+        ctx.beginPath();
+        ctx.arc(p.x, height - 2, 2, 0, Math.PI * 2);
+
+        if(![51,53,55].includes(w.code)){
+    drawSplash(ctx,p.x,height);
+}
+
+        ctx.fillStyle = "rgba(180,220,255,.45)";
+        ctx.fill();
+
+        p.y = -20;
+        p.x = Math.random() * width;
+    }
+
+});
+
+// 🔥 WAJIB RESET setelah loop
+ctx.globalAlpha = 1;
+}
+
+function drawSplash(ctx,x,y){
+
+    ctx.strokeStyle="rgba(220,240,255,.45)";
+
+    for(let i=0;i<4;i++){
+
+        ctx.beginPath();
+
+        ctx.moveTo(x,y);
+
+        ctx.lineTo(
+
+            x+(Math.random()-0.5)*8,
+
+            y-Math.random()*5
+
+        );
+
+        ctx.stroke();
+
+    }
+
+}
+function drawLightning(ctx,width,height){
+
+    const x=width*(0.3+Math.random()*0.4);
+
+    let y=20;
+
+    ctx.strokeStyle="white";
+    ctx.lineWidth=3;
+
+    ctx.beginPath();
+
+    ctx.moveTo(x,y);
+
+    for(let i=0;i<8;i++){
+
+        y+=15;
+
+        ctx.lineTo(
+
+            x+(Math.random()-0.5)*25,
+
+            y
+
+        );
+
+    }
+
+    ctx.stroke();
+
+}
+function flashScene(ctx,width,height){
+
+    ctx.fillStyle="rgba(255,255,255,.25)";
+
+    ctx.fillRect(
+        0,
+        0,
+        width,
+        height
+    );
+
+}
+function createSkyNoise(){
+
+    skyNoiseCanvas = document.createElement("canvas");
+
+    skyNoiseCanvas.width = 512;
+    skyNoiseCanvas.height = 512;
+
+    const ctx = skyNoiseCanvas.getContext("2d");
+
+    const img = ctx.createImageData(512,512);
+
+    for(let i=0;i<img.data.length;i+=4){
+
+        const v = 220 + Math.random()*35;
+
+        img.data[i]     = v;
+        img.data[i + 1] = v;
+        img.data[i + 2] = v;
+        img.data[i + 3] = 18;
+
+    }
+
+    ctx.putImageData(img,0,0);
+
+}
+const PHYSICAL_PALETTE = {
+
+    clear: {
+
+        skyTop: "#2E5FAE",
+        skyUpper: "#4E8CEB",
+        skyMiddle: "#78BFFF",
+        skyLower: "#B7E2FF",
+        horizon: "#FFF2D8",
+
+        haze: "rgba(255,245,225,.25)",
+
+        sunCore: "#FFFBE2",
+        sunMid: "#FFE06A",
+        sunEdge: "#F9B126"
+
+    },
+
+    partlyCloudy: {
+
+        skyTop: "#4774C4",
+        skyUpper: "#73A4F2",
+        skyMiddle: "#9DC7F8",
+        skyLower: "#DCEFFF",
+        horizon: "#F5EBDD",
+
+        haze: "rgba(255,255,255,.18)"
+
+    },
+
+cloudy: {
+
+    skyTop: "#3D73B0",
+    skyUpper: "#5F91C4",
+    skyMiddle: "#8DB5D9",
+    skyLower: "#C7DCEB",
+    horizon: "#F1EEE6",
+
+    haze: "rgba(255,255,255,.14)"
+
+},
+
+overcast: {
+
+    skyTop: "#2A3138",
+    skyUpper: "#3A434C",
+    skyMiddle: "#555F68",
+    skyLower: "#7B858E",
+    horizon: "#AAB2B9",
+
+    haze: "rgba(190,195,200,.18)"
+
+},
+
+    rain: {
+
+        skyTop: "#37424F",
+        skyUpper: "#4D5966",
+        skyMiddle: "#687482",
+        skyLower: "#9EAAB4",
+        horizon: "#C8D0D6",
+
+        haze: "rgba(205,215,225,.15)"
+
+    },
+
+    storm: {
+
+        skyTop: "#1D2632",
+        skyUpper: "#2F3A48",
+        skyMiddle: "#475464",
+        skyLower: "#6B7888",
+        horizon: "#A4AFBB",
+
+        haze: "rgba(170,190,220,.10)",
+
+        lightning: "#F2F7FF"
+
+    }
+
+};
+createSkyNoise();
+animateForecastWeather();
+const backgrounds = [
+
+"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEb1KaXqL1U38TKyqtqh9k4lWlJMWafUISV0Cxhkrmws5Xa2PvkNekgT8&s=10",
+
+"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/17/ca/76/1e/frontage.jpg?w=1200&h=-1&s=1",
+
+"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqmfDTnzFiM9XYYwojMuDszLdrOEVimAPJVIKjXcqzDHKWhPEFXWA1pkYB&s=10",
+
+"https://www.shutterstock.com/image-photo/bandung-west-java-april-28-600nw-2311582325.jpg",
+
+"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTY5y5j0NtrVIYm0e3ubRjajha12GMpLVHi4DOZfckaW5OURbNX_B1iVWpn&s=10",
+
+"https://cnc-magazine.oramiland.com/parenting/images/museum_konferensi_asia_afrika.width-800.format-webp.webp",
+
+"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG0VwgAWZtiG0W94-g2xYmThQqnKC2aO42EM40W80Yc_AxSUeJLuRJRk8&s=10",
+
+"https://salsawisata.com/wp-content/uploads/2023/04/lapangan-gasibu-bandung.jpg"
+
+];
+
+const bg1 = document.querySelector(".bg1");
+const bg2 = document.querySelector(".bg2");
+
+let index = 0;
+let showingFirst = true;
+
+bg1.style.backgroundImage = `url(${backgrounds[0]})`;
+
+setInterval(() => {
+
+    index++;
+
+    if(index >= backgrounds.length){
+        index = 0;
+    }
+
+    if(showingFirst){
+
+        bg2.style.backgroundImage =
+            `url(${backgrounds[index]})`;
+
+        bg2.style.opacity = 1;
+        bg1.style.opacity = 0;
+
+    }else{
+
+        bg1.style.backgroundImage =
+            `url(${backgrounds[index]})`;
+
+        bg1.style.opacity = 1;
+        bg2.style.opacity = 0;
+
+    }
+
+    showingFirst = !showingFirst;
+
+},8000);
+const infoTexts = [
+
+"Cuaca menggambarkan kondisi atmosfer pada waktu dan lokasi tertentu.",
+
+"Ramalan cuaca dibuat berdasarkan analisis data satelit, radar, dan model atmosfer.",
+
+"Suhu udara menunjukkan tingkat panas atau dinginnya udara.",
+
+"Suhu yang terasa (Feels Like) dapat berbeda dari suhu udara sebenarnya.",
+
+"Kelembapan tinggi membuat tubuh lebih sulit mendinginkan diri melalui keringat.",
+
+"Kelembapan rendah dapat menyebabkan kulit dan tenggorokan terasa kering.",
+
+"Probabilitas hujan menunjukkan peluang hujan terjadi di suatu lokasi selama periode tertentu.",
+
+"Peluang hujan 70% berarti ada kemungkinan hujan sebesar 70%, bukan hujan selama 70% waktu.",
+
+"Presipitasi adalah semua bentuk air yang jatuh dari atmosfer, seperti hujan, salju, atau hujan es.",
+
+"Intensitas hujan biasanya dibedakan menjadi ringan, sedang, dan lebat.",
+
+"Langit berawan tidak selalu menandakan hujan akan turun.",
+
+"Awan cumulonimbus sering dikaitkan dengan hujan lebat dan badai petir.",
+
+"Angin membantu mendistribusikan panas dan kelembapan di atmosfer.",
+
+"Kecepatan angin umumnya diukur dalam km/jam atau m/s.",
+
+"Arah angin menunjukkan dari mana angin berasal.",
+
+"Tekanan udara yang menurun sering dikaitkan dengan perubahan cuaca.",
+
+"Kabut terbentuk ketika udara di dekat permukaan menjadi sangat lembap.",
+
+"Embun muncul saat suhu permukaan turun hingga mencapai titik embun.",
+
+"Indeks UV menunjukkan tingkat radiasi ultraviolet dari matahari.",
+
+"Nilai UV yang tinggi meningkatkan risiko kulit terbakar.",
+
+"Kualitas udara dipengaruhi oleh konsentrasi polutan di atmosfer.",
+
+"Polutan utama meliputi PM2.5, PM10, ozon, nitrogen dioksida, sulfur dioksida, dan karbon monoksida.",
+
+"PM2.5 berukuran sangat kecil sehingga dapat masuk jauh ke dalam paru-paru.",
+
+"Semakin rendah nilai AQI, semakin baik kualitas udara.",
+
+"AQI yang tinggi dapat berdampak pada kesehatan, terutama bagi kelompok sensitif.",
+
+"Hujan sering membantu mengurangi debu dan partikel di udara untuk sementara.",
+
+"Cuaca panas dapat meningkatkan pembentukan ozon di permukaan.",
+
+"Suhu maksimum biasanya terjadi pada siang hingga sore hari.",
+
+"Suhu minimum umumnya terjadi menjelang matahari terbit.",
+
+"Awan tebal dapat mengurangi pemanasan oleh sinar matahari.",
+
+"Langit cerah memungkinkan panas lebih mudah dilepas pada malam hari.",
+
+"Perubahan cuaca dapat terjadi dalam waktu singkat akibat dinamika atmosfer.",
+
+"Gerimis memiliki ukuran tetesan air yang lebih kecil dibanding hujan biasa.",
+
+"Hujan lebat dapat mengurangi jarak pandang saat berkendara.",
+
+"Petir dapat terjadi meskipun hujan belum turun di lokasi Anda.",
+
+"Kilat terlihat lebih dulu daripada suara guntur karena cahaya bergerak lebih cepat daripada suara.",
+
+"Angin kencang sering menyertai badai petir.",
+
+"Curah hujan diukur dalam satuan milimeter (mm).",
+
+"Curah hujan 10 mm berarti setara dengan lapisan air setinggi 10 mm pada permukaan datar.",
+
+"Cuaca ekstrem dapat memengaruhi aktivitas, transportasi, dan keselamatan.",
+
+"Gelombang panas terjadi saat suhu tinggi berlangsung selama beberapa hari.",
+
+"Udara yang lebih lembap membuat suhu terasa lebih panas.",
+
+"Udara yang kering membuat suhu malam lebih cepat turun.",
+
+"Awan berfungsi memantulkan dan menyerap sebagian energi matahari.",
+
+"Kondisi atmosfer dipengaruhi oleh suhu, kelembapan, tekanan udara, dan angin.",
+
+"Ramalan cuaca akan semakin akurat untuk periode waktu yang lebih dekat.",
+
+"Kondisi cuaca dapat berbeda meskipun jaraknya hanya beberapa kilometer.",
+
+"Musim memengaruhi pola suhu, curah hujan, dan kelembapan.",
+
+"Memantau prakiraan cuaca membantu merencanakan aktivitas dengan lebih baik.",
+
+"Cuaca selalu berubah karena atmosfer Bumi terus bergerak dan berinteraksi setiap saat."
+
+];
+const infoText = document.getElementById("infoText");
+let infoIndex = 0;
+let charIndex = 0;
+
+function typeWriter(){
+
+    infoText.style.opacity = 1;
+
+    if(charIndex < infoTexts[infoIndex].length){
+        infoText.textContent +=
+            infoTexts[infoIndex].charAt(charIndex);
+
+        charIndex++;
+
+        setTimeout(typeWriter,40);
+
+    }else{
+
+    infoText.classList.add("cursor-blink");
+
+    setTimeout(eraseText,5000);
+
+}
+
+}
+
+function eraseText(){
+
+    infoText.classList.remove("cursor-blink");
+
+    if(charIndex > 0){
+
+        charIndex--;
+
+        infoText.textContent =
+            infoTexts[infoIndex].substring(0,charIndex);
+
+        setTimeout(eraseText,20);
+
+    }else{
+
+    infoText.style.opacity = 0;
+
+    setTimeout(nextInfo,300);
+
+}
+
+}
+
+function nextInfo(){
+infoText.textContent = "";
+
+    infoIndex++;
+
+    if(infoIndex >= infoTexts.length){
+
+        infoIndex = 0;
+
+    }
+
+    charIndex = 0;
+
+    typeWriter();
+
+}
+typeWriter();
+</script>
+</body>
+</html>
