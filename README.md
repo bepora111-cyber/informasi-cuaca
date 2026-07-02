@@ -2,7 +2,7 @@
 title: Informasi Cuaca
 emoji: ☀️
 colorFrom: blue
-colorTo: lightblue
+colorTo: indigo
 sdk: static
 pinned: false
 ---
