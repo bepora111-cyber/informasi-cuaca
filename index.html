@@ -1047,13 +1047,7 @@ body.golden-mode .dot.active{
     max-width:90%;
 
 }
-#infoText{
 
-    opacity:1;
-
-    transition:opacity .3s ease;
-
-}
 #infoText::after{
 
     content:"|";
@@ -4882,7 +4876,7 @@ const backgrounds = [
 
 "https://www.shutterstock.com/image-photo/bandung-west-java-april-28-600nw-2311582325.jpg",
 
-"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTY5y5j0NtrVIYm0e3ubRjajha12GMpLVHi4DOZfckaW5OURbNX_B1iVWpn&s=10",
+"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRx18r_aBbyyrcEvCqR60QVtzRB5PZOdb12PTDahCdwGw&s=10",
 
 "https://cnc-magazine.oramiland.com/parenting/images/museum_konferensi_asia_afrika.width-800.format-webp.webp",
 
@@ -5035,12 +5029,10 @@ const infoTexts = [
 const infoText = document.getElementById("infoText");
 let infoIndex = 0;
 let charIndex = 0;
-
 function typeWriter(){
 
-    infoText.style.opacity = 1;
-
     if(charIndex < infoTexts[infoIndex].length){
+
         infoText.textContent +=
             infoTexts[infoIndex].charAt(charIndex);
 
@@ -5073,16 +5065,13 @@ function eraseText(){
 
     }else{
 
-    infoText.style.opacity = 0;
+        setTimeout(nextInfo,300);
 
-    setTimeout(nextInfo,300);
-
-}
+    }
 
 }
 
 function nextInfo(){
-infoText.textContent = "";
 
     infoIndex++;
 
@@ -5101,24 +5090,3 @@ typeWriter();
 </script>
 </body>
 </html>
-=======
-<!doctype html>
-<html>
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<title>My static Space</title>
-		<link rel="stylesheet" href="style.css" />
-	</head>
-	<body>
-		<div class="card">
-			<h1>Welcome to your static Space!</h1>
-			<p>You can modify this app directly by editing <i>index.html</i> in the Files and versions tab.</p>
-			<p>
-				Also don't forget to check the
-				<a href="https://huggingface.co/docs/hub/spaces" target="_blank">Spaces documentation</a>.
-			</p>
-		</div>
-	</body>
-</html>
->>>>>>> 6d10b483bab0d30784994950c0dffa8e96f84983
