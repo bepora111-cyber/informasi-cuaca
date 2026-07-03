@@ -1,8 +1,28 @@
-# ... (bagian atas tetap sama)
+name: Deploy Jekyll site to Pages
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+# Izin global untuk workflow
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    # Menegaskan kembali izin di tingkat job build
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -16,7 +36,7 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
         with:
-          enablement: true # <-- Tambahkan baris ini untuk memaksa GitHub mengaktifkan Pages jika belum terdaftar
+          enablement: true # Memaksa sistem mengaktifkan Pages lewat API
 
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
@@ -27,4 +47,16 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
 
-# ... (bagian job deploy di bawahnya tetap sama)
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
