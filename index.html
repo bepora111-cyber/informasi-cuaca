@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Informasi Cuaca</title>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <style>
@@ -237,36 +236,19 @@ h2{
     padding:15px;
     text-align:center;
 
-    perspective:1000px;
+    height:150px;
+    overflow:hidden;
 
-    height:180px;
-
-    overflow:visible;
+    cursor:pointer;
 }
-.flip-inner{
-    position:relative;
+.day{
+    position: relative;
+    z-index: 1000 !important;
+}
+.front{
     width:100%;
     height:100%;
-    transition:transform 1s;
-    transform-style:preserve-3d;
-}
 
-.flip-card.flip .flip-inner{
-    transform:rotateY(180deg);
-}
-
-.front,
-.back{
-    position:absolute;
-    inset:0;
-
-    border-radius:15px;
-
-    backface-visibility:hidden;
-    -webkit-backface-visibility:hidden;
-}
-
-.front{
     display:flex;
     flex-direction:column;
     justify-content:center;
@@ -276,13 +258,11 @@ h2{
 
     background:rgba(0,0,0,.35);
     backdrop-filter:blur(10px);
-}
 
-.back{
-    transform:rotateY(180deg);
+    border-radius:15px;
 
-    overflow:hidden;
-    padding:0;
+    position:relative;
+    z-index:2;
 }
 
 .weatherCanvas{
@@ -292,24 +272,20 @@ h2{
     width:100%;
     height:100%;
     display:block;
+
+    pointer-events:none;
+    z-index:1;
 }
+
 .icon{
     font-size:30px;
     margin:10px 0;
 }
-.front,
-.back{
-    position:absolute;
-    inset:0;
 
-    border-radius:15px;
-
-    backface-visibility:hidden;
-    -webkit-backface-visibility:hidden;
-
-    overflow:hidden;
+/* Semua isi kartu tidak menangkap klik */
+.day *{
+    pointer-events:none;
 }
-
 /* Jam Digital Pojok */
 .datetime-container {
     position: absolute;
@@ -953,7 +929,7 @@ body.golden-mode .dot.active{
     position:relative;
 
     width:100%;
-    min-height:170px;
+    min-height:150px;
 
     border-radius:24px;
 
@@ -1078,6 +1054,7 @@ body.golden-mode .dot.active{
 </style>
 </head>
 <body>
+
 
 <h1>Informasi Cuaca</h1>
 <h2>Kota Bandung</h2>
@@ -1686,42 +1663,27 @@ for(let i = 1; i <= 7; i++){
     const text = cuaca.replace(/^[^\s]+\s/, "");
 
     html += `
-<div class="day flip-card"
+<div class="day"
      data-weather="${weather.daily.weather_code[i]}"
      onclick="showForecastDetail(${i})"
      style="cursor:pointer">
 
-    <div class="flip-inner">
+    <h4>${hari}</h4>
 
-        <!-- Depan -->
-        <div class="front">
+    <div class="icon">${icon}</div>
 
-            <h4>${hari}</h4>
+    <div>${text}</div>
 
-            <div class="icon">${icon}</div>
-
-            <div>${text}</div>
-
-            <div class="forecast-temp">
-    ${convertTemperature(weather.daily.temperature_2m_min[i]).toFixed(1)}${getTemperatureUnit()} -
-    ${convertTemperature(weather.daily.temperature_2m_max[i]).toFixed(1)}${getTemperatureUnit()}
-</div>
-
-        </div>
-
-        <!-- Belakang -->
-        <div class="back">
-
-            <canvas class="weatherCanvas"></canvas>
-
-        </div>
-
+    <div class="forecast-temp">
+        ${convertTemperature(weather.daily.temperature_2m_min[i]).toFixed(1)}${getTemperatureUnit()} -
+        ${convertTemperature(weather.daily.temperature_2m_max[i]).toFixed(1)}${getTemperatureUnit()}
     </div>
 
 </div>`;
 }
 const forecastEl = document.getElementById("forecast");
 if (forecastEl) forecastEl.innerHTML = html;
+
 
 initForecastWeather();
 
