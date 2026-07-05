@@ -926,14 +926,16 @@ body.golden-mode .dot.active{
     background: #ffb84d;
 }
 .info-card{
-    position:relative;
+    position: relative;
 
-    width:100%;
-    min-height:150px;
+    width: 80%;
+    min-height: 150px;
 
-    border-radius:24px;
+    margin: 0 auto; /* Tengah */
 
-    overflow:hidden;
+    border-radius: 24px;
+
+    overflow: hidden;
 
     box-shadow:
         0 10px 25px rgba(0,0,0,.18);
@@ -1059,6 +1061,65 @@ body.golden-mode .dot.active{
     font-weight:500;
     letter-spacing:0.3px;
 }
+/* ===========================
+   AI ANALYSIS
+=========================== */
+
+#ai-analysis-box{
+    width:80%;
+    max-width:560px;   /* kecilkan sesuai kebutuhan */
+
+    margin:20px auto;
+    padding:20px 24px;
+
+    border-radius:18px;
+    background:rgba(255,255,255,.12);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.15);
+    box-shadow:0 8px 25px rgba(0,0,0,.25);
+
+    color:#fff;
+    transition:.35s;
+}
+
+#ai-analysis-box h3{
+    margin:0 0 15px;
+    font-size:22px;
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+#ai-analysis-box h3::before{
+    content:"🤖";
+    font-size:24px;
+}
+
+#ai-analysis-text{
+    margin:0;
+    font-size:16px;
+    line-height:1.8;
+    text-align:justify;
+    color:rgba(255,255,255,.95);
+    white-space:pre-line;
+}
+
+#ai-analysis-box:hover{
+    transform:translateY(-2px);
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.35);
+}
+#ai-analysis-text{
+    opacity:1;
+    transition:opacity .3s;
+}
+
+#ai-analysis-text.fade{
+    opacity:0;
+}
 </style>
 </head>
 <body>
@@ -1178,6 +1239,11 @@ body.golden-mode .dot.active{
 </div> <!-- tutup slider-container -->
 
 <div class="slider-dots" id="sliderDots"></div>
+
+<div id="ai-analysis-box">
+    <h3>Analisis Cerdas Kondisi Cuaca</h3>
+    <p id="ai-analysis-text">Menunggu data...</p>
+</div>
 
 <h2 style="margin-bottom:20px;">Prediksi 7 Hari Ke Depan</h2>
 
@@ -3744,6 +3810,283 @@ function updateLastUpdated() {
 
     document.getElementById("lastUpdated").textContent =
         `Last Updated: ${jam}:${menit}:${detik}`;
+}
+function toCelsius(temp, unit){
+    if(unit === "C") return temp;
+    if(unit === "F") return (temp - 32) * 5/9;
+    if(unit === "K") return temp - 273.15;
+    if(unit === "R") return temp * 5/4;
+    return temp;
+}
+
+function windToKmh(val, unit){
+    if(unit === "kmh") return val;
+    if(unit === "ms") return val * 3.6;
+    return val;
+}
+function getWeatherData(){
+    const tempVal = parseFloat(document.getElementById("temp").innerText);
+    const tempUnit = document.getElementById("tempUnit").value;
+
+    const windVal = parseFloat(document.getElementById("wind").innerText);
+    const windUnit = document.getElementById("windUnit").value;
+
+    return {
+        weather: document.getElementById("cuacaText").innerText.trim().toLowerCase(),
+
+        temp: toCelsius(tempVal, tempUnit),
+        humidity: parseFloat(document.getElementById("humidity").innerText),
+        precip: parseFloat(document.getElementById("precip").innerText),
+        precipProb: parseFloat(document.getElementById("precipProb").innerText),
+        wind: windToKmh(windVal, windUnit),
+        aqi: parseFloat(document.getElementById("aqi").innerText)
+    };
+}
+function generateAnalysis(d){
+
+    let analysis = "";
+
+    // ===============================
+    // KONDISI CUACA
+    // ===============================
+
+    switch(d.weather){
+
+        case "cerah":
+            analysis += "Cuaca saat ini cerah";
+            break;
+
+        case "sebagian cerah":
+            analysis += "Cuaca saat ini sebagian cerah";
+            break;
+
+        case "berawan":
+            analysis += "Cuaca saat ini berawan";
+            break;
+
+        case "mendung":
+            analysis += "Cuaca saat ini mendung";
+            break;
+
+        case "berkabut":
+            analysis += "Cuaca saat ini berkabut";
+            break;
+
+        case "gerimis":
+            analysis += "Saat ini sedang terjadi gerimis";
+            break;
+
+        case "hujan":
+            analysis += "Saat ini sedang terjadi hujan";
+            break;
+
+        case "hujan lebat":
+            analysis += "Saat ini sedang terjadi hujan lebat";
+            break;
+
+        case "badai":
+            analysis += "Saat ini sedang terjadi badai";
+            break;
+
+        default:
+            analysis += "Kondisi cuaca sedang diamati";
+    }
+
+
+    // ===============================
+    // SUHU
+    // ===============================
+
+    if(d.temp >= 32){
+
+        analysis +=
+        " dengan suhu yang sangat panas sehingga risiko dehidrasi meningkat.";
+
+    }else if(d.temp >= 28){
+
+        analysis +=
+        " dengan suhu yang hangat.";
+
+    }else if(d.temp >= 20){
+
+        analysis +=
+        " dengan suhu yang cukup nyaman.";
+
+    }else{
+
+        analysis +=
+        " dengan suhu yang relatif dingin.";
+
+    }
+
+
+    // ===============================
+    // KELEMBAPAN
+    // ===============================
+
+    if(d.humidity >= 85){
+
+        analysis +=
+        " Kelembapan udara sangat tinggi sehingga udara terasa lebih gerah.";
+
+    }else if(d.humidity >= 70){
+
+        analysis +=
+        " Kelembapan udara cukup tinggi.";
+
+    }else if(d.humidity <= 40){
+
+        analysis +=
+        " Udara cenderung kering.";
+
+    }else{
+
+        analysis +=
+        " Tingkat kelembapan masih berada pada kisaran yang nyaman.";
+
+    }
+
+
+    // ===============================
+    // PRESIPITASI + PELUANG HUJAN
+    // ===============================
+
+    if(d.precip >= 10){
+
+        analysis +=
+        " Curah hujan tergolong lebat.";
+
+    }else if(d.precip >= 5){
+
+        analysis +=
+        " Curah hujan tergolong sedang.";
+
+    }else if(d.precip > 0){
+
+        analysis +=
+        " Curah hujan masih tergolong ringan.";
+
+    }
+
+    if(d.precipProb >= 90){
+
+        analysis +=
+        " Peluang hujan sangat tinggi sehingga hujan kemungkinan masih akan berlanjut.";
+
+    }else if(d.precipProb >= 70){
+
+        analysis +=
+        " Peluang hujan masih cukup tinggi.";
+
+    }else if(d.precipProb >= 40){
+
+        analysis +=
+        " Masih terdapat kemungkinan hujan.";
+
+    }
+
+
+    // ===============================
+    // ANGIN
+    // ===============================
+
+    if(d.wind >= 40){
+
+        analysis +=
+        " Angin bertiup sangat kencang sehingga perlu meningkatkan kewaspadaan.";
+
+    }else if(d.wind >= 25){
+
+        analysis +=
+        " Angin bertiup cukup kencang terutama di area terbuka.";
+
+    }else{
+
+        analysis +=
+        " Kecepatan angin relatif normal.";
+
+    }
+
+
+    // ===============================
+    // AQI
+    // ===============================
+
+    if(d.aqi >= 200){
+
+        analysis +=
+        " Kualitas udara sangat tidak sehat sehingga sebaiknya menghindari aktivitas luar ruangan.";
+
+    }else if(d.aqi >= 150){
+
+        analysis +=
+        " Kualitas udara tidak sehat terutama bagi kelompok rentan.";
+
+    }else if(d.aqi >= 100){
+
+        analysis +=
+        " Kualitas udara berada pada kategori sedang.";
+
+    }else{
+
+        analysis +=
+        " Kualitas udara tergolong baik.";
+
+    }
+
+
+    // ===============================
+    // KESIMPULAN
+    // ===============================
+
+    if(
+        d.weather === "badai" ||
+        d.weather === "hujan lebat" ||
+        d.precipProb >= 90 ||
+        d.wind >= 40
+    ){
+
+        analysis +=
+        " Secara keseluruhan, kondisi cuaca saat ini kurang mendukung untuk aktivitas luar ruangan.";
+
+    }else if(d.aqi >= 150){
+
+        analysis +=
+        " Secara keseluruhan, cuaca masih cukup stabil namun kualitas udara perlu menjadi perhatian.";
+
+    }else{
+
+        analysis +=
+        " Secara keseluruhan, kondisi cuaca masih cukup mendukung untuk aktivitas sehari-hari.";
+
+    }
+
+    return analysis;
+}
+function updateAIAnalysis(){
+    const data = getWeatherData();
+
+    if(isNaN(data.temp)) return;
+
+    setAnalysis(generateAnalysis(data));
+}
+const observer = new MutationObserver(() => {
+    updateAIAnalysis();
+});
+
+["cuacaText","temp","humidity","precip","precipProb","wind","aqi"].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) observer.observe(el, { childList: true });
+});
+function setAnalysis(text){
+    const el = document.getElementById("ai-analysis-text");
+
+    el.classList.add("fade");
+
+    setTimeout(()=>{
+        el.innerText = text;
+        el.classList.remove("fade");
+    },300);
 }
 </script>
 </body>
