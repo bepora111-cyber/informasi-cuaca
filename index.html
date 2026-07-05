@@ -953,18 +953,18 @@ body.golden-mode .dot.active{
 
     transition:opacity 1.5s ease;
 
-    will-change:opacity;
-}
-
-.bg1{
-
-    opacity:1;
+    will-change:opacity, transform;
 
 }
+@keyframes kenBurns{
 
-.bg2{
+    from{
+        transform:scale(1);
+    }
 
-    opacity:0;
+    to{
+        transform:scale(1.08);
+    }
 
 }
 
@@ -978,7 +978,7 @@ body.golden-mode .dot.active{
     inset:0;
 
     background:linear-gradient(
-        rgba(0,0,0,.70),
+        rgba(0,0,0,.80),
         rgba(0,0,0,.80)
     );
 
@@ -1051,6 +1051,14 @@ body.golden-mode .dot.active{
     }
 
 }
+#lastUpdated{
+    margin:8px 0 15px;
+    text-align:center;
+    color:#bbb;
+    font-size:14px;
+    font-weight:500;
+    letter-spacing:0.3px;
+}
 </style>
 </head>
 <body>
@@ -1064,8 +1072,12 @@ body.golden-mode .dot.active{
     <div id="jam-menit-detik">-</div>
 </div>
 <div id="warningBox"></div>
-<div class="slider-container">
 
+<div id="lastUpdated">
+    Last Updated: -
+</div>
+
+<div class="slider-container">
     <div class="slider-track-wrapper">
         <div class="slider-track" id="sliderTrack">
 
@@ -1579,7 +1591,7 @@ console.log("aqi-box:", document.getElementById("aqi-box"));
 
         globalWeatherData = weather;
         globalAirData = air;
-
+updateLastUpdated();
         const cuaca =
     weatherCode[weather.current.weather_code] || "-";
 
@@ -3498,6 +3510,14 @@ const backgrounds = [
 
 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG0VwgAWZtiG0W94-g2xYmThQqnKC2aO42EM40W80Yc_AxSUeJLuRJRk8&s=10",
 
+"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUMIpQgSv2khyCBd3rte1PQqyHejgilDhmOcXpy8szJT6Tlc_Bm8cIdODY&s=10",
+
+"https://metakom.id/userdata/admin/project/89ddd96533b19aa43bcc5524ff91c067.jpg",
+
+"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRB9_KYagZBRG4wPLBbuNRd5gxNhFivlcMobrJALYOWvfmA_kzSsjeZI7I&s=10",
+
+"https://awsimages.detik.net.id/community/media/visual/2021/09/12/stasiun-bandung_169.jpeg?w=1200",
+
 "https://salsawisata.com/wp-content/uploads/2023/04/lapangan-gasibu-bandung.jpg"
 
 ];
@@ -3509,6 +3529,7 @@ let index = 0;
 let showingFirst = true;
 
 bg1.style.backgroundImage = `url(${backgrounds[0]})`;
+bg1.style.animation = "kenBurns 8s linear forwards";
 
 setInterval(() => {
 
@@ -3520,21 +3541,31 @@ setInterval(() => {
 
     if(showingFirst){
 
-        bg2.style.backgroundImage =
-            `url(${backgrounds[index]})`;
+    bg2.style.backgroundImage =
+        `url(${backgrounds[index]})`;
 
-        bg2.style.opacity = 1;
-        bg1.style.opacity = 0;
+    // Reset animasi
+    bg2.style.animation = "none";
+    bg2.offsetHeight;
+    bg2.style.animation = "kenBurns 8s linear forwards";
 
-    }else{
+    bg2.style.opacity = 1;
+    bg1.style.opacity = 0;
 
-        bg1.style.backgroundImage =
-            `url(${backgrounds[index]})`;
+}else{
 
-        bg1.style.opacity = 1;
-        bg2.style.opacity = 0;
+    bg1.style.backgroundImage =
+        `url(${backgrounds[index]})`;
 
-    }
+    // Reset animasi
+    bg1.style.animation = "none";
+    bg1.offsetHeight;
+    bg1.style.animation = "kenBurns 8s linear forwards";
+
+    bg1.style.opacity = 1;
+    bg2.style.opacity = 0;
+
+}
 
     showingFirst = !showingFirst;
 
@@ -3703,6 +3734,17 @@ function nextInfo(){
 
 }
 typeWriter();
+function updateLastUpdated() {
+
+    const sekarang = new Date();
+
+    const jam = String(sekarang.getHours()).padStart(2, "0");
+    const menit = String(sekarang.getMinutes()).padStart(2, "0");
+    const detik = String(sekarang.getSeconds()).padStart(2, "0");
+
+    document.getElementById("lastUpdated").textContent =
+        `Last Updated: ${jam}:${menit}:${detik}`;
+}
 </script>
 </body>
 </html>
