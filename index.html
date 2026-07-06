@@ -928,8 +928,8 @@ body.golden-mode .dot.active{
 .info-card{
     position: relative;
 
-    width: 80%;
-    min-height: 150px;
+    width: 90%;
+    min-height: 180px;
 
     margin: 0 auto; /* Tengah */
 
@@ -1066,8 +1066,8 @@ body.golden-mode .dot.active{
 =========================== */
 
 #ai-analysis-box{
-    width:80%;
-    max-width:560px;   /* kecilkan sesuai kebutuhan */
+    width:85%;
+    max-width:720px;   /* kecilkan sesuai kebutuhan */
 
     margin:20px auto;
     padding:20px 24px;
@@ -1100,7 +1100,7 @@ body.golden-mode .dot.active{
 
 #ai-analysis-text{
     margin:0;
-    font-size:16px;
+    font-size:15.5px;
     line-height:1.8;
     text-align:justify;
     color:rgba(255,255,255,.95);
@@ -2634,15 +2634,7 @@ loadData();
 setInterval(() => {
     loadData();
 }, 60000);
-setInterval(() => {
 
-    document.querySelectorAll(".flip-card").forEach(card => {
-
-        card.classList.toggle("flip");
-
-    });
-
-}, 7000);
 // === LOGIKA SLIDER SYSTEM INDIKATOR ===
 let currentSlideIndex = 0;
 let slideTimer = null;
