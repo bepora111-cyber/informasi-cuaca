@@ -511,6 +511,48 @@ body.dark-mode .temp-front{
     filter:brightness(.85);
 
 }
+/* ================= SEARCH DARK MODE ================= */
+
+body.dark-mode .learn-search input{
+
+    background:rgba(20,20,20,.85);
+
+    border:1px solid rgba(255,255,255,.12);
+
+    color:white;
+
+    backdrop-filter:blur(15px);
+
+    -webkit-backdrop-filter:blur(15px);
+
+}
+
+
+body.dark-mode .learn-search input::placeholder{
+
+    color:rgba(255,255,255,.5);
+
+}
+
+
+body.dark-mode .learn-search input:focus{
+
+    background:rgba(30,30,30,.95);
+
+    border-color:rgba(255,255,255,.3);
+
+    box-shadow:
+    0 0 15px rgba(255,255,255,.1);
+
+}
+body.dark-mode .search-icon svg{
+
+    stroke:#ffffff;
+
+    filter:
+    drop-shadow(0 0 5px rgba(255,255,255,.5));
+
+}
 #chartLegend{
     margin-top:20px;
     padding-top:15px;
@@ -1046,6 +1088,51 @@ body.golden-mode .temp-flip-card{
 body.golden-mode .temp-front{
 
     filter:saturate(.9) brightness(.95);
+
+}
+/* ========= Search Golden Mode ========= */
+
+body.golden-mode .learn-search input{
+
+    background:rgba(90,55,20,.55);
+
+    border:1px solid rgba(255,200,120,.25);
+
+    color:#fff;
+
+    backdrop-filter:blur(15px);
+
+    -webkit-backdrop-filter:blur(15px);
+
+}
+
+
+body.golden-mode .learn-search input::placeholder{
+
+    color:rgba(255,230,180,.7);
+
+}
+
+
+body.golden-mode .learn-search input:focus{
+
+    background:rgba(120,70,20,.75);
+
+    border-color:rgba(255,210,140,.5);
+
+    box-shadow:
+
+    0 0 15px rgba(255,180,80,.25);
+
+}
+
+
+body.golden-mode .search-icon svg{
+
+    stroke:#ffe6b3;
+
+    filter:
+    drop-shadow(0 0 5px rgba(255,180,80,.6));
 
 }
 .info-card{
@@ -1955,6 +2042,120 @@ body.golden-mode .temp-front{
 }
 .learn-body p{
     white-space: pre-line;
+}
+.learn-search{
+
+    width:90%;
+    max-width:600px;
+
+    margin:15px auto 25px;
+
+    position:relative;
+
+}
+
+
+.learn-search input{
+
+    width:100%;
+
+    padding:14px 50px;
+
+    border-radius:50px;   /* membuat lonjong */
+
+    border:1px solid rgba(255,255,255,.25);
+
+    background:rgba(255,255,255,.12);
+
+    backdrop-filter:blur(15px);
+
+    -webkit-backdrop-filter:blur(15px);
+
+    color:white;
+
+    font-size:16px;
+
+    outline:none;
+
+    transition:.3s;
+
+}
+
+
+.learn-search input:focus{
+
+    background:rgba(255,255,255,.18);
+
+    border-color:rgba(255,255,255,.5);
+
+    box-shadow:
+    0 0 15px rgba(255,255,255,.15);
+
+}
+.learn-search input::placeholder{
+
+    color:rgba(255,255,255,.7);
+
+}
+
+
+.search-icon{
+
+    position:absolute;
+
+    left:18px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    width:20px;
+
+    height:20px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+
+.search-icon svg{
+
+    width:100%;
+
+    height:100%;
+
+    fill:none;
+
+    stroke:white;
+
+    stroke-width:2.5;
+
+    stroke-linecap:round;
+
+}
+.search-icon svg{
+
+    stroke:#333;
+
+    fill:none;
+
+    stroke-width:2.5;
+
+}
+mark{
+
+    background:#ffd54f;
+
+    color:#000;
+
+    padding:2px 4px;
+
+    border-radius:4px;
+
 }
 </style>
 </head>
@@ -5467,71 +5668,97 @@ function openLearnModal(type){
 
     document.getElementById("learnTitle").innerText = data.title;
 
-    let html = "";
+    let html = `
 
+    <div class="learn-search">
 
-data.sections.forEach((section,index)=>{
+        <span class="search-icon">
 
-    html += `
-    <div class="learn-section">
+    <svg viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="7"></circle>
+        <line x1="16.5" y1="16.5" x2="22" y2="22"></line>
+    </svg>
 
-        <div class="learn-header"
-             onclick="toggleSection(${index})">
+</span>
+        <input 
+            type="text"
+            id="learnSearch"
+            placeholder="Cari informasi..."
+            oninput="searchLearnContent()"
+        >
 
-            <span>${section.title}</span>
+    </div>
 
-            <span id="icon-${index}">+</span>
-
-        </div>
-
-        <div class="learn-body"
-             id="body-${index}">
-
-            <p>${section.text}</p>
     `;
 
-    // Tambahkan kartu jika section memiliki cards
-    if(section.cards){
+
+    data.sections.forEach((section,index)=>{
 
         html += `
-        <div class="temp-card-grid">
+        <div class="learn-section">
+
+            <div class="learn-header"
+                 onclick="toggleSection(${index})">
+
+                <span>${section.title}</span>
+
+                <span id="icon-${index}">+</span>
+
+            </div>
+
+            <div class="learn-body"
+                 id="body-${index}">
+
+                <p data-original="${section.text.replace(/"/g,'&quot;')}">
+${section.text}
+</p>
         `;
 
-        section.cards.forEach(card=>{
+
+        if(section.cards){
 
             html += `
-            <div class="temp-flip-card">
+            <div class="temp-card-grid">
+            `;
 
-                <div class="temp-flip-inner">
 
-                    <div class="temp-front">
-                        ${card.front}
-                    </div>
+            section.cards.forEach(card=>{
 
-                    <div class="temp-back">
-                        ${card.back}
+                html += `
+                <div class="temp-flip-card">
+
+                    <div class="temp-flip-inner">
+
+                        <div class="temp-front">
+                            ${card.front}
+                        </div>
+
+                        <div class="temp-back">
+                            ${card.back}
+                        </div>
+
                     </div>
 
                 </div>
+                `;
 
+            });
+
+
+            html += `
             </div>
             `;
 
-        });
+        }
+
 
         html += `
+            </div>
+
         </div>
         `;
 
-    }
-
-    html += `
-        </div>
-
-    </div>
-    `;
-
-});
+    });
 
 
     // Tambahkan kalkulator hanya untuk temperatur
@@ -6178,6 +6405,63 @@ function swapWindSpeed(){
 
 
     calculateWindSpeed();
+
+
+}
+function highlightText(text, keyword){
+
+    if(!keyword) return text;
+
+
+    let regex = new RegExp(
+        `(${keyword})`,
+        "gi"
+    );
+
+
+    return text.replace(
+        regex,
+        `<mark>$1</mark>`
+    );
+
+}
+function searchLearnContent(){
+
+
+    let keyword =
+    document
+    .getElementById("learnSearch")
+    .value;
+
+
+    document
+    .querySelectorAll(".learn-body p")
+    .forEach(body=>{
+
+
+        let original =
+        body.dataset.original;
+
+
+        if(!original){
+
+            body.dataset.original =
+            body.innerHTML;
+
+            original =
+            body.innerHTML;
+
+        }
+
+
+        body.innerHTML =
+        highlightText(
+            original,
+            keyword
+        );
+
+
+    });
 
 
 }
