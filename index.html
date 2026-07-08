@@ -425,6 +425,7 @@ h2{
     }
 }
 /* ================= DARK MODE OTOMATIS ================= */
+
 body.dark-mode{
     background-image:
         linear-gradient(rgba(0,0,0,0.65),
@@ -435,26 +436,80 @@ body.dark-mode{
 body.dark-mode .box,
 body.dark-mode .day,
 body.dark-mode .datetime-container,
-body.dark-mode .modal-content{
+body.dark-mode .modal-content,
+body.dark-mode .learn-modal-content,
+body.dark-mode .learn-card,
+body.dark-mode .temperature-calculator{
     background: rgba(15,15,15,0.85);
     border: 1px solid rgba(255,255,255,0.08);
     backdrop-filter: blur(15px);
 }
 
-body.dark-mode .dot.active{
-    background: #ffffff;
+body.dark-mode .learn-header{
+    background: rgba(255,255,255,0.08);
 }
+
+body.dark-mode .learn-body{
+    background: rgba(255,255,255,0.04);
+}
+
+body.dark-mode .dot.active{
+    background:#ffffff;
+}
+
 body.dark-mode .box.active{
     background: rgba(35,35,35,0.95);
     border: 1px solid rgba(255,255,255,0.18);
-    box-shadow: 0 0 15px rgba(255,255,255,0.12);
+    box-shadow:0 0 15px rgba(255,255,255,0.12);
 }
 
 body.dark-mode .box.side{
     background: rgba(15,15,15,0.75);
 }
-body.dark-mode .box:not(.active):hover{
+
+body.dark-mode .box:not(.active):hover,
+body.dark-mode .learn-card:hover{
     background: rgba(25,25,25,0.9);
+}
+body.dark-mode #ai-analysis-box{
+    background: rgba(15,15,15,0.85);
+    border: 1px solid rgba(255,255,255,0.08);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+body.dark-mode #ai-analysis-box:hover{
+    box-shadow:
+        0 12px 35px rgba(255,255,255,0.08);
+}
+/* ========= Flip Card Dark Mode ========= */
+
+body.dark-mode .temp-front{
+
+    box-shadow:
+        0 4px 15px rgba(0,0,0,.35);
+
+}
+
+body.dark-mode .temp-back{
+
+    background:rgba(20,20,20,.95);
+
+    color:#f5f5f5;
+
+    border:1px solid rgba(255,255,255,.08);
+
+}
+
+body.dark-mode .temp-flip-card{
+
+    filter:drop-shadow(0 8px 18px rgba(0,0,0,.35));
+
+}
+body.dark-mode .temp-front{
+
+    filter:brightness(.85);
+
 }
 #chartLegend{
     margin-top:20px;
@@ -911,10 +966,21 @@ body.golden-mode{
 body.golden-mode .box,
 body.golden-mode .day,
 body.golden-mode .datetime-container,
-body.golden-mode .modal-content{
+body.golden-mode .modal-content,
+body.golden-mode .learn-modal-content,
+body.golden-mode .learn-card,
+body.golden-mode .temperature-calculator{
     background: rgba(90,55,20,0.55);
     border: 1px solid rgba(255,200,120,0.25);
     backdrop-filter: blur(15px);
+}
+
+body.golden-mode .learn-header{
+    background: rgba(255,200,120,0.12);
+}
+
+body.golden-mode .learn-body{
+    background: rgba(255,220,170,0.06);
 }
 
 body.golden-mode .box.active{
@@ -924,6 +990,63 @@ body.golden-mode .box.active{
 
 body.golden-mode .dot.active{
     background: #ffb84d;
+}
+
+body.golden-mode .learn-card:hover{
+    background: rgba(120,70,20,0.7);
+}
+body.golden-mode #ai-analysis-box{
+    background: rgba(90,55,20,0.55);
+    border: 1px solid rgba(255,200,120,0.25);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow: 0 8px 25px rgba(80,45,10,0.35);
+}
+
+body.golden-mode #ai-analysis-box:hover{
+    box-shadow:
+        0 12px 35px rgba(255,180,80,0.25);
+}
+
+body.golden-mode #ai-analysis-box h3,
+body.golden-mode #ai-analysis-text{
+    color: #fff;
+}
+/* ========= Flip Card Golden Mode ========= */
+
+body.golden-mode .temp-front{
+
+    box-shadow:
+        0 6px 18px rgba(120,70,20,.35);
+
+}
+
+body.golden-mode .temp-back{
+
+    background:rgba(90,55,20,.85);
+
+    color:#fff;
+
+    border:1px solid rgba(255,210,140,.25);
+
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+
+    box-shadow:
+        inset 0 1px rgba(255,230,180,.08),
+        0 8px 20px rgba(80,45,10,.3);
+
+}
+
+body.golden-mode .temp-flip-card{
+
+    filter:drop-shadow(0 8px 18px rgba(120,70,20,.25));
+
+}
+body.golden-mode .temp-front{
+
+    filter:saturate(.9) brightness(.95);
+
 }
 .info-card{
     position: relative;
@@ -1219,6 +1342,620 @@ body.golden-mode .dot.active{
     }
 
 }
+.learn-grid{
+
+    width:90%;
+    max-width:900px;
+
+    margin:25px auto;
+
+    display:flex;
+    justify-content:center;
+    gap:18px;
+    flex-wrap:wrap;
+
+}
+
+.learn-card{
+
+    width:160px;
+    min-height:90px;
+
+    background:rgba(255,255,255,.10);
+
+    backdrop-filter:blur(15px);
+
+    border:1px solid rgba(255,255,255,.15);
+
+    border-radius:15px;
+
+    padding:15px;
+
+    cursor:pointer;
+
+    transition:.35s;
+
+    color:#fff;
+
+    font-size:15px;
+    font-weight:bold;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    gap:8px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.25);
+
+}
+.learn-card span{
+
+    display:block;
+
+    margin-top:0;
+
+}
+
+.learn-card:hover{
+
+    transform:translateY(-4px);
+
+    background:rgba(255,255,255,.16);
+
+}
+.learn-modal{
+
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.65);
+
+    backdrop-filter:blur(8px);
+
+    z-index:9999;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+
+.learn-modal-content{
+
+    width:55%;
+    max-width:500px;
+
+    max-height:70vh;
+
+    overflow-y:auto;
+
+    background:rgba(25,25,25,.95);
+
+    backdrop-filter:blur(15px);
+
+    border:1px solid rgba(255,255,255,.1);
+
+    border-radius:20px;
+
+    padding:20px;
+
+    color:white;
+
+    position:relative;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,.5);
+
+}
+
+
+.learn-section{
+
+    margin-top:15px;
+
+}
+
+
+.learn-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:10px 15px;
+
+    background:rgba(255,255,255,.1);
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    font-weight:bold;
+
+}
+
+
+.learn-body{
+
+    display:none;
+
+    padding:12px 15px;
+
+    line-height:1.5;
+
+    font-size:14px;
+
+    background:rgba(255,255,255,.05);
+
+    border-radius:0 0 12px 12px;
+
+}
+@media(max-width:768px){
+
+    .learn-modal-content{
+
+        width:85%;
+
+        max-height:75vh;
+
+        padding:15px;
+
+        border-radius:18px;
+
+    }
+
+
+    .learn-header{
+
+        font-size:14px;
+
+        padding:10px 12px;
+
+    }
+
+
+    .learn-body{
+
+        font-size:13px;
+
+        padding:10px 12px;
+
+    }
+
+}
+
+
+@media(max-width:480px){
+
+    .learn-modal-content{
+
+        width:90%;
+
+        max-height:70vh;
+
+        padding:12px;
+
+    }
+
+
+    .learn-header{
+
+        font-size:13px;
+
+    }
+
+
+    .learn-body{
+
+        font-size:12px;
+
+        line-height:1.4;
+
+    }
+
+}
+@media (max-width:768px){
+
+    .learn-grid{
+
+        gap:12px;
+
+    }
+
+    .learn-card{
+
+        width:calc(50% - 12px);
+        min-height:90px;
+
+        padding:12px;
+
+        font-size:14px;
+
+    }
+
+}
+
+
+@media (max-width:480px){
+
+    .learn-grid{
+
+        gap:10px;
+
+    }
+
+    .learn-card{
+
+        width:calc(50% - 10px);
+        min-height:80px;
+
+        padding:10px;
+
+        font-size:13px;
+
+    }
+
+}
+.temperature-calculator{
+
+    width:220px;
+    max-width:90%;
+
+    margin:20px auto;
+
+    padding:15px;
+
+    background:#1e1e1e;
+
+    border-radius:16px;
+
+    color:white;
+
+    box-shadow:
+    0 8px 25px rgba(0,0,0,.35);
+
+    overflow:hidden;
+
+}
+
+
+
+.temperature-calculator h3{
+
+    font-size:16px;
+
+    margin-bottom:15px;
+
+}
+
+
+
+/* angka input */
+
+#tempInput,
+#windInput{
+
+    width:100%;
+
+    height:45px;
+
+    background:none;
+
+    border:none;
+
+    outline:none;
+
+    color:white;
+
+    font-size:30px;
+
+    font-weight:600;
+
+    text-align:right;
+
+    padding:0;
+
+}
+
+
+
+/* tempat input + dropdown */
+
+.temp-box{
+
+    gap:6px;
+
+}
+
+
+
+/* dropdown */
+
+.temperature-calculator select{
+
+    width:100%;
+
+    background:#333;
+
+    color:white;
+
+    border:none;
+
+    border-radius:7px;
+
+    padding:6px 10px;
+
+    font-size:12px;
+
+}
+
+
+
+/* tombol tukar */
+
+.swap-temp{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin:12px auto;
+
+    width:40px;
+
+    height:40px;
+
+    border-radius:50%;
+
+    background:white;
+
+    color:#222;
+
+    border:none;
+
+    font-size:20px;
+
+    cursor:pointer;
+
+    box-shadow:
+    0 5px 15px rgba(0,0,0,.25);
+
+    transition:.3s;
+
+}
+
+
+.swap-temp:hover{
+
+    transform:rotate(180deg);
+
+    background:#f1f1f1;
+
+}
+
+
+
+/* tanda sama dengan */
+
+.equal-text{
+
+    font-size:15px;
+
+    margin-bottom:8px;
+
+}
+
+
+
+/* hasil */
+
+.temp-result{
+
+    font-size:28px;
+
+}
+
+
+
+.temp-result span{
+
+    font-size:12px;
+
+    margin-top:3px;
+
+}
+
+.temp-card-grid{
+
+    margin-top:18px;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(110px,1fr));
+
+    gap:14px;
+
+}
+
+.temp-flip-card{
+
+    height:110px;
+
+    perspective:900px;
+
+    cursor:pointer;
+
+}
+
+.temp-flip-inner{
+
+    position:relative;
+
+    width:100%;
+    height:100%;
+
+    transition:.6s;
+
+    transform-style:preserve-3d;
+
+}
+
+.temp-flip-card.flipped
+.temp-flip-inner{
+
+    transform:rotateY(180deg);
+
+}
+
+.temp-front,
+.temp-back{
+
+    position:absolute;
+
+    inset:0;
+
+    border-radius:18px;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    padding:12px;
+
+    backface-visibility:hidden;
+
+    color:white;
+
+    font-weight:600;
+
+}
+
+.temp-front{
+
+    font-size:32px;
+
+}
+
+.temp-back{
+
+    transform:rotateY(180deg);
+
+    background:#2f3542;
+    color:#fff;
+
+    border-radius:18px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:8px;
+
+    text-align:center;
+
+    font-size:clamp(9px, 2vw, 12px);
+    line-height:1.25;
+
+    box-sizing:border-box;
+
+    overflow:hidden;
+
+    word-break:break-word;
+    overflow-wrap:break-word;
+    hyphens:auto;
+
+}
+.temp-flip-card:nth-child(1) .temp-front{
+    background:#ef5350;
+}
+
+.temp-flip-card:nth-child(2) .temp-front{
+    background:#42a5f5;
+}
+
+.temp-flip-card:nth-child(3) .temp-front{
+    background:#ab47bc;
+}
+
+.temp-flip-card:nth-child(4) .temp-front{
+    background:#26a69a;
+}
+
+.temp-flip-card:nth-child(5) .temp-front{
+    background:#ffa726;
+}
+
+.temp-flip-card:nth-child(6) .temp-front{
+    background:#8d6e63;
+}
+
+.temp-flip-card:nth-child(7) .temp-front{
+    background:#5c6bc0;
+}
+
+.temp-flip-card:nth-child(8) .temp-front{
+    background:#66bb6a;
+}
+
+/* belakang */
+.temp-back{
+
+    background:#2f3542;
+
+}
+@media (max-width:600px){
+
+    .temp-card-grid{
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+        gap:10px;
+
+    }
+
+    .temp-flip-card{
+
+        height:95px;
+
+    }
+
+    .temp-front{
+
+        font-size:26px;
+
+    }
+
+    .temp-back{
+
+        font-size:10px;
+
+        padding:6px;
+
+        line-height:1.2;
+
+    }
+
+}
+.learn-body p{
+    white-space: pre-line;
+}
 </style>
 </head>
 <body>
@@ -1368,8 +2105,44 @@ body.golden-mode .dot.active{
     <p id="infoText"></p>
 
 </div>
+</div>
+<h2 style="margin:40px 0 20px;">
+    Pelajari Lebih Lanjut
+</h2>
+
+<div class="learn-grid">
+
+    <div class="learn-card"
+         onclick="openLearnModal('temperature')">
+        🌡️
+        <span>Temperatur</span>
+    </div>
+
+    <div class="learn-card"
+         onclick="openLearnModal('wind')">
+        💨
+        <span>Kecepatan Angin</span>
+    </div>
+
+    <div class="learn-card"
+         onclick="openLearnModal('aqi')">
+        🌍
+        <span>AQI</span>
+    </div>
 
 </div>
+<div id="learnModal" class="learn-modal">
+
+    <div class="learn-modal-content">
+
+        <h2 id="learnTitle"></h2>
+
+        <div id="learnContent"></div>
+
+    </div>
+
+</div>
+
 <!-- 3. STRUKTUR JENDELA POP-UP MODAL GRAFIK -->
 <div id="detailModal" class="modal">
     <div class="modal-content">
@@ -4421,6 +5194,992 @@ if(data.aqi !== "-" && data.aqi !== null && data.aqi !== undefined && !isNaN(dat
     analisis.push(saran);
 
     return analisis.join(" ");
+}
+const learnData = {
+
+    temperature:{
+        title:"Temperatur",
+
+        sections:[
+            {
+                title:"Apa itu Temperatur?",
+                text:`Temperatur (atau suhu) adalah ukuran kuantitatif dari seberapa panas atau dinginnya suatu objek atau lingkungan.
+Jika dilihat dari sudut pandang sains (khususnya fisika), suhu sebenarnya adalah ukuran dari energi kinetik rata-rata dari partikel-partikel (atom atau molekul) yang menyusun suatu benda.`
+            },
+            {
+                title:"Pengaruh Temperatur terhadap Cuaca",
+                text:`Suhu udara merupakan salah satu penggerak utama (motor) di balik perubahan cuaca. Mengapa? Karena perubahan suhu memicu reaksi berantai pada elemen atmosfer lainnya, seperti tekanan udara, angin, kelembapan, hingga terbentuknya hujan.
+
+Berikut adalah beberapa pengaruh utama suhu udara terhadap pembentukan cuaca:
+
+<strong>1. Suhu Udara Menentukan Tekanan Udara</strong>
+
+Suhu dan tekanan udara memiliki hubungan yang berbanding terbalik.
+
+Suhu Panas: Ketika udara memanas, molekul-molekulnya merenggang dan menjadi lebih ringan, sehingga udara bergerak naik (membubung). Hal ini menciptakan daerah tekanan udara rendah(<em>low pressure</em>).
+Suhu Dingin: Sebaliknya, udara yang dingin menjadi lebih padat dan berat, lalu turun ke permukaan bumi. Ini menciptakan daerah tekanan udara tinggi (<em>high pressure</em>).
+
+<strong>2. Memicu Terjadinya Pergerakan Angin</strong>
+
+Angin pada dasarnya adalah udara yang bergerak dari daerah bertekanan tinggi (dingin) ke daerah bertekanan rendah (panas).
+
+* Perbedaan suhu yang kontras antara satu wilayah dengan wilayah lain akan menciptakan perbedaan tekanan udara yang besar.
+* Semakin besar perbedaan suhunya, maka angin yang bertiup akan semakin kencang (bisa memicu angin puting beliung atau badai).
+
+<strong>3. Mengontrol Kelembapan dan Pembentukan Awan</strong>
+
+Suhu udara sangat menentukan seberapa banyak uap air yang bisa ditampung oleh atmosfer.
+
+Udara Hangat: Memiliki kapasitas yang besar untuk menampung uap air. Suhu panas memicu penguapan air yang tinggi (dari laut, sungai, tumbuhan). Ketika udara hangat yang kaya uap air ini naik ke atmosfer dan mendingin, uap air tersebut mengembun menjadi awan.
+Udara Dingin: Memiliki kapasitas tampung uap air yang kecil. Jika suhu turun drastis, kelembapan udara akan mencapai titik jenuh lebih cepat, menghasilkan embun, kabut, atau memicu hujan.
+
+<strong>4. Menentukan Jenis Presipitasi (Hujan)</strong>
+
+Suhu udara, baik di daratan maupun di lapisan atas atmosfer, menentukan bentuk air yang jatuh ke bumi:
+
+* Jika suhu di seluruh lapisan atmosfer berada di atas titik beku > 0°C, maka akan terjadi hujan air.
+* Jika suhu di awan dan udara sekitarnya berada di bawah titik beku < 0°C, butiran air akan membeku dan jatuh sebagai salju atau hujan es.
+
+
+<strong>Kesimpulan Singkat</strong>
+
+Tanpa adanya perubahan suhu udara, atmosfer bumi akan statis. Perbedaan suhu akibat pemanasan matahari inilah yang membuat cuaca selalu berubah setiap hari, mulai dari hari yang cerah, berangin, berkabut, hingga badai hujan.`
+            },
+            {
+               title: "Satuan Temperatur",
+text: `Satuan temperatur merupakan skala yang digunakan untuk menyatakan tingkat panas atau dinginnya suatu benda. Keberadaan satuan temperatur sangat penting karena memungkinkan manusia mengukur suhu secara objektif dan memperoleh hasil yang sama di mana pun pengukuran dilakukan. Sebelum adanya skala suhu yang baku, penilaian terhadap panas dan dingin hanya didasarkan pada indra peraba sehingga hasilnya sering kali berbeda antara satu orang dengan orang lainnya. Perkembangan termometer dan penelitian para ilmuwan sejak abad ke-17 hingga abad ke-19 kemudian melahirkan berbagai skala temperatur yang digunakan hingga sekarang maupun yang kini hanya memiliki nilai sejarah.
+
+Hingga saat ini terdapat delapan satuan temperatur yang paling dikenal, yaitu Celsius (°C), Fahrenheit (°F), Kelvin (K), Réaumur (°Ré), Rankine (°Ra), Rømer (°Rø), Delisle (°De), dan Newton (°N). Setiap satuan dikembangkan oleh ilmuwan yang berbeda dengan tujuan, titik acuan, dan pembagian skala yang tidak sama. Walaupun demikian, semuanya memiliki fungsi yang sama, yaitu memberikan cara yang konsisten untuk mengukur temperatur suatu benda.
+
+Celsius merupakan satuan temperatur yang paling banyak digunakan di dunia. Skala ini menetapkan titik beku air pada 0°C dan titik didih air pada 100°C pada tekanan atmosfer standar. Karena pembagian skalanya sederhana, Celsius digunakan dalam kehidupan sehari-hari, prakiraan cuaca, pendidikan, kesehatan, hingga berbagai bidang industri. Skala ini diperkenalkan oleh astronom Swedia Anders Celsius pada tahun 1742. Awalnya, susunan skalanya dibuat terbalik, namun kemudian disempurnakan menjadi seperti yang digunakan saat ini.
+
+Fahrenheit merupakan satuan temperatur yang masih digunakan secara luas di Amerika Serikat serta beberapa negara dan wilayah lainnya. Dalam skala ini, air membeku pada 32°F dan mendidih pada 212°F sehingga terdapat 180 interval di antara kedua titik tersebut. Fahrenheit banyak digunakan untuk mengukur suhu udara, suhu tubuh, serta berbagai keperluan rumah tangga. Skala ini dikembangkan oleh fisikawan Daniel Gabriel Fahrenheit pada tahun 1724 dan menjadi salah satu skala suhu pertama yang digunakan secara luas di dunia.
+
+Kelvin adalah satuan temperatur resmi dalam Sistem Internasional (SI) dan menjadi standar utama dalam bidang sains. Berbeda dengan Celsius dan Fahrenheit, Kelvin merupakan skala temperatur absolut yang dimulai dari nol mutlak (0 K), yaitu kondisi ketika partikel memiliki energi panas serendah mungkin secara teoritis. Karena tidak memiliki nilai negatif, Kelvin sangat penting dalam penelitian fisika, kimia, astronomi, dan berbagai perhitungan ilmiah. Besarnya kenaikan 1 Kelvin sama dengan kenaikan 1 derajat Celsius sehingga konversi antara keduanya cukup sederhana.
+
+Réaumur pernah menjadi salah satu satuan temperatur yang populer di Eropa, khususnya di Prancis dan beberapa negara di sekitarnya. Pada skala ini, titik beku air berada pada 0°R, sedangkan titik didih air berada pada 80°R. Skala Réaumur banyak digunakan pada abad ke-18 dan ke-19 dalam kegiatan ilmiah, industri, serta pembuatan makanan dan minuman. Namun seiring berkembangnya penggunaan Celsius sebagai standar internasional, Réaumur perlahan ditinggalkan dan kini lebih banyak dipelajari sebagai bagian dari sejarah ilmu pengetahuan.
+
+Rankine merupakan skala temperatur absolut yang menggunakan interval yang sama dengan Fahrenheit. Jika Kelvin dimulai dari nol mutlak dengan besar kenaikan yang sama seperti Celsius, maka Rankine juga dimulai dari nol mutlak tetapi setiap kenaikan 1°Ra setara dengan kenaikan 1°F. Oleh karena itu, Rankine sering dianggap sebagai pasangan absolut dari Fahrenheit. Skala ini diperkenalkan pada tahun 1859 oleh insinyur dan fisikawan Skotlandia William John Macquorn Rankine. Hingga saat ini, Rankine masih digunakan pada beberapa bidang teknik, terutama termodinamika, teknik mesin, dan teknik dirgantara di negara-negara yang menggunakan sistem satuan imperial.
+
+Rømer merupakan salah satu skala temperatur tertua yang pernah dikembangkan. Skala ini diperkenalkan oleh astronom Denmark Ole Rømer pada tahun 1701 sebagai salah satu upaya awal untuk membuat sistem pengukuran suhu yang lebih akurat. Dalam skala Rømer, titik beku air berada pada sekitar 7,5°Rø dan titik didih air pada 60°Rø. Meskipun saat ini hampir tidak lagi digunakan, skala Rømer memiliki peran penting dalam sejarah karena menjadi inspirasi bagi Daniel Gabriel Fahrenheit ketika mengembangkan skala Fahrenheit beberapa tahun kemudian.
+
+Delisle adalah skala temperatur yang memiliki karakteristik unik karena nilainya justru semakin kecil ketika suhu meningkat. Pada skala ini, titik didih air dijadikan sebagai titik nol, sedangkan titik beku air memiliki nilai sekitar 150°De. Skala ini dikembangkan oleh astronom Prancis Joseph-Nicolas Delisle pada tahun 1732. Delisle pernah digunakan secara resmi di Rusia selama lebih dari satu abad sebelum akhirnya digantikan oleh skala Celsius yang lebih praktis dan mudah digunakan.
+
+Newton merupakan skala temperatur yang diperkenalkan oleh ilmuwan Inggris Sir Isaac Newton sekitar tahun 1701. Skala ini dibuat berdasarkan pengamatan terhadap pemuaian minyak biji rami ketika dipanaskan. Dalam skala Newton, titik beku air ditetapkan pada 0°N, sedangkan titik didih air berada di sekitar 33°N. Meskipun tidak pernah digunakan secara luas dalam kehidupan sehari-hari, skala ini menunjukkan bagaimana para ilmuwan pada masa awal mulai berusaha memahami hubungan antara panas, perubahan suhu, dan sifat-sifat zat.
+
+Perbedaan utama di antara seluruh satuan temperatur tersebut terletak pada titik acuan, besar interval, dan tujuan penggunaannya. Celsius dan Fahrenheit banyak digunakan dalam kehidupan sehari-hari, Kelvin menjadi standar internasional untuk penelitian ilmiah, sedangkan Rankine masih dimanfaatkan pada beberapa bidang teknik tertentu. Di sisi lain, Réaumur, Rømer, Delisle, dan Newton kini lebih banyak memiliki nilai historis karena telah digantikan oleh skala yang lebih praktis. Meskipun demikian, kedelapan satuan tersebut merupakan bagian penting dari sejarah perkembangan ilmu pengetahuan dan menunjukkan bagaimana manusia terus menyempurnakan cara mengukur temperatur dari waktu ke waktu.
+`,
+
+                cards:[
+                    {
+                        front:"°C",
+                        back:"Celsius adalah satuan suhu yang paling banyak digunakan di dunia."
+                    },
+                    {
+                        front:"°F",
+                        back:"Fahrenheit umum digunakan di Amerika Serikat dan beberapa wilayah lainnya."
+                    },
+                    {
+                        front:"°R",
+                        back:"Réaumur pernah digunakan di beberapa negara Eropa."
+                    },
+                    {
+                        front:"K",
+                        back:"Kelvin merupakan satuan dasar temperatur dalam Sistem Internasional (SI)."
+                    },
+                    {
+                        front:"°Ra",
+                        back:"Rankine adalah skala absolut yang menggunakan interval Fahrenheit."
+                    },
+                    {
+                        front:"°De",
+                        back:"Delisle memiliki skala terbalik, semakin tinggi suhu nilainya semakin kecil."
+                    },
+                    {
+                        front:"°Rø",
+                        back:"Rømer merupakan salah satu skala suhu tertua yang dikembangkan di Denmark."
+                    },
+                    {
+                        front:"°N",
+                        back:"Newton adalah skala suhu yang diperkenalkan oleh Isaac Newton."
+                    }
+                ]
+            }
+        ],
+
+        calculator:true
+    },   // <-- koma, bukan };
+
+    wind:{
+    title:"Kecepatan Angin",
+
+    sections:[
+       {
+    title:"Apa itu Kecepatan Angin?",
+    text:`Kecepatan angin adalah besarnya laju pergerakan udara dari suatu tempat ke tempat lain dalam satuan waktu. Angin terbentuk karena adanya perbedaan tekanan udara di permukaan Bumi. Udara akan bergerak dari daerah yang memiliki tekanan udara lebih tinggi menuju daerah yang memiliki tekanan udara lebih rendah hingga tercapai keseimbangan.
+
+Perbedaan tekanan udara umumnya dipengaruhi oleh pemanasan Matahari yang tidak merata di permukaan Bumi. Daerah yang menerima lebih banyak panas akan memiliki udara yang lebih hangat dan cenderung naik, sehingga tekanan udaranya menjadi lebih rendah. Sebaliknya, daerah yang lebih dingin memiliki tekanan udara lebih tinggi sehingga udara bergerak menuju daerah bertekanan rendah dan membentuk angin.
+
+Kecepatan angin biasanya diukur menggunakan alat yang disebut anemometer. Satuan yang umum digunakan adalah meter per detik (m/s), kilometer per jam (km/jam atau km/h), knot, dan mil per jam (mph). Dalam prakiraan cuaca, kecepatan angin menjadi salah satu parameter penting karena dapat memengaruhi suhu yang dirasakan, penyebaran awan, penguapan air, hingga keselamatan aktivitas di darat, laut, maupun udara.
+
+Secara umum, kecepatan angin dibedakan menjadi angin lemah, sedang, kencang, hingga sangat kencang. Semakin besar kecepatan angin, semakin besar pula energi yang dibawa sehingga dampaknya terhadap lingkungan dan aktivitas manusia juga semakin besar.
+`
+},
+{
+    title:"Pengaruh Kecepatan Angin terhadap Cuaca",
+    text:`Kecepatan angin memiliki peran penting dalam menentukan kondisi cuaca karena angin berfungsi memindahkan massa udara, uap air, serta panas dari satu wilayah ke wilayah lainnya. Perubahan kecepatan angin dapat memengaruhi suhu udara, kelembapan, pembentukan awan, hingga kemungkinan terjadinya hujan.
+
+Angin yang bertiup dengan kecepatan sedang membantu mendistribusikan panas secara lebih merata sehingga suhu suatu wilayah tidak terlalu ekstrem. Selain itu, angin juga mempercepat proses penguapan air dari permukaan tanah, sungai, dan laut sehingga dapat meningkatkan kandungan uap air di atmosfer yang berperan dalam pembentukan awan.
+
+Apabila angin bertiup dari laut menuju daratan, udara yang dibawanya biasanya lebih lembap sehingga meningkatkan peluang terbentuknya awan dan hujan. Sebaliknya, angin yang berasal dari daratan atau daerah kering cenderung membawa udara yang lebih kering sehingga dapat mengurangi kelembapan dan menurunkan peluang hujan.
+
+Kecepatan angin yang sangat tinggi sering dikaitkan dengan cuaca buruk seperti badai, hujan lebat, atau puting beliung. Angin kencang dapat merobohkan pohon, merusak bangunan, mengganggu transportasi, serta menimbulkan gelombang tinggi di laut. Oleh karena itu, informasi mengenai kecepatan angin selalu menjadi salah satu bagian penting dalam prakiraan cuaca untuk membantu masyarakat mempersiapkan aktivitasnya dengan lebih aman.
+`
+},
+        {
+            title:"Satuan Kecepatan Angin",
+    text:`Kecepatan angin dapat dinyatakan dalam beberapa satuan pengukuran, tergantung pada kebutuhan dan bidang penggunaannya. Empat satuan yang paling umum digunakan adalah kilometer per jam (km/h), meter per detik (m/s), knot (kn), dan mil per jam (mph). Meskipun memiliki nilai yang berbeda, keempat satuan tersebut dapat saling dikonversi.
+
+Kilometer per jam (km/h) merupakan satuan yang paling sering digunakan dalam kehidupan sehari-hari. Satuan ini mudah dipahami karena juga digunakan untuk menyatakan kecepatan kendaraan, sehingga sering dijumpai pada prakiraan cuaca di berbagai negara.
+
+Meter per detik (m/s) adalah satuan resmi dalam Sistem Internasional (SI). Satuan ini banyak digunakan dalam penelitian ilmiah, meteorologi, fisika, dan berbagai perhitungan teknik karena memberikan hasil yang lebih presisi serta sesuai dengan standar internasional.
+
+Knot (kn) merupakan satuan kecepatan yang umum digunakan dalam dunia pelayaran dan penerbangan. Satu knot setara dengan satu mil laut per jam atau sekitar 1,852 kilometer per jam. Karena berkaitan langsung dengan navigasi, knot tetap menjadi standar internasional untuk kapal dan pesawat.
+
+Mil per jam (mph) adalah satuan kecepatan yang masih digunakan di Amerika Serikat, Britania Raya untuk beberapa keperluan, serta beberapa negara lainnya. Dalam prakiraan cuaca di wilayah tersebut, kecepatan angin sering dilaporkan menggunakan mph sehingga lebih mudah dipahami oleh masyarakat setempat.
+
+Pemilihan satuan kecepatan angin bergantung pada standar yang digunakan di suatu negara atau bidang tertentu. Oleh karena itu, memahami konversi antar satuan sangat membantu ketika membaca data cuaca dari berbagai sumber internasional.
+`,
+
+            cards:[
+                {
+                    front:"km/h",
+                    back:"Kilometer per jam. Umum digunakan untuk prakiraan cuaca dan transportasi."
+                },
+                {
+                    front:"m/s",
+                    back:"Meter per detik. Satuan SI yang banyak digunakan dalam meteorologi."
+                },
+                {
+                    front:"knot",
+                    back:"Satuan kecepatan yang digunakan dalam pelayaran dan penerbangan. 1 knot = 1,852 km/jam."
+                },
+                {
+                    front:"mph",
+                    back:"Miles per hour. Umum digunakan di Amerika Serikat dan Inggris."
+                }
+            ]
+        }
+    ],
+
+    windCalculator:true
+},
+    aqi:{
+    title:"AQI",
+
+    sections:[
+        {
+    title:"Apa itu AQI?",
+    text:`Air Quality Index (AQI) atau Indeks Kualitas Udara adalah sistem yang digunakan untuk menggambarkan tingkat kebersihan atau pencemaran udara dalam bentuk angka dan kategori tertentu. AQI dirancang agar masyarakat dapat dengan mudah memahami apakah kualitas udara pada suatu waktu aman atau berpotensi menimbulkan dampak bagi kesehatan.
+
+Semakin rendah nilai AQI, semakin baik kualitas udara yang dihirup. Sebaliknya, semakin tinggi nilai AQI menunjukkan bahwa konsentrasi polutan di udara semakin besar sehingga risiko gangguan kesehatan juga meningkat. Nilai AQI biasanya dikelompokkan ke dalam beberapa kategori, mulai dari Baik, Sedang, Tidak Sehat bagi Kelompok Sensitif, Tidak Sehat, Sangat Tidak Sehat, hingga Berbahaya.
+
+AQI digunakan oleh berbagai lembaga lingkungan dan meteorologi di seluruh dunia sebagai acuan dalam memberikan informasi kualitas udara kepada masyarakat. Dengan mengetahui nilai AQI, masyarakat dapat menyesuaikan aktivitas luar ruangan, terutama bagi anak-anak, lansia, ibu hamil, serta penderita penyakit pernapasan atau jantung yang lebih sensitif terhadap polusi udara.
+`
+},
+{
+    title:"Pengaruh AQI terhadap Cuaca",
+    text:`AQI tidak memengaruhi cuaca secara langsung, tetapi kondisi cuaca sangat memengaruhi nilai AQI. Angin, hujan, suhu udara, kelembapan, dan tekanan udara dapat mengubah konsentrasi polutan di atmosfer sehingga kualitas udara dapat membaik atau memburuk.
+
+Hujan umumnya membantu menurunkan nilai AQI karena tetesan air membawa partikel debu dan polutan turun ke permukaan Bumi melalui proses yang dikenal sebagai wet deposition. Sebaliknya, kondisi udara yang stabil, minim angin, dan tidak turun hujan dapat menyebabkan polutan terperangkap di dekat permukaan sehingga nilai AQI meningkat.
+
+Kecepatan angin juga berperan penting dalam menyebarkan polutan. Angin yang cukup kencang dapat mengencerkan konsentrasi polusi sehingga kualitas udara menjadi lebih baik. Namun, angin juga dapat membawa asap kebakaran hutan, debu, atau polutan dari daerah lain sehingga AQI di suatu wilayah dapat meningkat.
+
+Dengan demikian, hubungan antara AQI dan cuaca bersifat tidak langsung. Cuaca memengaruhi kualitas udara, sedangkan AQI menggambarkan kondisi udara yang dihasilkan oleh kombinasi berbagai faktor meteorologi dan sumber pencemaran.
+`
+},
+{
+    title:"Metodologi Menghitung AQI",
+    text:`AQI dihitung berdasarkan konsentrasi beberapa polutan utama yang diukur oleh stasiun pemantauan kualitas udara. Setiap polutan terlebih dahulu diukur konsentrasinya dalam satuan tertentu, seperti mikrogram per meter kubik (µg/m³) atau bagian per juta (ppm), kemudian dikonversi menjadi nilai indeks menggunakan tabel atau rumus standar yang telah ditetapkan oleh lembaga lingkungan.
+
+Setelah seluruh polutan dihitung, nilai AQI yang digunakan adalah nilai indeks tertinggi dari seluruh polutan tersebut. Polutan dengan nilai indeks paling besar disebut sebagai polutan dominan karena memberikan pengaruh terbesar terhadap kualitas udara pada saat itu.
+
+Metode ini memungkinkan AQI memberikan gambaran yang sederhana mengenai kondisi udara meskipun berasal dari berbagai jenis polutan dengan karakteristik yang berbeda. Banyak negara memiliki standar AQI masing-masing, seperti US AQI di Amerika Serikat atau ISPU di Indonesia, namun prinsip perhitungannya pada dasarnya serupa, yaitu menggunakan polutan yang memberikan dampak kesehatan paling besar sebagai nilai AQI akhir.
+`
+},
+{
+    title:"Polutan Indikator AQI",
+    text:`AQI dihitung berdasarkan konsentrasi beberapa polutan utama yang terdapat di udara. Setiap polutan memiliki sumber dan dampak kesehatan yang berbeda sehingga semuanya dipantau untuk mengetahui kualitas udara secara menyeluruh.
+
+PM2.5 merupakan partikel halus dengan diameter kurang dari 2,5 mikrometer yang dapat masuk hingga ke paru-paru bahkan aliran darah. PM10 adalah partikel berukuran kurang dari 10 mikrometer yang dapat mengganggu sistem pernapasan, terutama pada anak-anak dan lansia.
+
+Karbon monoksida (CO) adalah gas tidak berwarna dan tidak berbau yang dihasilkan dari pembakaran tidak sempurna bahan bakar. Nitrogen dioksida (NO₂) berasal dari emisi kendaraan bermotor, pembangkit listrik, dan aktivitas industri, serta dapat menyebabkan iritasi saluran pernapasan.
+
+Sulfur dioksida (SO₂) dihasilkan dari pembakaran bahan bakar yang mengandung sulfur, seperti batu bara dan minyak bumi. Ozon permukaan (O₃) tidak dipancarkan secara langsung, tetapi terbentuk melalui reaksi kimia antara polutan lain dengan sinar matahari dan dapat mengiritasi mata maupun paru-paru.
+
+Hidrokarbon (HC) merupakan senyawa organik yang berasal dari pembakaran bahan bakar dan penguapan bahan kimia tertentu. Beberapa jenis hidrokarbon dapat berperan dalam pembentukan ozon permukaan. Timbal (Pb) adalah logam berat yang dahulu banyak berasal dari bahan bakar bertimbal dan aktivitas industri. Paparan timbal dalam jumlah tinggi dapat memengaruhi sistem saraf, terutama pada anak-anak.
+
+Dari seluruh polutan tersebut, PM2.5, PM10, CO, NO₂, SO₂, dan O₃ merupakan indikator yang paling umum digunakan dalam sistem AQI modern. Sementara itu, HC dan Pb lebih jarang digunakan sebagai indikator utama karena konsentrasinya telah menurun di banyak negara berkat penerapan standar emisi yang lebih ketat.
+`,
+            cards:[
+                {
+                    front:"PM2.5",
+                    back:"Partikel halus berukuran ≤2,5 µm yang dapat masuk hingga ke paru-paru."
+                },
+                {
+                    front:"PM10",
+                    back:"Partikel berukuran ≤10 µm yang dapat mengganggu sistem pernapasan."
+                },
+                {
+                    front:"CO",
+                    back:"Karbon monoksida, gas tidak berwarna yang mengurangi kemampuan darah membawa oksigen."
+                },
+                {
+                    front:"NO₂",
+                    back:"Nitrogen dioksida, gas dari kendaraan dan industri yang dapat mengiritasi saluran napas."
+                },
+                {
+                    front:"SO₂",
+                    back:"Sulfur dioksida, dihasilkan dari pembakaran bahan bakar yang mengandung sulfur."
+                },
+                {
+                    front:"O₃",
+                    back:"Ozon di permukaan bumi yang dapat menyebabkan iritasi mata dan paru-paru."
+                },
+                {
+                    front:"HC",
+                    back:"Hidrokarbon, senyawa organik yang berasal dari pembakaran bahan bakar."
+                },
+                {
+                    front:"Pb",
+                    back:"Timbal, logam berat beracun yang dapat memengaruhi sistem saraf."
+                }
+            ]
+        }
+    ]
+}
+
+};
+
+function openLearnModal(type){
+
+    const data = learnData[type];
+
+    document.getElementById("learnTitle").innerText = data.title;
+
+    let html = "";
+
+
+data.sections.forEach((section,index)=>{
+
+    html += `
+    <div class="learn-section">
+
+        <div class="learn-header"
+             onclick="toggleSection(${index})">
+
+            <span>${section.title}</span>
+
+            <span id="icon-${index}">+</span>
+
+        </div>
+
+        <div class="learn-body"
+             id="body-${index}">
+
+            <p>${section.text}</p>
+    `;
+
+    // Tambahkan kartu jika section memiliki cards
+    if(section.cards){
+
+        html += `
+        <div class="temp-card-grid">
+        `;
+
+        section.cards.forEach(card=>{
+
+            html += `
+            <div class="temp-flip-card">
+
+                <div class="temp-flip-inner">
+
+                    <div class="temp-front">
+                        ${card.front}
+                    </div>
+
+                    <div class="temp-back">
+                        ${card.back}
+                    </div>
+
+                </div>
+
+            </div>
+            `;
+
+        });
+
+        html += `
+        </div>
+        `;
+
+    }
+
+    html += `
+        </div>
+
+    </div>
+    `;
+
+});
+
+
+    // Tambahkan kalkulator hanya untuk temperatur
+
+    if(data.calculator){
+
+html += `
+
+<div class="temperature-calculator">
+
+    <h3>Temperature Converter</h3>
+
+
+    <div class="temp-box">
+
+        <input 
+            type="number"
+            id="tempInput"
+            value="0"
+            oninput="calculateTempScale()"
+        >
+
+
+        <select 
+            id="tempFrom"
+            onchange="calculateTempScale()">
+
+            <option value="f">Fahrenheit</option>
+            <option value="c">Celsius</option>
+            <option value="k">Kelvin</option>
+            <option value="r">Réaumur</option>
+            <option value="ra">Rankine</option>
+            <option value="n">Newton</option>
+            <option value="de">Delisle</option>
+            <option value="ro">Rømer</option>
+
+        </select>
+
+    </div>
+
+
+
+    <button 
+        class="swap-temp"
+        onclick="swapTemperature()">
+
+        ⇅
+
+    </button>
+
+
+
+    <div class="equal-text">
+        =
+    </div>
+
+
+
+    <div 
+        class="temp-result"
+        id="tempResult">
+
+    </div>
+
+
+
+    <select 
+        id="tempTo"
+        onchange="calculateTempScale()">
+
+
+        <option value="k">Kelvin</option>
+        <option value="c">Celsius</option>
+        <option value="f">Fahrenheit</option>
+        <option value="r">Réaumur</option>
+        <option value="ra">Rankine</option>
+        <option value="n">Newton</option>
+        <option value="de">Delisle</option>
+        <option value="ro">Rømer</option>
+
+
+    </select>
+
+
+</div>
+`;
+
+}
+if(data.windCalculator){
+
+html += `
+
+<div class="temperature-calculator">
+
+<h3>Wind Speed Converter</h3>
+
+
+<input 
+type="number"
+id="windInput"
+value="0"
+oninput="calculateWindSpeed()"
+>
+
+
+<select 
+id="windFrom"
+onchange="calculateWindSpeed()">
+
+<option value="kmh">
+Kilometer per hour (km/h)
+</option>
+
+<option value="ms">
+Meter per second (m/s)
+</option>
+
+<option value="knot">
+Knot
+</option>
+
+<option value="mph">
+Miles per hour (mph)
+</option>
+
+</select>
+
+
+<button 
+class="swap-temp"
+onclick="swapWindSpeed()">
+
+⇅
+
+</button>
+
+
+<div class="equal-text">
+=
+</div>
+
+
+
+<div 
+class="temp-result"
+id="windResult">
+
+</div>
+
+
+
+<select 
+id="windTo"
+onchange="calculateWindSpeed()">
+
+
+<option value="ms">
+Meter per second (m/s)
+</option>
+
+<option value="kmh">
+Kilometer per hour (km/h)
+</option>
+
+<option value="knot">
+Knot
+</option>
+
+<option value="mph">
+Miles per hour (mph)
+</option>
+
+
+</select>
+
+
+</div>
+
+`;
+
+}
+
+    document.getElementById("learnContent").innerHTML = html;
+
+    document
+.querySelectorAll(".temp-flip-card")
+.forEach(card=>{
+
+    card.addEventListener("click",()=>{
+
+        card.classList.toggle("flipped");
+
+    });
+
+});
+    document.getElementById("learnModal").style.display = "flex";
+
+
+if(data.calculator){
+
+    calculateTempScale();
+
+}
+
+
+if(data.windCalculator){
+
+    calculateWindSpeed();
+
+}
+
+}
+function toggleSection(index){
+
+    const body = document.getElementById("body-" + index);
+
+    const icon = document.getElementById("icon-" + index);
+
+    if(body.style.display === "block"){
+
+        body.style.display = "none";
+
+        icon.innerText = "+";
+
+    }else{
+
+        body.style.display = "block";
+
+        icon.innerText = "−";
+
+    }
+
+}
+function closeLearnModal(){
+
+    document.getElementById("learnModal").style.display = "none";
+}
+document.getElementById("learnModal").addEventListener("click", function(e){
+
+    if(e.target === this){
+
+        closeLearnModal();
+
+    }
+
+});
+function calculateTempScale(){
+
+
+    let input =
+    document.getElementById("tempInput");
+
+
+    let value =
+    parseFloat(input.value);
+
+
+
+    if(isNaN(value)){
+
+        document.getElementById("tempResult").innerHTML =
+        "-";
+
+        return;
+
+    }
+
+
+
+    let from =
+    document.getElementById("tempFrom").value;
+
+
+    let to =
+    document.getElementById("tempTo").value;
+
+
+
+    let celsius;
+
+
+
+    // convert ke Celsius dulu
+
+    switch(from){
+
+
+        case "c":
+            celsius=value;
+        break;
+
+
+        case "f":
+            celsius=(value-32)*5/9;
+        break;
+
+
+        case "k":
+            celsius=value-273.15;
+        break;
+
+
+        case "r":
+            celsius=value*5/4;
+        break;
+
+
+        case "ra":
+            celsius=(value-491.67)*5/9;
+        break;
+
+
+        case "n":
+            celsius=value*100/33;
+        break;
+
+
+        case "de":
+            celsius=100-(value*2/3);
+        break;
+
+
+        case "ro":
+            celsius=(value-7.5)*40/21;
+        break;
+
+
+    }
+
+
+
+
+    let result;
+
+
+
+    // Celsius ke tujuan
+
+    switch(to){
+
+
+        case "c":
+            result=celsius;
+        break;
+
+
+        case "f":
+            result=(celsius*9/5)+32;
+        break;
+
+
+        case "k":
+            result=celsius+273.15;
+        break;
+
+
+        case "r":
+            result=celsius*4/5;
+        break;
+
+
+        case "ra":
+            result=(celsius+273.15)*9/5;
+        break;
+
+
+        case "n":
+            result=celsius*33/100;
+        break;
+
+
+        case "de":
+            result=(100-celsius)*3/2;
+        break;
+
+
+        case "ro":
+            result=(celsius*21/40)+7.5;
+        break;
+
+
+    }
+
+
+
+    document.getElementById("tempResult").innerHTML =
+
+    `
+    <b>${formatNumber(result)}</b>
+    <span>${getTempUnitName(to)}</span>
+    `;
+
+
+
+}
+
+function getTempUnitName(unit){
+
+    const names={
+
+        c:"°C (Celsius)",
+        f:"°F (Fahrenheit)",
+        r:"°Re (Réaumur)",
+        k:"K (Kelvin)",
+        ra:"°Ra (Rankine)",
+        n:"°N (Newton)",
+        de:"°De (Delisle)",
+        ro:"°Rø (Rømer)"
+
+    };
+
+    return names[unit];
+
+}
+function formatTemperature(value){
+
+
+    if(Math.abs(value) >= 1000){
+
+        return value.toFixed(1);
+
+    }
+
+
+    if(Number.isInteger(value)){
+
+        return value;
+
+    }
+
+
+    return parseFloat(value.toFixed(2));
+
+
+}
+function swapTemperature(){
+
+
+    let from =
+    document.getElementById("tempFrom");
+
+
+    let to =
+    document.getElementById("tempTo");
+
+
+
+    let temp = from.value;
+
+
+    from.value = to.value;
+
+
+    to.value = temp;
+
+
+
+    calculateTempScale();
+
+
+}
+function calculateWindSpeed(){
+
+
+let value =
+parseFloat(
+document.getElementById("windInput").value
+);
+
+
+
+if(isNaN(value)){
+
+document.getElementById("windResult").innerHTML="-";
+
+return;
+
+}
+
+
+
+let from =
+document.getElementById("windFrom").value;
+
+
+let to =
+document.getElementById("windTo").value;
+
+
+
+let ms;
+
+
+
+// semua ubah dulu ke m/s
+
+switch(from){
+
+
+case "ms":
+
+ms=value;
+
+break;
+
+
+case "kmh":
+
+ms=value/3.6;
+
+break;
+
+
+case "knot":
+
+ms=value*0.514444;
+
+break;
+
+
+case "mph":
+
+ms=value*0.44704;
+
+break;
+
+
+}
+
+
+
+let result;
+
+
+
+// m/s ke tujuan
+
+switch(to){
+
+
+case "ms":
+
+result=ms;
+
+break;
+
+
+case "kmh":
+
+result=ms*3.6;
+
+break;
+
+
+case "knot":
+
+result=ms/0.514444;
+
+break;
+
+
+case "mph":
+
+result=ms/0.44704;
+
+break;
+
+
+}
+
+
+
+document.getElementById("windResult").innerHTML=
+
+`
+<b>${formatNumber(result)}</b>
+<span>${getWindUnitName(to)}</span>
+`;
+
+
+
+}
+function getWindUnitName(unit){
+
+
+const names={
+
+kmh:"Kilometer per hour (km/h)",
+
+ms:"Meter per second (m/s)",
+
+knot:"Knot",
+
+mph:"Miles per hour (mph)"
+
+};
+
+
+return names[unit];
+
+
+}
+function formatNumber(value){
+
+
+    if(Math.abs(value) >= 1000){
+
+        return value.toFixed(1);
+
+    }
+
+
+    if(Number.isInteger(value)){
+
+        return value;
+
+    }
+
+
+    return parseFloat(value.toFixed(2));
+
+
+}
+function swapWindSpeed(){
+
+
+    let from =
+    document.getElementById("windFrom");
+
+
+    let to =
+    document.getElementById("windTo");
+
+
+
+    let temp = from.value;
+
+
+    from.value = to.value;
+
+
+    to.value = temp;
+
+
+
+    calculateWindSpeed();
+
+
 }
 </script>
 </body>
