@@ -39,73 +39,125 @@ h2{
 }
 
 /* ==================== STYLE PERSEGI ROUNDED ==================== */
-.slider-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+.slider-container{
+
+    position:relative;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
     max-width:500px;
+
     overflow:hidden;
+
     margin:auto;
+
 }
 
-.slider-track-wrapper {
-    overflow: hidden;
-    width: 100%;
-    border-radius: 15px; /* Membuat sudut bingkai luar melengkung */
-    padding: 0;
-}
+.slider-track-wrapper{
 
-.slider-track {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-    width: 100%;
-    touch-action: pan-y;
-    user-select: none;
-    -webkit-user-select: none;
-    cursor: grab;
-}
-.slider-track .box{
-    flex:0 0 calc(100% / 3);
-    max-width:calc(100% / 3);
+    width:100%;
 
-    background: rgba(0,0,0,0.4);
-    backdrop-filter: blur(10px);
+    overflow:hidden;
 
     border-radius:15px;
-    height:140px;
-    padding:15px;
-    text-align:left;
+
+}
+
+.slider-track{
+
     display:flex;
+
+    transform:translate3d(0,0,0);
+
+    will-change:transform;
+
+    transition:
+        transform .75s cubic-bezier(.16,1,.3,1);
+
+}
+
+.slider-track:active{
+
+    cursor:grabbing;
+
+}
+
+.slider-track .box{
+
+    flex:0 0 calc(100% / 3);
+
+    max-width:calc(100% / 3);
+
+    height:140px;
+
+    padding:15px;
+
+    display:flex;
+
     flex-direction:column;
+
     justify-content:space-between;
+
     align-items:center;
+
     gap:0;
-    cursor:pointer;
+
+    text-align:left;
+
     overflow:hidden;
 
-    transform:scale(0.85);
-    opacity:0.6;
-    transition:all .4s ease;
+    border-radius:15px;
 
-    border:1px solid rgba(255,255,255,.05);
+    background:rgba(0,0,0,.4);
+
+    backdrop-filter:blur(6px);
+    -webkit-backdrop-filter:blur(6px);
+
+    border:1px solid rgba(255,255,255,.06);
+
+    transform:translate3d(0,0,0) scale(.86);
+
+    opacity:.6;
+
+    will-change:transform,opacity;
+
+    transition:
+        transform .35s ease,
+        opacity .35s ease,
+        background-color .35s ease;
+
 }
+
 .slider-track .box.active{
-    transform:scale(1);
+
+    transform:translate3d(0,0,0) scale(1);
+
     opacity:1;
-    background:rgba(0,0,0,0.6);
+
+    background:rgba(0,0,0,.6);
+
 }
 
 .slider-track .box.side{
-    transform:scale(0.9);
-    opacity:0.8;
-    background:rgba(0,0,0,0.35);
-}
-.slider-track .box:hover {
-    transform: scale(1.02);
-    background: rgba(255, 255, 255, 0.1);
+
+    transform:translate3d(0,0,0) scale(.92);
+
+    opacity:.8;
+
+    background:rgba(0,0,0,.35);
+
 }
 
+.slider-track .box:hover{
+
+    transform:translate3d(0,0,0) scale(1.02);
+
+}
 .box h3{
     margin:0;
     font-size:18px;
@@ -486,29 +538,46 @@ body.dark-mode #ai-analysis-box:hover{
 
 body.dark-mode .temp-front{
 
+    filter:brightness(.88);
+
+    border:1.5px solid rgba(255,255,255,.18);
+
     box-shadow:
-        0 4px 15px rgba(0,0,0,.35);
+        inset 0 1px 2px rgba(255,255,255,.08),
+        inset 0 -2px 6px rgba(0,0,0,.35),
+        0 6px 16px rgba(0,0,0,.28);
+
+}
+
+body.dark-mode .temp-front::before,
+body.dark-mode .temp-back::before{
+
+    background:linear-gradient(
+        135deg,
+        rgba(255,255,255,.16) 0%,
+        rgba(255,255,255,.08) 20%,
+        rgba(255,255,255,0) 45%,
+        rgba(255,255,255,.04) 100%
+    );
 
 }
 
 body.dark-mode .temp-back{
 
-    background:rgba(20,20,20,.95);
+    background:linear-gradient(
+        145deg,
+        #232b38,
+        #151b25
+    );
 
     color:#f5f5f5;
 
-    border:1px solid rgba(255,255,255,.08);
+    border:1.5px solid rgba(255,255,255,.12);
 
-}
-
-body.dark-mode .temp-flip-card{
-
-    filter:drop-shadow(0 8px 18px rgba(0,0,0,.35));
-
-}
-body.dark-mode .temp-front{
-
-    filter:brightness(.85);
+    box-shadow:
+        inset 0 1px 2px rgba(255,255,255,.06),
+        inset 0 -2px 6px rgba(0,0,0,.35),
+        0 6px 16px rgba(0,0,0,.28);
 
 }
 /* ================= SEARCH DARK MODE ================= */
@@ -625,21 +694,34 @@ body.dark-mode .search-icon svg{
 }
 
 .legend-dot{
+
     width:14px;
     height:14px;
+
     border-radius:50%;
-    background:red;
-    box-shadow:0 0 10px red;
-    animation:blinkLegend 1s infinite;
+
+    background:#ff3b3b;
+
+    animation:blinkLegend 1.2s ease-in-out infinite;
+
+    will-change:opacity;
+
 }
 
 @keyframes blinkLegend{
+
     0%,100%{
+
         opacity:1;
+
     }
+
     50%{
-        opacity:0.3;
+
+        opacity:.35;
+
     }
+
 }
 @media (max-width: 768px){
     .legend-item{
@@ -666,6 +748,26 @@ body.dark-mode .search-icon svg{
 .heat-cell{
     position: relative;
     overflow: hidden;
+}
+
+/* ================= GLASS SHIMMER ================= */
+
+.heat-cell.glass-shimmer{
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:rgba(255,255,255,.08);
+
+    border:1px solid rgba(255,255,255,.12);
+
+    background-clip:padding-box;
+
+    transform:translateZ(0);
+
+    will-change:transform;
+
 }
 
 /* layer kaca */
@@ -955,42 +1057,71 @@ body.dark-mode .search-icon svg{
     }
 }
 .forecast-row{
-    transition:.4s;
+
+    transform:translate3d(0,0,0);
+
+    will-change:background-color;
+
 }
 
 .forecast-row td{
-    transition:.4s;
+
+    transition:
+        background-color .35s ease,
+        border-color .35s ease,
+        box-shadow .35s ease;
+
 }
 
 .forecast-row.active-row td{
-    background:rgba(255,40,40,.18);
+
+    background:rgba(255,40,40,.15);
+
     border-top:2px solid #ff3b3b;
+
     border-bottom:2px solid #ff3b3b;
+
     box-shadow:
-        inset 0 0 12px rgba(255,0,0,.35),
-        0 0 12px rgba(255,0,0,.35);
+        inset 0 0 6px rgba(255,0,0,.22);
+
 }
 
 .forecast-row.active-row td:first-child{
+
     border-left:2px solid #ff3b3b;
+
     border-radius:8px 0 0 8px;
+
 }
 
 .forecast-row.active-row td:last-child{
+
     border-right:2px solid #ff3b3b;
+
     border-radius:0 8px 8px 0;
+
 }
+
 .forecast-temp{
-    white-space: nowrap;
-    font-size: 14px;
-    font-weight: 600;
-    margin-top: 8px;
+
+    white-space:nowrap;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    margin-top:8px;
+
 }
+
 @media (max-width:768px){
 
     .forecast-temp{
+
         font-size:12px;
+
         white-space:nowrap;
+
     }
 
 }
@@ -1058,36 +1189,46 @@ body.golden-mode #ai-analysis-text{
 
 body.golden-mode .temp-front{
 
+    filter:saturate(.95) brightness(.96);
+
+    border:1.5px solid rgba(255,225,170,.28);
+
     box-shadow:
-        0 6px 18px rgba(120,70,20,.35);
+        inset 0 1px 2px rgba(255,240,200,.20),
+        inset 0 -2px 6px rgba(90,55,20,.18),
+        0 6px 16px rgba(120,70,20,.20);
+
+}
+
+body.golden-mode .temp-front::before,
+body.golden-mode .temp-back::before{
+
+    background:linear-gradient(
+        135deg,
+        rgba(255,245,220,.35) 0%,
+        rgba(255,220,160,.18) 20%,
+        rgba(255,255,255,0) 45%,
+        rgba(255,220,150,.08) 100%
+    );
 
 }
 
 body.golden-mode .temp-back{
 
-    background:rgba(90,55,20,.85);
+    background:linear-gradient(
+        145deg,
+        #8c5b26,
+        #5f3a18
+    );
 
     color:#fff;
 
-    border:1px solid rgba(255,210,140,.25);
-
-    backdrop-filter:blur(12px);
-    -webkit-backdrop-filter:blur(12px);
+    border:1.5px solid rgba(255,225,170,.28);
 
     box-shadow:
-        inset 0 1px rgba(255,230,180,.08),
-        0 8px 20px rgba(80,45,10,.3);
-
-}
-
-body.golden-mode .temp-flip-card{
-
-    filter:drop-shadow(0 8px 18px rgba(120,70,20,.25));
-
-}
-body.golden-mode .temp-front{
-
-    filter:saturate(.9) brightness(.95);
+        inset 0 1px 2px rgba(255,235,190,.15),
+        inset 0 -2px 6px rgba(70,40,10,.20),
+        0 6px 16px rgba(120,70,20,.20);
 
 }
 /* ========= Search Golden Mode ========= */
@@ -1136,63 +1277,79 @@ body.golden-mode .search-icon svg{
 
 }
 .info-card{
-    position: relative;
 
-    width: 90%;
-    min-height: 180px;
+    position:relative;
 
-    margin: 0 auto; /* Tengah */
+    width:90%;
 
-    border-radius: 24px;
+    min-height:180px;
 
-    overflow: hidden;
+    margin:0 auto;
+
+    border-radius:24px;
+
+    overflow:hidden;
 
     box-shadow:
-        0 10px 25px rgba(0,0,0,.18);
+        0 6px 18px rgba(0,0,0,.16);
+
 }
+
 /* =========================
-   BACKGROUND IMAGE LAYERS
+   BACKGROUND IMAGE
 ========================= */
 
 .bg{
 
     position:absolute;
+
     inset:0;
 
     background-size:cover;
+
     background-position:center;
+
     background-repeat:no-repeat;
 
-    transition:opacity 1.5s ease;
+    transform:translate3d(0,0,0);
 
-    will-change:opacity, transform;
+    transition:opacity 1.2s ease;
 
 }
+
+/* Ken Burns */
+
 @keyframes kenBurns{
 
     from{
-        transform:scale(1);
+
+        transform:
+            translate3d(0,0,0)
+            scale(1);
+
     }
 
     to{
-        transform:scale(1.08);
+
+        transform:
+            translate3d(0,0,0)
+            scale(1.05);
+
     }
 
 }
 
 /* =========================
-   DARK OVERLAY
+   OVERLAY
 ========================= */
 
 .info-overlay{
 
     position:absolute;
+
     inset:0;
 
-    background:linear-gradient(
-        rgba(0,0,0,.80),
-        rgba(0,0,0,.80)
-    );
+    background:rgba(0,0,0,.78);
 
     z-index:2;
 
@@ -1205,6 +1362,7 @@ body.golden-mode .search-icon svg{
 .info-content{
 
     position:absolute;
+
     inset:0;
 
     z-index:3;
@@ -1212,11 +1370,12 @@ body.golden-mode .search-icon svg{
     display:flex;
 
     justify-content:center;
+
     align-items:center;
 
     padding:20px 24px;
 
-    color:white;
+    color:#fff;
 
     text-align:center;
 
@@ -1236,6 +1395,8 @@ body.golden-mode .search-icon svg{
 
 }
 
+/* Cursor */
+
 #infoText::after{
 
     content:"|";
@@ -1247,19 +1408,19 @@ body.golden-mode .search-icon svg{
     opacity:1;
 
 }
+
 #infoText.cursor-blink::after{
 
-    animation:blinkCursor .8s infinite;
+    animation:blinkCursor .9s steps(1,end) infinite;
 
 }
+
 @keyframes blinkCursor{
 
-    0%,50%{
-        opacity:1;
-    }
+    50%{
 
-    50.01%,100%{
         opacity:0;
+
     }
 
 }
@@ -1881,7 +2042,7 @@ body.golden-mode .search-icon svg{
 
     height:110px;
 
-    perspective:900px;
+    perspective:1000px;
 
     cursor:pointer;
 
@@ -1894,18 +2055,23 @@ body.golden-mode .search-icon svg{
     width:100%;
     height:100%;
 
-    transition:.6s;
-
     transform-style:preserve-3d;
 
+    transition:transform .45s cubic-bezier(.22,1,.36,1);
+
+    will-change:transform;
+
+    transform:translateZ(0);
+
 }
 
-.temp-flip-card.flipped
-.temp-flip-inner{
+.temp-flip-card.flipped .temp-flip-inner{
 
-    transform:rotateY(180deg);
+    transform:translateZ(0) rotateY(180deg);
 
 }
+
+/* ================= FRONT & BACK ================= */
 
 .temp-front,
 .temp-back{
@@ -1914,8 +2080,6 @@ body.golden-mode .search-icon svg{
 
     inset:0;
 
-    border-radius:18px;
-
     display:flex;
 
     justify-content:center;
@@ -1923,89 +2087,125 @@ body.golden-mode .search-icon svg{
 
     text-align:center;
 
-    padding:12px;
-
-    backface-visibility:hidden;
-
-    color:white;
-
-    font-weight:600;
-
-}
-
-.temp-front{
-
-    font-size:32px;
-
-}
-
-.temp-back{
-
-    transform:rotateY(180deg);
-
-    background:#2f3542;
-    color:#fff;
-
     border-radius:18px;
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    padding:8px;
-
-    text-align:center;
-
-    font-size:clamp(9px, 2vw, 12px);
-    line-height:1.25;
+    padding:10px;
 
     box-sizing:border-box;
 
     overflow:hidden;
 
+    color:#fff;
+
+    backface-visibility:hidden;
+    -webkit-backface-visibility:hidden;
+
+    transform:translateZ(1px);
+
+    border:1.5px solid rgba(255,255,255,.28);
+
+    box-shadow:
+        inset 0 1px 2px rgba(255,255,255,.22),
+        inset 0 -2px 6px rgba(0,0,0,.15),
+        0 6px 16px rgba(0,0,0,.18);
+
+}
+
+/* Efek Glass */
+
+.temp-front::before,
+.temp-back::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    border-radius:inherit;
+
+    background:linear-gradient(
+        135deg,
+        rgba(255,255,255,.32) 0%,
+        rgba(255,255,255,.14) 20%,
+        rgba(255,255,255,0) 45%,
+        rgba(255,255,255,.08) 100%
+    );
+
+    pointer-events:none;
+
+}
+
+/* ================= FRONT ================= */
+
+.temp-front{
+
+    font-size:32px;
+
+    font-weight:600;
+
+}
+
+/* ================= BACK ================= */
+
+.temp-back{
+
+    transform:rotateY(180deg) translateZ(1px);
+
+    background:linear-gradient(
+        145deg,
+        #2b3445,
+        #1f2633
+    );
+
+    font-size:clamp(9px,2vw,12px);
+
+    line-height:1.25;
+
     word-break:break-word;
+
     overflow-wrap:break-word;
+
     hyphens:auto;
 
 }
+
+/* ================= WARNA ================= */
+
 .temp-flip-card:nth-child(1) .temp-front{
-    background:#ef5350;
+    background:#d32f2f;
 }
 
 .temp-flip-card:nth-child(2) .temp-front{
-    background:#42a5f5;
+    background:#1976d2;
 }
 
 .temp-flip-card:nth-child(3) .temp-front{
-    background:#ab47bc;
+    background:#8e24aa;
 }
 
 .temp-flip-card:nth-child(4) .temp-front{
-    background:#26a69a;
+    background:#00897b;
 }
 
 .temp-flip-card:nth-child(5) .temp-front{
-    background:#ffa726;
+    background:#f57c00;
 }
 
 .temp-flip-card:nth-child(6) .temp-front{
-    background:#8d6e63;
+    background:#6d4c41;
 }
 
 .temp-flip-card:nth-child(7) .temp-front{
-    background:#5c6bc0;
+    background:#3949ab;
 }
 
 .temp-flip-card:nth-child(8) .temp-front{
-    background:#66bb6a;
+    background:#43a047;
 }
 
-/* belakang */
-.temp-back{
+/* ================= MOBILE ================= */
 
-    background:#2f3542;
-
-}
 @media (max-width:600px){
 
     .temp-card-grid{
@@ -2033,7 +2233,7 @@ body.golden-mode .search-icon svg{
 
         font-size:10px;
 
-        padding:6px;
+        padding:8px;
 
         line-height:1.2;
 
@@ -3735,7 +3935,7 @@ window.onclick = function(e) { if (e.target == document.getElementById("detailMo
 loadData();
 setInterval(() => {
     loadData();
-}, 60000);
+}, 300000);
 
 // === LOGIKA SLIDER SYSTEM INDIKATOR ===
 let currentSlideIndex = 0;
@@ -3760,44 +3960,54 @@ function createPaginationDots() {
 
 // 2. Fungsi untuk menggeser posisi track css
 function updateSliderPosition() {
-    const boxWidth = boxes[currentSlideIndex].offsetWidth;
-    const boxLeft = boxes[currentSlideIndex].offsetLeft;
-    const containerWidth = track.parentElement.offsetWidth;
 
-    let offset =
-    boxLeft - (containerWidth / 2) + (boxWidth / 2);
+    requestAnimationFrame(() => {
 
-const maxOffset =
-    track.scrollWidth - containerWidth;
+        const box = boxes[currentSlideIndex];
 
-offset = Math.max(0, Math.min(offset, maxOffset));
+        const containerWidth = track.parentElement.clientWidth;
+const boxWidth = box.clientWidth;
+const boxLeft = box.offsetLeft;
 
-track.style.transform = `translateX(-${offset}px)`;
+        let offset =
+            boxLeft - (containerWidth / 2) + (boxWidth / 2);
 
-    boxes.forEach(box=>{
-        box.classList.remove('active','side');
+        const maxOffset =
+            track.scrollWidth - containerWidth;
+
+        offset = Math.max(0, Math.min(offset, maxOffset));
+
+        requestAnimationFrame(() => {
+    track.style.transform =
+        `translate3d(${-offset}px,0,0)`;
+});
+
+        boxes.forEach(box=>{
+            box.classList.remove("active","side");
+        });
+
+        const prev =
+            (currentSlideIndex - 1 + totalSlides) % totalSlides;
+
+        const next =
+            (currentSlideIndex + 1) % totalSlides;
+
+        boxes[currentSlideIndex].classList.add("active");
+        boxes[prev].classList.add("side");
+        boxes[next].classList.add("side");
+
+        document
+            .querySelectorAll(".slider-dots .dot")
+            .forEach((dot,index)=>{
+                dot.classList.toggle(
+                    "active",
+                    index===currentSlideIndex
+                );
+            });
+
     });
 
-    const prev =
-        (currentSlideIndex - 1 + totalSlides) % totalSlides;
-    const next =
-        (currentSlideIndex + 1) % totalSlides;
-
-    boxes[currentSlideIndex].classList.add('active');
-    boxes[prev].classList.add('side');
-    boxes[next].classList.add('side');
-
-    const dots =
-        document.querySelectorAll('.slider-dots .dot');
-
-    dots.forEach((dot,index)=>{
-        dot.classList.toggle(
-            'active',
-            index === currentSlideIndex
-        );
-    });
 }
-
 // 3. Fungsi Navigasi Panah (Kiri=-1, Kanan=1) - Mendukung Sistem Infinite Loop
 function moveSlide(direction) {
     currentSlideIndex += direction;
@@ -4507,20 +4717,24 @@ const time = performance.now() / 1000;
 
 function startForecastAnimation(){
 
-    clearInterval(forecastInterval);
+    clearTimeout(forecastInterval);
 
-    const rows = document.querySelectorAll(".forecast-row");
+    const rows =
+        document.querySelectorAll(".forecast-row");
 
-    if(rows.length === 0) return;
+    if(!rows.length) return;
 
-    rows.forEach(row => row.classList.remove("active-row"));
+    rows.forEach(row =>
+        row.classList.remove("active-row")
+    );
 
     let index = 0;
+
     rows[index].classList.add("active-row");
 
     if(rows.length === 1) return;
 
-    forecastInterval = setInterval(() => {
+    function animate(){
 
         rows[index].classList.remove("active-row");
 
@@ -4528,7 +4742,13 @@ function startForecastAnimation(){
 
         rows[index].classList.add("active-row");
 
-    }, 1000);
+        forecastInterval =
+            setTimeout(animate,1000);
+
+    }
+
+    forecastInterval =
+        setTimeout(animate,1000);
 
 }
 const weatherAnimations = [];
@@ -4538,7 +4758,6 @@ let animationPaused = false;
 document.addEventListener("visibilitychange", () => {
     animationPaused = document.hidden;
 });
-
 function initForecastWeather(){
 
     weatherAnimations.length = 0;
