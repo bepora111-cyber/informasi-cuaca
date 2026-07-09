@@ -683,23 +683,29 @@ body.dark-mode .search-icon svg{
     drop-shadow(0 0 5px rgba(255,255,255,.8));
 
 }
+/* =========================
+   HISTORY CARD - DARK MODE
+========================= */
+
 body.dark-mode .history-card{
 
-    background:rgba(15,15,15,.85);
+    background:rgba(15,15,15,.82);
 
     border:1px solid rgba(255,255,255,.08);
 
-    backdrop-filter:blur(15px);
+    backdrop-filter:blur(12px);
 
-    -webkit-backdrop-filter:blur(15px);
+    -webkit-backdrop-filter:blur(12px);
 
-    box-shadow:0 10px 30px rgba(0,0,0,.35);
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.30);
 
 }
 
 body.dark-mode .history-card:hover{
 
-    box-shadow:0 18px 40px rgba(0,0,0,.45);
+    box-shadow:
+        0 14px 28px rgba(0,0,0,.40);
 
 }
 
@@ -723,11 +729,31 @@ body.dark-mode .history-description{
 
 body.dark-mode .loading-card{
 
-    background:rgba(15,15,15,.85);
+    background:rgba(15,15,15,.82);
 
     border:1px solid rgba(255,255,255,.08);
 
     color:#fff;
+
+}
+
+
+/* =========================
+   MOBILE OPTIMIZATION
+========================= */
+
+@media(max-width:768px){
+
+    body.dark-mode .history-card{
+
+        backdrop-filter:blur(8px);
+
+        -webkit-backdrop-filter:blur(8px);
+
+        box-shadow:
+            0 6px 16px rgba(0,0,0,.25);
+
+    }
 
 }
 #chartLegend{
@@ -1389,7 +1415,13 @@ body.golden-mode .search-icon svg{
     filter:
     drop-shadow(0 0 5px rgba(255,180,80,.7));
 
-} body.golden-mode .history-card{
+} 
+
+/* =========================
+   HISTORY CARD - GOLDEN MODE
+========================= */
+
+body.golden-mode .history-card{
 
     background:rgba(90,55,20,.55);
 
@@ -1400,18 +1432,16 @@ body.golden-mode .search-icon svg{
     -webkit-backdrop-filter:blur(12px);
 
     box-shadow:
-    0 10px 25px rgba(80,45,10,.30);
+        0 8px 20px rgba(80,45,10,.30);
 
 }
-
 
 body.golden-mode .history-card:hover{
 
     box-shadow:
-    0 16px 30px rgba(255,180,80,.20);
+        0 14px 28px rgba(255,180,80,.20);
 
 }
-
 
 body.golden-mode .history-meta{
 
@@ -1419,19 +1449,33 @@ body.golden-mode .history-meta{
 
 }
 
-
 body.golden-mode .history-title{
 
     color:#fff;
 
 }
 
-
 body.golden-mode .history-description{
 
     color:rgba(255,245,220,.92);
 
 }
+
+body.golden-mode .loading-card{
+
+    background:rgba(90,55,20,.55);
+
+    border:1px solid rgba(255,200,120,.25);
+
+    color:#fff;
+
+}
+
+
+/* =========================
+   MOBILE OPTIMIZATION
+========================= */
+
 @media(max-width:768px){
 
     body.golden-mode .history-card{
@@ -1441,7 +1485,7 @@ body.golden-mode .history-description{
         -webkit-backdrop-filter:blur(8px);
 
         box-shadow:
-        0 6px 18px rgba(80,45,10,.22);
+            0 6px 16px rgba(80,45,10,.22);
 
     }
 
@@ -2537,7 +2581,6 @@ mark{
 }
 
 
-
 /* =========================
    HISTORY CARD
 ========================= */
@@ -2548,74 +2591,52 @@ mark{
 
     flex-direction:column;
 
-
     overflow:hidden;
-
 
     text-decoration:none;
 
+    border-radius:20px;
 
-    border-radius:24px;
-
-
-    background:
-    rgba(255,255,255,.08);
-
+    background:rgba(255,255,255,.08);
 
     backdrop-filter:blur(12px);
-
     -webkit-backdrop-filter:blur(12px);
 
-
-    border:
-    1px solid rgba(255,255,255,.12);
-
+    border:1px solid rgba(255,255,255,.12);
 
     box-shadow:
-    0 10px 25px rgba(0,0,0,.20);
-
+        0 8px 20px rgba(0,0,0,.18);
 
     color:#fff;
 
-
     cursor:pointer;
 
-
     height:100%;
-
 
     transform:translateZ(0);
 
     will-change:transform;
 
-
     content-visibility:auto;
 
-    contain-intrinsic-size:300px;
-
+    contain-intrinsic-size:280px;
 
     transition:
-    transform .35s cubic-bezier(.2,.8,.2,1),
-    box-shadow .35s ease;
+        transform .3s ease,
+        box-shadow .3s ease;
 
 }
-
-
-
 
 .history-card:hover{
 
     transform:
-    translateY(-6px)
-    translateZ(0);
-
+        translateY(-5px)
+        translateZ(0);
 
     box-shadow:
-    0 18px 35px rgba(0,0,0,.30);
+        0 14px 28px rgba(0,0,0,.26);
 
 }
-
-
 
 /* =========================
    IMAGE
@@ -2623,47 +2644,33 @@ mark{
 
 .history-image{
 
-
     width:100%;
 
+    height:190px;
 
-    height:220px;
+    min-height:190px;
 
-
-    min-height:220px;
-
-
-    max-height:220px;
-
+    max-height:190px;
 
     object-fit:cover;
 
-
     display:block;
-
 
     transform:translateZ(0);
 
-
     will-change:transform;
 
-
-    transition:
-    transform .4s cubic-bezier(.2,.8,.2,1);
+    transition:transform .35s ease;
 
 }
-
-
 
 .history-card:hover .history-image{
 
     transform:
-    scale(1.03)
-    translateZ(0);
+        scale(1.03)
+        translateZ(0);
 
 }
-
-
 
 /* =========================
    BODY
@@ -2671,12 +2678,9 @@ mark{
 
 .history-body{
 
-    padding:
-    18px 20px 22px;
+    padding:16px;
 
 }
-
-
 
 /* =========================
    META
@@ -2684,33 +2688,23 @@ mark{
 
 .history-meta{
 
-
     display:flex;
-
 
     align-items:center;
 
-
     gap:8px;
-
 
     flex-wrap:wrap;
 
-
-    font-size:.9rem;
-
+    font-size:.88rem;
 
     color:#d9d9d9;
 
-
-    margin-bottom:12px;
-
+    margin-bottom:10px;
 
     font-weight:600;
 
 }
-
-
 
 /* =========================
    TITLE
@@ -2718,40 +2712,27 @@ mark{
 
 .history-title{
 
-
-    font-size:1.45rem;
-
+    font-size:1.3rem;
 
     font-weight:700;
 
-
     color:#fff;
 
+    line-height:1.35;
 
-    line-height:1.4;
-
-
-    margin-bottom:10px;
-
-
+    margin-bottom:8px;
 
     display:-webkit-box;
 
-
     -webkit-box-orient:vertical;
-
 
     -webkit-line-clamp:3;
 
-
     line-clamp:3;
-
 
     overflow:hidden;
 
 }
-
-
 
 /* =========================
    DESCRIPTION
@@ -2759,27 +2740,21 @@ mark{
 
 .history-description{
 
-
     display:-webkit-box;
-
 
     -webkit-box-orient:vertical;
 
-
     -webkit-line-clamp:3;
-
 
     line-clamp:3;
 
-
     overflow:hidden;
-
 
     line-height:1.5;
 
+    font-size:.95rem;
+
 }
-
-
 
 /* =========================
    LOADING CARD
@@ -2787,27 +2762,17 @@ mark{
 
 .loading-card{
 
-
     text-align:center;
 
+    padding:36px;
 
-    padding:40px;
+    border-radius:18px;
 
-
-    border-radius:20px;
-
-
-    background:
-    rgba(255,255,255,.08);
-
+    background:rgba(255,255,255,.08);
 
     color:#fff;
 
 }
-
-
-
-
 
 /* =========================
    TABLET
@@ -2815,31 +2780,32 @@ mark{
 
 @media(max-width:992px){
 
-
     .onthisday-grid{
 
-
         grid-template-columns:
-        repeat(auto-fit,minmax(300px,1fr));
+        repeat(auto-fit,minmax(280px,1fr));
 
-
-        gap:20px;
+        gap:18px;
 
     }
 
+    .history-image{
 
+        height:170px;
+
+        min-height:170px;
+
+        max-height:170px;
+
+    }
 
     .history-title{
 
-        font-size:1.35rem;
+        font-size:1.2rem;
 
     }
 
 }
-
-
-
-
 
 /* =========================
    MOBILE
@@ -2847,149 +2813,96 @@ mark{
 
 @media(max-width:768px){
 
-
     .onthisday-grid{
-
 
         grid-template-columns:1fr;
 
-
-        gap:16px;
+        gap:14px;
 
     }
 
-
-
     .history-card{
 
-
-        border-radius:18px;
-
+        border-radius:16px;
 
         backdrop-filter:blur(8px);
 
         -webkit-backdrop-filter:blur(8px);
 
-
         box-shadow:
-
-        0 8px 20px rgba(0,0,0,.18);
+            0 6px 16px rgba(0,0,0,.16);
 
     }
 
-
-
-    /* Hilangkan hover di touchscreen */
+    /* Hover dimatikan di touchscreen */
 
     .history-card:hover{
 
-
         transform:none;
 
     }
-
-
 
     .history-card:hover .history-image{
 
-
         transform:none;
 
     }
 
-
-
     .history-image{
 
+        height:145px;
 
-        height:160px;
+        min-height:145px;
 
-
-        min-height:160px;
-
-
-        max-height:160px;
+        max-height:145px;
 
     }
-
-
 
     .history-body{
 
-
-        padding:14px;
+        padding:12px;
 
     }
-
-
 
     .history-meta{
 
+        font-size:.78rem;
 
-        font-size:.8rem;
-
-
-        margin-bottom:8px;
+        margin-bottom:6px;
 
     }
 
-
-
     .history-title{
 
+        font-size:1.15rem;
 
-        font-size:1.3rem;
+        line-height:1.3;
 
-
-        font-weight:700;
-
-
-        line-height:1.35;
-
-
-        margin-bottom:8px;
-
-
+        margin-bottom:6px;
 
         display:block;
 
-
         overflow:visible;
-
 
         line-clamp:unset;
 
-
         -webkit-line-clamp:unset;
-
 
         -webkit-box-orient:unset;
 
     }
 
-
-
     .history-description{
 
-
-        font-size:.9rem;
-
-
-        line-height:1.5;
-
-
+        font-size:.88rem;
 
         display:-webkit-box;
 
-
         -webkit-box-orient:vertical;
-
 
         -webkit-line-clamp:2;
 
-
         line-clamp:2;
-
 
         overflow:hidden;
 
@@ -2997,45 +2910,31 @@ mark{
 
 }
 
-
-
-
-
 /* =========================
    SMALL MOBILE
 ========================= */
 
 @media(max-width:480px){
 
-
     .history-image{
 
+        height:130px;
 
-        height:145px;
+        min-height:130px;
 
-
-        min-height:145px;
-
-
-        max-height:145px;
+        max-height:130px;
 
     }
-
-
 
     .history-title{
 
-
-        font-size:1.2rem;
+        font-size:1.05rem;
 
     }
 
-
-
     .history-description{
 
-
-        font-size:.85rem;
+        font-size:.82rem;
 
     }
 
