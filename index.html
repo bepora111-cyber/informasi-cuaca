@@ -56,6 +56,8 @@ h2{
 
     margin:auto;
 
+    touch-action:pan-y;
+
 }
 
 .slider-track-wrapper{
@@ -66,6 +68,8 @@ h2{
 
     border-radius:15px;
 
+    contain:layout paint;
+
 }
 
 .slider-track{
@@ -74,10 +78,13 @@ h2{
 
     transform:translate3d(0,0,0);
 
+    transition:transform .45s ease-out;
+
     will-change:transform;
 
-    transition:
-        transform .75s cubic-bezier(.16,1,.3,1);
+    backface-visibility:hidden;
+
+    transform-style:preserve-3d;
 
 }
 
@@ -105,57 +112,68 @@ h2{
 
     align-items:center;
 
-    gap:0;
-
     text-align:left;
 
     overflow:hidden;
 
     border-radius:15px;
 
-    background:rgba(0,0,0,.4);
+    background:rgba(0,0,0,.40);
 
-    backdrop-filter:blur(6px);
-    -webkit-backdrop-filter:blur(6px);
+    /* Paling ringan */
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
 
-    border:1px solid rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.08);
 
-    transform:translate3d(0,0,0) scale(.86);
+    transform:translate3d(0,0,0) scale(.88);
 
-    opacity:.6;
-
-    will-change:transform,opacity;
+    opacity:.55;
 
     transition:
-        transform .35s ease,
-        opacity .35s ease,
-        background-color .35s ease;
+        transform .22s ease-out,
+        opacity .22s ease-out,
+        background-color .22s ease-out;
+
+    backface-visibility:hidden;
+
+    contain:paint;
 
 }
 
+/* Box tengah */
 .slider-track .box.active{
 
     transform:translate3d(0,0,0) scale(1);
 
     opacity:1;
 
-    background:rgba(0,0,0,.6);
+    background:rgba(0,0,0,.58);
+
+    z-index:2;
 
 }
 
+/* Box kiri & kanan */
 .slider-track .box.side{
 
-    transform:translate3d(0,0,0) scale(.92);
+    transform:translate3d(0,0,0) scale(.91);
 
-    opacity:.8;
+    opacity:.78;
 
     background:rgba(0,0,0,.35);
 
+    z-index:1;
+
 }
 
-.slider-track .box:hover{
+@media (hover:hover){
 
-    transform:translate3d(0,0,0) scale(1.02);
+    .slider-track .box:hover{
+
+        transform:translate3d(0,0,0) scale(1.02);
+
+    }
 
 }
 .box h3{
@@ -620,6 +638,53 @@ body.dark-mode .search-icon svg{
 
     filter:
     drop-shadow(0 0 5px rgba(255,255,255,.8));
+
+}
+body.dark-mode .history-card{
+
+    background:rgba(15,15,15,.85);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:blur(15px);
+
+    -webkit-backdrop-filter:blur(15px);
+
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
+
+}
+
+body.dark-mode .history-card:hover{
+
+    box-shadow:0 18px 40px rgba(0,0,0,.45);
+
+}
+
+body.dark-mode .history-meta{
+
+    color:rgba(255,255,255,.72);
+
+}
+
+body.dark-mode .history-title{
+
+    color:#fff;
+
+}
+
+body.dark-mode .history-description{
+
+    color:rgba(255,255,255,.82);
+
+}
+
+body.dark-mode .loading-card{
+
+    background:rgba(15,15,15,.85);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    color:#fff;
 
 }
 #chartLegend{
@@ -1125,6 +1190,157 @@ body.dark-mode .search-icon svg{
     }
 
 }
+/* ================= GOLDEN HOUR ================= */
+
+body.golden-mode{
+    background-image:
+        linear-gradient(
+            rgba(255,170,60,0.18),
+            rgba(255,120,30,0.22)
+        ),
+        url('https://lh3.googleusercontent.com/gps-cs-s/APNQkAGXzDf6jAqrxVqIt-StdTukOFbGz1GhCgbTUc4Cy9HvG0ZJ1Lk6GwKSemZ9SSBePQ6xFvAHl-g-2ExnhP111C7NhC2NnwS8JRjZyBT-UGeuFAIt_Pjh9ENi7PStSl_RU352jqAyHI6mGIdz=s1360-w1360-h1020-rw');
+}
+
+body.golden-mode .box,
+body.golden-mode .day,
+body.golden-mode .datetime-container,
+body.golden-mode .modal-content,
+body.golden-mode .learn-modal-content,
+body.golden-mode .learn-card,
+body.golden-mode .temperature-calculator{
+    background: rgba(90,55,20,0.55);
+    border: 1px solid rgba(255,200,120,0.25);
+    backdrop-filter: blur(15px);
+}
+
+body.golden-mode .learn-header{
+    background: rgba(255,200,120,0.12);
+}
+
+body.golden-mode .learn-body{
+    background: rgba(255,220,170,0.06);
+}
+
+body.golden-mode .box.active{
+    background: rgba(120,70,20,0.8);
+    box-shadow: 0 0 18px rgba(255,180,80,0.25);
+}
+
+body.golden-mode .dot.active{
+    background: #ffb84d;
+}
+
+body.golden-mode .learn-card:hover{
+    background: rgba(120,70,20,0.7);
+}
+body.golden-mode #ai-analysis-box{
+    background: rgba(90,55,20,0.55);
+    border: 1px solid rgba(255,200,120,0.25);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow: 0 8px 25px rgba(80,45,10,0.35);
+}
+
+body.golden-mode #ai-analysis-box:hover{
+    box-shadow:
+        0 12px 35px rgba(255,180,80,0.25);
+}
+
+body.golden-mode #ai-analysis-box h3,
+body.golden-mode #ai-analysis-text{
+    color: #fff;
+}
+/* ========= Flip Card Golden Mode ========= */
+
+body.golden-mode .temp-front{
+
+    filter:saturate(.95) brightness(.96);
+
+    border:1.5px solid rgba(255,225,170,.28);
+
+    box-shadow:
+        inset 0 1px 2px rgba(255,240,200,.20),
+        inset 0 -2px 6px rgba(90,55,20,.18),
+        0 6px 16px rgba(120,70,20,.20);
+
+}
+
+body.golden-mode .temp-front::before,
+body.golden-mode .temp-back::before{
+
+    background:linear-gradient(
+        135deg,
+        rgba(255,245,220,.35) 0%,
+        rgba(255,220,160,.18) 20%,
+        rgba(255,255,255,0) 45%,
+        rgba(255,220,150,.08) 100%
+    );
+
+}
+
+body.golden-mode .temp-back{
+
+    background:linear-gradient(
+        145deg,
+        #8c5b26,
+        #5f3a18
+    );
+
+    color:#fff;
+
+    border:1.5px solid rgba(255,225,170,.28);
+
+    box-shadow:
+        inset 0 1px 2px rgba(255,235,190,.15),
+        inset 0 -2px 6px rgba(70,40,10,.20),
+        0 6px 16px rgba(120,70,20,.20);
+
+}
+/* ========= Search Golden Mode ========= */
+
+body.golden-mode .learn-search input{
+
+    background:rgba(90,55,20,.55);
+
+    border:1px solid rgba(255,200,120,.25);
+
+    color:#fff;
+
+    backdrop-filter:blur(15px);
+
+    -webkit-backdrop-filter:blur(15px);
+
+}
+
+
+body.golden-mode .learn-search input::placeholder{
+
+    color:rgba(255,230,180,.7);
+
+}
+
+
+body.golden-mode .learn-search input:focus{
+
+    background:rgba(120,70,20,.75);
+
+    border-color:rgba(255,210,140,.5);
+
+    box-shadow:
+
+    0 0 15px rgba(255,180,80,.25);
+
+}
+
+
+body.golden-mode .search-icon svg{
+
+    stroke:#ffe6b3 !important;
+
+    filter:
+    drop-shadow(0 0 5px rgba(255,180,80,.7));
+
+} 
 /* ================= GOLDEN HOUR ================= */
 
 body.golden-mode{
@@ -2349,6 +2565,284 @@ mark{
     border-radius:4px;
 
 }
+/* =========================
+   ON THIS DAY
+========================= */
+
+.onthisday-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+
+    gap:24px;
+
+    margin:20px 0 50px;
+
+}
+
+.history-card{
+
+    display:flex;
+    flex-direction:column;
+
+    overflow:hidden;
+
+    text-decoration:none;
+
+    border-radius:24px;
+
+    background:rgba(255,255,255,.08);
+
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+
+    border:1px solid rgba(255,255,255,.12);
+
+    box-shadow:0 10px 30px rgba(0,0,0,.22);
+
+    color:#fff;
+
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease;
+
+    cursor:pointer;
+
+    height:100%;
+}
+
+.history-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 20px 45px rgba(0,0,0,.35);
+
+}
+
+.history-image{
+    width:100%;
+    height:220px;
+    min-height:220px;
+    max-height:220px;
+    object-fit:cover;
+    display:block;
+}
+
+.history-card:hover .history-image{
+
+    transform:scale(1.06);
+
+}
+
+.history-body{
+
+    padding:18px 20px 22px;
+
+}
+
+.history-meta{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    flex-wrap:wrap;
+
+    font-size:.9rem;
+
+    color:#d9d9d9;
+
+    margin-bottom:12px;
+
+    font-weight:600;
+
+}
+
+.history-title{
+
+    font-size:1.45rem;      /* diperbesar */
+
+    font-weight:700;        /* bold */
+
+    color:#fff;
+
+    line-height:1.4;
+
+    margin-bottom:10px;
+
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+
+    line-clamp:3;
+    -webkit-line-clamp:3;
+
+    overflow:hidden;
+
+}
+
+.history-description{
+
+    display:-webkit-box;
+    display:box;
+
+    -webkit-box-orient:vertical;
+
+    line-clamp:3;
+    -webkit-line-clamp:3;
+
+    overflow:hidden;
+
+}
+
+.loading-card{
+
+    text-align:center;
+
+    padding:40px;
+
+    border-radius:20px;
+
+    background:rgba(255,255,255,.08);
+
+    color:#fff;
+
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width:992px){
+
+    .onthisday-grid{
+
+        grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+
+        gap:20px;
+
+    }
+
+    .history-title{
+
+        font-size:1.35rem;
+
+    }
+
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width:768px){
+
+    .onthisday-grid{
+
+        grid-template-columns:1fr;
+
+        gap:16px;
+
+    }
+
+    .history-card{
+
+        border-radius:18px;
+
+    }
+
+    .history-image{
+
+        height:160px;
+        min-height:160px;
+        max-height:160px;
+
+        object-fit:cover;
+
+    }
+
+    .history-body{
+
+        padding:14px;
+
+    }
+
+    .history-meta{
+
+        font-size:.8rem;
+
+        margin-bottom:8px;
+
+    }
+
+    .history-title{
+
+        font-size:1.3rem;
+
+        font-weight:700;
+
+        line-height:1.35;
+
+        margin-bottom:8px;
+
+        /* Judul tidak dipotong */
+        display:block;
+
+        overflow:visible;
+
+        line-clamp:unset;
+        -webkit-line-clamp:unset;
+        -webkit-box-orient:unset;
+
+    }
+
+    .history-description{
+
+        font-size:.9rem;
+
+        line-height:1.5;
+
+        display:-webkit-box;
+        -webkit-box-orient:vertical;
+
+        line-clamp:2;
+        -webkit-line-clamp:2;
+
+        overflow:hidden;
+
+    }
+
+}
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width:480px){
+
+    .history-image{
+
+        height:145px;
+        min-height:145px;
+        max-height:145px;
+
+    }
+
+    .history-title{
+
+        font-size:1.2rem;
+
+    }
+
+    .history-description{
+
+        font-size:.85rem;
+
+    }
+
+}
 </style>
 </head>
 <body>
@@ -2535,6 +3029,12 @@ mark{
     </div>
 
 </div>
+<h2 style="margin:50px 0 20px;">On This Day</h2>
+
+<div id="onThisDayContainer" class="onthisday-grid">
+    <div class="loading-card">Memuat peristiwa hari ini...</div>
+</div>
+
 
 <!-- 3. STRUKTUR JENDELA POP-UP MODAL GRAFIK -->
 <div id="detailModal" class="modal">
@@ -6674,6 +7174,239 @@ function searchLearnContent(){
 
     });
 
+
+}
+document.addEventListener("DOMContentLoaded", () => {
+    loadOnThisDay();
+});
+
+const KEYWORDS = [
+    // Natural Disaster
+    "earthquake",
+    "tsunami",
+    "volcano",
+    "eruption",
+    "hurricane",
+    "cyclone",
+    "tornado",
+    "flood",
+    "landslide",
+    "wildfire",
+    "avalanche",
+    "disaster",
+
+    // Astronomy
+    "eclipse",
+    "comet",
+    "asteroid",
+    "meteor",
+    "meteorite",
+    "planet",
+    "galaxy",
+    "nebula",
+    "moon",
+    "sun",
+    "solar",
+    "lunar",
+    "space",
+    "satellite",
+
+    // Geography
+    "mountain",
+    "river",
+    "lake",
+    "island",
+    "ocean",
+    "sea",
+    "continent",
+    "glacier",
+    "desert",
+    "forest"
+];
+
+function getCategory(text){
+
+    text = text.toLowerCase();
+
+    if(
+        text.includes("earthquake") ||
+        text.includes("tsunami") ||
+        text.includes("volcano") ||
+        text.includes("eruption") ||
+        text.includes("hurricane") ||
+        text.includes("cyclone") ||
+        text.includes("tornado") ||
+        text.includes("flood") ||
+        text.includes("landslide") ||
+        text.includes("wildfire") ||
+        text.includes("avalanche")
+    ){
+        return {
+            icon:"🌋",
+            name:"Natural Disaster"
+        };
+    }
+
+    if(
+        text.includes("eclipse") ||
+        text.includes("planet") ||
+        text.includes("moon") ||
+        text.includes("sun") ||
+        text.includes("asteroid") ||
+        text.includes("meteor") ||
+        text.includes("meteorite") ||
+        text.includes("galaxy") ||
+        text.includes("nebula") ||
+        text.includes("space") ||
+        text.includes("satellite") ||
+        text.includes("comet")
+    ){
+        return {
+            icon:"🪐",
+            name:"Astronomy"
+        };
+    }
+
+    return {
+        icon:"🌍",
+        name:"Geography"
+    };
+}
+
+async function loadOnThisDay() {
+
+    const container = document.getElementById("onThisDayContainer");
+
+    const now = new Date();
+    const month = now.getMonth() + 1;
+    const day = now.getDate();
+
+    try {
+
+        const res = await fetch(
+            `https://api.wikimedia.org/feed/v1/wikipedia/en/onthisday/events/${month}/${day}`
+        );
+
+        const data = await res.json();
+
+        const events = data.events.filter(event => {
+
+            const text = event.text.toLowerCase();
+
+            return KEYWORDS.some(keyword => text.includes(keyword));
+
+        });
+
+        container.innerHTML = "";
+
+        let shown = 0;
+
+for (const event of events) {
+
+    if (!event.pages || event.pages.length === 0) continue;
+
+    const page = event.pages[0];
+
+    if (!page) continue;
+
+    const category = getCategory(event.text);
+
+    // Ambil thumbnail terbaru dari Wikipedia Summary API
+    const summaryRes = await fetch(
+        `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(page.title)}`
+    );
+
+    if (!summaryRes.ok) continue;
+
+    const summary = await summaryRes.json();
+
+    const image =
+        summary.originalimage?.source ||
+        summary.thumbnail?.source;
+
+    if (!image) continue;
+
+    const link = page.content_urls?.desktop?.page || "#";
+
+    container.innerHTML += `
+        <a class="history-card"
+           href="${link}"
+           target="_blank">
+
+            <img
+                src="${image}"
+                class="history-image"
+                loading="lazy"
+                onerror="this.closest('.history-card').remove()">
+
+            <div class="history-body">
+
+                <div class="history-meta">
+
+                    <span>${category.icon} ${category.name}</span>
+
+                    <span>• ${event.year}</span>
+
+                </div>
+
+                <div class="history-title">
+                    ${page.normalizedtitle || page.title}
+                </div>
+
+                <div class="history-description">
+                    ${event.text}
+                </div>
+
+            </div>
+
+        </a>
+    `;
+
+    shown++;
+
+    // Berhenti setelah berhasil menampilkan 3 card
+    if (shown >= 6) {
+        break;
+    }
+
+}
+
+        if (shown === 0) {
+
+            container.innerHTML = `
+                <div class="loading-card">
+                    Tidak ada peristiwa dengan gambar hari ini.
+                </div>
+            `;
+
+        }
+
+    } catch (err) {
+
+        console.error(err);
+
+        container.innerHTML = `
+            <div class="loading-card">
+                Gagal memuat data.
+            </div>
+        `;
+
+    }
+
+}
+async function imageExists(url){
+
+    return new Promise(resolve=>{
+
+        const img=new Image();
+
+        img.onload=()=>resolve(true);
+
+        img.onerror=()=>resolve(false);
+
+        img.src=url;
+
+    });
 
 }
 </script>
