@@ -698,22 +698,29 @@ body.dark-mode .history-card{
     -webkit-backdrop-filter:blur(12px);
 
     box-shadow:
-        0 8px 20px rgba(0,0,0,.30);
+        0 8px 18px rgba(0,0,0,.30);
 
 }
+
 
 body.dark-mode .history-card:hover{
 
     box-shadow:
-        0 14px 28px rgba(0,0,0,.40);
+        0 12px 24px rgba(0,0,0,.40);
 
 }
+
+
+/* =========================
+   TEXT
+========================= */
 
 body.dark-mode .history-meta{
 
-    color:rgba(255,255,255,.72);
+    color:rgba(255,255,255,.70);
 
 }
+
 
 body.dark-mode .history-title{
 
@@ -721,11 +728,17 @@ body.dark-mode .history-title{
 
 }
 
+
 body.dark-mode .history-description{
 
-    color:rgba(255,255,255,.82);
+    color:rgba(255,255,255,.80);
 
 }
+
+
+/* =========================
+   LOADING
+========================= */
 
 body.dark-mode .loading-card{
 
@@ -739,7 +752,7 @@ body.dark-mode .loading-card{
 
 
 /* =========================
-   MOBILE OPTIMIZATION
+   MOBILE
 ========================= */
 
 @media(max-width:768px){
@@ -754,6 +767,20 @@ body.dark-mode .loading-card{
             0 6px 16px rgba(0,0,0,.25);
 
     }
+
+}
+/* ================= SUMMARY - DARK MODE ================= */
+
+body.dark-mode .section-summary{
+
+    background:rgba(180,35,35,.12);
+
+    border-left:4px solid #ff5252;
+
+    color:rgba(255,255,255,.92);
+
+    box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,.05);
 
 }
 #chartLegend{
@@ -1436,6 +1463,7 @@ body.golden-mode .history-card{
 
 }
 
+
 body.golden-mode .history-card:hover{
 
     box-shadow:
@@ -1443,11 +1471,13 @@ body.golden-mode .history-card:hover{
 
 }
 
+
 body.golden-mode .history-meta{
 
     color:rgba(255,235,190,.85);
 
 }
+
 
 body.golden-mode .history-title{
 
@@ -1455,11 +1485,13 @@ body.golden-mode .history-title{
 
 }
 
+
 body.golden-mode .history-description{
 
     color:rgba(255,245,220,.92);
 
 }
+
 
 body.golden-mode .loading-card{
 
@@ -1488,6 +1520,24 @@ body.golden-mode .loading-card{
             0 6px 16px rgba(80,45,10,.22);
 
     }
+
+}
+
+body.golden-mode .section-summary{
+
+    background:linear-gradient(
+        135deg,
+        rgba(120,70,20,.30),
+        rgba(170,110,35,.18)
+    );
+
+    border-left:4px solid #ffc86a;
+
+    color:#fff8ea;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,240,200,.15),
+        0 4px 12px rgba(80,45,10,.15);
 
 }
 
@@ -2565,16 +2615,17 @@ mark{
 
 }
 /* =========================
-   ON THIS DAY
+   ON THIS DAY + WORLD TODAY
 ========================= */
 
 .onthisday-grid{
 
     display:grid;
 
-    grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+    grid-template-columns:
+    repeat(auto-fit,minmax(280px,1fr));
 
-    gap:24px;
+    gap:20px;
 
     margin:20px 0 50px;
 
@@ -2595,7 +2646,7 @@ mark{
 
     text-decoration:none;
 
-    border-radius:20px;
+    border-radius:18px;
 
     background:rgba(255,255,255,.08);
 
@@ -2605,7 +2656,7 @@ mark{
     border:1px solid rgba(255,255,255,.12);
 
     box-shadow:
-        0 8px 20px rgba(0,0,0,.18);
+        0 8px 18px rgba(0,0,0,.18);
 
     color:#fff;
 
@@ -2619,7 +2670,7 @@ mark{
 
     content-visibility:auto;
 
-    contain-intrinsic-size:280px;
+    contain-intrinsic-size:250px;
 
     transition:
         transform .3s ease,
@@ -2627,16 +2678,18 @@ mark{
 
 }
 
+
 .history-card:hover{
 
     transform:
-        translateY(-5px)
+        translateY(-4px)
         translateZ(0);
 
     box-shadow:
-        0 14px 28px rgba(0,0,0,.26);
+        0 12px 24px rgba(0,0,0,.25);
 
 }
+
 
 /* =========================
    IMAGE
@@ -2646,11 +2699,11 @@ mark{
 
     width:100%;
 
-    height:190px;
+    height:150px;
 
-    min-height:190px;
+    min-height:150px;
 
-    max-height:190px;
+    max-height:150px;
 
     object-fit:cover;
 
@@ -2660,9 +2713,11 @@ mark{
 
     will-change:transform;
 
-    transition:transform .35s ease;
+    transition:
+        transform .35s ease;
 
 }
+
 
 .history-card:hover .history-image{
 
@@ -2672,15 +2727,17 @@ mark{
 
 }
 
+
 /* =========================
    BODY
 ========================= */
 
 .history-body{
 
-    padding:16px;
+    padding:14px;
 
 }
+
 
 /* =========================
    META
@@ -2692,19 +2749,20 @@ mark{
 
     align-items:center;
 
-    gap:8px;
+    gap:7px;
 
     flex-wrap:wrap;
 
-    font-size:.88rem;
+    font-size:.8rem;
 
     color:#d9d9d9;
 
-    margin-bottom:10px;
+    margin-bottom:8px;
 
     font-weight:600;
 
 }
+
 
 /* =========================
    TITLE
@@ -2712,7 +2770,7 @@ mark{
 
 .history-title{
 
-    font-size:1.3rem;
+    font-size:1.15rem;
 
     font-weight:700;
 
@@ -2720,7 +2778,7 @@ mark{
 
     line-height:1.35;
 
-    margin-bottom:8px;
+    margin-bottom:7px;
 
     display:-webkit-box;
 
@@ -2733,6 +2791,7 @@ mark{
     overflow:hidden;
 
 }
+
 
 /* =========================
    DESCRIPTION
@@ -2750,11 +2809,14 @@ mark{
 
     overflow:hidden;
 
-    line-height:1.5;
+    line-height:1.45;
 
-    font-size:.95rem;
+    font-size:.88rem;
+
+    opacity:.95;
 
 }
+
 
 /* =========================
    LOADING CARD
@@ -2764,9 +2826,9 @@ mark{
 
     text-align:center;
 
-    padding:36px;
+    padding:30px;
 
-    border-radius:18px;
+    border-radius:16px;
 
     background:rgba(255,255,255,.08);
 
@@ -2774,44 +2836,50 @@ mark{
 
 }
 
+
 /* =========================
    TABLET
 ========================= */
 
 @media(max-width:992px){
 
+
     .onthisday-grid{
 
         grid-template-columns:
-        repeat(auto-fit,minmax(280px,1fr));
+        repeat(auto-fit,minmax(260px,1fr));
 
         gap:18px;
 
     }
 
+
     .history-image{
 
-        height:170px;
+        height:140px;
 
-        min-height:170px;
+        min-height:140px;
 
-        max-height:170px;
+        max-height:140px;
 
     }
 
+
     .history-title{
 
-        font-size:1.2rem;
+        font-size:1.1rem;
 
     }
 
 }
+
 
 /* =========================
    MOBILE
 ========================= */
 
 @media(max-width:768px){
+
 
     .onthisday-grid{
 
@@ -2820,6 +2888,7 @@ mark{
         gap:14px;
 
     }
+
 
     .history-card{
 
@@ -2834,7 +2903,6 @@ mark{
 
     }
 
-    /* Hover dimatikan di touchscreen */
 
     .history-card:hover{
 
@@ -2842,11 +2910,13 @@ mark{
 
     }
 
+
     .history-card:hover .history-image{
 
         transform:none;
 
     }
+
 
     .history-image{
 
@@ -2858,11 +2928,13 @@ mark{
 
     }
 
+
     .history-body{
 
         padding:12px;
 
     }
+
 
     .history-meta{
 
@@ -2872,13 +2944,12 @@ mark{
 
     }
 
+
     .history-title{
 
-        font-size:1.15rem;
+        font-size:1.1rem;
 
         line-height:1.3;
-
-        margin-bottom:6px;
 
         display:block;
 
@@ -2892,9 +2963,10 @@ mark{
 
     }
 
+
     .history-description{
 
-        font-size:.88rem;
+        font-size:.86rem;
 
         display:-webkit-box;
 
@@ -2904,17 +2976,17 @@ mark{
 
         line-clamp:2;
 
-        overflow:hidden;
-
     }
 
 }
+
 
 /* =========================
    SMALL MOBILE
 ========================= */
 
 @media(max-width:480px){
+
 
     .history-image{
 
@@ -2926,11 +2998,13 @@ mark{
 
     }
 
+
     .history-title{
 
-        font-size:1.05rem;
+        font-size:1.02rem;
 
     }
+
 
     .history-description{
 
@@ -2939,6 +3013,33 @@ mark{
     }
 
 }
+.history-card{
+    contain:layout paint;
+}
+
+.history-image{
+    content-visibility:auto;
+}
+
+
+.section-summary{
+
+    margin-bottom:16px;
+
+    padding:14px 16px;
+
+    border-left:4px solid #d32f2f;
+
+    background:rgba(211,47,47,.08);
+
+    border-radius:12px;
+
+    line-height:1.7;
+
+    font-weight:300;
+
+}
+
 </style>
 </head>
 <body>
@@ -3126,12 +3227,19 @@ mark{
     </div>
 
 </div>
+</div>
 <h2 style="margin:50px 0 20px;">On This Day</h2>
 
 <div id="onThisDayContainer" class="onthisday-grid">
     <div class="loading-card">Memuat peristiwa hari ini...</div>
 </div>
 
+</div>
+<h2 style="margin:60px 0 20px;">🌍 World Today</h2>
+
+<div id="worldTodayContainer" class="onthisday-grid">
+    <div class="loading-card">Memuat berita dunia...</div>
+</div>
 
 <!-- 3. STRUKTUR JENDELA POP-UP MODAL GRAFIK -->
 <div id="detailModal" class="modal">
@@ -3209,6 +3317,7 @@ mark{
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css" rel="stylesheet" type="text/css" />
+
 
 <!-- 4. LOGIKA JAVASCRIPT GABUNGAN -->
 <script>
@@ -6207,17 +6316,24 @@ if(data.aqi !== "-" && data.aqi !== null && data.aqi !== undefined && !isNaN(dat
 const learnData = {
 
     temperature:{
-        title:"Temperatur",
+    title:"Temperatur",
 
-        sections:[
-            {
-                title:"Apa itu Temperatur?",
-                text:`Temperatur (atau suhu) adalah ukuran kuantitatif dari seberapa panas atau dinginnya suatu objek atau lingkungan.
+    sections:[
+        {
+            title:"Apa itu Temperatur?",
+
+            summary:"Pelajari pengertian temperatur sebagai ukuran tingkat panas atau dingin suatu benda berdasarkan energi kinetik rata-rata partikel penyusunnya.",
+
+            text:`Temperatur (atau suhu) adalah ukuran kuantitatif dari seberapa panas atau dinginnya suatu objek atau lingkungan.
 Jika dilihat dari sudut pandang sains (khususnya fisika), suhu sebenarnya adalah ukuran dari energi kinetik rata-rata dari partikel-partikel (atom atau molekul) yang menyusun suatu benda.`
-            },
-            {
-                title:"Pengaruh Temperatur terhadap Cuaca",
-                text:`Suhu udara merupakan salah satu penggerak utama (motor) di balik perubahan cuaca. Mengapa? Karena perubahan suhu memicu reaksi berantai pada elemen atmosfer lainnya, seperti tekanan udara, angin, kelembapan, hingga terbentuknya hujan.
+        },
+
+        {
+            title:"Pengaruh Temperatur terhadap Cuaca",
+
+            summary:"Pahami bagaimana perubahan temperatur memengaruhi tekanan udara, angin, kelembapan, pembentukan awan, hingga terjadinya berbagai jenis presipitasi.",
+
+            text:`Suhu udara merupakan salah satu penggerak utama (motor) di balik perubahan cuaca. Mengapa? Karena perubahan suhu memicu reaksi berantai pada elemen atmosfer lainnya, seperti tekanan udara, angin, kelembapan, hingga terbentuknya hujan.
 
 Berikut adalah beberapa pengaruh utama suhu udara terhadap pembentukan cuaca:
 
@@ -6249,14 +6365,17 @@ Suhu udara, baik di daratan maupun di lapisan atas atmosfer, menentukan bentuk a
 * Jika suhu di seluruh lapisan atmosfer berada di atas titik beku > 0°C, maka akan terjadi hujan air.
 * Jika suhu di awan dan udara sekitarnya berada di bawah titik beku < 0°C, butiran air akan membeku dan jatuh sebagai salju atau hujan es.
 
-
 <strong>Kesimpulan Singkat</strong>
 
 Tanpa adanya perubahan suhu udara, atmosfer bumi akan statis. Perbedaan suhu akibat pemanasan matahari inilah yang membuat cuaca selalu berubah setiap hari, mulai dari hari yang cerah, berangin, berkabut, hingga badai hujan.`
-            },
-            {
-               title: "Satuan Temperatur",
-text: `Satuan temperatur merupakan skala yang digunakan untuk menyatakan tingkat panas atau dinginnya suatu benda. Keberadaan satuan temperatur sangat penting karena memungkinkan manusia mengukur suhu secara objektif dan memperoleh hasil yang sama di mana pun pengukuran dilakukan. Sebelum adanya skala suhu yang baku, penilaian terhadap panas dan dingin hanya didasarkan pada indra peraba sehingga hasilnya sering kali berbeda antara satu orang dengan orang lainnya. Perkembangan termometer dan penelitian para ilmuwan sejak abad ke-17 hingga abad ke-19 kemudian melahirkan berbagai skala temperatur yang digunakan hingga sekarang maupun yang kini hanya memiliki nilai sejarah.
+        },
+
+        {
+            title:"Satuan Temperatur",
+
+            summary:"Kenali delapan skala temperatur beserta sejarah, karakteristik, dan penggunaannya dalam kehidupan sehari-hari, sains, maupun bidang teknik.",
+
+            text:`Satuan temperatur merupakan skala yang digunakan untuk menyatakan tingkat panas atau dinginnya suatu benda. Keberadaan satuan temperatur sangat penting karena memungkinkan manusia mengukur suhu secara objektif dan memperoleh hasil yang sama di mana pun pengukuran dilakukan. Sebelum adanya skala suhu yang baku, penilaian terhadap panas dan dingin hanya didasarkan pada indra peraba sehingga hasilnya sering kali berbeda antara satu orang dengan orang lainnya. Perkembangan termometer dan penelitian para ilmuwan sejak abad ke-17 hingga abad ke-19 kemudian melahirkan berbagai skala temperatur yang digunakan hingga sekarang maupun yang kini hanya memiliki nilai sejarah.
 
 Hingga saat ini terdapat delapan satuan temperatur yang paling dikenal, yaitu Celsius (°C), Fahrenheit (°F), Kelvin (K), Réaumur (°Ré), Rankine (°Ra), Rømer (°Rø), Delisle (°De), dan Newton (°N). Setiap satuan dikembangkan oleh ilmuwan yang berbeda dengan tujuan, titik acuan, dan pembagian skala yang tidak sama. Walaupun demikian, semuanya memiliki fungsi yang sama, yaitu memberikan cara yang konsisten untuk mengukur temperatur suatu benda.
 
@@ -6276,48 +6395,47 @@ Delisle adalah skala temperatur yang memiliki karakteristik unik karena nilainya
 
 Newton merupakan skala temperatur yang diperkenalkan oleh ilmuwan Inggris Sir Isaac Newton sekitar tahun 1701. Skala ini dibuat berdasarkan pengamatan terhadap pemuaian minyak biji rami ketika dipanaskan. Dalam skala Newton, titik beku air ditetapkan pada 0°N, sedangkan titik didih air berada di sekitar 33°N. Meskipun tidak pernah digunakan secara luas dalam kehidupan sehari-hari, skala ini menunjukkan bagaimana para ilmuwan pada masa awal mulai berusaha memahami hubungan antara panas, perubahan suhu, dan sifat-sifat zat.
 
-Perbedaan utama di antara seluruh satuan temperatur tersebut terletak pada titik acuan, besar interval, dan tujuan penggunaannya. Celsius dan Fahrenheit banyak digunakan dalam kehidupan sehari-hari, Kelvin menjadi standar internasional untuk penelitian ilmiah, sedangkan Rankine masih dimanfaatkan pada beberapa bidang teknik tertentu. Di sisi lain, Réaumur, Rømer, Delisle, dan Newton kini lebih banyak memiliki nilai historis karena telah digantikan oleh skala yang lebih praktis. Meskipun demikian, kedelapan satuan tersebut merupakan bagian penting dari sejarah perkembangan ilmu pengetahuan dan menunjukkan bagaimana manusia terus menyempurnakan cara mengukur temperatur dari waktu ke waktu.
-`,
+Perbedaan utama di antara seluruh satuan temperatur tersebut terletak pada titik acuan, besar interval, dan tujuan penggunaannya. Celsius dan Fahrenheit banyak digunakan dalam kehidupan sehari-hari, Kelvin menjadi standar internasional untuk penelitian ilmiah, sedangkan Rankine masih dimanfaatkan pada beberapa bidang teknik tertentu. Di sisi lain, Réaumur, Rømer, Delisle, dan Newton kini lebih banyak memiliki nilai historis karena telah digantikan oleh skala yang lebih praktis. Meskipun demikian, kedelapan satuan tersebut merupakan bagian penting dari sejarah perkembangan ilmu pengetahuan dan menunjukkan bagaimana manusia terus menyempurnakan cara mengukur temperatur dari waktu ke waktu.`,
+            
+            cards:[
+                {
+                    front:"°C",
+                    back:"Celsius adalah satuan suhu yang paling banyak digunakan di dunia."
+                },
+                {
+                    front:"°F",
+                    back:"Fahrenheit umum digunakan di Amerika Serikat dan beberapa wilayah lainnya."
+                },
+                {
+                    front:"°R",
+                    back:"Réaumur pernah digunakan di beberapa negara Eropa."
+                },
+                {
+                    front:"K",
+                    back:"Kelvin merupakan satuan dasar temperatur dalam Sistem Internasional (SI)."
+                },
+                {
+                    front:"°Ra",
+                    back:"Rankine adalah skala absolut yang menggunakan interval Fahrenheit."
+                },
+                {
+                    front:"°De",
+                    back:"Delisle memiliki skala terbalik, semakin tinggi suhu nilainya semakin kecil."
+                },
+                {
+                    front:"°Rø",
+                    back:"Rømer merupakan salah satu skala suhu tertua yang dikembangkan di Denmark."
+                },
+                {
+                    front:"°N",
+                    back:"Newton adalah skala suhu yang diperkenalkan oleh Isaac Newton."
+                }
+            ]
+        }
+    ],
 
-                cards:[
-                    {
-                        front:"°C",
-                        back:"Celsius adalah satuan suhu yang paling banyak digunakan di dunia."
-                    },
-                    {
-                        front:"°F",
-                        back:"Fahrenheit umum digunakan di Amerika Serikat dan beberapa wilayah lainnya."
-                    },
-                    {
-                        front:"°R",
-                        back:"Réaumur pernah digunakan di beberapa negara Eropa."
-                    },
-                    {
-                        front:"K",
-                        back:"Kelvin merupakan satuan dasar temperatur dalam Sistem Internasional (SI)."
-                    },
-                    {
-                        front:"°Ra",
-                        back:"Rankine adalah skala absolut yang menggunakan interval Fahrenheit."
-                    },
-                    {
-                        front:"°De",
-                        back:"Delisle memiliki skala terbalik, semakin tinggi suhu nilainya semakin kecil."
-                    },
-                    {
-                        front:"°Rø",
-                        back:"Rømer merupakan salah satu skala suhu tertua yang dikembangkan di Denmark."
-                    },
-                    {
-                        front:"°N",
-                        back:"Newton adalah skala suhu yang diperkenalkan oleh Isaac Newton."
-                    }
-                ]
-            }
-        ],
-
-        calculator:true
-    },   // <-- koma, bukan };
+    calculator:true
+},
 
     wind:{
     title:"Kecepatan Angin",
@@ -6325,6 +6443,7 @@ Perbedaan utama di antara seluruh satuan temperatur tersebut terletak pada titik
     sections:[
        {
     title:"Apa itu Kecepatan Angin?",
+    summary:"Pelajari pengertian kecepatan angin sebagai ukuran laju pergerakan udara akibat perbedaan tekanan atmosfer serta cara pengukurannya.",
     text:`Kecepatan angin adalah besarnya laju pergerakan udara dari suatu tempat ke tempat lain dalam satuan waktu. Angin terbentuk karena adanya perbedaan tekanan udara di permukaan Bumi. Udara akan bergerak dari daerah yang memiliki tekanan udara lebih tinggi menuju daerah yang memiliki tekanan udara lebih rendah hingga tercapai keseimbangan.
 
 Perbedaan tekanan udara umumnya dipengaruhi oleh pemanasan Matahari yang tidak merata di permukaan Bumi. Daerah yang menerima lebih banyak panas akan memiliki udara yang lebih hangat dan cenderung naik, sehingga tekanan udaranya menjadi lebih rendah. Sebaliknya, daerah yang lebih dingin memiliki tekanan udara lebih tinggi sehingga udara bergerak menuju daerah bertekanan rendah dan membentuk angin.
@@ -6336,6 +6455,7 @@ Secara umum, kecepatan angin dibedakan menjadi angin lemah, sedang, kencang, hin
 },
 {
     title:"Pengaruh Kecepatan Angin terhadap Cuaca",
+    summary:"Pahami bagaimana kecepatan angin memengaruhi distribusi panas, kelembapan, pembentukan awan, curah hujan, hingga terjadinya cuaca ekstrem.",
     text:`Kecepatan angin memiliki peran penting dalam menentukan kondisi cuaca karena angin berfungsi memindahkan massa udara, uap air, serta panas dari satu wilayah ke wilayah lainnya. Perubahan kecepatan angin dapat memengaruhi suhu udara, kelembapan, pembentukan awan, hingga kemungkinan terjadinya hujan.
 
 Angin yang bertiup dengan kecepatan sedang membantu mendistribusikan panas secara lebih merata sehingga suhu suatu wilayah tidak terlalu ekstrem. Selain itu, angin juga mempercepat proses penguapan air dari permukaan tanah, sungai, dan laut sehingga dapat meningkatkan kandungan uap air di atmosfer yang berperan dalam pembentukan awan.
@@ -6347,6 +6467,7 @@ Kecepatan angin yang sangat tinggi sering dikaitkan dengan cuaca buruk seperti b
 },
         {
             title:"Satuan Kecepatan Angin",
+            summary:"Kenali berbagai satuan kecepatan angin beserta fungsi, karakteristik, dan penggunaannya dalam meteorologi, pelayaran, penerbangan, serta kehidupan sehari-hari.",
     text:`Kecepatan angin dapat dinyatakan dalam beberapa satuan pengukuran, tergantung pada kebutuhan dan bidang penggunaannya. Empat satuan yang paling umum digunakan adalah kilometer per jam (km/h), meter per detik (m/s), knot (kn), dan mil per jam (mph). Meskipun memiliki nilai yang berbeda, keempat satuan tersebut dapat saling dikonversi.
 
 Kilometer per jam (km/h) merupakan satuan yang paling sering digunakan dalam kehidupan sehari-hari. Satuan ini mudah dipahami karena juga digunakan untuk menyatakan kecepatan kendaraan, sehingga sering dijumpai pada prakiraan cuaca di berbagai negara.
@@ -6389,6 +6510,7 @@ Pemilihan satuan kecepatan angin bergantung pada standar yang digunakan di suatu
     sections:[
         {
     title:"Apa itu AQI?",
+    summary:"Pelajari pengertian Air Quality Index (AQI) sebagai indikator kualitas udara yang menunjukkan tingkat risiko polutan terhadap kesehatan manusia.",
     text:`Air Quality Index (AQI) atau Indeks Kualitas Udara adalah sistem yang digunakan untuk menggambarkan tingkat kebersihan atau pencemaran udara dalam bentuk angka dan kategori tertentu. AQI dirancang agar masyarakat dapat dengan mudah memahami apakah kualitas udara pada suatu waktu aman atau berpotensi menimbulkan dampak bagi kesehatan.
 
 Semakin rendah nilai AQI, semakin baik kualitas udara yang dihirup. Sebaliknya, semakin tinggi nilai AQI menunjukkan bahwa konsentrasi polutan di udara semakin besar sehingga risiko gangguan kesehatan juga meningkat. Nilai AQI biasanya dikelompokkan ke dalam beberapa kategori, mulai dari Baik, Sedang, Tidak Sehat bagi Kelompok Sensitif, Tidak Sehat, Sangat Tidak Sehat, hingga Berbahaya.
@@ -6398,6 +6520,7 @@ AQI digunakan oleh berbagai lembaga lingkungan dan meteorologi di seluruh dunia 
 },
 {
     title:"Pengaruh AQI terhadap Cuaca",
+    summary:"Pahami hubungan antara kondisi cuaca dan perubahan nilai AQI, serta bagaimana angin, hujan, suhu, dan kelembapan memengaruhi penyebaran polutan.",
     text:`AQI tidak memengaruhi cuaca secara langsung, tetapi kondisi cuaca sangat memengaruhi nilai AQI. Angin, hujan, suhu udara, kelembapan, dan tekanan udara dapat mengubah konsentrasi polutan di atmosfer sehingga kualitas udara dapat membaik atau memburuk.
 
 Hujan umumnya membantu menurunkan nilai AQI karena tetesan air membawa partikel debu dan polutan turun ke permukaan Bumi melalui proses yang dikenal sebagai wet deposition. Sebaliknya, kondisi udara yang stabil, minim angin, dan tidak turun hujan dapat menyebabkan polutan terperangkap di dekat permukaan sehingga nilai AQI meningkat.
@@ -6409,6 +6532,7 @@ Dengan demikian, hubungan antara AQI dan cuaca bersifat tidak langsung. Cuaca me
 },
 {
     title:"Metodologi Menghitung AQI",
+    summary:"Ketahui bagaimana nilai AQI dihitung dari konsentrasi berbagai polutan dan bagaimana indeks akhir ditentukan berdasarkan polutan dengan dampak terbesar.",
     text:`AQI dihitung berdasarkan konsentrasi beberapa polutan utama yang diukur oleh stasiun pemantauan kualitas udara. Setiap polutan terlebih dahulu diukur konsentrasinya dalam satuan tertentu, seperti mikrogram per meter kubik (µg/m³) atau bagian per juta (ppm), kemudian dikonversi menjadi nilai indeks menggunakan tabel atau rumus standar yang telah ditetapkan oleh lembaga lingkungan.
 
 Setelah seluruh polutan dihitung, nilai AQI yang digunakan adalah nilai indeks tertinggi dari seluruh polutan tersebut. Polutan dengan nilai indeks paling besar disebut sebagai polutan dominan karena memberikan pengaruh terbesar terhadap kualitas udara pada saat itu.
@@ -6418,6 +6542,7 @@ Metode ini memungkinkan AQI memberikan gambaran yang sederhana mengenai kondisi 
 },
 {
     title:"Polutan Indikator AQI",
+    summary:"Kenali polutan utama penyusun AQI, seperti PM2.5, PM10, CO, NO₂, SO₂, dan O₃, beserta perannya dalam menentukan kualitas udara.",
     text:`AQI dihitung berdasarkan konsentrasi beberapa polutan utama yang terdapat di udara. Setiap polutan memiliki sumber dan dampak kesehatan yang berbeda sehingga semuanya dipantau untuk mengetahui kualitas udara secara menyeluruh.
 
 PM2.5 merupakan partikel halus dengan diameter kurang dari 2,5 mikrometer yang dapat masuk hingga ke paru-paru bahkan aliran darah. PM10 adalah partikel berukuran kurang dari 10 mikrometer yang dapat mengganggu sistem pernapasan, terutama pada anak-anak dan lansia.
@@ -6515,11 +6640,15 @@ function openLearnModal(type){
             </div>
 
             <div class="learn-body"
-                 id="body-${index}">
+     id="body-${index}">
 
-                <p data-original="${section.text.replace(/"/g,'&quot;')}">
-${section.text}
-</p>
+    <div class="section-summary">
+        ${section.summary}
+    </div>
+
+    <p data-original="${section.text.replace(/"/g,'&quot;')}">
+        ${section.text}
+    </p>
         `;
 
 
@@ -7461,7 +7590,7 @@ for (const event of events) {
 
     shown++;
 
-    // Berhenti setelah berhasil menampilkan 6 card
+    // Berhenti setelah berhasil menampilkan 5 card
     if (shown >= 5) {
         break;
     }
@@ -7506,6 +7635,411 @@ async function imageExists(url){
     });
 
 }
+
+let worldTodayCache = null;
+let worldTodayLastUpdate = 0;
+
+
+const earthquakeImages = [
+
+"https://labkons.dinaspupr.kalselprov.go.id/uploads/2024/artikel/ilustrasi-gempa-1.jpg",
+
+"https://akcdn.detik.net.id/visual/2023/10/18/ilustrasi-gempa-bumi_11.jpeg?w=720&q=90",
+
+"https://geologi.esdm.go.id/storage/artikel/2WZeH7jcEqyYj5rB5axYBStJZMHPfMZ87WwTRXxZ.jpg",
+
+"https://cdn1-production-images-kly.akamaized.net/4he7Dw6ECXYc4G2_M3dchvMisQw=/0x0:1023x576/1200x675/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/3352208/original/027437300_1610963252-AP21018075595503.jpg",
+
+"https://assets.negara.co.id/uploads/2026/06/13/b06bd124-fae5-413e-90bf-eae144cb1b0f.jpeg",
+
+];
+
+function getRandomEarthquakeImage(){
+
+    return earthquakeImages[
+        Math.floor(Math.random() * earthquakeImages.length)
+    ];
+
+}
+function explainDirection(place){
+
+    const directions = {
+
+        "N": "north",
+        "NE": "northeast",
+        "E": "east",
+        "SE": "southeast",
+        "S": "south",
+        "SW": "southwest",
+        "W": "west",
+        "NW": "northwest",
+
+        "NNE": "north-northeast",
+        "ENE": "east-northeast",
+        "ESE": "east-southeast",
+        "SSE": "south-southeast",
+        "SSW": "south-southwest",
+        "WSW": "west-southwest",
+        "WNW": "west-northwest"
+
+    };
+
+
+    Object.keys(directions).forEach(dir=>{
+
+        const regex = new RegExp(`\\b${dir}\\b`, "g");
+
+        place = place.replace(
+            regex,
+            directions[dir]
+        );
+
+    });
+
+
+    return place;
+
+}
+function getSourceLabel(url){
+
+    if(url.includes("nasa.gov")){
+        return "🚀 NASA";
+    }
+
+    if(url.includes("esa.int")){
+        return "🛰️ ESA";
+    }
+
+    if(url.includes("spacex.com")){
+        return "🚀 SpaceX";
+    }
+
+    if(url.includes("space.com")){
+        return "🌌 Space.com";
+    }
+
+    if(url.includes("phys.org")){
+        return "🔬 Phys.org";
+    }
+
+    if(url.includes("sciencealert.com")){
+        return "🔬 Science Alert";
+    }
+
+    if(url.includes("nature.com")){
+        return "🧬 Nature";
+    }
+
+    if(url.includes("arstechnica.com")){
+        return "💻 Ars Technica";
+    }
+
+    return "🌌 Astronomy";
+
+}
+async function loadWorldToday(){
+
+    const container = document.getElementById("worldTodayContainer");
+
+    const nowTime = Date.now();
+
+
+    // gunakan cache 30 menit
+    if(
+        worldTodayCache &&
+        nowTime - worldTodayLastUpdate < 30 * 60 * 1000
+    ){
+
+        renderWorldToday(worldTodayCache);
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+    '<div class="loading-card">Memuat berita dunia...</div>';
+
+
+    try {
+
+
+        const [
+            spaceRes,
+            quakeRes
+        ] = await Promise.all([
+
+
+            fetch(
+                "https://api.spaceflightnewsapi.net/v4/articles/?limit=20"
+            ),
+
+
+            fetch(
+                "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson"
+            )
+
+
+        ]);
+
+
+
+        const spaceData =
+        await spaceRes.json();
+
+
+        const quakeData =
+        await quakeRes.json();
+
+
+
+        let items=[];
+
+
+        const now=new Date();
+
+
+
+        // =====================
+        // ASTRONOMY
+        // =====================
+
+        spaceData.results
+
+        .filter(article=>
+            article.image_url
+        )
+
+        .filter(article=>{
+
+            const age =
+            (now - new Date(article.published_at))
+            /
+            (1000*60*60);
+
+
+            return age <=72;
+
+        })
+
+
+        .slice(0,5)
+
+
+        .forEach(article=>{
+
+
+            items.push({
+
+                title:article.title,
+
+                image:article.image_url,
+
+                description:
+                article.summary.substring(0,120)+"...",
+
+                date:
+                article.published_at,
+
+                url:
+                article.url,
+
+                category:
+getSourceLabel(article.url)
+
+            });
+
+
+        });
+
+
+
+        // =====================
+        // EARTHQUAKE
+        // =====================
+
+        quakeData.features
+
+        .slice(0,5)
+
+        .forEach(eq=>{
+
+
+            items.push({
+
+                title:
+                eq.properties.title,
+image:
+        getRandomEarthquakeImage(),
+
+description:
+`A magnitude ${eq.properties.mag} earthquake occurred in ${explainDirection(eq.properties.place)}.`,
+
+                date:
+                new Date(eq.properties.time)
+                .toISOString(),
+
+
+                url:
+                eq.properties.url,
+
+
+                category:
+"🌋 Natural Disasters"
+
+            });
+
+
+        });
+
+
+
+        items.sort(
+            (a,b)=>
+            new Date(b.date)-new Date(a.date)
+        );
+
+// acak urutan agar sumber bercampur
+items.sort(() => Math.random() - 0.5);
+
+
+// ambil 5 item pertama
+items =
+items.slice(0,5);
+
+
+
+        worldTodayCache = items;
+
+        worldTodayLastUpdate = nowTime;
+
+
+
+        renderWorldToday(items);
+
+
+
+    }
+    catch(err){
+
+        console.error(err);
+
+
+        container.innerHTML =
+        '<div class="loading-card">Gagal memuat berita dunia.</div>';
+
+    }
+
+}
+
+
+
+
+function renderWorldToday(items){
+
+
+    const container =
+    document.getElementById("worldTodayContainer");
+
+
+    const fragment =
+    document.createDocumentFragment();
+
+
+
+    items.forEach(item=>{
+
+
+        const card =
+        document.createElement("a");
+
+
+        card.className =
+        "history-card";
+
+
+        card.href =
+        item.url;
+
+
+        card.target="_blank";
+
+        card.rel="noopener noreferrer";
+
+
+
+        card.innerHTML=`
+
+        <img
+        class="history-image"
+        src="${item.image}"
+        loading="lazy">
+
+
+        <div class="history-body">
+
+
+        <div class="history-meta">
+
+        ${item.category}
+
+        <span>
+        • ${new Date(item.date)
+        .toLocaleDateString("id-ID")}
+        </span>
+
+        </div>
+
+
+        <div class="history-title">
+
+        ${item.title}
+
+        </div>
+
+
+        <div class="history-description">
+
+        ${item.description}
+
+        </div>
+
+
+        </div>
+
+        `;
+
+
+        fragment.appendChild(card);
+
+
+    });
+
+
+
+    container.replaceChildren(fragment);
+
+}
+
+
+
+
+loadWorldToday();
+
+
+
+// update tiap 1 jam hanya jika tab aktif
+setInterval(()=>{
+
+    if(!document.hidden){
+
+        worldTodayCache=null;
+
+        loadWorldToday();
+
+    }
+
+},60*60*1000);
 </script>
 </body>
 </html>
