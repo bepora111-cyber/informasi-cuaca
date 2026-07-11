@@ -17,9 +17,9 @@
 
 body{
 
-    min-height:100vh;
+    margin:0;
 
-    padding:20px;
+    min-height:100vh;
 
     color:white;
 
@@ -28,8 +28,11 @@ body{
     overflow-x:hidden;
 
 }
+.container{
 
+    padding:20px;
 
+}
 
 /* BACKGROUND LAYER */
 
@@ -61,7 +64,7 @@ body::before{
 h1{
     text-align:center;
     text-shadow:0 2px 5px black;
-    margin-top:10px;
+    margin-top:22.5px;
 }
 
 h2{
@@ -319,14 +322,47 @@ h2{
 
 /* ==================== LAYOUT PREDIKSI 7 HARI ==================== */
 .forecast{
+
     margin-top:20px;
-    clear: both;
+
+    clear:both;
+
+    padding:0 20px;
+
+    box-sizing:border-box;
+
 }
 
 .forecast-grid{
+
     display:grid;
+
     grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+
     gap:15px;
+
+}
+.forecast{
+
+    margin:20px auto 0;
+
+    max-width:1400px;
+
+    padding:0 20px;
+
+    box-sizing:border-box;
+
+    clear:both;
+
+}
+@media (max-width:768px){
+
+    .forecast{
+
+        padding:0 16px;
+
+    }
+
 }
 
 .day{
@@ -4022,6 +4058,264 @@ body.independence-mode .section-summary{
     }
 
 }
+
+/* ==================================
+   LOWER THIRD
+================================== */
+
+.bottom-lower-third{
+
+    position:relative;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:100vw;
+
+    background:#fff;
+
+    margin-top:60px;
+
+    padding:60px 20px 70px;
+
+    box-sizing:border-box;
+
+    text-align:center;
+
+    border-radius:0;
+
+    z-index:5;
+
+    overflow:hidden;
+
+}
+
+/* ==========================
+   CONTENT
+========================== */
+
+.provider-section,
+.presented-section{
+
+    max-width:1100px;
+
+    margin:0 auto;
+
+}
+
+.presented-section{
+
+    margin-top:55px;
+
+}
+
+.bottom-lower-third h3{
+
+    margin:0 0 20px;
+
+    font-size:1rem;
+
+    font-weight:700;
+
+    color:#444;
+
+    letter-spacing:.5px;
+
+}
+
+/* ==========================
+   MAIN PROVIDER
+========================== */
+
+.main-provider{
+
+    display:inline-block;
+
+}
+
+.main-provider img{
+
+    display:block;
+
+    width:190px;
+
+    max-width:90%;
+
+    height:auto;
+
+    margin:auto;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.15);
+
+    transition:
+        transform .25s,
+        box-shadow .25s;
+
+}
+
+.main-provider img:hover{
+
+    transform:scale(1.03);
+
+    box-shadow:
+        0 12px 28px rgba(0,0,0,.22);
+
+}
+/* ==========================
+   PROVIDER LOGOS
+========================== */
+
+.provider-list{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-wrap:nowrap;
+
+    gap:18px;
+
+    margin-top:28px;
+
+    overflow-x:auto;
+
+    overflow-y:hidden;
+
+    -webkit-overflow-scrolling:touch;
+
+    scrollbar-width:none;
+
+    padding:6px 0;
+
+}
+
+.provider-list::-webkit-scrollbar{
+
+    display:none;
+
+}
+
+.provider-list a{
+
+    flex:0 0 auto;
+
+    display:block;
+
+}
+
+.provider-list img{
+
+    width:74px;
+
+    height:auto;
+
+    display:block;
+
+    transition:.25s;
+
+}
+
+.provider-list img:hover{
+
+    transform:scale(1.08);
+
+}
+
+/* ==========================
+   PRESENTED BY
+========================== */
+
+.presented-image{
+
+    display:inline-block;
+
+}
+
+.presented-image img{
+
+    display:block;
+
+    width:190px;      /* Sama dengan main-provider */
+
+    max-width:90%;
+
+    height:auto;
+
+    margin:auto;
+
+    border-radius:20px;
+
+    transition:.25s;
+
+}
+
+
+.presented-image img:hover{
+
+    transform:scale(1.03);
+
+}
+
+/* ==========================
+   MOBILE
+========================== */
+
+@media (max-width:768px){
+
+    .bottom-lower-third{
+        padding:45px 16px 55px;
+    }
+
+    .main-provider img,
+    .presented-image img{
+        width:150px;
+        border-radius:16px;
+    }
+
+    .provider-list{
+        justify-content:flex-start;
+        gap:14px;
+    }
+
+    .provider-list img{
+        width:60px;
+    }
+
+}
+.copyright{
+
+    margin-top:18px;
+
+    color:#9a9a9a;
+
+    font-size:.9rem;
+
+    line-height:1.7;
+
+    user-select:none;
+
+}
+
+.copyright-note{
+
+    display:block;
+
+    margin-top:4px;
+
+    font-size:.8rem;
+
+    color:#b0b0b0;
+
+}
+
 </style>
 </head>
 <body>
@@ -4209,20 +4503,115 @@ body.independence-mode .section-summary{
     </div>
 
 </div>
-</div>
-<h2 style="margin:50px 0 20px;">On This Day</h2>
+<div class="container">
 
-<div id="onThisDayContainer" class="onthisday-grid">
-    <div class="loading-card">Memuat peristiwa hari ini...</div>
-</div>
+    <!-- =========================
+         ON THIS DAY
+    ========================== -->
+
+    <h2 style="margin:50px 0 20px;">On This Day</h2>
+
+    <div id="onThisDayContainer" class="onthisday-grid">
+        <div class="loading-card">Memuat peristiwa hari ini...</div>
+    </div>
+
+    <!-- =========================
+         WORLD TODAY
+    ========================== -->
+
+    <h2 style="margin:60px 0 20px;">🌍 World Today</h2>
+
+    <div id="worldTodayContainer" class="onthisday-grid">
+        <div class="loading-card">Memuat berita dunia...</div>
+    </div>
+
+</div> <!-- AKHIR CONTAINER -->
+
+
+<!-- =========================
+     LOWER THIRD
+========================= -->
+
+<footer class="bottom-lower-third">
+
+    <!-- DATA PROVIDED BY -->
+
+    <div class="provider-section">
+
+        <h3>Data Provided by</h3>
+
+        <a
+            href="https://open-meteo.com/"
+            target="_blank"
+            rel="noopener"
+            class="main-provider">
+
+            <img
+                src="https://avatars.githubusercontent.com/u/86407831"
+                alt="Provider">
+
+        </a>
+
+        <div class="provider-list">
+
+            <a href="https://en.wikipedia.org/wiki/Main_Page" target="_blank" rel="noopener">
+                <img src="https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-en-25.svg" alt="">
+            </a>
+
+            <a href="https://spaceflightnow.com/" target="_blank" rel="noopener">
+                <img src="https://spaceflightnow.com/wp-content/uploads/2015/09/SFN-Logo-Blue1.png" alt="">
+            </a>
+
+            <a href="https://spacenews.com/" target="_blank" rel="noopener">
+                <img src="https://i0.wp.com/spacenews.com/wp-content/uploads/2025/10/spacenews_logo-crop25.webp?w=736&ssl=1" alt="">
+            </a>
+
+            <a href="https://www.nasa.gov/" target="_blank" rel="noopener">
+                <img src="https://science.nasa.gov/wp-content/themes/nasa-child/assets/images/nasa-logo.svg" alt="">
+            </a>
+
+            <a href="https://www.nasaspaceflight.com/" target="_blank" rel="noopener">
+                <img src="https://www.nasaspaceflight.com/wp-content/uploads/2023/03/NSF-Logo-Blue-300.svg" alt="">
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- PRESENTED BY -->
+
+    <div class="presented-section">
+
+        <h3>Presented by</h3>
+
+        <a
+            href="https://batagorsahabat.my.canva.site/online-order"
+            target="_blank"
+            rel="noopener"
+            class="presented-image">
+
+            <img
+                src="https://lh3.googleusercontent.com/a-/ALV-UjU_FPz2y9E_D9f6FJgqFeg9QfuHMF5mqVlE5ETrX8wD-iCh4rk=w1265"
+                alt="Presented By">
+
+        </a>
+
+    <div class="copyright">
+
+    &copy; <span id="currentYear"></span> Weather Dashboard
+
+    <br>
+
+    <span class="copyright-note">
+        All trademarks and data remain the property of their respective owners.
+    </span>
 
 </div>
-<h2 style="margin:60px 0 20px;">🌍 World Today</h2>
 
-<div id="worldTodayContainer" class="onthisday-grid">
-    <div class="loading-card">Memuat berita dunia...</div>
-</div>
 
+
+</footer>
 <!-- 3. STRUKTUR JENDELA POP-UP MODAL GRAFIK -->
 <div id="detailModal" class="modal">
     <div class="modal-content">
@@ -9070,6 +9459,10 @@ setInterval(()=>{
     }
 
 },60*60*1000);
+
+document.getElementById("currentYear").textContent =
+    new Date().getFullYear();
+    
 </script>
 </body>
 </html>
