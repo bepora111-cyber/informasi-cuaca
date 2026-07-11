@@ -4878,17 +4878,20 @@ body.valentine-mode .section-summary{
 
     <div class="copyright">
 
-    &copy; <span id="currentYear"></span> Weather Dashboard
+    &copy; <span id="currentYear"></span> Weather Dashboard. All rights reserved.
 
     <br>
 
     <span class="copyright-note">
-        All trademarks and data remain the property of their respective owners.
+        Weather, air quality, news, and earthquake data are provided by third-party services.
+        <br>
+        All trademarks, logos, and data remain the property of their respective owners.
     </span>
 
-</div>
 
+        </div>
 
+    </div>
 
 </footer>
 <!-- 3. STRUKTUR JENDELA POP-UP MODAL GRAFIK -->
@@ -9503,9 +9506,12 @@ async function imageExists(url){
 // Optimized Version - Stable Random Order
 // ==========================================
 
+// ==========================================
+// WORLD TODAY
+// ==========================================
+
 let worldTodayCache = null;
 let worldTodayLastUpdate = 0;
-let worldTodayCacheDate = null;
 
 const CACHE_DURATION = 30 * 60 * 1000; // 30 menit
 const SHOW_ITEMS = 5;
@@ -9582,6 +9588,18 @@ function shuffle(array){
 
 
 // ==========================================
+// RANDOM ITEMS
+// ==========================================
+
+function getRandomItems(items,total){
+
+    return shuffle(items)
+    .slice(0,total);
+
+}
+
+
+// ==========================================
 // DIRECTION
 // ==========================================
 
@@ -9608,7 +9626,6 @@ function explainDirection(place){
 
     };
 
-
     Object.keys(directions)
     .forEach(dir=>{
 
@@ -9618,7 +9635,6 @@ function explainDirection(place){
             "g"
         );
 
-
         place =
         place.replace(
             regex,
@@ -9626,7 +9642,6 @@ function explainDirection(place){
         );
 
     });
-
 
     return place;
 
@@ -9663,20 +9678,7 @@ function getSourceLabel(url){
     if(url.includes("arstechnica.com"))
         return "💻 Ars Technica";
 
-
     return "🌌 Astronomy";
-
-}
-
-
-// ==========================================
-// RANDOM ITEMS
-// ==========================================
-
-function getRandomItems(items,total){
-
-    return shuffle(items)
-    .slice(0,total);
 
 }
 
@@ -9692,79 +9694,37 @@ async function loadWorldToday(){
         "worldTodayContainer"
     );
 
-
     const nowTime =
     Date.now();
 
 
-// =====================================
-// LOAD CACHE SESSION
-// =====================================
-
-const savedCache =
-sessionStorage.getItem(
-    "worldTodayCache"
-);
-
-
-const savedDate =
-sessionStorage.getItem(
-    "worldTodayCacheDate"
-);
-
-
-
-if(
-    savedCache &&
-    savedDate ===
-    new Date()
-    .toLocaleDateString(
-        "id-ID",
-        {
-            timeZone:"Asia/Jakarta"
-        }
-    )
-){
-
-    worldTodayCache =
-    JSON.parse(savedCache);
-
-
-    renderWorldToday(
-        worldTodayCache
-    );
-
-
-    return;
-
-}
     // =====================================
-    // CACHE
-    // TIDAK ACAK LAGI
+    // GUNAKAN CACHE SELAMA HALAMAN
+    // MASIH TERBUKA
     // =====================================
 
-   if(
-    worldTodayCache &&
-    worldTodayCacheDate ===
-    new Date()
-    .toLocaleDateString(
-        "id-ID",
-        {
-            timeZone:"Asia/Jakarta"
-        }
-    ) &&
-    (
-        nowTime -
-        worldTodayLastUpdate
-    )
-    <
-    CACHE_DURATION
-){
-    renderWorldToday(worldTodayCache);
-    return;
-}
+    if(
+
+        worldTodayCache &&
+
+        (
+            nowTime -
+            worldTodayLastUpdate
+        ) < CACHE_DURATION
+
+    ){
+
+        renderWorldToday(
+            worldTodayCache
+        );
+
+        return;
+
+    }
+
 
     container.innerHTML =
+
     `
     <div class="loading-card">
         Memuat berita dunia...
@@ -9772,35 +9732,36 @@ if(
     `;
 
 
-
     try{
 
 
         const [
+
             spaceRes,
+
             quakeRes
 
         ] =
+
         await Promise.all([
 
-
             fetch(
-            "https://api.spaceflightnewsapi.net/v4/articles/?limit=50"
+                "https://api.spaceflightnewsapi.net/v4/articles/?limit=50"
             ),
 
-
             fetch(
-            "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson"
+                "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson"
             )
-
 
         ]);
 
 
-
         if(
+
             !spaceRes.ok ||
+
             !quakeRes.ok
+
         ){
 
             throw new Error(
@@ -9810,307 +9771,210 @@ if(
         }
 
 
-
         const spaceData =
         await spaceRes.json();
-
 
         const quakeData =
         await quakeRes.json();
 
 
-
-        const now =
-        Date.now();
-
-
-
-        let spaceItems = [];
-
-        let quakeItems = [];
-
-
-
-        // =====================================
-// TODAY WIB
-// =====================================
-
-const todayWIB =
-new Date()
-.toLocaleDateString(
-    "id-ID",
-    {
-        timeZone:"Asia/Jakarta"
-    }
-);
-
-
-
-// =====================================
-// SPACE
-// TODAY + FALLBACK 24 JAM
-// =====================================
-
-let spaceToday = [];
-
-let spaceFallback = [];
-
-
-
-spaceData.results
-
-.filter(article=>article.image_url)
-
-.forEach(article=>{
-
-
-    const newsDate =
-    new Date(article.published_at);
-
-
-
-    const newsWIB =
-    newsDate.toLocaleDateString(
-        "id-ID",
-        {
-            timeZone:"Asia/Jakarta"
-        }
-    );
-
-
-
-    const age =
-    Date.now() -
-    newsDate.getTime();
-
-
-
-    // berita hari ini
-
-    if(
-        newsWIB === todayWIB
-    ){
-
-        spaceToday.push(article);
-
-    }
-
-
-
-    // fallback 24 jam
-
-    else if(
-
-        age <= ONE_DAY &&
-        age >= 0
-
-    ){
-
-        spaceFallback.push(article);
-
-    }
-
-
-});
-
-
-
-
-
-// gabungkan
-// hari ini dulu,
-// lalu fallback
-
-
-spaceToday
-.concat(spaceFallback)
-
-.forEach(article=>{
-
-
-    spaceItems.push({
-
-        title:
-        article.title,
-
-
-        image:
-        article.image_url,
-
-
-        description:
-        (
-            article.summary || ""
-        )
-        .substring(0,120)
-        +
-        "...",
-
-
-        date:
-        article.published_at,
-
-
-        url:
-        article.url,
-
-
-        category:
-        getSourceLabel(
-            article.url
-        )
-
-
-    });
-
-
-});
-
-
-
-
-
-
-
-// =====================================
-// EARTHQUAKE
-// TODAY + FALLBACK 24 JAM
-// =====================================
-
-
-let quakeToday = [];
-
-let quakeFallback = [];
-
-
-
-quakeData.features
-
-.forEach(eq=>{
-
-
-    const quakeDate =
-    new Date(
-        eq.properties.time
-    );
-
-
-
-    const quakeWIB =
-    quakeDate.toLocaleDateString(
-        "id-ID",
-        {
-            timeZone:"Asia/Jakarta"
-        }
-    );
-
-
-
-    const age =
-    Date.now() -
-    quakeDate.getTime();
-
-
-
-    // gempa hari ini
-
-    if(
-        quakeWIB === todayWIB
-    ){
-
-        quakeToday.push(eq);
-
-    }
-
-
-
-    // fallback 24 jam
-
-    else if(
-
-        age <= ONE_DAY &&
-        age >= 0
-
-    ){
-
-        quakeFallback.push(eq);
-
-    }
-
-
-});
-
-
-
-
-
-// gabungkan
-// hari ini dulu,
-// lalu fallback
-
-
-quakeToday
-.concat(quakeFallback)
-
-.forEach(eq=>{
-
-
-    quakeItems.push({
-
-        title:
-        eq.properties.title,
-
-
-        image:
-        getRandomEarthquakeImage(),
-
-
-        description:
-
-        `A magnitude ${eq.properties.mag} earthquake occurred in ${explainDirection(eq.properties.place)}.`,
-
-
-        date:
-
-        new Date(
-            eq.properties.time
-        )
-        .toISOString(),
-
-
-        url:
-
-        eq.properties.url,
-
-
-        category:
-
-        "🌋 Natural Disasters"
-
-
-    });
-
-
-});
-
-
-        // =====================================
-        // KOMBINASI
-        // 3 SPACE + 2 GEMPA
-        // =====================================
-
-        const randomSpace =
-        getRandomItems(
-            spaceItems,
-            3
+        const todayWIB =
+        new Date()
+        .toLocaleDateString(
+            "id-ID",
+            {
+                timeZone:"Asia/Jakarta"
+            }
         );
 
 
-        const randomQuake =
-        getRandomItems(
-            quakeItems,
-            2
-        );
+    
+        // =====================================
+        // SPACE
+        // HARI INI + FALLBACK <24 JAM
+        // =====================================
+
+        let spaceToday = [];
+        let spaceFallback = [];
+
+        spaceData.results
+
+        .filter(article=>article.image_url)
+
+        .forEach(article=>{
+
+            const newsDate =
+            new Date(
+                article.published_at
+            );
+
+            const newsWIB =
+            newsDate.toLocaleDateString(
+                "id-ID",
+                {
+                    timeZone:"Asia/Jakarta"
+                }
+            );
+
+            const age =
+            Date.now() -
+            newsDate.getTime();
+
+
+            if(
+                newsWIB === todayWIB
+            ){
+
+                spaceToday.push(article);
+
+            }
+
+            else if(
+
+                age >= 0 &&
+
+                age <= ONE_DAY
+
+            ){
+
+                spaceFallback.push(article);
+
+            }
+
+        });
+
+
+        const randomSpace = [
+
+    ...shuffle(spaceToday),
+
+    ...shuffle(spaceFallback)
+
+]
+
+.slice(0,3)
+
+.map(article=>({
+
+    title:
+    article.title,
+
+    image:
+    article.image_url,
+
+    description:
+
+    (
+        article.summary || ""
+    )
+    .substring(0,120)
+    + "...",
+
+    date:
+    article.published_at,
+
+    url:
+    article.url,
+
+    category:
+    getSourceLabel(article.url)
+
+}));
+
+        // =====================================
+        // EARTHQUAKE
+        // HARI INI + FALLBACK <24 JAM
+        // =====================================
+
+        let quakeToday = [];
+
+        let quakeFallback = [];
+
+
+        quakeData.features
+
+        .forEach(eq=>{
+
+            const quakeDate =
+            new Date(
+                eq.properties.time
+            );
+
+            const quakeWIB =
+            quakeDate.toLocaleDateString(
+                "id-ID",
+                {
+                    timeZone:"Asia/Jakarta"
+                }
+            );
+
+            const age =
+            Date.now() -
+            quakeDate.getTime();
+
+
+            if(
+
+                quakeWIB === todayWIB
+
+            ){
+
+                quakeToday.push(eq);
+
+            }
+
+            else if(
+
+                age >= 0 &&
+
+                age <= ONE_DAY
+
+            ){
+
+                quakeFallback.push(eq);
+
+            }
+
+        });
+
+
+       const randomQuake = [
+
+    ...shuffle(quakeToday),
+
+    ...shuffle(quakeFallback)
+
+]
+
+.slice(0,2)
+
+.map(eq=>({
+
+    title:
+    eq.properties.title,
+
+    image:
+    getRandomEarthquakeImage(),
+
+    description:
+    `A magnitude ${eq.properties.mag} earthquake occurred in ${explainDirection(eq.properties.place)}.`,
+
+    date:
+    new Date(eq.properties.time).toISOString(),
+
+    url:
+    eq.properties.url,
+
+    category:
+    "🌋 Natural Disasters"
+
+}));
+
+        // =====================================
+        // RANDOM
+        // =====================================
+
+    
 
 
 
@@ -10123,20 +9987,15 @@ quakeToday
         ];
 
 
-
-
-
         // =====================================
-        // ACAK POSISI SEKALI SAJA
+        // ACAK URUTAN
         // =====================================
 
         selectedItems =
+
         shuffle(
             selectedItems
         );
-
-
-
 
 
         // =====================================
@@ -10148,12 +10007,12 @@ quakeToday
         const used = new Set();
 
 
-
         selectedItems.forEach(item=>{
 
-
             if(
+
                 !used.has(item.url)
+
             ){
 
                 used.add(item.url);
@@ -10162,59 +10021,26 @@ quakeToday
 
             }
 
-
         });
 
 
-
         selectedItems =
+
         unique.slice(
             0,
             SHOW_ITEMS
         );
 
 
-
-
-
         // =====================================
-        // SIMPAN CACHE
-        // URUTAN SUDAH FINAL
+        // CACHE RAM
         // =====================================
-worldTodayCache =
-selectedItems;
 
+        worldTodayCache =
+        selectedItems;
 
-worldTodayLastUpdate =
-nowTime;
-
-
-worldTodayCacheDate =
-new Date()
-.toLocaleDateString(
-    "id-ID",
-    {
-        timeZone:"Asia/Jakarta"
-    }
-);
-
-
-
-sessionStorage.setItem(
-    "worldTodayCache",
-    JSON.stringify(
-        worldTodayCache
-    )
-);
-
-
-sessionStorage.setItem(
-    "worldTodayCacheDate",
-    worldTodayCacheDate
-);
-
-
-
+        worldTodayLastUpdate =
+        nowTime;
 
 
         // =====================================
@@ -10225,15 +10051,11 @@ sessionStorage.setItem(
             worldTodayCache
         );
 
-
-
     }
 
     catch(err){
 
-
         console.error(err);
-
 
         container.innerHTML =
 
@@ -10243,60 +10065,62 @@ sessionStorage.setItem(
         </div>
         `;
 
-
     }
 
-
-}
-
-
-
-
-
-// ==========================================
+}// ==========================================
 // RENDER WORLD TODAY
 // ==========================================
 
 function renderWorldToday(items){
-
 
     const container =
     document.getElementById(
         "worldTodayContainer"
     );
 
-
     const fragment =
     document.createDocumentFragment();
 
 
-
     items.forEach(item=>{
-
 
         const card =
         document.createElement("a");
 
-
         card.className =
         "history-card";
-
 
         card.href =
         item.url;
 
-
         card.target =
         "_blank";
-
 
         card.rel =
         "noopener noreferrer";
 
 
+        // ===============================
+        // SIMPAN FLAG
+        // AGAR BACK TIDAK RANDOM
+        // ===============================
 
-        card.innerHTML = `
+        card.addEventListener(
+            "click",
+            ()=>{
 
+                sessionStorage.setItem(
+                    "worldTodayBack",
+                    "1"
+                );
+
+            }
+        );
+
+
+        card.innerHTML =
+
+        `
 
         <img
 
@@ -10322,7 +10146,6 @@ function renderWorldToday(items){
 
                 ${item.category}
 
-
                 <span>
 
                 •
@@ -10332,22 +10155,18 @@ function renderWorldToday(items){
                     "id-ID",
                     {
 
-                    day:"numeric",
+                        day:"numeric",
 
-                    month:"short",
+                        month:"short",
 
-                    year:"numeric"
+                        year:"numeric"
 
                     }
-
                 )}
 
                 </span>
 
-
             </div>
-
-
 
 
             <div class="history-title">
@@ -10357,8 +10176,6 @@ function renderWorldToday(items){
             </div>
 
 
-
-
             <div class="history-description">
 
                 ${item.description}
@@ -10366,31 +10183,23 @@ function renderWorldToday(items){
             </div>
 
 
-
         </div>
-
 
         `;
 
 
-
-        fragment.appendChild(card);
-
+        fragment.appendChild(
+            card
+        );
 
     });
-
 
 
     container.replaceChildren(
         fragment
     );
 
-
 }
-
-
-
-
 
 
 
@@ -10402,40 +10211,31 @@ loadWorldToday();
 
 
 
-
-
-
 // ==========================================
 // AUTO REFRESH
 // ==========================================
 
 setInterval(()=>{
 
-
-    if(document.hidden){
-
+    if(
+        document.hidden
+    ){
         return;
-
     }
 
 
-
-    // hapus cache
-    // agar berita baru + acak baru
+    // ===============================
+    // PAKSA AMBIL DATA BARU
+    // DAN ACAK ULANG
+    // ===============================
 
     worldTodayCache = null;
 
-
+    worldTodayLastUpdate = 0;
 
     loadWorldToday();
 
-
-
-},60*60*1000);
-
-
-
-
+},60*1000);
 
 
 
@@ -10449,28 +10249,40 @@ document.addEventListener(
 
 ()=>{
 
+    if(
+        document.hidden
+    ){
+        return;
+    }
 
-    if(document.hidden){
+
+    // ===============================
+    // KALAU HABIS BACK
+    // JANGAN ACAK
+    // ===============================
+
+    if(
+
+        sessionStorage.getItem(
+            "worldTodayBack"
+        )
+
+    ){
+
+        sessionStorage.removeItem(
+            "worldTodayBack"
+        );
 
         return;
 
     }
 
 
-
-    // cache masih ada
-    // tidak akan random ulang
-
     loadWorldToday();
-
 
 }
 
 );
-
-
-
-
 
 
 
@@ -10484,19 +10296,15 @@ window.addEventListener(
 
 ()=>{
 
-
     worldTodayCache = null;
 
+    worldTodayLastUpdate = 0;
 
     loadWorldToday();
-
 
 }
 
 );
-
-
-
 
 
 document.getElementById("currentYear").textContent =
