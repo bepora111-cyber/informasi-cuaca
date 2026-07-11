@@ -4058,7 +4058,6 @@ body.independence-mode .section-summary{
     }
 
 }
-
 /* ==================================
    LOWER THIRD
 ================================== */
@@ -4075,21 +4074,18 @@ body.independence-mode .section-summary{
 
     background:#fff;
 
-    margin-top:60px;
+    margin-top:24px;
 
-    padding:60px 20px 70px;
+    padding:12px 16px 14px;
 
     box-sizing:border-box;
 
     text-align:center;
 
-    border-radius:0;
-
-    z-index:5;
-
     overflow:hidden;
 
 }
+
 
 /* ==========================
    CONTENT
@@ -4098,31 +4094,34 @@ body.independence-mode .section-summary{
 .provider-section,
 .presented-section{
 
-    max-width:1100px;
+    max-width:1000px;
 
     margin:0 auto;
 
 }
 
+
 .presented-section{
 
-    margin-top:55px;
+    margin-top:8px;
 
 }
 
+
 .bottom-lower-third h3{
 
-    margin:0 0 20px;
+    margin:0 0 6px;
 
-    font-size:1rem;
+    font-size:.95rem;
 
     font-weight:700;
 
     color:#444;
 
-    letter-spacing:.5px;
+    letter-spacing:.3px;
 
 }
+
 
 /* ==========================
    MAIN PROVIDER
@@ -4134,11 +4133,12 @@ body.independence-mode .section-summary{
 
 }
 
+
 .main-provider img{
 
     display:block;
 
-    width:190px;
+    width:120px;
 
     max-width:90%;
 
@@ -4146,12 +4146,10 @@ body.independence-mode .section-summary{
 
     margin:auto;
 
-    border-radius:20px;
-
-    overflow:hidden;
+    border-radius:14px;
 
     box-shadow:
-        0 8px 20px rgba(0,0,0,.15);
+        0 5px 12px rgba(0,0,0,.12);
 
     transition:
         transform .25s,
@@ -4159,19 +4157,38 @@ body.independence-mode .section-summary{
 
 }
 
+
 .main-provider img:hover{
 
     transform:scale(1.03);
 
-    box-shadow:
-        0 12px 28px rgba(0,0,0,.22);
-
 }
+
+
 /* ==========================
    PROVIDER LOGOS
 ========================== */
 
 .provider-list{
+
+    display:grid;
+
+    grid-template-columns:repeat(5,1fr);
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    margin-top:6px;
+
+    padding:0;
+
+}
+
+
+.provider-list a{
 
     display:flex;
 
@@ -4179,41 +4196,12 @@ body.independence-mode .section-summary{
 
     align-items:center;
 
-    flex-wrap:nowrap;
-
-    gap:18px;
-
-    margin-top:28px;
-
-    overflow-x:auto;
-
-    overflow-y:hidden;
-
-    -webkit-overflow-scrolling:touch;
-
-    scrollbar-width:none;
-
-    padding:6px 0;
-
 }
 
-.provider-list::-webkit-scrollbar{
-
-    display:none;
-
-}
-
-.provider-list a{
-
-    flex:0 0 auto;
-
-    display:block;
-
-}
 
 .provider-list img{
 
-    width:74px;
+    width:58px;
 
     height:auto;
 
@@ -4223,11 +4211,13 @@ body.independence-mode .section-summary{
 
 }
 
+
 .provider-list img:hover{
 
-    transform:scale(1.08);
+    transform:scale(1.06);
 
 }
+
 
 /* ==========================
    PRESENTED BY
@@ -4239,11 +4229,12 @@ body.independence-mode .section-summary{
 
 }
 
+
 .presented-image img{
 
     display:block;
 
-    width:190px;      /* Sama dengan main-provider */
+    width:120px;
 
     max-width:90%;
 
@@ -4251,7 +4242,7 @@ body.independence-mode .section-summary{
 
     margin:auto;
 
-    border-radius:20px;
+    border-radius:14px;
 
     transition:.25s;
 
@@ -4264,6 +4255,7 @@ body.independence-mode .section-summary{
 
 }
 
+
 /* ==========================
    MOBILE
 ========================== */
@@ -4271,48 +4263,335 @@ body.independence-mode .section-summary{
 @media (max-width:768px){
 
     .bottom-lower-third{
-        padding:45px 16px 55px;
+
+        margin-top:20px;
+
+        padding:10px 12px 12px;
+
     }
+
+
+    .bottom-lower-third h3{
+
+        margin-bottom:5px;
+
+        font-size:.9rem;
+
+    }
+
+
+    .provider-list{
+
+        grid-template-columns:repeat(5,1fr);
+
+        gap:6px;
+
+        margin-top:5px;
+
+    }
+
+
+    .provider-list img{
+
+        width:42px;
+
+    }
+
 
     .main-provider img,
     .presented-image img{
-        width:150px;
-        border-radius:16px;
+
+        width:100px;
+
+        border-radius:12px;
+
     }
 
-    .provider-list{
-        justify-content:flex-start;
-        gap:14px;
-    }
 
-    .provider-list img{
-        width:60px;
+    .presented-section{
+
+        margin-top:8px;
+
     }
 
 }
+
+
+/* ==========================
+   COPYRIGHT
+========================== */
+
 .copyright{
 
-    margin-top:18px;
+    margin-top:6px;
 
-    color:#9a9a9a;
+    color:#999;
 
-    font-size:.9rem;
+    font-size:.8rem;
 
-    line-height:1.7;
+    line-height:1.4;
 
     user-select:none;
 
 }
 
+
 .copyright-note{
 
     display:block;
 
-    margin-top:4px;
+    margin-top:2px;
 
-    font-size:.8rem;
+    font-size:.72rem;
 
     color:#b0b0b0;
+
+}
+/* ==========================================
+   VALENTINE MODE
+========================================== */
+
+body.valentine-mode::before{
+
+    background-image:
+        linear-gradient(
+            rgba(15,15,15,.55),
+            rgba(255,105,180,.32)
+        ),
+        url('https://lh3.googleusercontent.com/gps-cs-s/APNQkAGXzDf6jAqrxVqIt-StdTukOFbGz1GhCgbTUc4Cy9HvG0ZJ1Lk6GwKSemZ9SSBePQ6xFvAHl-g-2ExnhP111C7NhC2NnwS8JRjZyBT-UGeuFAIt_Pjh9ENi7PStSl_RU352jqAyHI6mGIdz=s1360-w1360-h1020-rw');
+
+    background-size:cover;
+    background-position:center;
+
+}
+
+
+/* CARD */
+
+body.valentine-mode .box,
+body.valentine-mode .day,
+body.valentine-mode .datetime-container,
+body.valentine-mode .modal-content,
+body.valentine-mode .learn-modal-content,
+body.valentine-mode .learn-card,
+body.valentine-mode .temperature-calculator,
+body.valentine-mode #ai-analysis-box,
+body.valentine-mode .history-card,
+body.valentine-mode .loading-card{
+
+    background:rgba(18,18,18,.82);
+
+    border:1px solid rgba(255,255,255,.14);
+
+    backdrop-filter:blur(15px);
+    -webkit-backdrop-filter:blur(15px);
+
+}
+
+
+/* HEADERS */
+
+body.valentine-mode .learn-header{
+
+    background:rgba(255,105,180,.18);
+
+}
+
+body.valentine-mode .learn-body{
+
+    background:rgba(255,255,255,.04);
+
+}
+
+
+/* DOT */
+
+body.valentine-mode .dot.active{
+
+    background:#ffd9ea;
+
+    box-shadow:
+        0 0 12px rgba(255,182,193,.85);
+
+}
+
+
+/* BOX */
+
+body.valentine-mode .box.active{
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff5fa2,
+            #ff82b5,
+            #ffc2d8
+        );
+
+    color:#ffffff;
+
+    border:1px solid rgba(255,255,255,.28);
+
+    box-shadow:
+        0 0 20px rgba(255,105,180,.45),
+        0 0 40px rgba(255,105,180,.20);
+
+}
+
+body.valentine-mode .box.side{
+
+    background:rgba(24,24,24,.75);
+
+}
+
+body.valentine-mode .box:not(.active):hover,
+body.valentine-mode .learn-card:hover{
+
+    background:rgba(40,30,35,.95);
+
+}
+
+
+/* AI */
+
+body.valentine-mode #ai-analysis-box:hover{
+
+    box-shadow:
+        0 12px 35px rgba(255,105,180,.30);
+
+}
+
+
+/* FLIP */
+
+body.valentine-mode .temp-front{
+
+    filter:brightness(.96);
+
+    border:1.5px solid rgba(255,255,255,.15);
+
+    box-shadow:
+        inset 0 1px 2px rgba(255,255,255,.06),
+        inset 0 -2px 6px rgba(0,0,0,.45),
+        0 6px 16px rgba(255,105,180,.18);
+
+}
+
+body.valentine-mode .temp-front::before,
+body.valentine-mode .temp-back::before{
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.18),
+            rgba(255,105,180,.15) 35%,
+            rgba(255,255,255,0) 70%
+        );
+
+}
+
+body.valentine-mode .temp-back{
+
+    background:
+        linear-gradient(
+            145deg,
+            #2a2a2a,
+            #101010
+        );
+
+    color:#ffffff;
+
+    border:1.5px solid rgba(255,255,255,.15);
+
+}
+
+
+/* SEARCH */
+
+body.valentine-mode .learn-search input{
+
+    background:rgba(20,20,20,.92);
+
+    color:#ffffff;
+
+    border:1px solid rgba(255,255,255,.15);
+
+}
+
+body.valentine-mode .learn-search input::placeholder{
+
+    color:rgba(255,255,255,.50);
+
+}
+
+body.valentine-mode .learn-search input:focus{
+
+    background:rgba(30,30,30,.96);
+
+    border-color:#ff7eb3;
+
+    box-shadow:
+        0 0 15px rgba(255,105,180,.35);
+
+}
+
+body.valentine-mode .search-icon svg{
+
+    stroke:#ff8fc1 !important;
+
+}
+
+
+/* HISTORY */
+
+body.valentine-mode .history-title{
+
+    color:#ffffff;
+
+}
+
+body.valentine-mode .history-meta{
+
+    color:#ffc1da;
+
+}
+
+body.valentine-mode .history-description{
+
+    color:#ececec;
+
+}
+
+
+/* SUMMARY */
+
+body.valentine-mode .section-summary{
+
+    background:rgba(255,105,180,.12);
+
+    border-left:4px solid #ffd6e7;
+
+    color:#ffffff;
+
+    box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,.06);
+
+}
+
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+    body.valentine-mode .history-card{
+
+        backdrop-filter:blur(8px);
+        -webkit-backdrop-filter:blur(8px);
+
+        box-shadow:
+            0 6px 16px rgba(255,105,180,.18);
+
+    }
 
 }
 
@@ -4552,30 +4831,30 @@ body.independence-mode .section-summary{
 
         </a>
 
-        <div class="provider-list">
+       <div class="provider-list">
 
-            <a href="https://en.wikipedia.org/wiki/Main_Page" target="_blank" rel="noopener">
-                <img src="https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-en-25.svg" alt="">
-            </a>
+    <!-- BARIS 1 -->
+    <a href="https://en.wikipedia.org/wiki/Main_Page" target="_blank" rel="noopener">
+        <img src="https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-en-25.svg" alt="">
+    </a>
 
-            <a href="https://spaceflightnow.com/" target="_blank" rel="noopener">
-                <img src="https://spaceflightnow.com/wp-content/uploads/2015/09/SFN-Logo-Blue1.png" alt="">
-            </a>
+    <a href="https://spaceflightnow.com/" target="_blank" rel="noopener">
+        <img src="https://spaceflightnow.com/wp-content/uploads/2015/09/SFN-Logo-Blue1.png" alt="">
+    </a>
 
-            <a href="https://spacenews.com/" target="_blank" rel="noopener">
-                <img src="https://i0.wp.com/spacenews.com/wp-content/uploads/2025/10/spacenews_logo-crop25.webp?w=736&ssl=1" alt="">
-            </a>
+    <a href="https://spacenews.com/" target="_blank" rel="noopener">
+        <img src="https://i0.wp.com/spacenews.com/wp-content/uploads/2025/10/spacenews_logo-crop25.webp?w=736&ssl=1" alt="">
+    </a>
 
-            <a href="https://www.nasa.gov/" target="_blank" rel="noopener">
-                <img src="https://science.nasa.gov/wp-content/themes/nasa-child/assets/images/nasa-logo.svg" alt="">
-            </a>
+    <a href="https://www.nasa.gov/" target="_blank" rel="noopener">
+        <img src="https://science.nasa.gov/wp-content/themes/nasa-child/assets/images/nasa-logo.svg" alt="">
+    </a>
 
-            <a href="https://www.nasaspaceflight.com/" target="_blank" rel="noopener">
-                <img src="https://www.nasaspaceflight.com/wp-content/uploads/2023/03/NSF-Logo-Blue-300.svg" alt="">
-            </a>
+    <a href="https://www.nasaspaceflight.com/" target="_blank" rel="noopener">
+        <img src="https://www.nasaspaceflight.com/wp-content/uploads/2023/03/NSF-Logo-Blue-300.svg" alt="">
+    </a>
 
-        </div>
-
+</div> 
     </div>
 
 
@@ -6287,10 +6566,12 @@ function updateThemeByTime() {
     // ==========================
     // Hapus semua mode
     // ==========================
+
     document.body.classList.remove(
         "golden-mode",
         "dark-mode",
         "newyear-mode",
+        "valentine-mode",
         "christmas-mode",
         "independence-mode",
         "weekend-mode"
@@ -6300,59 +6581,140 @@ function updateThemeByTime() {
     // MODE HARI SPESIAL
     // ==========================
 
-    // 🎆 1 Januari (24 jam)
-    if (month === 1 && day === 1) {
-        document.body.classList.add("newyear-mode");
+    // 🎆 Tahun Baru (1 Januari)
+    if (
+        month === 1 &&
+        day === 1
+    ) {
+
+        document.body.classList.add(
+            "newyear-mode"
+        );
+
         return;
+
     }
 
-    // 🇮🇩 17 Agustus (24 jam)
-    if (month === 8 && day === 17) {
-        document.body.classList.add("independence-mode");
+
+    // 💖 Valentine (14 Februari)
+    if (
+        month === 2 &&
+        day === 14
+    ) {
+
+        document.body.classList.add(
+            "valentine-mode"
+        );
+
         return;
+
     }
 
-    // 🎄 25 Desember (24 jam)
-    if (month === 12 && day === 25) {
-        document.body.classList.add("christmas-mode");
+
+    // 🇮🇩 Hari Kemerdekaan (17 Agustus)
+    if (
+        month === 8 &&
+        day === 17
+    ) {
+
+        document.body.classList.add(
+            "independence-mode"
+        );
+
         return;
+
     }
+
+
+    // 🎄 Natal (25 Desember)
+    if (
+        month === 12 &&
+        day === 25
+    ) {
+
+        document.body.classList.add(
+            "christmas-mode"
+        );
+
+        return;
+
+    }
+
 
     // ==========================
     // WEEKEND MODE
-    // Berlaku 24 jam penuh
+    // Berlaku 24 jam
     // ==========================
 
-    if (weekDay === 0 || weekDay === 6) {
-        document.body.classList.add("weekend-mode");
+    if (
+        weekDay === 0 ||
+        weekDay === 6
+    ) {
+
+        document.body.classList.add(
+            "weekend-mode"
+        );
+
         return;
+
     }
+
 
     // ==========================
     // MODE BERDASARKAN WAKTU
     // ==========================
 
-    const sunriseStart = 5 * 60 + 30;   // 05:30
-    const sunriseEnd   = 6 * 60 + 30;   // 06:30
+    const sunriseStart =
+    5 * 60 + 30;   // 05:30
 
-    const sunsetStart  = 16 * 60 + 30;  // 16:30
-    const sunsetEnd    = 17 * 60 + 30;  // 17:30
+    const sunriseEnd =
+    6 * 60 + 30;   // 06:30
+
+
+    const sunsetStart =
+    16 * 60 + 30;  // 16:30
+
+    const sunsetEnd =
+    17 * 60 + 30;  // 17:30
+
 
     if (
-        (totalMinutes >= sunriseStart && totalMinutes < sunriseEnd) ||
-        (totalMinutes >= sunsetStart && totalMinutes < sunsetEnd)
+
+        (
+            totalMinutes >= sunriseStart &&
+            totalMinutes < sunriseEnd
+        )
+
+        ||
+
+        (
+            totalMinutes >= sunsetStart &&
+            totalMinutes < sunsetEnd
+        )
+
     ) {
 
-        document.body.classList.add("golden-mode");
+        document.body.classList.add(
+            "golden-mode"
+        );
 
     }
 
     else if (
-        totalMinutes >= 18 * 60 ||
-        totalMinutes < sunriseStart
+
+        totalMinutes >=
+        18 * 60
+
+        ||
+
+        totalMinutes <
+        sunriseStart
+
     ) {
 
-        document.body.classList.add("dark-mode");
+        document.body.classList.add(
+            "dark-mode"
+        );
 
     }
 
@@ -6360,8 +6722,12 @@ function updateThemeByTime() {
 
 updateThemeByTime();
 
+
 // Cek setiap detik
-setInterval(updateThemeByTime, 1000);
+setInterval(
+    updateThemeByTime,
+    1000
+);
 // Inisialisasi awal slider saat halaman siap
 createPaginationDots();
 updateSliderPosition();
@@ -8934,7 +9300,7 @@ async function loadOnThisDay() {
 
         const data = await res.json();
 
-        const events = data.events.filter(event => {
+        let events = data.events.filter(event => {
 
             const text = event.text.toLowerCase();
 
@@ -8942,79 +9308,91 @@ async function loadOnThisDay() {
 
         });
 
+        // ==========================
+        // Acak urutan event (Fisher-Yates Shuffle)
+        // ==========================
+        for (let i = events.length - 1; i > 0; i--) {
+
+            const j = Math.floor(Math.random() * (i + 1));
+
+            [events[i], events[j]] = [events[j], events[i]];
+
+        }
+
         container.innerHTML = "";
 
         let shown = 0;
 
-for (const event of events) {
+        for (const event of events) {
 
-    if (!event.pages || event.pages.length === 0) continue;
+            if (!event.pages || event.pages.length === 0) continue;
 
-    const page = event.pages[0];
+            const page = event.pages[0];
 
-    if (!page) continue;
+            if (!page) continue;
 
-    const category = getCategory(event.text);
+            const category = getCategory(event.text);
 
-    // Ambil thumbnail terbaru dari Wikipedia Summary API
-    const summaryRes = await fetch(
-        `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(page.title)}`
-    );
+            // Ambil thumbnail terbaru dari Wikipedia Summary API
+            const summaryRes = await fetch(
+                `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(page.title)}`
+            );
 
-    if (!summaryRes.ok) continue;
+            if (!summaryRes.ok) continue;
 
-    const summary = await summaryRes.json();
+            const summary = await summaryRes.json();
 
-    const image =
-        summary.originalimage?.source ||
-        summary.thumbnail?.source;
+            const image =
+                summary.originalimage?.source ||
+                summary.thumbnail?.source;
 
-    if (!image) continue;
+            if (!image) continue;
 
-    const link = page.content_urls?.desktop?.page || "#";
+            const link =
+                page.content_urls?.desktop?.page || "#";
 
-    container.innerHTML += `
-        <a class="history-card"
-           href="${link}"
-           target="_blank">
+            container.innerHTML += `
+                <a class="history-card"
+                   href="${link}"
+                   target="_blank">
 
-            <img
-                src="${image}"
-                class="history-image"
-                loading="lazy"
-                onerror="this.closest('.history-card').remove()">
+                    <img
+                        src="${image}"
+                        class="history-image"
+                        loading="lazy"
+                        onerror="this.closest('.history-card').remove()">
 
-            <div class="history-body">
+                    <div class="history-body">
 
-                <div class="history-meta">
+                        <div class="history-meta">
 
-                    <span>${category.icon} ${category.name}</span>
+                            <span>${category.icon} ${category.name}</span>
 
-                    <span>• ${event.year}</span>
+                            <span>• ${event.year}</span>
 
-                </div>
+                        </div>
 
-                <div class="history-title">
-                    ${page.normalizedtitle || page.title}
-                </div>
+                        <div class="history-title">
+                            ${page.normalizedtitle || page.title}
+                        </div>
 
-                <div class="history-description">
-                    ${event.text}
-                </div>
+                        <div class="history-description">
+                            ${event.text}
+                        </div>
 
-            </div>
+                    </div>
 
-        </a>
-    `;
+                </a>
+            `;
 
-    shown++;
+            shown++;
 
-    // Berhenti setelah berhasil menampilkan 5 card
-    if (shown >= 5) {
-        break;
-    }
+            // Berhenti setelah berhasil menampilkan 5 card
+            if (shown >= 5) {
+                break;
+            }
 
-}
+        }
 
         if (shown === 0) {
 
@@ -9055,9 +9433,23 @@ async function imageExists(url){
 
 }
 
+// ==========================================
+// WORLD TODAY
+// Optimized Version - Stable Random Order
+// ==========================================
+
 let worldTodayCache = null;
 let worldTodayLastUpdate = 0;
+let worldTodayCacheDate = null;
 
+const CACHE_DURATION = 30 * 60 * 1000; // 30 menit
+const SHOW_ITEMS = 5;
+const ONE_DAY = 24 * 60 * 60 * 1000;
+
+
+// ==========================================
+// RANDOM EARTHQUAKE IMAGES
+// ==========================================
 
 const earthquakeImages = [
 
@@ -9069,46 +9461,101 @@ const earthquakeImages = [
 
 "https://cdn1-production-images-kly.akamaized.net/4he7Dw6ECXYc4G2_M3dchvMisQw=/0x0:1023x576/1200x675/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/3352208/original/027437300_1610963252-AP21018075595503.jpg",
 
-"https://assets.negara.co.id/uploads/2026/06/13/b06bd124-fae5-413e-90bf-eae144cb1b0f.jpeg",
+"https://assets.negara.co.id/uploads/2026/06/13/b06bd124-fae5-413e-90bf-eae144cb1b0f.jpeg"
 
 ];
+
+
+// ==========================================
+// RANDOM IMAGE
+// ==========================================
 
 function getRandomEarthquakeImage(){
 
     return earthquakeImages[
-        Math.floor(Math.random() * earthquakeImages.length)
+        Math.floor(
+            Math.random() * earthquakeImages.length
+        )
     ];
 
 }
+
+
+// ==========================================
+// FISHER YATES SHUFFLE
+// ==========================================
+
+function shuffle(array){
+
+    const arr = [...array];
+
+    for(
+        let i = arr.length - 1;
+        i > 0;
+        i--
+    ){
+
+        const j =
+        Math.floor(
+            Math.random() * (i + 1)
+        );
+
+        [
+            arr[i],
+            arr[j]
+        ] =
+        [
+            arr[j],
+            arr[i]
+        ];
+
+    }
+
+    return arr;
+
+}
+
+
+// ==========================================
+// DIRECTION
+// ==========================================
+
 function explainDirection(place){
 
     const directions = {
 
-        "N": "north",
-        "NE": "northeast",
-        "E": "east",
-        "SE": "southeast",
-        "S": "south",
-        "SW": "southwest",
-        "W": "west",
-        "NW": "northwest",
+        "N":"north",
+        "NE":"northeast",
+        "E":"east",
+        "SE":"southeast",
+        "S":"south",
+        "SW":"southwest",
+        "W":"west",
+        "NW":"northwest",
 
-        "NNE": "north-northeast",
-        "ENE": "east-northeast",
-        "ESE": "east-southeast",
-        "SSE": "south-southeast",
-        "SSW": "south-southwest",
-        "WSW": "west-southwest",
-        "WNW": "west-northwest"
+        "NNE":"north-northeast",
+        "ENE":"east-northeast",
+        "ESE":"east-southeast",
+        "SSE":"south-southeast",
+        "SSW":"south-southwest",
+        "WSW":"west-southwest",
+        "WNW":"west-northwest"
 
     };
 
 
-    Object.keys(directions).forEach(dir=>{
+    Object.keys(directions)
+    .forEach(dir=>{
 
-        const regex = new RegExp(`\\b${dir}\\b`, "g");
+        const regex =
+        new RegExp(
+            `\\b${dir}\\b`,
+            "g"
+        );
 
-        place = place.replace(
+
+        place =
+        place.replace(
             regex,
             directions[dir]
         );
@@ -9119,87 +9566,183 @@ function explainDirection(place){
     return place;
 
 }
+
+
+// ==========================================
+// SOURCE LABEL
+// ==========================================
+
 function getSourceLabel(url){
 
-    if(url.includes("nasa.gov")){
+    if(url.includes("nasa.gov"))
         return "🚀 NASA";
-    }
 
-    if(url.includes("esa.int")){
+    if(url.includes("esa.int"))
         return "🛰️ ESA";
-    }
 
-    if(url.includes("spacex.com")){
+    if(url.includes("spacex.com"))
         return "🚀 SpaceX";
-    }
 
-    if(url.includes("space.com")){
+    if(url.includes("space.com"))
         return "🌌 Space.com";
-    }
 
-    if(url.includes("phys.org")){
+    if(url.includes("phys.org"))
         return "🔬 Phys.org";
-    }
 
-    if(url.includes("sciencealert.com")){
+    if(url.includes("sciencealert.com"))
         return "🔬 Science Alert";
-    }
 
-    if(url.includes("nature.com")){
+    if(url.includes("nature.com"))
         return "🧬 Nature";
-    }
 
-    if(url.includes("arstechnica.com")){
+    if(url.includes("arstechnica.com"))
         return "💻 Ars Technica";
-    }
+
 
     return "🌌 Astronomy";
 
 }
+
+
+// ==========================================
+// RANDOM ITEMS
+// ==========================================
+
+function getRandomItems(items,total){
+
+    return shuffle(items)
+    .slice(0,total);
+
+}
+
+
+// ==========================================
+// LOAD WORLD TODAY
+// ==========================================
+
 async function loadWorldToday(){
 
-    const container = document.getElementById("worldTodayContainer");
+    const container =
+    document.getElementById(
+        "worldTodayContainer"
+    );
 
-    const nowTime = Date.now();
+
+    const nowTime =
+    Date.now();
 
 
-    // gunakan cache 30 menit
-    if(
-        worldTodayCache &&
-        nowTime - worldTodayLastUpdate < 30 * 60 * 1000
-    ){
+// =====================================
+// LOAD CACHE SESSION
+// =====================================
 
-        renderWorldToday(worldTodayCache);
+const savedCache =
+sessionStorage.getItem(
+    "worldTodayCache"
+);
 
-        return;
 
-    }
+const savedDate =
+sessionStorage.getItem(
+    "worldTodayCacheDate"
+);
 
+
+
+if(
+    savedCache &&
+    savedDate ===
+    new Date()
+    .toLocaleDateString(
+        "id-ID",
+        {
+            timeZone:"Asia/Jakarta"
+        }
+    )
+){
+
+    worldTodayCache =
+    JSON.parse(savedCache);
+
+
+    renderWorldToday(
+        worldTodayCache
+    );
+
+
+    return;
+
+}
+    // =====================================
+    // CACHE
+    // TIDAK ACAK LAGI
+    // =====================================
+
+   if(
+    worldTodayCache &&
+    worldTodayCacheDate ===
+    new Date()
+    .toLocaleDateString(
+        "id-ID",
+        {
+            timeZone:"Asia/Jakarta"
+        }
+    ) &&
+    (
+        nowTime -
+        worldTodayLastUpdate
+    )
+    <
+    CACHE_DURATION
+){
+    renderWorldToday(worldTodayCache);
+    return;
+}
 
     container.innerHTML =
-    '<div class="loading-card">Memuat berita dunia...</div>';
+    `
+    <div class="loading-card">
+        Memuat berita dunia...
+    </div>
+    `;
 
 
-    try {
+
+    try{
 
 
         const [
             spaceRes,
             quakeRes
-        ] = await Promise.all([
+
+        ] =
+        await Promise.all([
 
 
             fetch(
-                "https://api.spaceflightnewsapi.net/v4/articles/?limit=20"
+            "https://api.spaceflightnewsapi.net/v4/articles/?limit=50"
             ),
 
 
             fetch(
-                "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson"
+            "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson"
             )
 
 
         ]);
+
+
+
+        if(
+            !spaceRes.ok ||
+            !quakeRes.ok
+        ){
+
+            throw new Error(
+                "Fetch gagal"
+            );
+
+        }
 
 
 
@@ -9212,153 +9755,450 @@ async function loadWorldToday(){
 
 
 
-        let items=[];
-
-
-        const now=new Date();
+        const now =
+        Date.now();
 
 
 
-        // =====================
-        // ASTRONOMY
-        // =====================
+        let spaceItems = [];
 
-        spaceData.results
+        let quakeItems = [];
 
-        .filter(article=>
-            article.image_url
+
+
+        // =====================================
+// TODAY WIB
+// =====================================
+
+const todayWIB =
+new Date()
+.toLocaleDateString(
+    "id-ID",
+    {
+        timeZone:"Asia/Jakarta"
+    }
+);
+
+
+
+// =====================================
+// SPACE
+// TODAY + FALLBACK 24 JAM
+// =====================================
+
+let spaceToday = [];
+
+let spaceFallback = [];
+
+
+
+spaceData.results
+
+.filter(article=>article.image_url)
+
+.forEach(article=>{
+
+
+    const newsDate =
+    new Date(article.published_at);
+
+
+
+    const newsWIB =
+    newsDate.toLocaleDateString(
+        "id-ID",
+        {
+            timeZone:"Asia/Jakarta"
+        }
+    );
+
+
+
+    const age =
+    Date.now() -
+    newsDate.getTime();
+
+
+
+    // berita hari ini
+
+    if(
+        newsWIB === todayWIB
+    ){
+
+        spaceToday.push(article);
+
+    }
+
+
+
+    // fallback 24 jam
+
+    else if(
+
+        age <= ONE_DAY &&
+        age >= 0
+
+    ){
+
+        spaceFallback.push(article);
+
+    }
+
+
+});
+
+
+
+
+
+// gabungkan
+// hari ini dulu,
+// lalu fallback
+
+
+spaceToday
+.concat(spaceFallback)
+
+.forEach(article=>{
+
+
+    spaceItems.push({
+
+        title:
+        article.title,
+
+
+        image:
+        article.image_url,
+
+
+        description:
+        (
+            article.summary || ""
+        )
+        .substring(0,120)
+        +
+        "...",
+
+
+        date:
+        article.published_at,
+
+
+        url:
+        article.url,
+
+
+        category:
+        getSourceLabel(
+            article.url
         )
 
-        .filter(article=>{
 
-            const age =
-            (now - new Date(article.published_at))
-            /
-            (1000*60*60);
+    });
 
 
-            return age <=72;
-
-        })
-
-
-        .slice(0,5)
-
-
-        .forEach(article=>{
-
-
-            items.push({
-
-                title:article.title,
-
-                image:article.image_url,
-
-                description:
-                article.summary.substring(0,120)+"...",
-
-                date:
-                article.published_at,
-
-                url:
-                article.url,
-
-                category:
-getSourceLabel(article.url)
-
-            });
-
-
-        });
+});
 
 
 
-        // =====================
-        // EARTHQUAKE
-        // =====================
-
-        quakeData.features
-
-        .slice(0,5)
-
-        .forEach(eq=>{
 
 
-            items.push({
 
-                title:
-                eq.properties.title,
-image:
+
+// =====================================
+// EARTHQUAKE
+// TODAY + FALLBACK 24 JAM
+// =====================================
+
+
+let quakeToday = [];
+
+let quakeFallback = [];
+
+
+
+quakeData.features
+
+.forEach(eq=>{
+
+
+    const quakeDate =
+    new Date(
+        eq.properties.time
+    );
+
+
+
+    const quakeWIB =
+    quakeDate.toLocaleDateString(
+        "id-ID",
+        {
+            timeZone:"Asia/Jakarta"
+        }
+    );
+
+
+
+    const age =
+    Date.now() -
+    quakeDate.getTime();
+
+
+
+    // gempa hari ini
+
+    if(
+        quakeWIB === todayWIB
+    ){
+
+        quakeToday.push(eq);
+
+    }
+
+
+
+    // fallback 24 jam
+
+    else if(
+
+        age <= ONE_DAY &&
+        age >= 0
+
+    ){
+
+        quakeFallback.push(eq);
+
+    }
+
+
+});
+
+
+
+
+
+// gabungkan
+// hari ini dulu,
+// lalu fallback
+
+
+quakeToday
+.concat(quakeFallback)
+
+.forEach(eq=>{
+
+
+    quakeItems.push({
+
+        title:
+        eq.properties.title,
+
+
+        image:
         getRandomEarthquakeImage(),
 
-description:
-`A magnitude ${eq.properties.mag} earthquake occurred in ${explainDirection(eq.properties.place)}.`,
 
-                date:
-                new Date(eq.properties.time)
-                .toISOString(),
+        description:
+
+        `A magnitude ${eq.properties.mag} earthquake occurred in ${explainDirection(eq.properties.place)}.`,
 
 
-                url:
-                eq.properties.url,
+        date:
+
+        new Date(
+            eq.properties.time
+        )
+        .toISOString(),
 
 
-                category:
-"🌋 Natural Disasters"
+        url:
 
-            });
+        eq.properties.url,
+
+
+        category:
+
+        "🌋 Natural Disasters"
+
+
+    });
+
+
+});
+
+
+        // =====================================
+        // KOMBINASI
+        // 3 SPACE + 2 GEMPA
+        // =====================================
+
+        const randomSpace =
+        getRandomItems(
+            spaceItems,
+            3
+        );
+
+
+        const randomQuake =
+        getRandomItems(
+            quakeItems,
+            2
+        );
+
+
+
+        let selectedItems = [
+
+            ...randomSpace,
+
+            ...randomQuake
+
+        ];
+
+
+
+
+
+        // =====================================
+        // ACAK POSISI SEKALI SAJA
+        // =====================================
+
+        selectedItems =
+        shuffle(
+            selectedItems
+        );
+
+
+
+
+
+        // =====================================
+        // HAPUS DUPLIKAT
+        // =====================================
+
+        const unique = [];
+
+        const used = new Set();
+
+
+
+        selectedItems.forEach(item=>{
+
+
+            if(
+                !used.has(item.url)
+            ){
+
+                used.add(item.url);
+
+                unique.push(item);
+
+            }
 
 
         });
 
 
 
-        items.sort(
-            (a,b)=>
-            new Date(b.date)-new Date(a.date)
+        selectedItems =
+        unique.slice(
+            0,
+            SHOW_ITEMS
         );
 
-// acak urutan agar sumber bercampur
-items.sort(() => Math.random() - 0.5);
-
-
-// ambil 5 item pertama
-items =
-items.slice(0,5);
 
 
 
-        worldTodayCache = items;
 
-        worldTodayLastUpdate = nowTime;
+        // =====================================
+        // SIMPAN CACHE
+        // URUTAN SUDAH FINAL
+        // =====================================
+worldTodayCache =
+selectedItems;
+
+
+worldTodayLastUpdate =
+nowTime;
+
+
+worldTodayCacheDate =
+new Date()
+.toLocaleDateString(
+    "id-ID",
+    {
+        timeZone:"Asia/Jakarta"
+    }
+);
 
 
 
-        renderWorldToday(items);
+sessionStorage.setItem(
+    "worldTodayCache",
+    JSON.stringify(
+        worldTodayCache
+    )
+);
+
+
+sessionStorage.setItem(
+    "worldTodayCacheDate",
+    worldTodayCacheDate
+);
+
+
+
+
+
+        // =====================================
+        // RENDER
+        // =====================================
+
+        renderWorldToday(
+            worldTodayCache
+        );
 
 
 
     }
+
     catch(err){
+
 
         console.error(err);
 
 
         container.innerHTML =
-        '<div class="loading-card">Gagal memuat berita dunia.</div>';
+
+        `
+        <div class="loading-card">
+            Gagal memuat berita dunia.
+        </div>
+        `;
+
 
     }
+
 
 }
 
 
 
 
+
+// ==========================================
+// RENDER WORLD TODAY
+// ==========================================
+
 function renderWorldToday(items){
 
 
     const container =
-    document.getElementById("worldTodayContainer");
+    document.getElementById(
+        "worldTodayContainer"
+    );
 
 
     const fragment =
@@ -9381,52 +10221,92 @@ function renderWorldToday(items){
         item.url;
 
 
-        card.target="_blank";
-
-        card.rel="noopener noreferrer";
-
+        card.target =
+        "_blank";
 
 
-        card.innerHTML=`
+        card.rel =
+        "noopener noreferrer";
+
+
+
+        card.innerHTML = `
+
 
         <img
+
         class="history-image"
+
         src="${item.image}"
-        loading="lazy">
+
+        loading="lazy"
+
+        decoding="async"
+
+        referrerpolicy="no-referrer"
+
+        onerror="
+        this.src='https://placehold.co/800x450/1b1b1b/ffffff?text=No+Image';
+        ">
 
 
         <div class="history-body">
 
 
-        <div class="history-meta">
+            <div class="history-meta">
 
-        ${item.category}
+                ${item.category}
 
-        <span>
-        • ${new Date(item.date)
-        .toLocaleDateString("id-ID")}
-        </span>
+
+                <span>
+
+                •
+
+                ${new Date(item.date)
+                .toLocaleDateString(
+                    "id-ID",
+                    {
+
+                    day:"numeric",
+
+                    month:"short",
+
+                    year:"numeric"
+
+                    }
+
+                )}
+
+                </span>
+
+
+            </div>
+
+
+
+
+            <div class="history-title">
+
+                ${item.title}
+
+            </div>
+
+
+
+
+            <div class="history-description">
+
+                ${item.description}
+
+            </div>
+
+
 
         </div>
 
-
-        <div class="history-title">
-
-        ${item.title}
-
-        </div>
-
-
-        <div class="history-description">
-
-        ${item.description}
-
-        </div>
-
-
-        </div>
 
         `;
+
 
 
         fragment.appendChild(card);
@@ -9436,29 +10316,123 @@ function renderWorldToday(items){
 
 
 
-    container.replaceChildren(fragment);
+    container.replaceChildren(
+        fragment
+    );
+
 
 }
 
 
 
 
+
+
+
+// ==========================================
+// FIRST LOAD
+// ==========================================
+
 loadWorldToday();
 
 
 
-// update tiap 1 jam hanya jika tab aktif
+
+
+
+// ==========================================
+// AUTO REFRESH
+// ==========================================
+
 setInterval(()=>{
 
-    if(!document.hidden){
 
-        worldTodayCache=null;
+    if(document.hidden){
 
-        loadWorldToday();
+        return;
 
     }
 
+
+
+    // hapus cache
+    // agar berita baru + acak baru
+
+    worldTodayCache = null;
+
+
+
+    loadWorldToday();
+
+
+
 },60*60*1000);
+
+
+
+
+
+
+
+// ==========================================
+// TAB AKTIF LAGI
+// ==========================================
+
+document.addEventListener(
+
+"visibilitychange",
+
+()=>{
+
+
+    if(document.hidden){
+
+        return;
+
+    }
+
+
+
+    // cache masih ada
+    // tidak akan random ulang
+
+    loadWorldToday();
+
+
+}
+
+);
+
+
+
+
+
+
+
+// ==========================================
+// ONLINE KEMBALI
+// ==========================================
+
+window.addEventListener(
+
+"online",
+
+()=>{
+
+
+    worldTodayCache = null;
+
+
+    loadWorldToday();
+
+
+}
+
+);
+
+
+
+
 
 document.getElementById("currentYear").textContent =
     new Date().getFullYear();
