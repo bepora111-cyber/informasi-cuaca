@@ -3546,7 +3546,482 @@ body.weekend-mode .section-summary{
 
 }
 
+/* ==========================================
+   CHRISTMAS MODE
+========================================== */
 
+body.christmas-mode::before{
+
+    background-image:
+        linear-gradient(
+            rgba(18,40,22,.45),
+            rgba(70,8,8,.40)
+        ),
+        url('https://lh3.googleusercontent.com/gps-cs-s/APNQkAGXzDf6jAqrxVqIt-StdTukOFbGz1GhCgbTUc4Cy9HvG0ZJ1Lk6GwKSemZ9SSBePQ6xFvAHl-g-2ExnhP111C7NhC2NnwS8JRjZyBT-UGeuFAIt_Pjh9ENi7PStSl_RU352jqAyHI6mGIdz=s1360-w1360-h1020-rw');
+
+    background-size:cover;
+    background-position:center;
+
+}
+
+/* CARD */
+
+body.christmas-mode .box,
+body.christmas-mode .day,
+body.christmas-mode .datetime-container,
+body.christmas-mode .modal-content,
+body.christmas-mode .learn-modal-content,
+body.christmas-mode .learn-card,
+body.christmas-mode .temperature-calculator,
+body.christmas-mode #ai-analysis-box,
+body.christmas-mode .history-card,
+body.christmas-mode .loading-card{
+
+    background:rgba(20,45,30,.82);
+
+    border:1px solid rgba(255,255,255,.18);
+
+    backdrop-filter:blur(15px);
+    -webkit-backdrop-filter:blur(15px);
+
+}
+
+/* HEADERS */
+
+body.christmas-mode .learn-header{
+
+    background:rgba(183,28,28,.18);
+
+}
+
+body.christmas-mode .learn-body{
+
+    background:rgba(255,255,255,.05);
+
+}
+
+/* DOT */
+
+body.christmas-mode .dot.active{
+
+    background:#ffffff;
+
+    box-shadow:
+        0 0 12px rgba(255,255,255,.8);
+
+}
+
+/* BOX */
+
+body.christmas-mode .box.active{
+
+    background:
+        linear-gradient(
+            135deg,
+            #b71c1c,
+            #d32f2f,
+            #1b5e20
+        );
+
+    color:#ffffff;
+
+    border:1px solid rgba(255,255,255,.25);
+
+    box-shadow:
+        0 0 18px rgba(183,28,28,.30),
+        0 0 35px rgba(27,94,32,.18);
+
+}
+
+body.christmas-mode .box.side{
+
+    background:rgba(20,45,30,.72);
+
+}
+
+body.christmas-mode .box:not(.active):hover,
+body.christmas-mode .learn-card:hover{
+
+    background:rgba(32,58,41,.94);
+
+}
+
+/* AI */
+
+body.christmas-mode #ai-analysis-box:hover{
+
+    box-shadow:
+        0 12px 35px rgba(183,28,28,.20);
+
+}
+
+/* FLIP */
+
+body.christmas-mode .temp-front{
+
+    filter:brightness(.96);
+
+    border:1.5px solid rgba(255,255,255,.18);
+
+    box-shadow:
+        inset 0 1px 2px rgba(255,255,255,.06),
+        inset 0 -2px 6px rgba(0,0,0,.35),
+        0 6px 16px rgba(27,94,32,.18);
+
+}
+
+body.christmas-mode .temp-front::before,
+body.christmas-mode .temp-back::before{
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.18),
+            rgba(183,28,28,.12) 30%,
+            rgba(27,94,32,.12) 60%,
+            rgba(255,255,255,.05)
+        );
+
+}
+
+body.christmas-mode .temp-back{
+
+    background:
+        linear-gradient(
+            145deg,
+            #1d4727,
+            #112718
+        );
+
+    color:#f8f8f8;
+
+    border:1.5px solid rgba(255,255,255,.15);
+
+}
+
+/* SEARCH */
+
+body.christmas-mode .learn-search input{
+
+    background:rgba(22,40,28,.92);
+
+    color:#ffffff;
+
+    border:1px solid rgba(255,255,255,.15);
+
+}
+
+body.christmas-mode .learn-search input::placeholder{
+
+    color:rgba(255,255,255,.55);
+
+}
+
+body.christmas-mode .learn-search input:focus{
+
+    background:rgba(30,55,37,.96);
+
+    border-color:#ffffff;
+
+    box-shadow:
+        0 0 15px rgba(255,255,255,.18);
+
+}
+
+body.christmas-mode .search-icon svg{
+
+    stroke:#ffffff !important;
+
+}
+
+/* HISTORY */
+
+body.christmas-mode .history-title{
+
+    color:#ffffff;
+
+}
+
+body.christmas-mode .history-meta{
+
+    color:#d7d7d7;
+
+}
+
+body.christmas-mode .history-description{
+
+    color:#ededed;
+
+}
+
+/* SUMMARY */
+
+body.christmas-mode .section-summary{
+
+    background:rgba(183,28,28,.15);
+
+    border-left:4px solid #ffffff;
+
+    color:#ffffff;
+
+    box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,.08);
+
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+    body.christmas-mode .history-card{
+
+        backdrop-filter:blur(8px);
+        -webkit-backdrop-filter:blur(8px);
+
+        box-shadow:
+            0 6px 16px rgba(27,94,32,.15);
+
+    }
+
+}
+
+/* ==========================================
+   INDEPENDENCE MODE
+========================================== */
+
+body.independence-mode::before{
+
+    background-image:
+        linear-gradient(
+            rgba(15,15,15,.55),
+            rgba(120,0,0,.38)
+        ),
+        url('https://lh3.googleusercontent.com/gps-cs-s/APNQkAGXzDf6jAqrxVqIt-StdTukOFbGz1GhCgbTUc4Cy9HvG0ZJ1Lk6GwKSemZ9SSBePQ6xFvAHl-g-2ExnhP111C7NhC2NnwS8JRjZyBT-UGeuFAIt_Pjh9ENi7PStSl_RU352jqAyHI6mGIdz=s1360-w1360-h1020-rw');
+
+    background-size:cover;
+    background-position:center;
+
+}
+
+/* CARD */
+
+body.independence-mode .box,
+body.independence-mode .day,
+body.independence-mode .datetime-container,
+body.independence-mode .modal-content,
+body.independence-mode .learn-modal-content,
+body.independence-mode .learn-card,
+body.independence-mode .temperature-calculator,
+body.independence-mode #ai-analysis-box,
+body.independence-mode .history-card,
+body.independence-mode .loading-card{
+
+    background:rgba(18,18,18,.82);
+
+    border:1px solid rgba(255,255,255,.14);
+
+    backdrop-filter:blur(15px);
+    -webkit-backdrop-filter:blur(15px);
+
+}
+
+/* HEADERS */
+
+body.independence-mode .learn-header{
+
+    background:rgba(213,0,0,.18);
+
+}
+
+body.independence-mode .learn-body{
+
+    background:rgba(255,255,255,.04);
+
+}
+
+/* DOT */
+
+body.independence-mode .dot.active{
+
+    background:#ffffff;
+
+    box-shadow:
+        0 0 12px rgba(255,255,255,.8);
+
+}
+
+/* BOX */
+
+body.independence-mode .box.active{
+
+    background:
+        linear-gradient(
+            135deg,
+            #7a0000,
+            #d50000,
+            #ff2b2b
+        );
+
+    color:#ffffff;
+
+    border:1px solid rgba(255,255,255,.28);
+
+    box-shadow:
+        0 0 20px rgba(213,0,0,.45),
+        0 0 40px rgba(213,0,0,.20);
+
+}
+
+body.independence-mode .box.side{
+
+    background:rgba(24,24,24,.75);
+
+}
+
+body.independence-mode .box:not(.active):hover,
+body.independence-mode .learn-card:hover{
+
+    background:rgba(38,38,38,.95);
+
+}
+
+/* AI */
+
+body.independence-mode #ai-analysis-box:hover{
+
+    box-shadow:
+        0 12px 35px rgba(213,0,0,.30);
+
+}
+
+/* FLIP */
+
+body.independence-mode .temp-front{
+
+    filter:brightness(.96);
+
+    border:1.5px solid rgba(255,255,255,.15);
+
+    box-shadow:
+        inset 0 1px 2px rgba(255,255,255,.06),
+        inset 0 -2px 6px rgba(0,0,0,.45),
+        0 6px 16px rgba(213,0,0,.15);
+
+}
+
+body.independence-mode .temp-front::before,
+body.independence-mode .temp-back::before{
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.18),
+            rgba(213,0,0,.14) 35%,
+            rgba(255,255,255,0) 70%
+        );
+
+}
+
+body.independence-mode .temp-back{
+
+    background:
+        linear-gradient(
+            145deg,
+            #2b2b2b,
+            #111111
+        );
+
+    color:#ffffff;
+
+    border:1.5px solid rgba(255,255,255,.15);
+
+}
+
+/* SEARCH */
+
+body.independence-mode .learn-search input{
+
+    background:rgba(20,20,20,.92);
+
+    color:#ffffff;
+
+    border:1px solid rgba(255,255,255,.15);
+
+}
+
+body.independence-mode .learn-search input::placeholder{
+
+    color:rgba(255,255,255,.50);
+
+}
+
+body.independence-mode .learn-search input:focus{
+
+    background:rgba(30,30,30,.96);
+
+    border-color:#ff3d3d;
+
+    box-shadow:
+        0 0 15px rgba(213,0,0,.35);
+
+}
+
+body.independence-mode .search-icon svg{
+
+    stroke:#ff4d4d !important;
+
+}
+
+/* HISTORY */
+
+body.independence-mode .history-title{
+
+    color:#ffffff;
+
+}
+
+body.independence-mode .history-meta{
+
+    color:#ff8a8a;
+
+}
+
+body.independence-mode .history-description{
+
+    color:#ececec;
+
+}
+
+/* SUMMARY */
+
+body.independence-mode .section-summary{
+
+    background:rgba(213,0,0,.12);
+
+    border-left:4px solid #ffffff;
+
+    color:#ffffff;
+
+    box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,.06);
+
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+    body.independence-mode .history-card{
+
+        backdrop-filter:blur(8px);
+        -webkit-backdrop-filter:blur(8px);
+
+        box-shadow:
+            0 6px 16px rgba(213,0,0,.15);
+
+    }
+
+}
 </style>
 </head>
 <body>
@@ -5427,6 +5902,8 @@ function updateThemeByTime() {
         "golden-mode",
         "dark-mode",
         "newyear-mode",
+        "christmas-mode",
+        "independence-mode",
         "weekend-mode"
     );
 
@@ -5434,9 +5911,21 @@ function updateThemeByTime() {
     // MODE HARI SPESIAL
     // ==========================
 
-    // 1 Januari
+    // 🎆 1 Januari (24 jam)
     if (month === 1 && day === 1) {
         document.body.classList.add("newyear-mode");
+        return;
+    }
+
+    // 🇮🇩 17 Agustus (24 jam)
+    if (month === 8 && day === 17) {
+        document.body.classList.add("independence-mode");
+        return;
+    }
+
+    // 🎄 25 Desember (24 jam)
+    if (month === 12 && day === 25) {
+        document.body.classList.add("christmas-mode");
         return;
     }
 
