@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Informasi Cuaca</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.36/dist/lenis.min.js"></script>
 </head>
 
 <style>
@@ -10322,6 +10323,19 @@ window.addEventListener(
 document.getElementById("currentYear").textContent =
     new Date().getFullYear();
     
+
+const lenis = new Lenis({
+    duration: 1.2, // Mengatur berapa lama efek meluncurnya (makin besar, makin lambat & mewah)
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Rumus pergerakan yang halus
+    smoothWheel: true // Mengaktifkan efek smooth untuk scroll biasa (mouse wheel)
+  })
+
+  function raf(time) {
+    lenis.raf(time)
+    requestAnimationFrame(raf)
+  }
+
+  requestAnimationFrame(raf)
 </script>
 </body>
 </html>
