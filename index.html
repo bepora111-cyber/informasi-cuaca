@@ -1063,6 +1063,7 @@ body.dark-mode .section-summary{
     }
 }
 #warningBox{
+
     display:none;
     flex-direction:column;
     gap:12px;
@@ -1073,27 +1074,36 @@ body.dark-mode .section-summary{
     padding:15px 20px;
 
     border-radius:15px;
+
     background:rgba(255,80,80,.15);
-    backdrop-filter:blur(10px);
+    backdrop-filter:blur(6px);
     border:1px solid rgba(255,100,100,.3);
 
     color:#fff;
     font-weight:bold;
     text-align:center;
 
-    animation:warningPulse 2s ease-in-out infinite;
     box-shadow:0 8px 25px rgba(0,0,0,.25);
+
+    animation:warningPulse 2s cubic-bezier(.45,.05,.55,.95) infinite;
+
+    will-change:transform,opacity;
+    transform:translateZ(0);
+    backface-visibility:hidden;
 }
+
 @keyframes warningPulse{
+
     0%,100%{
-        transform:scale(1);
-        box-shadow:0 8px 25px rgba(0,0,0,.25);
+        transform:translateZ(0) scale(1);
+        opacity:.90;
     }
 
     50%{
-        transform:scale(1.03);
-        box-shadow:0 10px 35px rgba(255,80,80,.35);
+        transform:translateZ(0) scale(1.05);
+        opacity:1;
     }
+
 }
 #heatmapLegend{
     color:#ddd;
