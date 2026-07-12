@@ -1064,19 +1064,36 @@ body.dark-mode .section-summary{
 }
 #warningBox{
     display:none;
+    flex-direction:column;
+    gap:12px;
+
     width:fit-content;
     max-width:80%;
     margin:15px auto;
     padding:15px 20px;
+
     border-radius:15px;
-    background:rgba(255,80,80,0.15);
+    background:rgba(255,80,80,.15);
     backdrop-filter:blur(10px);
-    border:1px solid rgba(255,100,100,0.3);
+    border:1px solid rgba(255,100,100,.3);
+
     color:#fff;
     font-weight:bold;
     text-align:center;
-    animation:warningPulse 2s infinite;
-    box-shadow:0 8px 25px rgba(0,0,0,0.25);
+
+    animation:warningPulse 2s ease-in-out infinite;
+    box-shadow:0 8px 25px rgba(0,0,0,.25);
+}
+@keyframes warningPulse{
+    0%,100%{
+        transform:scale(1);
+        box-shadow:0 8px 25px rgba(0,0,0,.25);
+    }
+
+    50%{
+        transform:scale(1.03);
+        box-shadow:0 10px 35px rgba(255,80,80,.35);
+    }
 }
 #heatmapLegend{
     color:#ddd;
@@ -5063,7 +5080,7 @@ function checkWarning(weather, air){
     if(rain >= 80){
 
         warning +=
-        "⛈️ Potensi hujan lebat.<br>";
+        "<div>⛈️ Potensi hujan lebat</div>";
 
     }
 
@@ -5074,7 +5091,7 @@ function checkWarning(weather, air){
     if(wind >= 35){
 
         warning +=
-        "🌪️ Angin kencang.<br>";
+        "<div>🌪️ Angin kencang</div>";
 
     }
 
@@ -5085,7 +5102,7 @@ function checkWarning(weather, air){
     if(aqi >= 150){
 
         warning +=
-        "⚠️ Kualitas udara tidak sehat.<br>";
+        "<div>⚠️ Kualitas udara tidak sehat</div>";
 
     }
 
@@ -5096,13 +5113,13 @@ function checkWarning(weather, air){
     if(uv >= 8){
 
         warning +=
-        "☀️ UV sangat tinggi.<br>";
+        "<div>☀️ UV sangat tinggi</div>";
 
     }
     else if(uv >= 6){
 
         warning +=
-        "🧴 UV tinggi.<br>";
+        "<div>🧴 UV tinggi</div>";
 
     }
 
@@ -5113,13 +5130,13 @@ function checkWarning(weather, air){
     if(visibility <= 1000){
 
         warning +=
-        "🌫️ Jarak pandang sangat buruk.<br>";
+        "<div>🌫️ Jarak pandang sangat buruk</div>";
 
     }
     else if(visibility <= 5000){
 
         warning +=
-        "🌁 Jarak pandang berkurang.<br>";
+        "<div>🌁 Jarak pandang berkurang</div>";
 
     }
 
@@ -5129,11 +5146,12 @@ function checkWarning(weather, air){
     if(warning){
 
         box.innerHTML = warning;
-        box.style.display = "block";
+        box.style.display = "flex";
 
     }
     else{
 
+        box.innerHTML = "";
         box.style.display = "none";
 
     }
