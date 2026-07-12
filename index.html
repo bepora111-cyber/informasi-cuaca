@@ -1075,32 +1075,30 @@ body.dark-mode .section-summary{
 
     border-radius:15px;
 
-    background:rgba(255,80,80,.15);
-    backdrop-filter:blur(6px);
-    border:1px solid rgba(255,100,100,.3);
+    background:rgba(255,80,80,.22);
+    border:1px solid rgba(255,100,100,.30);
 
     color:#fff;
     font-weight:bold;
     text-align:center;
 
-    box-shadow:0 8px 25px rgba(0,0,0,.25);
+    box-shadow:0 4px 12px rgba(0,0,0,.20);
 
-    animation:warningPulse 2s cubic-bezier(.45,.05,.55,.95) infinite;
+    animation:warningPulse 3.2s ease-in-out infinite;
 
-    will-change:transform,opacity;
-    transform:translateZ(0);
-    backface-visibility:hidden;
+    will-change:transform;
+    contain:layout paint;
 }
 
 @keyframes warningPulse{
 
     0%,100%{
-        transform:translateZ(0) scale(1);
-        opacity:.90;
+        transform:scale(1);
+        opacity:.95;
     }
 
     50%{
-        transform:translateZ(0) scale(1.05);
+        transform:scale(1.02);
         opacity:1;
     }
 
@@ -4132,13 +4130,11 @@ body.independence-mode .section-summary{
 
 }
 
-
 .presented-section{
 
     margin-top:8px;
 
 }
-
 
 .bottom-lower-third h3{
 
@@ -4165,7 +4161,6 @@ body.independence-mode .section-summary{
 
 }
 
-
 .main-provider img{
 
     display:block;
@@ -4189,7 +4184,6 @@ body.independence-mode .section-summary{
 
 }
 
-
 .main-provider img:hover{
 
     transform:scale(1.03);
@@ -4198,59 +4192,90 @@ body.independence-mode .section-summary{
 
 
 /* ==========================
-   PROVIDER LOGOS
+   PROVIDER LOGO TICKER
 ========================== */
 
-.provider-list{
+.provider-slider{
 
-    display:grid;
+    position:relative;
 
-    grid-template-columns:repeat(5,1fr);
+    left:50%;
 
+    transform:translateX(-50%);
+
+    width:100vw;
+
+    overflow:hidden;
+
+    margin-top:8px;
+
+}
+
+.provider-track{
+
+    display:flex;
     align-items:center;
+    gap:36px;
 
-    justify-content:center;
-
-    gap:8px;
-
-    margin-top:6px;
-
-    padding:0;
+    width:max-content;
 
 }
 
 
-.provider-list a{
+.provider-track.running{
+
+    animation: tickerMove 35s linear infinite;
+
+}
+
+
+@keyframes tickerMove{
+
+    from{
+        transform:translate3d(0,0,0);
+    }
+
+    to{
+        transform:translate3d(calc(-1 * var(--ticker-width)),0,0);
+    }
+
+}
+
+.provider-track a{
+
+    flex:0 0 auto;
 
     display:flex;
 
-    justify-content:center;
-
     align-items:center;
+
+    justify-content:center;
 
 }
 
-
-.provider-list img{
-
-    width:58px;
-
-    height:auto;
+.provider-track img{
 
     display:block;
 
-    transition:.25s;
+    width:auto;
+
+    height:22px;
+
+    transform:translateZ(0);
 
 }
 
+.provider-track img:hover{
 
-.provider-list img:hover{
-
-    transform:scale(1.06);
+    transform:scale(1.08);
 
 }
 
+.provider-slider:hover .provider-track{
 
+    cursor:pointer;
+
+}
 /* ==========================
    PRESENTED BY
 ========================== */
@@ -4261,14 +4286,13 @@ body.independence-mode .section-summary{
 
 }
 
-
 .presented-image img{
 
     display:block;
 
     width:120px;
 
-    max-width:90%;
+    max-width:100%;
 
     height:auto;
 
@@ -4276,10 +4300,10 @@ body.independence-mode .section-summary{
 
     border-radius:14px;
 
-    transition:.25s;
+    transition:
+        transform .25s;
 
 }
-
 
 .presented-image img:hover{
 
@@ -4302,7 +4326,6 @@ body.independence-mode .section-summary{
 
     }
 
-
     .bottom-lower-third h3{
 
         margin-bottom:5px;
@@ -4311,24 +4334,23 @@ body.independence-mode .section-summary{
 
     }
 
+    .provider-slider{
 
-    .provider-list{
-
-        grid-template-columns:repeat(5,1fr);
-
-        gap:6px;
-
-        margin-top:5px;
+        margin-top:6px;
 
     }
 
+    .provider-track{
 
-    .provider-list img{
-
-        width:42px;
+        gap:26px;
 
     }
 
+    .provider-track img{
+
+        height:20px;
+
+    }
 
     .main-provider img,
     .presented-image img{
@@ -4338,7 +4360,6 @@ body.independence-mode .section-summary{
         border-radius:12px;
 
     }
-
 
     .presented-section{
 
@@ -4366,7 +4387,6 @@ body.independence-mode .section-summary{
     user-select:none;
 
 }
-
 
 .copyright-note{
 
@@ -4871,37 +4891,63 @@ body.valentine-mode .section-summary{
 
             <img
                 src="https://avatars.githubusercontent.com/u/86407831"
-                alt="Provider">
+                alt="Open-Meteo">
 
         </a>
 
-       <div class="provider-list">
+       <!-- LOGO TICKER -->
 
-    <!-- BARIS 1 -->
-    <a href="https://en.wikipedia.org/wiki/Main_Page" target="_blank" rel="noopener">
-        <img src="https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-en-25.svg" alt="">
-    </a>
+<div class="provider-slider">
 
-    <a href="https://spaceflightnow.com/" target="_blank" rel="noopener">
-        <img src="https://spaceflightnow.com/wp-content/uploads/2015/09/SFN-Logo-Blue1.png" alt="">
-    </a>
+    <div class="provider-track">
 
-    <a href="https://spacenews.com/" target="_blank" rel="noopener">
-        <img src="https://i0.wp.com/spacenews.com/wp-content/uploads/2025/10/spacenews_logo-crop25.webp?w=736&ssl=1" alt="">
-    </a>
+        <!-- SET 1 -->
 
-    <a href="https://www.nasa.gov/" target="_blank" rel="noopener">
-        <img src="https://science.nasa.gov/wp-content/themes/nasa-child/assets/images/nasa-logo.svg" alt="">
-    </a>
+        <a href="https://en.wikipedia.org/wiki/Main_Page" target="_blank" rel="noopener">
+            <img src="https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-en-25.svg" alt="Wikipedia">
+        </a>
 
-    <a href="https://www.nasaspaceflight.com/" target="_blank" rel="noopener">
-        <img src="https://www.nasaspaceflight.com/wp-content/uploads/2023/03/NSF-Logo-Blue-300.svg" alt="">
-    </a>
+        <a href="https://spaceflightnow.com/" target="_blank" rel="noopener">
+            <img src="https://spaceflightnow.com/wp-content/uploads/2015/09/SFN-Logo-Blue1.png" alt="Spaceflight Now">
+        </a>
 
-</div> 
+        <a href="https://spacenews.com/" target="_blank" rel="noopener">
+            <img src="https://i0.wp.com/spacenews.com/wp-content/uploads/2025/10/spacenews_logo-crop25.webp?w=736&ssl=1" alt="SpaceNews">
+        </a>
+
+        <a href="https://www.nasa.gov/" target="_blank" rel="noopener">
+            <img src="https://science.nasa.gov/wp-content/themes/nasa-child/assets/images/nasa-logo.svg" alt="NASA">
+        </a>
+
+        <a href="https://www.nasaspaceflight.com/" target="_blank" rel="noopener">
+            <img src="https://www.nasaspaceflight.com/wp-content/uploads/2023/03/NSF-Logo-Blue-300.svg" alt="NASASpaceflight">
+        </a>
+
+        <!-- SET 2 (DUPLIKAT) -->
+
+        <a href="https://en.wikipedia.org/wiki/Main_Page" target="_blank" rel="noopener">
+            <img src="https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-en-25.svg" alt="Wikipedia">
+        </a>
+
+        <a href="https://spaceflightnow.com/" target="_blank" rel="noopener">
+            <img src="https://spaceflightnow.com/wp-content/uploads/2015/09/SFN-Logo-Blue1.png" alt="Spaceflight Now">
+        </a>
+
+        <a href="https://spacenews.com/" target="_blank" rel="noopener">
+            <img src="https://i0.wp.com/spacenews.com/wp-content/uploads/2025/10/spacenews_logo-crop25.webp?w=736&ssl=1" alt="SpaceNews">
+        </a>
+
+        <a href="https://www.nasa.gov/" target="_blank" rel="noopener">
+            <img src="https://science.nasa.gov/wp-content/themes/nasa-child/assets/images/nasa-logo.svg" alt="NASA">
+        </a>
+
+        <a href="https://www.nasaspaceflight.com/" target="_blank" rel="noopener">
+            <img src="https://www.nasaspaceflight.com/wp-content/uploads/2023/03/NSF-Logo-Blue-300.svg" alt="NASASpaceflight">
+        </a>
+
     </div>
 
-
+</div>
     <!-- PRESENTED BY -->
 
     <div class="presented-section">
@@ -4920,18 +4966,17 @@ body.valentine-mode .section-summary{
 
         </a>
 
-    <div class="copyright">
+        <div class="copyright">
 
-    &copy; <span id="currentYear"></span> Weather Dashboard. All rights reserved.
+            &copy; <span id="currentYear"></span> Weather Dashboard. All rights reserved.
 
-    <br>
+            <br>
 
-    <span class="copyright-note">
-        Weather, air quality, news, and earthquake data are provided by third-party services.
-        <br>
-        All trademarks, logos, and data remain the property of their respective owners.
-    </span>
-
+            <span class="copyright-note">
+                Weather, air quality, news, and earthquake data are provided by third-party services.
+                <br>
+                All trademarks, logos, and data remain the property of their respective owners.
+            </span>
 
         </div>
 
@@ -10368,6 +10413,35 @@ const lenis = new Lenis({
   }
 
   requestAnimationFrame(raf)
+
+  
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const track = document.querySelector(".provider-track");
+
+    if (!track) return;
+
+
+    const items = [...track.children];
+
+    items.forEach(item => {
+        track.appendChild(item.cloneNode(true));
+    });
+
+
+    let width = track.scrollWidth / 2;
+
+
+    track.style.setProperty(
+        "--ticker-width",
+        `${width}px`
+    );
+
+
+    track.classList.add("running");
+
+});
 </script>
 </body>
 </html>
