@@ -8246,588 +8246,188 @@ function setAnalysis(text){
 function generateForecastAnalysis(data){
 
     const analisis = [];
-/* ===========================
-   CUACA + TEMPERATUR
-=========================== */
 
-let suhuText = "";
-
-if(data.temp >= 37){
-
-    suhuText =
-    "sangat tinggi sehingga udara terasa sangat terik.";
-
-}
-else if(data.temp >= 33){
-
-    suhuText =
-    "tinggi sehingga udara terasa panas terutama siang hari.";
-
-}
-else if(data.temp >= 29){
-
-    suhuText =
-    "hangat sehingga masih cukup nyaman meskipun terasa lebih panas.";
-
-}
-else if(data.temp >= 24){
-
-    suhuText =
-    "nyaman untuk berbagai aktivitas sehari-hari.";
-
-}
-else if(data.temp >= 20){
-
-    suhuText =
-    "sejuk sehingga udara terasa lebih nyaman.";
-
-}
-else if(data.temp >= 15){
-
-    suhuText =
-    "dingin sehingga pakaian tambahan dapat membantu menjaga kenyamanan.";
-
-}
-else{
-
-    suhuText =
-    "sangat dingin sehingga perlindungan tambahan diperlukan.";
-
-}
-
-
-if(data.weather.includes("Cerah")){
-
-    analisis.push(
-        "Cuaca diperkirakan cerah dengan temperatur " +
-        data.temp +
-        "°C yang " +
-        suhuText +
-        " Langit relatif bersih dan kondisi mendukung aktivitas luar ruangan."
-    );
-
-}
-
-else if(data.weather.includes("Sebagian Cerah")){
-
-    analisis.push(
-        "Cuaca sebagian cerah dengan kombinasi matahari dan awan. Temperatur " +
-        data.temp +
-        "°C yang " +
-        suhuText +
-        " Kondisi masih cukup mendukung untuk berbagai aktivitas."
-    );
-
-}
-
-else if(data.weather.includes("Berawan")){
-
-    analisis.push(
-        "Cuaca diperkirakan berawan dengan temperatur " +
-        data.temp +
-        "°C yang " +
-        suhuText +
-        " Tutupan awan membuat intensitas sinar matahari berkurang."
-    );
-
-}
-
-else if(data.weather.includes("Mendung")){
-
-    analisis.push(
-        "Kondisi cuaca mendung dengan temperatur " +
-        data.temp +
-        "°C yang " +
-        suhuText +
-        " Perubahan cuaca masih dapat terjadi terutama menuju hujan."
-    );
-
-}
-
-else if(data.weather.includes("Badai") || data.weather.includes("Petir")){
-
-    analisis.push(
-        "Cuaca berpotensi mengalami badai atau petir dengan temperatur " +
-        data.temp +
-        "°C. " +
-        "Kondisi ini dapat disertai angin kuat dan perubahan cuaca secara cepat."
-    );
-
-}
-
-else if(data.weather.includes("Hujan Lebat")){
-
-    analisis.push(
-        "Hujan lebat diperkirakan terjadi dengan temperatur " +
-        data.temp +
-        "°C yang " +
-        suhuText +
-        " Intensitas hujan tinggi dapat mengurangi jarak pandang dan mengganggu aktivitas luar ruangan."
-    );
-
-}
-
-else if(data.weather.includes("Hujan Sedang")){
-
-    analisis.push(
-        "Hujan sedang diperkirakan terjadi dengan temperatur " +
-        data.temp +
-        "°C yang " +
-        suhuText +
-        " Kondisi jalan dapat menjadi basah dan aktivitas luar ruangan perlu disesuaikan."
-    );
-
-}
-
-else if(data.weather.includes("Hujan Ringan")){
-
-    analisis.push(
-        "Hujan ringan diperkirakan terjadi dengan temperatur " +
-        data.temp +
-        "°C yang " +
-        suhuText +
-        " Aktivitas masih dapat dilakukan dengan persiapan perlengkapan hujan."
-    );
-
-}
-
-else if(data.weather.includes("Hujan")){
-
-    analisis.push(
-        "Cuaca diperkirakan mengalami hujan dengan temperatur " +
-        data.temp +
-        "°C yang " +
-        suhuText +
-        " Kondisi lingkungan dapat menjadi lebih basah sehingga perlu memperhatikan perubahan cuaca."
-    );
-
-}
-
-else if(data.weather.includes("Gerimis")){
-
-    analisis.push(
-        "Gerimis diperkirakan terjadi dengan temperatur " +
-        data.temp +
-        "°C yang " +
-        suhuText +
-        " Permukaan jalan dapat menjadi licin sehingga perlu lebih berhati-hati."
-    );
-
-}
-
-else if(data.weather.includes("Kabut")){
-
-    analisis.push(
-        "Kabut diperkirakan terjadi dengan jarak pandang yang dapat berkurang. " +
-        "Kondisi ini dapat memengaruhi perjalanan terutama pada area terbuka."
-    );
-
-}
-
-else{
-
-    analisis.push(
-        "Kondisi cuaca normal dengan temperatur " +
-        data.temp +
-        "°C yang " +
-        suhuText +
-        " Tetap pantau perubahan cuaca secara berkala."
-    );
-
-}
-/* ===========================
-   KELEMBAPAN
-=========================== */
-
-
-if(data.humidity >= 90){
-
-    analisis.push(
-        "Kelembapan sangat tinggi sehingga udara terasa lembap dan gerah."
-    );
-
-}
-
-else if(data.humidity >= 80){
-
-    analisis.push(
-        "Kelembapan tinggi sehingga udara cenderung terasa lebih lembap."
-    );
-
-}
-
-else if(data.humidity >= 65){
-
-    analisis.push(
-        "Kelembapan berada pada tingkat nyaman untuk aktivitas sehari-hari."
-    );
-
-}
-
-else if(data.humidity >= 45){
-
-    analisis.push(
-        "Kelembapan berada pada kondisi ideal dan terasa seimbang."
-    );
-
-}
-
-else if(data.humidity >= 30){
-
-    analisis.push(
-        "Kelembapan rendah sehingga udara dapat terasa lebih kering."
-    );
-
-}
-
-else{
-
-    analisis.push(
-        "Kelembapan sangat rendah sehingga kondisi udara terasa kering."
-    );
-
-}
-/* ===========================
-   PRESIPITASI + PROBABILITAS HUJAN
-=========================== */
-
-
-if(data.rain >= 90){
-
-    if(data.precipitation >= 20){
-
-        analisis.push(
-            "Peluang hujan sangat tinggi dengan potensi presipitasi besar. " +
-            "Hujan sedang hingga lebat dapat terjadi."
-        );
-
+    /* ===========================
+       CUACA + TEMPERATUR
+    =========================== */
+
+    let suhuText = "";
+
+    if(data.temp >= 35){
+        suhuText = "dengan temperatur yang sangat tinggi sehingga kondisi dapat terasa cukup terik.";
+    }
+    else if(data.temp >= 30){
+        suhuText = "dengan temperatur yang panas sehingga aktivitas di luar ruangan berpotensi terasa lebih menyengat.";
+    }
+    else if(data.temp >= 24){
+        suhuText = "dengan temperatur yang nyaman untuk sebagian besar aktivitas.";
+    }
+    else if(data.temp >= 18){
+        suhuText = "dengan temperatur yang sejuk sehingga udara terasa lebih nyaman.";
+    }
+    else{
+        suhuText = "dengan temperatur yang dingin sehingga pakaian hangat dapat dipertimbangkan.";
     }
 
-    else if(data.precipitation >= 10){
-
-        analisis.push(
-            "Peluang hujan sangat tinggi dengan kemungkinan hujan intensitas sedang."
-        );
-
+    if(data.weather.includes("Cerah")){
+        analisis.push("Cuaca diperkirakan cerah " + suhuText);
+    }
+    else if(data.weather.includes("Berawan")){
+        analisis.push("Kondisi cuaca cenderung berawan " + suhuText);
+    }
+    else if(data.weather.includes("Hujan")){
+        analisis.push("Cuaca diperkirakan didominasi hujan " + suhuText);
+    }
+    else if(data.weather.includes("Kabut")){
+        analisis.push("Kondisi cuaca berkabut " + suhuText + " Jarak pandang berpotensi berkurang.");
+    }
+    else{
+        analisis.push("Kondisi cuaca secara umum normal " + suhuText);
     }
 
-    else if(data.precipitation >= 3){
+    /* ===========================
+       KELEMBAPAN
+    =========================== */
 
-        analisis.push(
-            "Kemungkinan hujan sangat tinggi meskipun jumlah presipitasi cenderung ringan."
-        );
-
+    if(data.humidity >= 85){
+        analisis.push("Kelembapan sangat tinggi sehingga udara berpotensi terasa lebih lembap dan gerah.");
+    }
+    else if(data.humidity >= 70){
+        analisis.push("Kelembapan cukup tinggi sehingga kondisi udara cenderung terasa lembap.");
+    }
+    else if(data.humidity >= 40){
+        analisis.push("Kelembapan berada pada kisaran yang nyaman.");
+    }
+    else{
+        analisis.push("Kelembapan rendah sehingga udara cenderung terasa lebih kering.");
     }
 
+    /* ===========================
+       PRESIPITASI + PROBABILITAS HUJAN
+    =========================== */
+
+    if(data.rain >= 80){
+
+        if(data.precipitation >= 10){
+            analisis.push("Potensi hujan sangat tinggi dengan akumulasi presipitasi yang diperkirakan cukup besar.");
+        }
+        else if(data.precipitation >= 3){
+            analisis.push("Peluang hujan sangat tinggi dengan intensitas ringan hingga sedang.");
+        }
+        else{
+            analisis.push("Meskipun akumulasi presipitasi rendah, peluang terjadinya hujan tetap tinggi.");
+        }
+
+    }
+    else if(data.rain >= 60){
+
+        if(data.precipitation >= 10){
+            analisis.push("Potensi hujan tinggi dengan kemungkinan akumulasi presipitasi yang cukup signifikan.");
+        }
+        else if(data.precipitation >= 3){
+            analisis.push("Potensi hujan tinggi dengan intensitas ringan hingga sedang.");
+        }
+        else{
+            analisis.push("Peluang hujan tinggi meskipun akumulasi presipitasi diperkirakan tidak terlalu besar.");
+        }
+
+    }
+    else if(data.rain >= 30){
+
+        if(data.precipitation > 0){
+            analisis.push("Masih terdapat potensi hujan ringan meskipun probabilitasnya sedang.");
+        }
+        else{
+            analisis.push("Probabilitas hujan berada pada tingkat sedang namun belum terdapat indikasi presipitasi yang berarti.");
+        }
+
+    }
     else{
 
-        analisis.push(
-            "Peluang hujan sangat tinggi, namun presipitasi diperkirakan rendah."
-        );
+        if(data.precipitation > 0){
+            analisis.push("Presipitasi diperkirakan rendah sehingga hanya terdapat kemungkinan hujan ringan.");
+        }
+        else{
+            analisis.push("Potensi hujan rendah dan belum terdapat indikasi presipitasi yang signifikan.");
+        }
 
     }
 
-}
+    /* ===========================
+       ANGIN
+    =========================== */
 
-
-else if(data.rain >= 70){
-
-    if(data.precipitation >= 15){
-
-        analisis.push(
-            "Peluang hujan tinggi dengan potensi presipitasi cukup besar."
-        );
-
+    if(data.wind >= 40){
+        analisis.push("Kecepatan angin tergolong kencang sehingga perlu berhati-hati terhadap benda ringan di area terbuka.");
     }
-
-    else if(data.precipitation >= 5){
-
-        analisis.push(
-            "Peluang hujan tinggi dengan kemungkinan hujan ringan hingga sedang."
-        );
-
+    else if(data.wind >= 20){
+        analisis.push("Kecepatan angin berada pada kategori sedang dan umumnya masih mendukung aktivitas luar ruangan.");
     }
-
     else{
-
-        analisis.push(
-            "Peluang hujan tinggi, tetapi jumlah presipitasi diperkirakan rendah."
-        );
-
+        analisis.push("Kecepatan angin cenderung tenang sehingga tidak diperkirakan memberikan pengaruh yang berarti.");
     }
 
-}
-
-
-else if(data.rain >= 40){
-
-    if(data.precipitation >= 5){
-
-        analisis.push(
-            "Terdapat peluang hujan sedang dengan potensi presipitasi ringan hingga sedang."
-        );
-
-    }
-
-    else if(data.precipitation > 0){
-
-        analisis.push(
-            "Kemungkinan hujan ringan masih ada dengan presipitasi rendah."
-        );
-
-    }
-
-    else{
-
-        analisis.push(
-            "Peluang hujan sedang, namun belum terdapat indikasi presipitasi signifikan."
-        );
-
-    }
-
-}
-
-
-else if(data.rain >= 20){
-
-    if(data.precipitation > 0){
-
-        analisis.push(
-            "Peluang hujan rendah dengan kemungkinan presipitasi ringan."
-        );
-
-    }
-
-    else{
-
-        analisis.push(
-            "Kemungkinan hujan rendah sehingga cuaca diperkirakan stabil."
-        );
-
-    }
-
-}
-
-
-else{
-
-    if(data.precipitation > 0){
-
-        analisis.push(
-            "Potensi hujan sangat rendah dengan kemungkinan hujan singkat."
-        );
-
-    }
-
-    else{
-
-        analisis.push(
-            "Tidak terdapat indikasi hujan yang berarti."
-        );
-
-    }
-
-}
-
-
-
-/* ===========================
-   KECEPATAN ANGIN
-=========================== */
-
-
-if(data.wind >= 60){
-
-    analisis.push(
-        "Angin sangat kencang sehingga kewaspadaan diperlukan terutama di area terbuka."
-    );
-
-}
-
-else if(data.wind >= 40){
-
-    analisis.push(
-        "Angin tergolong kencang dan dapat memengaruhi aktivitas luar ruangan."
-    );
-
-}
-
-else if(data.wind >= 25){
-
-    analisis.push(
-        "Kecepatan angin sedang dengan hembusan yang cukup terasa."
-    );
-
-}
-
-else if(data.wind >= 10){
-
-    analisis.push(
-        "Kecepatan angin ringan sehingga kondisi udara masih terasa nyaman."
-    );
-
-}
-
-else{
-
-    analisis.push(
-        "Kecepatan angin sangat rendah sehingga kondisi udara cenderung tenang."
-    );
-
-}
-
-
-
-/* ===========================
+    /* ===========================
    AQI
 =========================== */
 
-
-if(
-    data.aqi !== "-" &&
-    data.aqi !== null &&
-    data.aqi !== undefined &&
-    !isNaN(data.aqi)
-){
+if(data.aqi !== "-" && data.aqi !== null && data.aqi !== undefined && !isNaN(data.aqi)){
 
     if(data.aqi <= 50){
-
-        analisis.push(
-            "Indeks kualitas udara berada pada kategori baik dengan kondisi atmosfer yang bersih dan tingkat polutan yang rendah."
-        );
-
+        analisis.push("Kualitas udara berada pada kategori baik sehingga aktivitas luar ruangan umumnya masih nyaman.");
     }
-
     else if(data.aqi <= 100){
-
-        analisis.push(
-            "Indeks kualitas udara berada pada kategori sedang dengan beberapa peningkatan polutan, namun masih dalam batas yang dapat diterima."
-        );
-
+        analisis.push("Kualitas udara berada pada kategori sedang dan masih dapat diterima oleh sebagian besar masyarakat.");
     }
-
     else if(data.aqi <= 150){
-
-        analisis.push(
-            "Indeks kualitas udara berada pada kategori kurang sehat dengan peningkatan konsentrasi polutan yang dapat memengaruhi kelompok sensitif."
-        );
-
+        analisis.push("Kualitas udara berada pada kategori tidak sehat bagi kelompok sensitif sehingga anak-anak, lansia, dan penderita gangguan pernapasan sebaiknya membatasi aktivitas luar ruangan.");
     }
-
     else if(data.aqi <= 200){
-
-        analisis.push(
-            "Indeks kualitas udara berada pada kategori tidak sehat dengan kondisi atmosfer yang kurang ideal untuk aktivitas intensif."
-        );
-
+        analisis.push("Kualitas udara berada pada kategori tidak sehat sehingga aktivitas luar ruangan sebaiknya dikurangi, terutama dalam waktu yang lama.");
     }
-
     else{
-
-        analisis.push(
-            "Indeks kualitas udara berada pada kategori sangat tidak sehat dengan tingkat polusi tinggi yang menunjukkan kondisi atmosfer buruk."
-        );
-
+        analisis.push("Kualitas udara berada pada kategori sangat tidak sehat sehingga aktivitas luar ruangan sebaiknya dihindari apabila tidak mendesak.");
     }
 
 }
 
+    /* ===========================
+       SARAN
+    =========================== */
 
-/* ===========================
-   SARAN AI
-=========================== */
+    let saran = "";
 
-
-let saran = "";
-
-
-if(
-    data.weather.includes("Hujan") ||
-    data.rain >= 80 ||
-    data.precipitation >= 15
-){
-
-    saran =
-    "Disarankan membawa perlengkapan hujan dan berhati-hati karena jalan dapat menjadi licin, permukaan basah dapat meningkatkan risiko tergelincir.";
-
-}
-
-
-else if(
-    data.temp >= 33 &&
-    data.humidity >= 75
-){
-
-    saran =
-    "Disarankan menjaga kondisi tubuh karena suhu tinggi dan kelembapan besar dapat membuat tubuh lebih cepat lelah, pastikan cukup minum dan hindari aktivitas berat saat siang hari.";
-
-}
-
-
-else if(data.temp >= 35){
-
-    saran =
-    "Disarankan mengurangi paparan matahari langsung karena temperatur tinggi dapat meningkatkan risiko dehidrasi, jaga asupan cairan agar tubuh tetap nyaman.";
-
-}
-
-
-else if(data.wind >= 40){
-
-    saran =
-    "Disarankan mengamankan benda ringan di area terbuka karena angin cukup kuat, berhati-hati terhadap hembusan angin yang dapat mengganggu aktivitas.";
-
-}
-
-
-else if(
+    if(
+        data.weather.includes("Hujan") ||
+        data.rain >= 70 ||
+        data.precipitation >= 10
+    ){
+        saran = "Disarankan membawa payung atau jas hujan serta menyesuaikan rencana aktivitas luar ruangan apabila kondisi cuaca berubah.";
+    }
+    else if(
+        data.temp >= 33 &&
+        data.humidity >= 75
+    ){
+        saran = "Disarankan menjaga asupan cairan, menggunakan pakaian yang nyaman, serta mengurangi aktivitas di bawah sinar matahari langsung.";
+    }
+    else if(
+        data.wind >= 40
+    ){
+        saran = "Disarankan berhati-hati terhadap hembusan angin yang kencang dan mengamankan benda ringan di area terbuka.";
+    }
+ else if(
     data.aqi !== "-" &&
     data.aqi > 100
 ){
-
-    saran =
-    "Disarankan mengurangi aktivitas luar ruangan terlalu lama karena kualitas udara menurun, kelompok sensitif seperti anak-anak dan lansia perlu lebih berhati-hati.";
-
+    saran = "Disarankan mengurangi aktivitas luar ruangan dan menggunakan masker apabila diperlukan, terutama bagi kelompok yang sensitif terhadap polusi udara.";
 }
+    else{
+        saran = "Secara umum kondisi cuaca mendukung berbagai aktivitas. Tetap disarankan memantau pembaruan prakiraan cuaca secara berkala.";
+    }
 
+    analisis.push(saran);
 
-else if(data.humidity >= 85){
-
-    saran =
-    "Disarankan menggunakan pakaian yang nyaman karena kelembapan tinggi dapat membuat udara terasa gerah, jaga hidrasi agar tubuh tetap segar.";
-
-}
-
-
-else if(data.humidity <= 35){
-
-    saran =
-    "Disarankan menjaga asupan cairan karena udara kering dapat meningkatkan kebutuhan air tubuh, gunakan pelembap jika diperlukan untuk menjaga kenyamanan.";
-
-}
-
-
-else if(data.temp <= 18){
-
-    saran =
-    "Disarankan menggunakan pakaian tambahan karena temperatur rendah dapat membuat udara terasa dingin, sesuaikan perlengkapan dengan kondisi lingkungan.";
-
-}
-
-
-else{
-
-    saran =
-    "Kesimpulan kondisi cuaca saat ini cukup mendukung untuk berbagai aktivitas sehari-hari, namun perubahan cuaca tetap perlu dipantau secara berkala.";
-
-}
-
-
-analisis.push(saran);
-
-
-return analisis.join(" ");
-
+    return analisis.join(" ");
 }
 
 const learnData = {
