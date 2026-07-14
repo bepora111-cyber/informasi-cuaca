@@ -8269,22 +8269,30 @@ function generateForecastAnalysis(data){
         suhuText = "dengan temperatur yang dingin sehingga pakaian hangat dapat dipertimbangkan.";
     }
 
-    if(data.weather.includes("Cerah")){
-        analisis.push("Cuaca diperkirakan cerah " + suhuText);
-    }
-    else if(data.weather.includes("Berawan")){
-        analisis.push("Kondisi cuaca cenderung berawan " + suhuText);
-    }
-    else if(data.weather.includes("Hujan")){
-        analisis.push("Cuaca diperkirakan didominasi hujan " + suhuText);
-    }
-    else if(data.weather.includes("Kabut")){
-        analisis.push("Kondisi cuaca berkabut " + suhuText + " Jarak pandang berpotensi berkurang.");
-    }
-    else{
-        analisis.push("Kondisi cuaca secara umum normal " + suhuText);
-    }
-
+   if(data.weather.includes("Sebagian Cerah")){
+    analisis.push("Cuaca diperkirakan sebagian cerah " + suhuText + " Matahari masih sesekali terlihat di antara awan.");
+}
+else if(data.weather.includes("Cerah")){
+    analisis.push("Cuaca diperkirakan cerah " + suhuText);
+}
+else if(data.weather.includes("Berawan")){
+    analisis.push("Kondisi cuaca cenderung berawan " + suhuText);
+}
+else if(data.weather.includes("Mendung")){
+    analisis.push("Langit diperkirakan mendung.");
+}
+else if(data.weather.includes("Gerimis")){
+    analisis.push("Cuaca diperkirakan gerimis. Kondisi akan terasa sedikit lebih basah dibanding biasanya.");
+}
+else if(data.weather.includes("Hujan")){
+    analisis.push("Cuaca diperkirakan didominasi hujan.");
+}
+else if(data.weather.includes("Kabut")){
+    analisis.push("Kondisi cuaca berkabut " + suhuText + " Jarak pandang berpotensi berkurang.");
+}
+else{
+    analisis.push("Kondisi cuaca secara umum normal " + suhuText);
+}
     /* ===========================
        KELEMBAPAN
     =========================== */
