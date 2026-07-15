@@ -1352,22 +1352,30 @@ body.dark-mode .section-summary{
     }
 
 }
-/* ================= GOLDEN HOUR ================= */
+/* ==========================================
+   GOLDEN MODE
+   (Navy Edition)
+========================================== */
 
 body.golden-mode::before{
-
     background-image:
-        linear-gradient(
-            rgba(255,170,60,0.18),
-            rgba(255,120,30,0.22)
-        ),
+         linear-gradient(
+        160deg,
+        rgba(255,250,235,.22) 0%,
+        rgba(255,236,190,.20) 25%,
+        rgba(255,214,135,.18) 50%,
+        rgba(255,191,105,.16) 75%,
+        rgba(255,243,225,.12) 100%
+    ),
         url('https://lh3.googleusercontent.com/gps-cs-s/APNQkAGXzDf6jAqrxVqIt-StdTukOFbGz1GhCgbTUc4Cy9HvG0ZJ1Lk6GwKSemZ9SSBePQ6xFvAHl-g-2ExnhP111C7NhC2NnwS8JRjZyBT-UGeuFAIt_Pjh9ENi7PStSl_RU352jqAyHI6mGIdz=s1360-w1360-h1020-rw');
-
-    background-size:cover;
-
-    background-position:center;
-
+    background-size: cover;
+    background-position: center;
 }
+
+
+/* ==========================================
+   CARD
+========================================== */
 
 body.golden-mode .box,
 body.golden-mode .day,
@@ -1375,238 +1383,258 @@ body.golden-mode .datetime-container,
 body.golden-mode .modal-content,
 body.golden-mode .learn-modal-content,
 body.golden-mode .learn-card,
-body.golden-mode .temperature-calculator{
-    background: rgba(90,55,20,0.55);
-    border: 1px solid rgba(255,200,120,0.25);
+body.golden-mode .temperature-calculator,
+body.golden-mode #ai-analysis-box,
+body.golden-mode .history-card,
+body.golden-mode .loading-card{
+
+    background: rgba(22,28,46,.82);
+    border: 1px solid rgba(255,215,0,.22);
+
     backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
 }
 
+/* ==========================================
+   HEADERS
+========================================== */
+
 body.golden-mode .learn-header{
-    background: rgba(255,200,120,0.12);
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,215,0,.18),
+            rgba(255,255,255,.06)
+        );
+
 }
 
 body.golden-mode .learn-body{
-    background: rgba(255,220,170,0.06);
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,245,200,.08),
+            rgba(255,255,255,.04)
+        );
+
 }
 
-body.golden-mode .box.active{
-    background: rgba(120,70,20,0.8);
-    box-shadow: 0 0 18px rgba(255,180,80,0.25);
-}
+/* ==========================================
+   DOT
+========================================== */
 
 body.golden-mode .dot.active{
-    background: #ffb84d;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ffd700,
+            #ffffff
+        );
+
+    box-shadow:
+        0 0 10px rgba(255,215,0,.60);
+
 }
 
-body.golden-mode .learn-card:hover{
-    background: rgba(120,70,20,0.7);
+/* ==========================================
+   BOX
+========================================== */
+
+body.golden-mode .box.active{
+
+    background: #0b1f4d;
+
+    color: #ffffff;
+
+    border: 1px solid rgba(255,255,255,.20);
+
+    box-shadow:
+        0 0 18px rgba(11,31,77,.35),
+        0 0 35px rgba(11,31,77,.15);
+
 }
+
+body.golden-mode .box.side{
+    background: rgba(22,28,46,.72);
+}
+
+body.golden-mode .box:not(.active):hover,
+body.golden-mode .learn-card:hover{
+    background: rgba(34,42,64,.92);
+}
+
+/* ==========================================
+   AI
+========================================== */
+
 body.golden-mode #ai-analysis-box{
-    background: rgba(90,55,20,0.55);
-    border: 1px solid rgba(255,200,120,0.25);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    box-shadow: 0 8px 25px rgba(80,45,10,0.35);
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,215,0,.16) 0%,
+            rgba(255,245,200,.10) 45%,
+            rgba(255,255,255,.08) 100%
+        );
+
 }
 
 body.golden-mode #ai-analysis-box:hover{
+
     box-shadow:
-        0 12px 35px rgba(255,180,80,0.25);
+        0 12px 35px rgba(255,215,0,.22);
+
 }
 
-body.golden-mode #ai-analysis-box h3,
-body.golden-mode #ai-analysis-text{
-    color: #fff;
-}
-/* ========= Flip Card Golden Mode ========= */
+/* ==========================================
+   FLIP
+========================================== */
 
 body.golden-mode .temp-front{
 
-    filter:saturate(.95) brightness(.96);
+    filter: brightness(.95);
 
-    border:1.5px solid rgba(255,225,170,.28);
+    border: 1.5px solid rgba(255,215,0,.22);
 
     box-shadow:
-        inset 0 1px 2px rgba(255,240,200,.20),
-        inset 0 -2px 6px rgba(90,55,20,.18),
-        0 6px 16px rgba(120,70,20,.20);
+        inset 0 1px 2px rgba(255,255,255,.06),
+        inset 0 -2px 6px rgba(0,0,0,.35),
+        0 6px 16px rgba(255,215,0,.12);
 
 }
 
 body.golden-mode .temp-front::before,
 body.golden-mode .temp-back::before{
 
-    background:linear-gradient(
+    background: linear-gradient(
         135deg,
-        rgba(255,245,220,.35) 0%,
-        rgba(255,220,160,.18) 20%,
-        rgba(255,255,255,0) 45%,
-        rgba(255,220,150,.08) 100%
+        rgba(255,255,255,.18),
+        rgba(255,215,0,.10) 25%,
+        rgba(255,255,255,0) 55%,
+        rgba(255,255,255,.05)
     );
 
 }
 
 body.golden-mode .temp-back{
 
-    background:linear-gradient(
+    background: linear-gradient(
         145deg,
-        #8c5b26,
-        #5f3a18
+        #28314a,
+        #171d2d
     );
 
-    color:#fff;
+    color: #f5f5f5;
 
-    border:1.5px solid rgba(255,225,170,.28);
-
-    box-shadow:
-        inset 0 1px 2px rgba(255,235,190,.15),
-        inset 0 -2px 6px rgba(70,40,10,.20),
-        0 6px 16px rgba(120,70,20,.20);
+    border: 1.5px solid rgba(255,215,0,.18);
 
 }
-/* ========= Search Golden Mode ========= */
+
+/* ==========================================
+   SEARCH
+========================================== */
 
 body.golden-mode .learn-search input{
 
-    background:rgba(90,55,20,.55);
+    background: rgba(25,28,45,.88);
+    color: #f8f8f8;
 
-    border:1px solid rgba(255,200,120,.25);
-
-    color:#fff;
-
-    backdrop-filter:blur(15px);
-
-    -webkit-backdrop-filter:blur(15px);
+    border: 1px solid rgba(255,215,0,.18);
 
 }
-
 
 body.golden-mode .learn-search input::placeholder{
-
-    color:rgba(255,230,180,.7);
-
+    color: rgba(255,255,255,.45);
 }
-
 
 body.golden-mode .learn-search input:focus{
 
-    background:rgba(120,70,20,.75);
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,215,0,.20),
+            rgba(255,255,255,.12)
+        );
 
-    border-color:rgba(255,210,140,.5);
+    border-color: #ffd700;
 
     box-shadow:
-
-    0 0 15px rgba(255,180,80,.25);
+        0 0 15px rgba(255,215,0,.20);
 
 }
-
 
 body.golden-mode .search-icon svg{
 
-    stroke:#ffe6b3 !important;
-
-    filter:
-    drop-shadow(0 0 5px rgba(255,180,80,.7));
-
-} 
-
-/* =========================
-   HISTORY CARD - GOLDEN MODE
-========================= */
-
-body.golden-mode .history-card{
-
-    background:rgba(90,55,20,.55);
-
-    border:1px solid rgba(255,200,120,.25);
-
-    backdrop-filter:blur(12px);
-
-    -webkit-backdrop-filter:blur(12px);
-
-    box-shadow:
-        0 8px 20px rgba(80,45,10,.30);
+    stroke: #ffd700 !important;
 
 }
 
-
-body.golden-mode .history-card:hover{
-
-    box-shadow:
-        0 14px 28px rgba(255,180,80,.20);
-
-}
-
-
-body.golden-mode .history-meta{
-
-    color:rgba(255,235,190,.85);
-
-}
-
+/* ==========================================
+   HISTORY
+========================================== */
 
 body.golden-mode .history-title{
 
-    color:#fff;
+    color: #ffe066;
 
 }
 
+body.golden-mode .history-meta{
+
+    color: #f4d35e;
+
+}
 
 body.golden-mode .history-description{
 
-    color:rgba(255,245,220,.92);
+    color: #f3f3f3;
 
 }
 
+/* ==========================================
+   SUMMARY
+========================================== */
 
-body.golden-mode .loading-card{
+body.golden-mode .section-summary{
 
-    background:rgba(90,55,20,.55);
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,215,0,.18) 0%,
+            rgba(255,245,200,.12) 45%,
+            rgba(255,255,255,.08) 100%
+        );
 
-    border:1px solid rgba(255,200,120,.25);
+    border-left: 4px solid #ffd700;
 
-    color:#fff;
+    color: #f5f5f5;
+
+    box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,.12);
 
 }
 
+/* ==========================================
+   MOBILE
+========================================== */
 
-/* =========================
-   MOBILE OPTIMIZATION
-========================= */
-
-@media(max-width:768px){
+@media (max-width:768px){
 
     body.golden-mode .history-card{
 
-        backdrop-filter:blur(8px);
-
-        -webkit-backdrop-filter:blur(8px);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
 
         box-shadow:
-            0 6px 16px rgba(80,45,10,.22);
+            0 6px 16px rgba(255,215,0,.10);
 
     }
 
 }
-
-body.golden-mode .section-summary{
-
-    background:linear-gradient(
-        135deg,
-        rgba(120,70,20,.30),
-        rgba(170,110,35,.18)
-    );
-
-    border-left:4px solid #ffc86a;
-
-    color:#fff8ea;
-
-    box-shadow:
-        inset 0 1px 0 rgba(255,240,200,.15),
-        0 4px 12px rgba(80,45,10,.15);
-
-}
-
 .info-card{
 
     position:relative;
@@ -3112,10 +3140,10 @@ mark{
 body.newyear-mode::before{
 
     background-image:
-    linear-gradient(
-        rgba(8,15,45,0.55),
-        rgba(0,0,0,0.45)
-    ),
+        linear-gradient(
+            rgba(173, 216, 230, 0.45), /* biru muda */
+            rgba(255, 255, 255, 0.35)  /* putih */
+        ),
     url('https://lh3.googleusercontent.com/gps-cs-s/APNQkAGXzDf6jAqrxVqIt-StdTukOFbGz1GhCgbTUc4Cy9HvG0ZJ1Lk6GwKSemZ9SSBePQ6xFvAHl-g-2ExnhP111C7NhC2NnwS8JRjZyBT-UGeuFAIt_Pjh9ENi7PStSl_RU352jqAyHI6mGIdz=s1360-w1360-h1020-rw');
 
     background-size:cover;
@@ -3419,18 +3447,16 @@ body.newyear-mode .section-summary{
 ========================================== */
 
 body.weekend-mode::before{
-
     background-image:
         linear-gradient(
-            rgba(255,215,0,.12),
-            rgba(255,255,255,.08)
+            rgba(8,15,45,.55),
+            rgba(0,0,0,.45)
         ),
         url('https://lh3.googleusercontent.com/gps-cs-s/APNQkAGXzDf6jAqrxVqIt-StdTukOFbGz1GhCgbTUc4Cy9HvG0ZJ1Lk6GwKSemZ9SSBePQ6xFvAHl-g-2ExnhP111C7NhC2NnwS8JRjZyBT-UGeuFAIt_Pjh9ENi7PStSl_RU352jqAyHI6mGIdz=s1360-w1360-h1020-rw');
-
     background-size:cover;
     background-position:center;
-
 }
+
 
 /* ==========================================
    CARD
@@ -3447,15 +3473,8 @@ body.weekend-mode #ai-analysis-box,
 body.weekend-mode .history-card,
 body.weekend-mode .loading-card{
 
-    background:
-        linear-gradient(
-            180deg,
-            rgba(255,215,0,.18) 0%,
-            rgba(255,240,180,.14) 40%,
-            rgba(255,255,255,.10) 100%
-        );
-
-    border:1px solid rgba(255,255,255,.20);
+    background:rgba(22,28,46,.82);
+    border:1px solid rgba(255,215,0,.22);
 
     backdrop-filter:blur(15px);
     -webkit-backdrop-filter:blur(15px);
@@ -3525,26 +3544,12 @@ body.weekend-mode .box.active{
 }
 
 body.weekend-mode .box.side{
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(255,215,0,.10),
-            rgba(255,255,255,.06)
-        );
-
+    background:rgba(22,28,46,.72);
 }
 
 body.weekend-mode .box:not(.active):hover,
 body.weekend-mode .learn-card:hover{
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(255,215,0,.18),
-            rgba(255,255,255,.10)
-        );
-
+    background:rgba(34,42,64,.92);
 }
 
 /* ==========================================
@@ -3570,86 +3575,63 @@ body.weekend-mode #ai-analysis-box:hover{
 
 }
 
-/* ==========================================
-   FLIP CARD
-========================================== */
+/* FLIP */
 
 body.weekend-mode .temp-front{
 
-    background:
-        linear-gradient(
-            180deg,
-            #ffd700 0%,
-            #ffe45c 25%,
-            #fff1a8 55%,
-            #ffffff 100%
-        );
+    filter:brightness(.95);
 
-    color:#111;
-
-    border:1.5px solid rgba(255,255,255,.35);
+    border:1.5px solid rgba(255,215,0,.22);
 
     box-shadow:
-        inset 0 1px 2px rgba(255,255,255,.35),
-        inset 0 -2px 6px rgba(0,0,0,.10),
-        0 6px 16px rgba(255,215,0,.15);
+        inset 0 1px 2px rgba(255,255,255,.06),
+        inset 0 -2px 6px rgba(0,0,0,.35),
+        0 6px 16px rgba(255,215,0,.12);
 
 }
 
 body.weekend-mode .temp-front::before,
 body.weekend-mode .temp-back::before{
 
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,.45),
-            rgba(255,255,255,.15) 30%,
-            rgba(255,255,255,0) 60%,
-            rgba(255,255,255,.08)
-        );
+    background:linear-gradient(
+        135deg,
+        rgba(255,255,255,.18),
+        rgba(255,215,0,.10) 25%,
+        rgba(255,255,255,0) 55%,
+        rgba(255,255,255,.05)
+    );
 
 }
 
 body.weekend-mode .temp-back{
 
-    background:
-        linear-gradient(
-            180deg,
-            rgba(255,215,0,.18) 0%,
-            rgba(255,245,210,.12) 40%,
-            rgba(255,255,255,.08) 100%
-        );
+    background:linear-gradient(
+        145deg,
+        #28314a,
+        #171d2d
+    );
 
     color:#f5f5f5;
 
-    border:1.5px solid rgba(255,255,255,.20);
+    border:1.5px solid rgba(255,215,0,.18);
 
 }
 
-/* ==========================================
-   SEARCH
-========================================== */
+/* SEARCH */
 
 body.weekend-mode .learn-search input{
 
-    background:
-        linear-gradient(
-            180deg,
-            rgba(255,215,0,.12),
-            rgba(255,255,255,.08)
-        );
-
+    background:rgba(25,28,45,.88);
     color:#f8f8f8;
 
-    border:1px solid rgba(255,255,255,.18);
+    border:1px solid rgba(255,215,0,.18);
 
 }
 
 body.weekend-mode .learn-search input::placeholder{
-
-    color:rgba(255,255,255,.55);
-
+    color:rgba(255,255,255,.45);
 }
+
 
 body.weekend-mode .learn-search input:focus{
 
@@ -3718,65 +3700,21 @@ body.weekend-mode .section-summary{
 
 }
 
-/* ==========================================
-   MOBILE
-========================================== */
+/* MOBILE */
 
 @media(max-width:768px){
 
     body.weekend-mode .history-card{
 
-        background:
-            linear-gradient(
-                180deg,
-                rgba(255,215,0,.16) 0%,
-                rgba(255,245,200,.10) 45%,
-                rgba(255,255,255,.08) 100%
-            );
-
         backdrop-filter:blur(8px);
         -webkit-backdrop-filter:blur(8px);
 
         box-shadow:
-            0 6px 16px rgba(255,215,0,.12);
-
-    }
-
-    body.weekend-mode .box.active{
-
-        background:#0b1f4d;
-
-        color:#ffffff;
-
-        border:1px solid rgba(255,255,255,.20);
-
-        box-shadow:
-            0 0 18px rgba(11,31,77,.35),
-            0 0 35px rgba(11,31,77,.15);
-
-    }
-
-    body.weekend-mode .dot.active{
-
-        box-shadow:
-            0 0 12px rgba(255,215,0,.65);
-
-    }
-
-    body.weekend-mode .learn-search input{
-
-        background:
-            linear-gradient(
-                180deg,
-                rgba(255,215,0,.14),
-                rgba(255,255,255,.08)
-            );
+            0 6px 16px rgba(255,215,0,.10);
 
     }
 
 }
-
-
 
 /* ==========================================
    CHRISTMAS MODE
@@ -4140,7 +4078,7 @@ body.independence-mode .temp-front{
     box-shadow:
         inset 0 1px 2px rgba(255,255,255,.06),
         inset 0 -2px 6px rgba(0,0,0,.45),
-        0 6px 16px rgba(211,47,47,.15);
+        0 6px 16px rgba(213,0,0,.15);
 
 }
 
@@ -4151,7 +4089,7 @@ body.independence-mode .temp-back::before{
         linear-gradient(
             135deg,
             rgba(255,255,255,.18),
-            rgba(211,47,47,.14) 35%,
+            rgba(213,0,0,.14) 35%,
             rgba(255,255,255,0) 70%
         );
 
@@ -4161,21 +4099,16 @@ body.independence-mode .temp-back{
 
     background:
         linear-gradient(
-            to bottom,
-            #6d0000 0%,
-            #8b0000 18%,
-            #b71c1c 40%,
-            #d32f2f 60%,
-            #ef9a9a 82%,
-            #ffffff 100%
+            145deg,
+            #2b2b2b,
+            #111111
         );
 
-    color:#111111;
+    color:#ffffff;
 
-    border:1.5px solid rgba(255,255,255,.18);
+    border:1.5px solid rgba(255,255,255,.15);
 
 }
-
 /* SEARCH */
 
 body.independence-mode .learn-search input{
