@@ -1062,44 +1062,160 @@ body.dark-mode .section-summary{
         left:200%;
     }
 }
+/* ==========================================
+   WARNING BOX
+========================================== */
+
 #warningBox{
 
     display:none;
+
     flex-direction:column;
+
     gap:12px;
 
     width:fit-content;
+
     max-width:80%;
+
     margin:15px auto;
-    padding:15px 20px;
+
+    contain:layout paint;
+
+}
+
+
+/* ==========================================
+   WARNING CARD
+========================================== */
+
+.warning-card{
+
+    width:100%;
+
+    cursor:pointer;
+
+    perspective:1000px;
+
+}
+
+
+/* ==========================================
+   FLIP INNER
+========================================== */
+
+.warning-inner{
+
+    position:relative;
+
+    width:100%;
+
+    min-height:52px;
+
+    transform-style:preserve-3d;
+
+    transition:transform .6s ease;
+
+}
+
+
+/* ==========================================
+   SAAT DI-FLIP
+========================================== */
+
+.warning-card.flip .warning-inner{
+
+    transform:rotateY(180deg);
+
+}
+
+
+/* ==========================================
+   DEPAN & BELAKANG
+========================================== */
+
+.warning-front,
+.warning-back{
+
+    width:100%;
+
+    min-height:52px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    box-sizing:border-box;
+
+    padding:14px 20px;
 
     border-radius:15px;
 
     background:rgba(255,80,80,.22);
+
     border:1px solid rgba(255,100,100,.30);
 
     color:#fff;
+
     font-weight:bold;
+
     text-align:center;
 
     box-shadow:0 4px 12px rgba(0,0,0,.20);
 
+    backface-visibility:hidden;
+
+    -webkit-backface-visibility:hidden;
+
+}
+
+
+/* ==========================================
+   BELAKANG
+========================================== */
+
+.warning-back{
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+    transform:rotateY(180deg);
+
+}
+
+
+/* ==========================================
+   ANIMASI PULSE
+========================================== */
+
+.warning-card{
+
     animation:warningPulse 3.2s ease-in-out infinite;
 
-    will-change:transform;
-    contain:layout paint;
 }
+
 
 @keyframes warningPulse{
 
     0%,100%{
+
         transform:scale(1);
+
         opacity:.95;
+
     }
 
     50%{
+
         transform:scale(1.02);
+
         opacity:1;
+
     }
 
 }
@@ -1598,9 +1714,6 @@ body.golden-mode .history-description{
 
 }
 
-/* ==========================================
-   SUMMARY
-========================================== */
 
 /* ==========================================
    SUMMARY
@@ -1886,11 +1999,13 @@ body.golden-mode .section-summary{
 }
 
 
+/* ==========================================
+   FORECAST ANALYSIS
+========================================== */
+
 .forecast-analysis{
 
     margin-top:25px;
-
-    padding:18px;
 
     border-radius:18px;
 
@@ -1898,54 +2013,194 @@ body.golden-mode .section-summary{
 
     backdrop-filter:blur(12px);
 
-    line-height:1.8;
-
-    text-align:justify;
+    overflow:hidden;
 
 }
 
-.forecast-analysis h3{
 
-    margin-bottom:12px;
+/* ==========================================
+   HEADER
+========================================== */
+
+.analysis-header{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:18px;
+
+    cursor:pointer;
+
+    user-select:none;
+
+}
+
+
+.analysis-header h3{
+
+    margin:0;
 
     font-size:18px;
 
 }
 
-.forecast-analysis p{
+
+/* ==========================================
+   TOMBOL + / -
+========================================== */
+
+.analysis-toggle{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:30px;
+
+    height:30px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.12);
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    line-height:1;
+
+    transition:
+
+        transform .3s ease,
+
+        background .3s ease;
+
+}
+
+
+/* ==========================================
+   ISI ANALISIS
+========================================== */
+
+.analysis-content{
+
+    display:grid;
+
+    grid-template-rows:0fr;
+
+    transition:grid-template-rows .4s ease;
+
+}
+
+
+.analysis-content p{
+
+    overflow:hidden;
 
     margin:0;
 
+    padding:0 18px;
+
     font-size:14.5px;
 
+    line-height:1.8;
+
+    text-align:justify;
+
+    opacity:0;
+
+    transition:
+
+        opacity .3s ease,
+
+        padding .4s ease;
+
 }
+
+
+/* ==========================================
+   SAAT OPEN
+========================================== */
+
+.forecast-analysis.open .analysis-content{
+
+    grid-template-rows:1fr;
+
+}
+
+
+.forecast-analysis.open .analysis-content p{
+
+    padding:
+
+        0 18px 18px;
+
+    opacity:1;
+
+}
+
+
+/* ICON BERPUTAR */
+
+.forecast-analysis.open .analysis-toggle{
+
+    transform:rotate(180deg);
+
+    background:rgba(255,255,255,.20);
+
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
 @media (max-width:768px){
 
     .forecast-analysis{
 
-        padding:14px;
-
         margin-top:18px;
-
-        line-height:1.65;
 
     }
 
-    .forecast-analysis h3{
+
+    .analysis-header{
+
+        padding:14px;
+
+    }
+
+
+    .analysis-header h3{
 
         font-size:16px;
 
-        margin-bottom:8px;
-
     }
 
-    .forecast-analysis p{
+
+    .analysis-content p{
+
+        padding-left:14px;
+
+        padding-right:14px;
 
         font-size:13px;
 
         line-height:1.7;
 
         text-align:left;
+
+    }
+
+
+    .forecast-analysis.open .analysis-content p{
+
+        padding-bottom:14px;
 
     }
 
@@ -4814,7 +5069,7 @@ body.valentine-mode .section-summary{
 <div id="warningBox"></div>
 
 <div id="lastUpdated">
-    Last Updated: -
+    Last updated: -
 </div>
 
 <div class="slider-container">
@@ -5249,24 +5504,85 @@ const penjelasanIndikator = {
 };
 function checkWarning(weather, air){
 
-    const hour = new Date().getHours();
+    const hour =
+        new Date().getHours();
+
 
     let warning = "";
+
+
+    // ==========================
+    // DATA CUACA
+    // ==========================
 
     const rain =
         weather.hourly.precipitation_probability[hour];
 
+
+    const precipitation =
+        weather.hourly.precipitation[hour];
+
+
     const wind =
         weather.current.wind_speed_10m;
+
 
     const aqi =
         air.hourly.us_aqi[hour];
 
+
     const uv =
         weather.current.uv_index;
 
+
     const visibility =
         weather.current.visibility;
+
+
+
+    // ==========================
+    // FUNGSI FLIP CARD
+    // ==========================
+
+    function warningCard(front, back){
+
+        return `
+
+        <div class="warning-card"
+             onclick="this.classList.toggle('flip')">
+
+
+            <div class="warning-inner">
+
+
+                <!-- DEPAN -->
+
+                <div class="warning-front">
+
+                    ${front}
+
+                </div>
+
+
+                <!-- BELAKANG -->
+
+                <div class="warning-back">
+
+                    ${back}
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+        `;
+
+    }
+
+
 
     // ==========================
     // HUJAN
@@ -5274,10 +5590,18 @@ function checkWarning(weather, air){
 
     if(rain >= 80){
 
-        warning +=
-        "<div>⛈️ Potensi hujan lebat</div>";
+        warning += warningCard(
+
+            "⛈️ Potensi hujan lebat",
+
+            `🌧️ Presipitasi :
+             ${precipitation.toFixed(2)} mm`
+
+        );
 
     }
+
+
 
     // ==========================
     // ANGIN
@@ -5285,10 +5609,18 @@ function checkWarning(weather, air){
 
     if(wind >= 35){
 
-        warning +=
-        "<div>🌪️ Angin kencang</div>";
+        warning += warningCard(
+
+            "🌪️ Angin kencang",
+
+            `🌪️ Kecepatan Angin :
+             ${wind.toFixed(1)} km/jam`
+
+        );
 
     }
+
+
 
     // ==========================
     // KUALITAS UDARA
@@ -5296,10 +5628,17 @@ function checkWarning(weather, air){
 
     if(aqi >= 150){
 
-        warning +=
-        "<div>⚠️ Kualitas udara tidak sehat</div>";
+        warning += warningCard(
+
+            "⚠️ Kualitas udara tidak sehat",
+
+            `⚠️ AQI : ${aqi}`
+
+        );
 
     }
+
+
 
     // ==========================
     // UV INDEX
@@ -5307,16 +5646,32 @@ function checkWarning(weather, air){
 
     if(uv >= 8){
 
-        warning +=
-        "<div>☀️ UV sangat tinggi</div>";
+        warning += warningCard(
+
+            "☀️ UV sangat tinggi",
+
+            `☀️ UV Index :
+             ${uv.toFixed(2)}`
+
+        );
 
     }
+
+
     else if(uv >= 6){
 
-        warning +=
-        "<div>🧴 UV tinggi</div>";
+        warning += warningCard(
+
+            "🧴 UV tinggi",
+
+            `☀️ UV Index :
+             ${uv.toFixed(2)}`
+
+        );
 
     }
+
+
 
     // ==========================
     // VISIBILITY
@@ -5324,30 +5679,62 @@ function checkWarning(weather, air){
 
     if(visibility <= 1000){
 
-        warning +=
-        "<div>🌫️ Jarak pandang sangat buruk</div>";
+        warning += warningCard(
+
+            "🌫️ Jarak pandang sangat buruk",
+
+            `🌫️ Visibility :
+             ${visibility} m`
+
+        );
 
     }
+
+
     else if(visibility <= 5000){
 
-        warning +=
-        "<div>🌁 Jarak pandang berkurang</div>";
+        warning += warningCard(
+
+            "🌁 Jarak pandang berkurang",
+
+            `🌫️ Visibility :
+             ${(visibility / 1000).toFixed(1)} km`
+
+        );
 
     }
+
+
+
+    // ==========================
+    // WARNING BOX
+    // ==========================
 
     const box =
         document.getElementById("warningBox");
 
+
+
     if(warning){
 
-        box.innerHTML = warning;
-        box.style.display = "flex";
+        box.innerHTML =
+            warning;
+
+
+        box.style.display =
+            "flex";
 
     }
+
+
     else{
 
-        box.innerHTML = "";
-        box.style.display = "none";
+        box.innerHTML =
+            "";
+
+
+        box.style.display =
+            "none";
 
     }
 
@@ -5892,8 +6279,21 @@ const analisisAI = generateForecastAnalysis({
 </tr>
 </table>
 <div class="forecast-analysis">
-    <h3>🤖 Analisis Cerdas</h3>
-    <p>${analisisAI}</p>
+
+    <div class="analysis-header" onclick="toggleAnalysis(this)">
+
+        <h3>🤖 Analisis Cerdas</h3>
+
+        <span class="analysis-toggle">+</span>
+
+    </div>
+
+    <div class="analysis-content">
+
+        <p>${analisisAI}</p>
+
+    </div>
+
 </div>
 `;
 startForecastAnimation();
@@ -10753,6 +11153,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
+function toggleAnalysis(header){
+
+    const analysisBox =
+        header.closest('.forecast-analysis');
+
+    const toggle =
+        header.querySelector('.analysis-toggle');
+
+    analysisBox.classList.toggle('open');
+
+    toggle.textContent =
+        analysisBox.classList.contains('open')
+            ? '−'
+            : '+';
+
+}
 
 </script>
 </body>
