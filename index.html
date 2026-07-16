@@ -3795,12 +3795,12 @@ mark{
 
 @media(max-width:768px){
 
-
     .onthisday-grid{
 
-        grid-template-columns:1fr;
+        grid-template-columns:
+        repeat(2, minmax(0, 1fr));
 
-        gap:14px;
+        gap:10px;
 
     }
 
@@ -3902,14 +3902,13 @@ mark{
 
 @media(max-width:480px){
 
-
     .history-image{
 
-        height:130px;
+        height:110px;
 
-        min-height:130px;
+        min-height:110px;
 
-        max-height:130px;
+        max-height:110px;
 
     }
 
@@ -11173,8 +11172,8 @@ async function loadOnThisDay() {
 
             shown++;
 
-            // Berhenti setelah berhasil menampilkan 5 card
-            if (shown >= 5) {
+            // Berhenti setelah berhasil menampilkan 6 card
+            if (shown >= 6) {
                 break;
             }
 
@@ -11232,7 +11231,7 @@ let worldTodayCache = null;
 let worldTodayLastUpdate = 0;
 
 const CACHE_DURATION = 30 * 60 * 1000; // 30 menit
-const SHOW_ITEMS = 5;
+const SHOW_ITEMS = 6;
 const ONE_DAY = 24 * 60 * 60 * 1000;
 
 
@@ -11664,7 +11663,7 @@ async function loadWorldToday(){
 
 ]
 
-.slice(0,2)
+.slice(0,3)
 
 .map(eq=>({
 
