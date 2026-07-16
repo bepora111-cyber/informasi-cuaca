@@ -2961,8 +2961,17 @@ body.golden-mode .section-summary{
 
     }
 
-}
 
+    .learn-grid{
+
+        grid-template-columns:
+        repeat(3, 1fr);
+
+        gap:8px;
+
+    }
+
+}
 
 @media(max-width:480px){
 
@@ -2997,18 +3006,19 @@ body.golden-mode .section-summary{
 
     .learn-grid{
 
-        gap:12px;
+        gap:8px;
 
     }
 
     .learn-card{
 
-        width:calc(50% - 12px);
+        width:calc(33.333% - 8px);
+
         min-height:90px;
 
-        padding:12px;
+        padding:10px 5px;
 
-        font-size:14px;
+        font-size:12px;
 
     }
 
@@ -3019,18 +3029,19 @@ body.golden-mode .section-summary{
 
     .learn-grid{
 
-        gap:10px;
+        gap:6px;
 
     }
 
     .learn-card{
 
-        width:calc(50% - 10px);
+        width:calc(33.333% - 4px);
+
         min-height:80px;
 
-        padding:10px;
+        padding:8px 3px;
 
-        font-size:13px;
+        font-size:11px;
 
     }
 
