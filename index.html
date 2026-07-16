@@ -430,40 +430,533 @@ h2{
 .day *{
     pointer-events:none;
 }
-/* Jam Digital Pojok */
-.datetime-container {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    text-align: right;
-    color: white;
-    font-family: sans-serif;
-    background: rgba(0, 0, 0, 0.4); 
-    padding: 10px 15px;
-    border-radius: 10px;
-    backdrop-filter: blur(5px);
-    z-index: 1000; 
+
+
+/* ==========================================
+   KARTU FLIP UTAMA
+========================================== */
+
+.datetime-flip-card{
+
+    position:absolute;
+
+    top:20px;
+
+    right:20px;
+
+    width:280px;
+
+    height:100px;
+
+    perspective:1000px;
+
+    cursor:pointer;
+
+    z-index:1000;
+
 }
 
-#hari-tanggal { font-size: 16px; font-weight: 500; margin-bottom: 3px; }
-#jam-menit-detik { font-size: 22px; font-weight: bold; letter-spacing: 1px; }
 
-/* STYLE POP-UP MODAL GRAFIK */
-.modal {
-    display: none; 
-    position: fixed;
-    z-index: 2000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(5px);
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+/* ==========================================
+   INNER FLIP
+========================================== */
+
+.datetime-flip-inner{
+
+    position:relative;
+
+    width:100%;
+
+    height:100%;
+
+    transform-style:preserve-3d;
+
+    transition:
+
+        transform .8s
+        cubic-bezier(.4,0,.2,1);
+
 }
 
+
+/* ==========================================
+   KETIKA DI-FLIP
+========================================== */
+
+.datetime-flip-card.flipped
+.datetime-flip-inner{
+
+    transform:rotateY(180deg);
+
+}
+
+
+/* ==========================================
+   SISI DEPAN & BELAKANG
+========================================== */
+
+.datetime-face{
+
+    position:absolute;
+
+    inset:0;
+
+    width:100%;
+
+    height:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    backface-visibility:hidden;
+
+    -webkit-backface-visibility:hidden;
+
+}
+
+
+/* ==========================================
+   SISI DEPAN — DIGITAL
+========================================== */
+
+.datetime-front{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+
+/* ==========================================
+   CONTAINER DIGITAL
+========================================== */
+
+.datetime-container{
+
+    width:185px;
+
+    box-sizing:border-box;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-align:center;
+
+    color:white;
+
+    font-family:sans-serif;
+
+    background:
+
+        rgba(0,0,0,.4);
+
+    padding:
+
+        10px 15px;
+
+    border-radius:10px;
+
+    backdrop-filter:blur(5px);
+
+}
+
+
+/* ==========================================
+   TANGGAL
+========================================== */
+
+#hari-tanggal{
+
+    width:100%;
+
+    text-align:center;
+
+    font-size:16px;
+
+    font-weight:500;
+
+    margin-bottom:3px;
+
+}
+
+
+/* ==========================================
+   JAM
+========================================== */
+
+#jam-menit-detik{
+
+    width:100%;
+
+    text-align:center;
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    letter-spacing:1px;
+
+    font-variant-numeric:tabular-nums;
+
+}
+/* ==========================================
+   SISI BELAKANG
+========================================== */
+
+.datetime-back{
+
+    transform:rotateY(180deg);
+
+}
+
+
+/* ==========================================
+   KALENDER BELAKANG — MINI
+========================================== */
+
+.paper-calendar{
+
+    width:180px;
+
+    height:56px;
+
+    box-sizing:border-box;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-around;
+
+    gap:5px;
+
+    padding:4px 6px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #eeeeee
+        );
+
+    border-radius:6px;
+
+    color:#222;
+
+    box-shadow:
+
+        0 2px 6px
+        rgba(0,0,0,.3);
+
+}
+
+
+/* ==========================================
+   TANGGAL KALENDER
+========================================== */
+
+.calendar-date{
+
+    min-width:55px;
+
+    text-align:center;
+
+}
+
+
+/* ==========================================
+   NAMA HARI
+========================================== */
+
+#calendar-weekday{
+
+    margin-bottom:2px;
+
+    font-size:8px;
+
+    letter-spacing:1px;
+
+    font-weight:bold;
+
+}
+
+
+/* ==========================================
+   ANGKA TANGGAL
+========================================== */
+
+#calendar-day{
+
+    font-size:23px;
+
+    line-height:1;
+
+    font-weight:900;
+
+}
+
+
+/* ==========================================
+   NAMA BULAN
+========================================== */
+
+#calendar-month{
+
+    margin-top:2px;
+
+    font-size:7px;
+
+    letter-spacing:.8px;
+
+    font-weight:bold;
+
+}
+
+
+/* ==========================================
+   JAM ANALOG
+========================================== */
+
+.analog-clock{
+
+    position:relative;
+
+    flex-shrink:0;
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:50%;
+
+    background:#fff;
+
+    border:2px solid #222;
+
+    box-shadow:
+
+        0 2px 5px
+        rgba(0,0,0,.3);
+
+}
+
+
+/* ==========================================
+   ANGKA JAM
+========================================== */
+
+.clock-number{
+
+    position:absolute;
+
+    font-size:5px;
+
+    font-weight:bold;
+
+    color:#222;
+
+    z-index:3;
+
+}
+
+
+/* ANGKA 12 */
+
+.number-12{
+
+    top:2px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+}
+
+
+/* ANGKA 3 */
+
+.number-3{
+
+    top:50%;
+
+    right:2px;
+
+    transform:translateY(-50%);
+
+}
+
+
+/* ANGKA 6 */
+
+.number-6{
+
+    bottom:2px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+}
+
+
+/* ANGKA 9 */
+
+.number-9{
+
+    top:50%;
+
+    left:2px;
+
+    transform:translateY(-50%);
+
+}
+
+
+/* ==========================================
+   DASAR SEMUA JARUM
+========================================== */
+
+.clock-hand{
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:50%;
+
+    transform-origin:50% 100%;
+
+    border-radius:5px;
+
+    z-index:5;
+
+}
+
+
+/* ==========================================
+   JARUM PENDEK
+========================================== */
+
+.hour-hand{
+
+    width:2px;
+
+    height:11px;
+
+    margin-left:-1px;
+
+    background:#222;
+
+}
+
+
+/* ==========================================
+   JARUM PANJANG
+========================================== */
+
+.minute-hand{
+
+    width:1.5px;
+
+    height:16px;
+
+    margin-left:-.75px;
+
+    background:#333;
+
+}
+
+
+/* ==========================================
+   JARUM DETIK
+========================================== */
+
+.second-hand{
+
+    width:1px;
+
+    height:19px;
+
+    margin-left:-.5px;
+
+    background:red;
+
+    z-index:6;
+
+}
+
+
+/* ==========================================
+   TITIK TENGAH
+========================================== */
+
+.clock-center{
+
+    position:absolute;
+
+    top:50%;
+
+    left:50%;
+
+    width:4px;
+
+    height:4px;
+
+    border-radius:50%;
+
+    background:#222;
+
+    transform:translate(-50%,-50%);
+
+    z-index:10;
+
+}
+
+/* ==========================================
+   STYLE POP-UP MODAL GRAFIK
+========================================== */
+
+.modal{
+
+    display:none;
+
+    position:fixed;
+
+    z-index:2000;
+
+    left:0;
+
+    top:0;
+
+    width:100%;
+
+    height:100%;
+
+    background-color:
+
+        rgba(0,0,0,.6);
+
+    backdrop-filter:
+
+        blur(5px);
+
+    justify-content:center;
+
+    align-items:center;
+
+}
 .modal-content {
     background: rgba(25, 25, 25, 0.95);
     backdrop-filter: blur(15px);
@@ -545,16 +1038,70 @@ h2{
     font-weight: bold;
 
 }
-/* Responsive HP */
-@media (max-width: 768px) {
-    .datetime-container {
-        position: relative;
-        top: 0;
-        right: 0;
-        text-align: center;
-        margin: 15px auto 25px auto;
-        width: fit-content;
+/* ==========================================
+   RESPONSIVE HP
+========================================== */
+
+@media (max-width:768px){
+
+    h1{
+
+        margin-top:30px;
+
+        margin-bottom:0;
+
     }
+
+
+    h2{
+
+        margin-top:0;
+
+        margin-bottom:0;
+
+    }
+
+
+    .datetime-flip-card{
+
+        position:relative;
+
+        top:0;
+
+        right:0;
+
+        width:280px;
+
+        height:100px;
+
+        margin:0 auto;
+
+    }
+
+
+    #warningBox{
+
+    margin-top:0;
+
+    margin-bottom:0;
+
+    transform:translateY(-8px);
+
+}
+
+
+    /* ==========================================
+       LAST UPDATED
+    ========================================== */
+
+    #lastUpdated{
+
+        margin-top:0;
+
+        margin-bottom:0;
+
+    }
+
     .forecast-grid {
         grid-template-columns: repeat(2, 1fr) !important;
     }
@@ -566,6 +1113,15 @@ h2{
     #aqi-box h3 {
         font-size: 12px;
         line-height: 1.2;
+    }
+     #modalTitle{
+
+        white-space:normal;
+
+        font-size:22px;
+
+        margin-bottom:15px;
+
     }
 }
 /* ================= DARK MODE OTOMATIS ================= */
@@ -1476,17 +2032,29 @@ body.dark-mode .section-summary{
 body.golden-mode::before{
 
     background-image:
+
+        /* LAPISAN GRADASI */
         linear-gradient(
-            160deg,
-            rgba(255,245,200,.58) 0%,
-            rgba(255,224,102,.52) 25%,
-            rgba(255,193,7,.46) 55%,
-            rgba(212,175,55,.42) 80%,
-            rgba(120,85,20,.30) 100%
+            to bottom,
+
+            /* ATAS: hampir transparan,
+               warna merah dari gambar tetap terlihat */
+            rgba(255,245,200,0.05) 0%,
+            rgba(255,224,102,0.08) 20%,
+
+            /* TENGAH: mulai masuk warna gold */
+            rgba(255,193,7,0.28) 45%,
+            rgba(212,175,55,0.55) 65%,
+
+            /* BAWAH: gold lebih kuat */
+            rgba(180,130,20,0.78) 82%,
+            rgba(120,85,20,0.92) 100%
         ),
+
         url('https://lh3.googleusercontent.com/gps-cs-s/APNQkAGXzDf6jAqrxVqIt-StdTukOFbGz1GhCgbTUc4Cy9HvG0ZJ1Lk6GwKSemZ9SSBePQ6xFvAHl-g-2ExnhP111C7NhC2NnwS8JRjZyBT-UGeuFAIt_Pjh9ENi7PStSl_RU352jqAyHI6mGIdz=s1360-w1360-h1020-rw');
 
     background-size: cover;
+
     background-position: center;
 
 }
@@ -5062,9 +5630,106 @@ body.valentine-mode .section-summary{
 <h1>Informasi Cuaca</h1>
 <h2>Kota Bandung</h2>
 
-<div class="datetime-container">
-    <div id="hari-tanggal">-</div>
-    <div id="jam-menit-detik">-</div>
+<div class="datetime-flip-card" id="datetimeFlipCard">
+
+    <div class="datetime-flip-inner">
+
+        <!-- =========================
+             SISI DEPAN
+        ========================== -->
+
+        <div class="datetime-face datetime-front">
+
+            <div class="datetime-container">
+
+                <div id="hari-tanggal">-</div>
+
+                <div id="jam-menit-detik">-</div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             SISI BELAKANG
+        ========================== -->
+
+        <div class="datetime-face datetime-back">
+
+            <div class="paper-calendar">
+
+                <div class="calendar-date">
+
+<div id="calendar-weekday">
+        SENIN
+    </div>
+                    <div id="calendar-day">
+                        16
+                    </div>
+
+                    <div id="calendar-month">
+                        JULI
+                    </div>
+
+                </div>
+
+
+                <div class="analog-clock">
+
+                    <div class="clock-number number-12">
+                        12
+                    </div>
+
+                    <div class="clock-number number-3">
+                        3
+                    </div>
+
+                    <div class="clock-number number-6">
+                        6
+                    </div>
+
+                    <div class="clock-number number-9">
+                        9
+                    </div>
+
+
+                    <!-- Jarum jam -->
+
+                    <div
+                        class="clock-hand hour-hand"
+                        id="hourHand">
+                    </div>
+
+
+                    <!-- Jarum menit -->
+
+                    <div
+                        class="clock-hand minute-hand"
+                        id="minuteHand">
+                    </div>
+
+
+                    <!-- Jarum detik -->
+
+                    <div
+                        class="clock-hand second-hand"
+                        id="secondHand">
+                    </div>
+
+
+                    <!-- Titik tengah -->
+
+                    <div class="clock-center"></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
 <div id="warningBox"></div>
 
@@ -5896,18 +6561,273 @@ function updateAirLegend(type) {
     legend.style.display = "block";
 }
 function updateDateTime() {
-    const sekarang = new Date();
-    const opsiHariTanggal = { weekday: 'long', year: 'numeric', month: '2-digit', day: '2-digit' };
-    let textHariTanggal = sekarang.toLocaleDateString('id-ID', opsiHariTanggal).replace(/-/g, '/');
-    const jam = String(sekarang.getHours()).padStart(2, '0');
-    const menit = String(sekarang.getMinutes()).padStart(2, '0');
-    const detik = String(sekarang.getSeconds()).padStart(2, '0');
 
-    document.getElementById('hari-tanggal').innerText = textHariTanggal;
-    document.getElementById('jam-menit-detik').innerText = `${jam}:${menit}:${detik}`;
+    const sekarang = new Date();
+
+
+    /* ==========================================
+       SISI DEPAN — DIGITAL
+    ========================================== */
+
+    const opsiHariTanggal = {
+
+        weekday: 'long',
+
+        year: 'numeric',
+
+        month: '2-digit',
+
+        day: '2-digit'
+
+    };
+
+
+    let textHariTanggal =
+
+        sekarang
+        .toLocaleDateString(
+            'id-ID',
+            opsiHariTanggal
+        )
+        .replace(/-/g, '/');
+
+
+    const jam =
+
+        String(
+            sekarang.getHours()
+        ).padStart(2, '0');
+
+
+    const menit =
+
+        String(
+            sekarang.getMinutes()
+        ).padStart(2, '0');
+
+
+    const detik =
+
+        String(
+            sekarang.getSeconds()
+        ).padStart(2, '0');
+
+
+    document.getElementById(
+        'hari-tanggal'
+    ).innerText =
+
+        textHariTanggal;
+
+
+    document.getElementById(
+        'jam-menit-detik'
+    ).innerText =
+
+        `${jam}:${menit}:${detik}`;
+
+
+    /* ==========================================
+       SISI BELAKANG — KALENDER KERTAS
+    ========================================== */
+
+    const namaHari =
+
+        sekarang.toLocaleDateString(
+            'id-ID',
+            {
+                weekday: 'long'
+            }
+        );
+
+
+    const tanggal =
+
+        sekarang.getDate();
+
+
+    const bulan =
+
+        sekarang.toLocaleDateString(
+            'id-ID',
+            {
+                month: 'long'
+            }
+        );
+
+
+    const calendarWeekday =
+
+        document.getElementById(
+            'calendar-weekday'
+        );
+
+
+    const calendarDay =
+
+        document.getElementById(
+            'calendar-day'
+        );
+
+
+    const calendarMonth =
+
+        document.getElementById(
+            'calendar-month'
+        );
+
+
+    if (calendarWeekday) {
+
+        calendarWeekday.innerText =
+
+            namaHari.toUpperCase();
+
+    }
+
+
+    if (calendarDay) {
+
+        calendarDay.innerText =
+
+            tanggal;
+
+    }
+
+
+    if (calendarMonth) {
+
+        calendarMonth.innerText =
+
+            bulan.toUpperCase();
+
+    }
+
+
+    /* ==========================================
+       JAM ANALOG
+    ========================================== */
+
+    const jamAnalog =
+
+        sekarang.getHours() % 12;
+
+
+    const menitAnalog =
+
+        sekarang.getMinutes();
+
+
+    const detikAnalog =
+
+        sekarang.getSeconds();
+
+
+    const derajatJam =
+
+        (jamAnalog * 30) +
+
+        (menitAnalog * 0.5);
+
+
+    const derajatMenit =
+
+        menitAnalog * 6;
+
+
+    const derajatDetik =
+
+        detikAnalog * 6;
+
+
+    const hourHand =
+
+        document.getElementById(
+            'hourHand'
+        );
+
+
+    const minuteHand =
+
+        document.getElementById(
+            'minuteHand'
+        );
+
+
+    const secondHand =
+
+        document.getElementById(
+            'secondHand'
+        );
+
+
+    if (hourHand) {
+
+        hourHand.style.transform =
+
+            `rotate(${derajatJam}deg)`;
+
+    }
+
+
+    if (minuteHand) {
+
+        minuteHand.style.transform =
+
+            `rotate(${derajatMenit}deg)`;
+
+    }
+
+
+    if (secondHand) {
+
+        secondHand.style.transform =
+
+            `rotate(${derajatDetik}deg)`;
+
+    }
+
 }
-setInterval(updateDateTime, 1000);
+
+
+/* ==========================================
+   UPDATE SETIAP 1 DETIK
+========================================== */
+
+setInterval(
+
+    updateDateTime,
+
+    1000
+
+);
+
+
 updateDateTime();
+/* ==========================================
+   FLIP MANUAL KARTU TANGGAL
+========================================== */
+
+const datetimeFlipCard =
+    document.getElementById(
+        'datetimeFlipCard'
+    );
+
+
+if (datetimeFlipCard) {
+
+    datetimeFlipCard.addEventListener(
+        'click',
+        function(){
+
+            this.classList.toggle(
+                'flipped'
+            );
+
+        }
+    );
+
+}
 
 function animateNumberWithEmoji(elementId, emojiArray, emojiFinal, targetValue, unit = "") {
     const el = document.getElementById(elementId);
@@ -7943,7 +8863,6 @@ function startForecastAnimation(){
 }
 const weatherAnimations = [];
 const rainParticles = [];
-
 let animationPaused = false;
 document.addEventListener("visibilitychange", () => {
     animationPaused = document.hidden;
