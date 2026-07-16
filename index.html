@@ -8331,7 +8331,7 @@ function updateLastUpdated() {
     const detik = String(sekarang.getSeconds()).padStart(2, "0");
 
     document.getElementById("lastUpdated").textContent =
-        `Last Updated: ${jam}:${menit}:${detik}`;
+        `Last updated: ${jam}:${menit}:${detik}`;
 }
 function toCelsius(temp, unit){
     if(unit === "C") return temp;
@@ -8647,103 +8647,102 @@ function generateAnalysis(d){
     }
 
     // ===============================
-    // KESIMPULAN
-    // ===============================
+// KESIMPULAN
+// ===============================
 
-    if(
-        d.weather === "badai" ||
-        (d.wind >= 70 && d.precipProb >= 70)
-    ){
+if(
+    d.weather === "badai" ||
+    (d.wind >= 70 && d.precipProb >= 70)
+){
 
-        analysis +=
-        " Secara keseluruhan, kondisi cuaca berbahaya dan aktivitas luar ruangan sebaiknya ditunda.";
+    analysis +=
+    " Secara keseluruhan, kondisi cuaca berbahaya dan aktivitas luar ruangan sebaiknya ditunda.";
 
-    }else if(
-        d.weather === "hujan lebat" ||
-        (d.precip >= 30 && d.precipProb >= 80)
-    ){
+}else if(
+    d.weather === "hujan lebat" ||
+    (d.precip >= 30 && d.precipProb >= 80)
+){
 
-        analysis +=
-        " Secara keseluruhan, hujan berpotensi mengganggu aktivitas luar ruangan.";
+    analysis +=
+    " Secara keseluruhan, hujan berpotensi mengganggu aktivitas luar ruangan.";
 
-    }else if(
-        d.aqi >= 200
-    ){
+}else if(
+    d.wind >= 45
+){
 
-        analysis +=
-        " Secara keseluruhan, kualitas udara menjadi perhatian utama.";
+    analysis +=
+    " Secara keseluruhan, waspadai hembusan angin yang cukup kencang.";
 
-    }else if(
-        d.aqi >= 150
-    ){
+}else if(
+    d.temp >= 37
+){
 
-        analysis +=
-        " Secara keseluruhan, gunakan masker bila beraktivitas di luar.";
+    analysis +=
+    " Secara keseluruhan, hindari paparan panas dalam waktu lama.";
 
-    }else if(
-        d.wind >= 45
-    ){
+}else if(
+    d.temp >= 32 &&
+    d.humidity >= 80
+){
 
-        analysis +=
-        " Secara keseluruhan, waspadai hembusan angin yang cukup kencang.";
+    analysis +=
+    " Secara keseluruhan, udara terasa panas dan cukup gerah.";
 
-    }else if(
-        d.temp >= 37
-    ){
+}else if(
+    d.weather === "berkabut"
+){
 
-        analysis +=
-        " Secara keseluruhan, hindari paparan panas dalam waktu lama.";
+    analysis +=
+    " Secara keseluruhan, jarak pandang dapat berkurang.";
 
-    }else if(
-        d.temp >= 32 &&
-        d.humidity >= 80
-    ){
+}else if(
+    d.weather === "gerimis"
+){
 
-        analysis +=
-        " Secara keseluruhan, udara terasa panas dan cukup gerah.";
+    analysis +=
+    " Secara keseluruhan, tetap berhati-hati karena jalan dapat menjadi licin.";
 
-    }else if(
-        d.weather === "berkabut"
-    ){
+}else if(
+    d.weather === "mendung" &&
+    d.precipProb >= 50
+){
 
-        analysis +=
-        " Secara keseluruhan, jarak pandang dapat berkurang.";
+    analysis +=
+    " Secara keseluruhan, masih ada potensi hujan.";
 
-    }else if(
-        d.weather === "gerimis"
-    ){
+}else if(
+    d.weather === "cerah" &&
+    d.aqi < 100 &&
+    d.wind < 25
+){
 
-        analysis +=
-        " Secara keseluruhan, tetap berhati-hati karena jalan dapat menjadi licin.";
+    analysis +=
+    " Secara keseluruhan, kondisi cukup ideal untuk beraktivitas.";
 
-    }else if(
-        d.weather === "mendung" &&
-        d.precipProb >= 50
-    ){
+}else if(
+    d.aqi >= 200
+){
 
-        analysis +=
-        " Secara keseluruhan, masih ada potensi hujan.";
+    analysis +=
+    " Secara keseluruhan, kualitas udara menjadi perhatian utama.";
 
-    }else if(
-        d.weather === "cerah" &&
-        d.aqi < 100 &&
-        d.wind < 25
-    ){
+}else if(
+    d.aqi >= 150
+){
 
-        analysis +=
-        " Secara keseluruhan, kondisi cukup ideal untuk beraktivitas.";
+    analysis +=
+    " Secara keseluruhan, gunakan masker bila beraktivitas di luar.";
 
-    }else{
+}else{
 
-        analysis +=
-        " Secara keseluruhan, kondisi cuaca relatif stabil.";
-
-    }
-
-    return analysis;
+    analysis +=
+    " Secara keseluruhan, kondisi cuaca relatif stabil.";
 
 }
 
+return analysis;
+
+}
 
 
 function updateAIAnalysis(){
