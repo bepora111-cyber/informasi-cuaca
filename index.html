@@ -558,11 +558,9 @@ h2{
     font-family:sans-serif;
 
     background:
-
         rgba(0,0,0,.4);
 
     padding:
-
         10px 15px;
 
     border-radius:10px;
@@ -610,6 +608,8 @@ h2{
     font-variant-numeric:tabular-nums;
 
 }
+
+
 /* ==========================================
    SISI BELAKANG
 ========================================== */
@@ -664,14 +664,122 @@ h2{
 
 
 /* ==========================================
-   TANGGAL KALENDER
+   TUMPUKAN KALENDER
 ========================================== */
 
-.calendar-date{
+.calendar-stack{
 
-    min-width:55px;
+    position:relative;
 
-    text-align:center;
+    width:55px;
+
+    height:48px;
+
+    flex-shrink:0;
+
+}
+
+
+/* ==========================================
+   SEMUA LEMBAR KALENDER
+========================================== */
+
+.calendar-sheet{
+
+    position:absolute;
+
+    width:55px;
+
+    height:48px;
+
+    border-radius:4px;
+
+}
+
+
+/* ==========================================
+   KERTAS PALING BELAKANG
+========================================== */
+
+.sheet-3{
+
+    top:6px;
+
+    left:5px;
+
+    background:#cfcfcf;
+
+    transform:rotate(-7deg);
+
+}
+
+
+/* ==========================================
+   KERTAS KEDUA
+========================================== */
+
+.sheet-2{
+
+    top:4px;
+
+    left:3px;
+
+    background:#dedede;
+
+    transform:rotate(5deg);
+
+}
+
+
+/* ==========================================
+   KERTAS KETIGA
+========================================== */
+
+.sheet-1{
+
+    top:2px;
+
+    left:1px;
+
+    background:#eeeeee;
+
+    transform:rotate(-3deg);
+
+}
+
+
+/* ==========================================
+   KERTAS UTAMA
+========================================== */
+
+.sheet-front{
+
+    z-index:10;
+
+    top:0;
+
+    left:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #eeeeee
+        );
+
+    box-shadow:
+
+        0 3px 6px
+        rgba(0,0,0,.25);
 
 }
 
@@ -682,11 +790,11 @@ h2{
 
 #calendar-weekday{
 
-    margin-bottom:2px;
+    margin-bottom:1px;
 
-    font-size:8px;
+    font-size:7px;
 
-    letter-spacing:1px;
+    letter-spacing:.5px;
 
     font-weight:bold;
 
@@ -699,7 +807,7 @@ h2{
 
 #calendar-day{
 
-    font-size:23px;
+    font-size:20px;
 
     line-height:1;
 
@@ -714,13 +822,26 @@ h2{
 
 #calendar-month{
 
-    margin-top:2px;
+    margin-top:1px;
 
-    font-size:7px;
+    font-size:6px;
 
-    letter-spacing:.8px;
+    letter-spacing:.5px;
 
     font-weight:bold;
+
+}
+
+
+/* ==========================================
+   HARI MINGGU — WARNA MERAH
+========================================== */
+
+#calendar-weekday.sunday,
+#calendar-day.sunday,
+#calendar-month.sunday{
+
+    color:#d32f2f;
 
 }
 
@@ -3331,11 +3452,9 @@ body.golden-mode .section-summary{
 /* ================= FRONT ================= */
 
 .temp-front{
-
     font-size:32px;
-
     font-weight:600;
-
+    white-space:nowrap;
 }
 
 /* ================= BACK ================= */
@@ -3394,6 +3513,41 @@ body.golden-mode .section-summary{
 
 .temp-flip-card:nth-child(8) .temp-front{
     background:#43a047;
+}
+
+
+/* ================= TAMBAHAN ================= */
+
+.temp-flip-card:nth-child(9) .temp-front{
+    background:#c2185b;
+}
+
+.temp-flip-card:nth-child(10) .temp-front{
+    background:#0097a7;
+}
+
+.temp-flip-card:nth-child(11) .temp-front{
+    background:#7b1fa2;
+}
+
+.temp-flip-card:nth-child(12) .temp-front{
+    background:#689f38;
+}
+
+.temp-flip-card:nth-child(13) .temp-front{
+    background:#ef6c00;
+}
+
+.temp-flip-card:nth-child(14) .temp-front{
+    background:#5d4037;
+}
+
+.temp-flip-card:nth-child(15) .temp-front{
+    background:#303f9f;
+}
+
+.temp-flip-card:nth-child(16) .temp-front{
+    background:#388e3c;
 }
 
 /* ================= MOBILE ================= */
@@ -5632,6 +5786,305 @@ body.valentine-mode .section-summary{
 
 }
 
+/* ==========================================
+   HALLOWEEN MODE
+========================================== */
+
+body.halloween-mode::before{
+
+   background-image:
+
+    linear-gradient(
+        to bottom,
+
+        /* ATAS
+           gambar asli tetap dominan / merah tetap terlihat */
+        rgba(0,0,0,0.00) 0%,
+        rgba(120,20,10,0.05) 18%,
+
+        /* MULAI MASUK MERAH-ORANYE */
+        rgba(190,55,10,0.22) 35%,
+
+        /* TENGAH: ORANYE */
+        rgba(235,95,10,0.55) 52%,
+
+        /* BAWAH TENGAH: ORANYE LEBIH KUAT */
+        rgba(220,75,5,0.78) 68%,
+
+        /* TRANSISI ORANYE KE HITAM */
+        rgba(100,30,10,0.88) 82%,
+
+        /* PALING BAWAH: HITAM */
+        rgba(0,0,0,0.98) 100%
+    ),
+
+    url('https://lh3.googleusercontent.com/gps-cs-s/APNQkAGXzDf6jAqrxVqIt-StdTukOFbGz1GhCgbTUc4Cy9HvG0ZJ1Lk6GwKSemZ9SSBePQ6xFvAHl-g-2ExnhP111C7NhC2NnwS8JRjZyBT-UGeuFAIt_Pjh9ENi7PStSl_RU352jqAyHI6mGIdz=s1360-w1360-h1020-rw');
+
+background-size:cover;
+
+background-position:center;
+}
+
+/* ==========================================
+   CARD
+========================================== */
+
+body.halloween-mode .box,
+body.halloween-mode .day,
+body.halloween-mode .datetime-container,
+body.halloween-mode .modal-content,
+body.halloween-mode .learn-modal-content,
+body.halloween-mode .learn-card,
+body.halloween-mode .temperature-calculator,
+body.halloween-mode #ai-analysis-box,
+body.halloween-mode .history-card,
+body.halloween-mode .loading-card{
+
+    background: rgba(22,28,46,.82);
+    border: 1px solid rgba(212,175,55,.42);
+
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
+}
+
+
+/* ==========================================
+   HEADERS
+========================================== */
+
+body.halloween-mode .learn-header{
+
+background:
+    linear-gradient(
+        180deg,
+        rgba(255,193,7,.46),
+        rgba(255,255,255,.06)
+    );
+
+}
+
+body.halloween-mode .learn-body{
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,245,200,.08),
+            rgba(255,255,255,.04)
+        );
+
+}
+
+/* ==========================================
+   DOT
+========================================== */
+
+body.halloween-mode .dot.active{
+
+    background:
+        linear-gradient(
+            180deg,
+            #ffd700,
+            #ffffff
+        );
+
+    box-shadow:
+        0 0 10px rgba(255,215,0,.60);
+
+}
+
+/* ==========================================
+   BOX
+========================================== */
+
+body.halloween-mode .box.active{
+
+    background: #0b1f4d;
+
+    color: #ffffff;
+
+    border: 1px solid rgba(255,255,255,.20);
+
+    box-shadow:
+        0 0 18px rgba(11,31,77,.35),
+        0 0 35px rgba(11,31,77,.15);
+
+}
+
+body.halloween-mode .box.side{
+    background: rgba(22,28,46,.72);
+}
+
+body.halloween-mode .box:not(.active):hover,
+body.halloween-mode .learn-card:hover{
+    background: rgba(34,42,64,.92);
+}
+
+/* ==========================================
+   AI
+========================================== */
+
+body.halloween-mode #ai-analysis-box{
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,215,0,.16) 0%,
+            rgba(255,245,200,.10) 45%,
+            rgba(255,255,255,.08) 100%
+        );
+
+}
+
+body.halloween-mode #ai-analysis-box:hover{
+
+    box-shadow:
+        0 12px 35px rgba(255,215,0,.22);
+
+}
+
+/* ==========================================
+   FLIP
+========================================== */
+
+body.halloween-mode .temp-front{
+
+    filter: brightness(.95);
+
+    border: 1.5px solid rgba(255,215,0,.22);
+
+    box-shadow:
+        inset 0 1px 2px rgba(255,255,255,.06),
+        inset 0 -2px 6px rgba(0,0,0,.35),
+        0 6px 16px rgba(255,215,0,.12);
+
+}
+
+body.halloween-mode .temp-front::before,
+body.halloween-mode .temp-back::before{
+
+    background: linear-gradient(
+        135deg,
+        rgba(255,255,255,.18),
+        rgba(255,215,0,.10) 25%,
+        rgba(255,255,255,0) 55%,
+        rgba(255,255,255,.05)
+    );
+
+}
+
+body.halloween-mode .temp-back{
+
+    background: linear-gradient(
+        145deg,
+        #28314a,
+        #171d2d
+    );
+
+    color: #f5f5f5;
+
+    border: 1.5px solid rgba(255,215,0,.18);
+
+}
+
+/* ==========================================
+   SEARCH
+========================================== */
+
+body.halloween-mode .learn-search input{
+
+    background: rgba(25,28,45,.88);
+    color: #f8f8f8;
+
+    border: 1px solid rgba(255,215,0,.18);
+
+}
+
+body.halloween-mode .learn-search input::placeholder{
+    color: rgba(255,255,255,.45);
+}
+
+body.halloween-mode .learn-search input:focus{
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,215,0,.20),
+            rgba(255,255,255,.12)
+        );
+
+    border-color: #ffd700;
+
+    box-shadow:
+        0 0 15px rgba(255,215,0,.20);
+
+}
+
+body.halloween-mode .search-icon svg{
+
+    stroke: #ffd700 !important;
+
+}
+
+/* ==========================================
+   HISTORY
+========================================== */
+
+body.halloween-mode .history-title{
+
+    color: #ffe066;
+
+}
+
+body.halloween-mode .history-meta{
+
+    color: #f4d35e;
+
+}
+
+body.halloween-mode .history-description{
+
+    color: #f3f3f3;
+
+}
+
+
+/* ==========================================
+   SUMMARY
+========================================== */
+
+body.halloween-mode .section-summary{
+
+    background: rgba(255,224,102,.20);
+
+    border-left:4px solid rgba(212,175,55,.90);
+
+    color:#f5f5f5;
+
+    box-shadow:
+        inset 0 0 0 1px rgba(255,224,102,.20);
+
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width:768px){
+
+    body.halloween-mode .history-card{
+
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+
+        box-shadow:
+            0 6px 16px rgba(255,215,0,.10);
+
+    }
+
+}
+
 </style>
 </head>
 <body>
@@ -5644,6 +6097,7 @@ body.valentine-mode .section-summary{
 
     <div class="datetime-flip-inner">
 
+
         <!-- =========================
              SISI DEPAN
         ========================== -->
@@ -5652,9 +6106,13 @@ body.valentine-mode .section-summary{
 
             <div class="datetime-container">
 
-                <div id="hari-tanggal">-</div>
+                <div id="hari-tanggal">
+                    -
+                </div>
 
-                <div id="jam-menit-detik">-</div>
+                <div id="jam-menit-detik">
+                    -
+                </div>
 
             </div>
 
@@ -5669,42 +6127,96 @@ body.valentine-mode .section-summary{
 
             <div class="paper-calendar">
 
-                <div class="calendar-date">
 
-<div id="calendar-weekday">
-        SENIN
-    </div>
-                    <div id="calendar-day">
-                        16
-                    </div>
+                <!-- =========================
+                     KALENDER HARIAN BERTUMPUK
+                ========================== -->
 
-                    <div id="calendar-month">
-                        JULI
+                <div class="calendar-stack">
+
+
+                    <!-- KERTAS PALING BELAKANG -->
+
+                    <div class="calendar-sheet sheet-3"></div>
+
+
+                    <!-- KERTAS TENGAH -->
+
+                    <div class="calendar-sheet sheet-2"></div>
+
+
+                    <!-- KERTAS DEPAN BELAKANG -->
+
+                    <div class="calendar-sheet sheet-1"></div>
+
+
+                    <!-- KERTAS UTAMA -->
+
+                    <div class="calendar-sheet sheet-front">
+
+
+                        <!-- HARI -->
+
+                        <div id="calendar-weekday">
+                            SENIN
+                        </div>
+
+
+                        <!-- TANGGAL -->
+
+                        <div id="calendar-day">
+                            16
+                        </div>
+
+
+                        <!-- BULAN -->
+
+                        <div id="calendar-month">
+                            JULI
+                        </div>
+
+
                     </div>
 
                 </div>
 
 
+                <!-- =========================
+                     JAM ANALOG
+                ========================== -->
+
                 <div class="analog-clock">
+
+
+                    <!-- ANGKA 12 -->
 
                     <div class="clock-number number-12">
                         12
                     </div>
 
+
+                    <!-- ANGKA 3 -->
+
                     <div class="clock-number number-3">
                         3
                     </div>
 
+
+                    <!-- ANGKA 6 -->
+
                     <div class="clock-number number-6">
                         6
                     </div>
+
+
+                    <!-- ANGKA 9 -->
 
                     <div class="clock-number number-9">
                         9
                     </div>
 
 
-                    <!-- Jarum jam -->
+                    <!-- JARUM JAM -->
 
                     <div
                         class="clock-hand hour-hand"
@@ -5712,7 +6224,7 @@ body.valentine-mode .section-summary{
                     </div>
 
 
-                    <!-- Jarum menit -->
+                    <!-- JARUM MENIT -->
 
                     <div
                         class="clock-hand minute-hand"
@@ -5720,7 +6232,7 @@ body.valentine-mode .section-summary{
                     </div>
 
 
-                    <!-- Jarum detik -->
+                    <!-- JARUM DETIK -->
 
                     <div
                         class="clock-hand second-hand"
@@ -5728,9 +6240,10 @@ body.valentine-mode .section-summary{
                     </div>
 
 
-                    <!-- Titik tengah -->
+                    <!-- TITIK TENGAH -->
 
                     <div class="clock-center"></div>
+
 
                 </div>
 
@@ -6572,7 +7085,9 @@ function updateAirLegend(type) {
 }
 function updateDateTime() {
 
-    const sekarang = new Date();
+
+    const sekarang =
+        new Date();
 
 
     /* ==========================================
@@ -6581,51 +7096,73 @@ function updateDateTime() {
 
     const opsiHariTanggal = {
 
+
         weekday: 'long',
+
 
         year: 'numeric',
 
+
         month: '2-digit',
 
+
         day: '2-digit'
+
 
     };
 
 
     let textHariTanggal =
 
+
         sekarang
         .toLocaleDateString(
             'id-ID',
             opsiHariTanggal
         )
-        .replace(/-/g, '/');
+        .replace(
+            /-/g,
+            '/'
+        );
 
 
     const jam =
 
+
         String(
             sekarang.getHours()
-        ).padStart(2, '0');
+        ).padStart(
+            2,
+            '0'
+        );
 
 
     const menit =
 
+
         String(
             sekarang.getMinutes()
-        ).padStart(2, '0');
+        ).padStart(
+            2,
+            '0'
+        );
 
 
     const detik =
 
+
         String(
             sekarang.getSeconds()
-        ).padStart(2, '0');
+        ).padStart(
+            2,
+            '0'
+        );
 
 
     document.getElementById(
         'hari-tanggal'
     ).innerText =
+
 
         textHariTanggal;
 
@@ -6633,6 +7170,7 @@ function updateDateTime() {
     document.getElementById(
         'jam-menit-detik'
     ).innerText =
+
 
         `${jam}:${menit}:${detik}`;
 
@@ -6642,6 +7180,7 @@ function updateDateTime() {
     ========================================== */
 
     const namaHari =
+
 
         sekarang.toLocaleDateString(
             'id-ID',
@@ -6653,10 +7192,12 @@ function updateDateTime() {
 
     const tanggal =
 
+
         sekarang.getDate();
 
 
     const bulan =
+
 
         sekarang.toLocaleDateString(
             'id-ID',
@@ -6668,12 +7209,14 @@ function updateDateTime() {
 
     const calendarWeekday =
 
+
         document.getElementById(
             'calendar-weekday'
         );
 
 
     const calendarDay =
+
 
         document.getElementById(
             'calendar-day'
@@ -6682,34 +7225,94 @@ function updateDateTime() {
 
     const calendarMonth =
 
+
         document.getElementById(
             'calendar-month'
         );
 
 
+    /* ==========================================
+       UPDATE KALENDER
+    ========================================== */
+
     if (calendarWeekday) {
+
 
         calendarWeekday.innerText =
 
+
             namaHari.toUpperCase();
+
 
     }
 
 
     if (calendarDay) {
 
+
         calendarDay.innerText =
 
+
             tanggal;
+
 
     }
 
 
     if (calendarMonth) {
 
+
         calendarMonth.innerText =
 
+
             bulan.toUpperCase();
+
+
+    }
+
+
+    /* ==========================================
+       WARNA MERAH SAAT HARI MINGGU
+    ========================================== */
+
+    const isSunday =
+
+
+        sekarang.getDay() === 0;
+
+
+    if (calendarWeekday) {
+
+
+        calendarWeekday.classList.toggle(
+            'sunday',
+            isSunday
+        );
+
+
+    }
+
+
+    if (calendarDay) {
+
+
+        calendarDay.classList.toggle(
+            'sunday',
+            isSunday
+        );
+
+
+    }
+
+
+    if (calendarMonth) {
+
+
+        calendarMonth.classList.toggle(
+            'sunday',
+            isSunday
+        );
+
 
     }
 
@@ -6720,37 +7323,45 @@ function updateDateTime() {
 
     const jamAnalog =
 
+
         sekarang.getHours() % 12;
 
 
     const menitAnalog =
+
 
         sekarang.getMinutes();
 
 
     const detikAnalog =
 
+
         sekarang.getSeconds();
 
 
     const derajatJam =
 
+
         (jamAnalog * 30) +
+
 
         (menitAnalog * 0.5);
 
 
     const derajatMenit =
 
+
         menitAnalog * 6;
 
 
     const derajatDetik =
 
+
         detikAnalog * 6;
 
 
     const hourHand =
+
 
         document.getElementById(
             'hourHand'
@@ -6759,12 +7370,14 @@ function updateDateTime() {
 
     const minuteHand =
 
+
         document.getElementById(
             'minuteHand'
         );
 
 
     const secondHand =
+
 
         document.getElementById(
             'secondHand'
@@ -6773,29 +7386,39 @@ function updateDateTime() {
 
     if (hourHand) {
 
+
         hourHand.style.transform =
 
+
             `rotate(${derajatJam}deg)`;
+
 
     }
 
 
     if (minuteHand) {
 
+
         minuteHand.style.transform =
 
+
             `rotate(${derajatMenit}deg)`;
+
 
     }
 
 
     if (secondHand) {
 
+
         secondHand.style.transform =
+
 
             `rotate(${derajatDetik}deg)`;
 
+
     }
+
 
 }
 
@@ -6814,31 +7437,44 @@ setInterval(
 
 
 updateDateTime();
+
+
 /* ==========================================
    FLIP MANUAL KARTU TANGGAL
 ========================================== */
 
 const datetimeFlipCard =
+
     document.getElementById(
+
         'datetimeFlipCard'
+
     );
 
 
 if (datetimeFlipCard) {
 
+
     datetimeFlipCard.addEventListener(
+
         'click',
+
         function(){
 
+
             this.classList.toggle(
+
                 'flipped'
+
             );
 
+
         }
+
     );
 
-}
 
+}
 function animateNumberWithEmoji(elementId, emojiArray, emojiFinal, targetValue, unit = "") {
     const el = document.getElementById(elementId);
     if (!el) return;
@@ -8109,28 +8745,53 @@ function getWindDirectionEmoji(deg) {
 }
 
 function getWindDirectionName(deg) {
-    if (deg >= 337.5 || deg < 22.5)
+
+    if (deg >= 348.75 || deg < 11.25)
         return "Utara";
 
-    if (deg < 67.5)
+    if (deg < 33.75)
+        return "Utara Timur Laut";
+
+    if (deg < 56.25)
         return "Timur Laut";
 
-    if (deg < 112.5)
+    if (deg < 78.75)
+        return "Timur Timur Laut";
+
+    if (deg < 101.25)
         return "Timur";
 
-    if (deg < 157.5)
+    if (deg < 123.75)
+        return "Timur Tenggara";
+
+    if (deg < 146.25)
         return "Tenggara";
 
-    if (deg < 202.5)
+    if (deg < 168.75)
+        return "Selatan Tenggara";
+
+    if (deg < 191.25)
         return "Selatan";
 
-    if (deg < 247.5)
+    if (deg < 213.75)
+        return "Selatan Barat Daya";
+
+    if (deg < 236.25)
         return "Barat Daya";
 
-    if (deg < 292.5)
+    if (deg < 258.75)
+        return "Barat Barat Daya";
+
+    if (deg < 281.25)
         return "Barat";
 
-    return "Barat Laut";
+    if (deg < 303.75)
+        return "Barat Barat Laut";
+
+    if (deg < 326.25)
+        return "Barat Laut";
+
+    return "Utara Barat Laut";
 }
 function getWindUnit() {
     return windUnit === "ms" ? " m/s" : " km/j";
@@ -8162,22 +8823,65 @@ function updateWindDisplay(){
     // hanya teks, tanpa emoji
     const directionText = getWindDirectionName(dirDeg);
 
-   document.getElementById("wind").innerHTML = `
-    <div style="display:flex; flex-direction:column; align-items:flex-start; gap:4px; width:100%;">
+ document.getElementById("wind").innerHTML = `
+    <div style="
+        display:flex;
+        flex-direction:column;
+        align-items:flex-start;
+        gap:4px;
+        width:100%;
+    ">
 
-        <div style="font-size:18px; font-weight:bold;">
+        <div style="
+            font-size:18px;
+            font-weight:bold;
+        ">
             ${speed.toFixed(1)}
         </div>
 
-        <div class="wind-direction" style="font-size:11px; opacity:0.75;">
+        <div class="wind-direction"
+             style="
+                font-size:10px;
+                opacity:0.75;
+                white-space:nowrap;
+             ">
             Arah angin dari: ${directionText}
         </div>
 
     </div>
 `;
-        
-}
 
+
+// Ambil elemen arah angin
+const windDirection =
+    document.querySelector("#wind .wind-direction");
+
+
+// Lebar maksimum kotak
+const maxWidth =
+    windDirection.parentElement.clientWidth;
+
+
+// Ukuran awal font
+let fontSize = 10;
+
+
+// Terapkan ukuran awal
+windDirection.style.fontSize =
+    fontSize + "px";
+
+
+// Kecilkan hanya jika teks tidak muat
+while (
+    windDirection.scrollWidth > maxWidth
+) {
+
+    fontSize -= 0.1;
+
+    windDirection.style.fontSize =
+        fontSize + "px";
+}
+}
 
 function updateThemeByTime() {
 
@@ -8191,28 +8895,39 @@ function updateThemeByTime() {
         now.getHours() * 60 +
         now.getMinutes();
 
+
     // ==========================
     // Hapus semua mode
     // ==========================
 
     document.body.classList.remove(
+
         "golden-mode",
         "dark-mode",
+
         "newyear-mode",
         "valentine-mode",
+        "halloween-mode",
         "christmas-mode",
         "independence-mode",
+
         "weekend-mode"
+
     );
+
 
     // ==========================
     // MODE HARI SPESIAL
     // ==========================
 
-    // 🎆 Tahun Baru (1 Januari)
+
+    // 🎆 Tahun Baru — 1 Januari
+
     if (
+
         month === 1 &&
         day === 1
+
     ) {
 
         document.body.classList.add(
@@ -8224,10 +8939,13 @@ function updateThemeByTime() {
     }
 
 
-    // 💖 Valentine (14 Februari)
+    // 💖 Valentine — 14 Februari
+
     if (
+
         month === 2 &&
         day === 14
+
     ) {
 
         document.body.classList.add(
@@ -8239,10 +8957,31 @@ function updateThemeByTime() {
     }
 
 
-    // 🇮🇩 Hari Kemerdekaan (17 Agustus)
+    // 🎃 Halloween — 31 Oktober
+
     if (
+
+        month === 10 &&
+        day === 31
+
+    ) {
+
+        document.body.classList.add(
+            "halloween-mode"
+        );
+
+        return;
+
+    }
+
+
+    // 🇮🇩 Hari Kemerdekaan — 17 Agustus
+
+    if (
+
         month === 8 &&
         day === 17
+
     ) {
 
         document.body.classList.add(
@@ -8254,10 +8993,13 @@ function updateThemeByTime() {
     }
 
 
-    // 🎄 Natal (25 Desember)
+    // 🎄 Natal — 25 Desember
+
     if (
+
         month === 12 &&
         day === 25
+
     ) {
 
         document.body.classList.add(
@@ -8275,8 +9017,10 @@ function updateThemeByTime() {
     // ==========================
 
     if (
+
         weekDay === 0 ||
         weekDay === 6
+
     ) {
 
         document.body.classList.add(
@@ -8293,31 +9037,35 @@ function updateThemeByTime() {
     // ==========================
 
     const sunriseStart =
-    5 * 60 + 30;   // 05:30
+        5 * 60 + 30;   // 05:30
 
     const sunriseEnd =
-    6 * 60 + 30;   // 06:30
+        6 * 60 + 30;   // 06:30
 
 
     const sunsetStart =
-    16 * 60 + 30;  // 16:30
+        16 * 60 + 30;  // 16:30
 
     const sunsetEnd =
-    17 * 60 + 30;  // 17:30
+        17 * 60 + 30;  // 17:30
 
 
     if (
 
         (
+
             totalMinutes >= sunriseStart &&
             totalMinutes < sunriseEnd
+
         )
 
         ||
 
         (
+
             totalMinutes >= sunsetStart &&
             totalMinutes < sunsetEnd
+
         )
 
     ) {
@@ -8327,6 +9075,7 @@ function updateThemeByTime() {
         );
 
     }
+
 
     else if (
 
@@ -8348,13 +9097,18 @@ function updateThemeByTime() {
 
 }
 
+
 updateThemeByTime();
 
 
 // Cek setiap detik
+
 setInterval(
+
     updateThemeByTime,
+
     1000
+
 );
 // Inisialisasi awal slider saat halaman siap
 createPaginationDots();
@@ -10046,6 +10800,123 @@ Apabila angin bertiup dari laut menuju daratan, udara yang dibawanya biasanya le
 Kecepatan angin yang sangat tinggi sering dikaitkan dengan cuaca buruk seperti badai, hujan lebat, atau puting beliung. Angin kencang dapat merobohkan pohon, merusak bangunan, mengganggu transportasi, serta menimbulkan gelombang tinggi di laut. Oleh karena itu, informasi mengenai kecepatan angin selalu menjadi salah satu bagian penting dalam prakiraan cuaca untuk membantu masyarakat mempersiapkan aktivitasnya dengan lebih aman.
 `
 },
+
+{
+    title:"Arah Datangnya Angin",
+    summary:"Pahami pengertian arah datangnya angin serta 16 arah mata angin yang digunakan untuk menunjukkan dari mana angin bertiup.",
+    text:`Arah datangnya angin adalah arah dari mana angin berasal dan menuju ke suatu wilayah. Dalam meteorologi, arah angin biasanya dinamai berdasarkan titik kompas tempat angin tersebut berasal. Sebagai contoh, angin yang datang dari arah utara disebut angin utara, sedangkan angin yang datang dari arah barat daya disebut angin barat daya.
+
+Arah angin berbeda dengan arah tujuan angin. Jika angin disebut berasal dari utara, berarti angin bergerak dari utara menuju ke arah selatan. Oleh karena itu, informasi arah angin menunjukkan asal datangnya massa udara, bukan ke mana angin tersebut bergerak.
+
+Arah datangnya angin biasanya diukur menggunakan satuan derajat, mulai dari 0° hingga 360°. Arah utara berada pada 0° atau 360°, timur berada pada 90°, selatan berada pada 180°, dan barat berada pada 270°. Di antara keempat arah utama tersebut terdapat arah-arah lainnya yang membentuk sistem 16 mata angin.
+
+Berikut adalah 16 arah mata angin:
+
+1. Utara (U) — sekitar 0° atau 360°. Angin datang dari arah utara dan bergerak menuju ke arah selatan.
+
+2. Utara Timur Laut (UTL) — sekitar 22,5°. Arah ini berada di antara utara dan timur laut.
+
+3. Timur Laut (TL) — sekitar 45°. Angin datang dari arah timur laut.
+
+4. Timur Timur Laut (TTL) — sekitar 67,5°. Arah ini berada di antara timur laut dan timur.
+
+5. Timur (T) — sekitar 90°. Angin datang dari arah timur dan bergerak menuju ke arah barat.
+
+6. Timur Tenggara (TTG) — sekitar 112,5°. Arah ini berada di antara timur dan tenggara.
+
+7. Tenggara (TG) — sekitar 135°. Angin datang dari arah tenggara.
+
+8. Selatan Tenggara (STG) — sekitar 157,5°. Arah ini berada di antara tenggara dan selatan.
+
+9. Selatan (S) — sekitar 180°. Angin datang dari arah selatan dan bergerak menuju ke arah utara.
+
+10. Selatan Barat Daya (SBD) — sekitar 202,5°. Arah ini berada di antara selatan dan barat daya.
+
+11. Barat Daya (BD) — sekitar 225°. Angin datang dari arah barat daya.
+
+12. Barat Barat Daya (BBD) — sekitar 247,5°. Arah ini berada di antara barat daya dan barat.
+
+13. Barat (B) — sekitar 270°. Angin datang dari arah barat dan bergerak menuju ke arah timur.
+
+14. Barat Barat Laut (BBL) — sekitar 292,5°. Arah ini berada di antara barat dan barat laut.
+
+15. Barat Laut (BL) — sekitar 315°. Angin datang dari arah barat laut.
+
+16. Utara Barat Laut (UBL) — sekitar 337,5°. Arah ini berada di antara barat laut dan utara.
+
+Dalam data cuaca, arah angin umumnya dinyatakan dalam derajat azimut. Nilai 0° atau 360° menunjukkan angin yang datang dari utara, 90° menunjukkan angin dari timur, 180° menunjukkan angin dari selatan, dan 270° menunjukkan angin dari barat. Nilai di antara arah-arah tersebut digunakan untuk menentukan arah mata angin yang lebih spesifik.
+
+Sebagai contoh, jika arah angin tercatat sebesar 45°, berarti angin datang dari arah timur laut. Jika tercatat 225°, berarti angin datang dari arah barat daya. Dengan demikian, semakin besar nilai derajat arah angin, semakin tepat pula kita dapat mengetahui dari mana massa udara bergerak menuju suatu wilayah.
+
+Informasi mengenai arah datangnya angin sangat penting dalam prakiraan cuaca karena setiap arah dapat membawa karakteristik udara yang berbeda. Angin dari laut dapat membawa udara yang lebih lembap, sedangkan angin dari daratan atau wilayah yang lebih kering dapat membawa udara dengan kelembapan yang lebih rendah. Oleh karena itu, arah angin dapat membantu menjelaskan perubahan suhu, kelembapan, pembentukan awan, dan kemungkinan terjadinya hujan.
+`,
+cards:[
+    {
+        front:"Utara",
+        back:"0° / 360°"
+    },
+    {
+        front:"Utara Timur Laut",
+        back:"22,5°"
+    },
+    {
+        front:"Timur Laut",
+        back:"45°"
+    },
+    {
+        front:"Timur Timur Laut",
+        back:"67,5°"
+    },
+    {
+        front:"Timur",
+        back:"90°"
+    },
+    {
+        front:"Timur Tenggara",
+        back:"112,5°"
+    },
+    {
+        front:"Tenggara",
+        back:"135°"
+    },
+    {
+        front:"Selatan Tenggara",
+        back:"157,5°"
+    },
+    {
+        front:"Selatan",
+        back:"180°"
+    },
+    {
+        front:"Selatan Barat Daya",
+        back:"202,5°"
+    },
+    {
+        front:"Barat Daya",
+        back:"225°"
+    },
+    {
+        front:"Barat Barat Daya",
+        back:"247,5°"
+    },
+    {
+        front:"Barat",
+        back:"270°"
+    },
+    {
+        front:"Barat Barat Laut",
+        back:"292,5°"
+    },
+    {
+        front:"Barat Laut",
+        back:"315°"
+    },
+    {
+        front:"Utara Barat Laut",
+        back:"337,5°"
+    }
+]
+},
         {
             title:"Satuan Kecepatan Angin",
             summary:"Kenali berbagai satuan kecepatan angin beserta fungsi, karakteristik, dan penggunaannya dalam meteorologi, pelayaran, penerbangan, serta kehidupan sehari-hari.",
@@ -10461,6 +11332,64 @@ Miles per hour (mph)
 
     document.getElementById("learnContent").innerHTML = html;
 
+
+// ===============================
+// AUTO FONT SIZE FLIP CARD
+// ===============================
+
+document
+.querySelectorAll(".temp-front")
+.forEach(card => {
+
+    const maxWidth =
+        card.clientWidth - 20;
+
+    let fontSize = 32;
+
+
+    const measure =
+        document.createElement("span");
+
+    measure.style.position =
+        "absolute";
+
+    measure.style.visibility =
+        "hidden";
+
+    measure.style.whiteSpace =
+        "nowrap";
+
+    measure.style.fontWeight =
+        "600";
+
+    measure.style.fontSize =
+        "32px";
+
+    measure.textContent =
+        card.textContent.trim();
+
+    document.body.appendChild(measure);
+
+
+    while (
+        measure.offsetWidth > maxWidth &&
+        fontSize > 12
+    ) {
+
+        fontSize -= 0.5;
+
+        measure.style.fontSize =
+            fontSize + "px";
+    }
+
+
+    card.style.fontSize =
+        fontSize + "px";
+
+
+    measure.remove();
+
+});
     document
 .querySelectorAll(".temp-flip-card")
 .forEach(card=>{
