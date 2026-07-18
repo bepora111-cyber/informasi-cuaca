@@ -627,6 +627,8 @@ h2{
 
 .paper-calendar{
 
+    position:relative;
+
     width:180px;
 
     height:56px;
@@ -643,13 +645,7 @@ h2{
 
     padding:4px 6px;
 
-    background:
-
-        linear-gradient(
-            135deg,
-            #ffffff,
-            #eeeeee
-        );
+    overflow:hidden;
 
     border-radius:6px;
 
@@ -662,6 +658,94 @@ h2{
 
 }
 
+
+/* ==========================================
+   BACKGROUND BERGERAK
+========================================== */
+
+.paper-calendar::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-10%;
+
+    background-image:
+
+        url("https://png.pngtree.com/thumb_back/fh260/background/20210902/pngtree-shockingly-overlook-the-day-to-night-city-scenery-of-chengdu-339-image_787294.jpg");
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-repeat:no-repeat;
+
+    animation:
+
+        calendarBackgroundMove
+        60s
+        linear
+        infinite;
+
+    will-change:transform;
+
+    transform:
+
+        translate3d(0,0,0);
+
+    z-index:0;
+
+}
+
+
+/* ==========================================
+   ISI KALENDER DI ATAS BACKGROUND
+========================================== */
+
+.paper-calendar > *{
+
+    position:relative;
+
+    z-index:1;
+
+}
+
+
+/* ==========================================
+   GERAKAN BACKGROUND
+========================================== */
+
+@keyframes calendarBackgroundMove{
+
+
+    0%{
+
+        transform:
+
+            translate3d(-4%,0,0);
+
+    }
+
+
+    50%{
+
+        transform:
+
+            translate3d(4%,0,0);
+
+    }
+
+
+    100%{
+
+        transform:
+
+            translate3d(-4%,0,0);
+
+    }
+
+}
 
 /* ==========================================
    TUMPUKAN KALENDER
@@ -698,52 +782,190 @@ h2{
 
 
 /* ==========================================
-   KERTAS PALING BELAKANG
+   LAPISAN KALENDER
 ========================================== */
 
-.sheet-3{
 
-    top:6px;
+/* ==========================================
+   PALING BELAKANG
+========================================== */
 
-    left:5px;
+.sheet-12{
 
-    background:#cfcfcf;
+    top:11px;
+
+    left:8px;
+
+    z-index:1;
+
+    background:#bdbdbd;
+
+    transform:rotate(-9deg);
+
+}
+
+
+.sheet-11{
+
+    top:10px;
+
+    left:7px;
+
+    z-index:2;
+
+    background:#c4c4c4;
+
+    transform:rotate(8deg);
+
+}
+
+
+.sheet-10{
+
+    top:9px;
+
+    left:6px;
+
+    z-index:3;
+
+    background:#c9c9c9;
 
     transform:rotate(-7deg);
 
 }
 
 
-/* ==========================================
-   KERTAS KEDUA
-========================================== */
+.sheet-9{
 
-.sheet-2{
+    top:8px;
+
+    left:5px;
+
+    z-index:4;
+
+    background:#cfcfcf;
+
+    transform:rotate(6deg);
+
+}
+
+
+.sheet-8{
+
+    top:7px;
+
+    left:5px;
+
+    z-index:5;
+
+    background:#d3d3d3;
+
+    transform:rotate(-5deg);
+
+}
+
+
+.sheet-7{
+
+    top:6px;
+
+    left:4px;
+
+    z-index:6;
+
+    background:#d7d7d7;
+
+    transform:rotate(4deg);
+
+}
+
+
+.sheet-6{
+
+    top:5px;
+
+    left:4px;
+
+    z-index:7;
+
+    background:#dadada;
+
+    transform:rotate(-3deg);
+
+}
+
+
+.sheet-5{
 
     top:4px;
 
     left:3px;
 
+    z-index:8;
+
     background:#dedede;
 
-    transform:rotate(5deg);
+    transform:rotate(3deg);
 
 }
 
 
-/* ==========================================
-   KERTAS KETIGA
-========================================== */
+.sheet-4{
 
-.sheet-1{
+    top:3px;
+
+    left:3px;
+
+    z-index:9;
+
+    background:#e2e2e2;
+
+    transform:rotate(-2deg);
+
+}
+
+
+.sheet-3{
 
     top:2px;
 
+    left:2px;
+
+    z-index:10;
+
+    background:#e6e6e6;
+
+    transform:rotate(2deg);
+
+}
+
+
+.sheet-2{
+
+    top:1px;
+
     left:1px;
+
+    z-index:11;
+
+    background:#eaeaea;
+
+    transform:rotate(-1deg);
+
+}
+
+
+.sheet-1{
+
+    top:0;
+
+    left:0;
+
+    z-index:12;
 
     background:#eeeeee;
 
-    transform:rotate(-3deg);
+    transform:rotate(1deg);
 
 }
 
@@ -754,7 +976,7 @@ h2{
 
 .sheet-front{
 
-    z-index:10;
+    z-index:100;
 
     top:0;
 
@@ -844,8 +1066,6 @@ h2{
     color:#d32f2f;
 
 }
-
-
 /* ==========================================
    JAM ANALOG
 ========================================== */
@@ -6134,52 +6354,41 @@ body.halloween-mode .section-summary{
 
                 <div class="calendar-stack">
 
+    <!-- 12 LAPISAN KERTAS BELAKANG -->
 
-                    <!-- KERTAS PALING BELAKANG -->
-
-                    <div class="calendar-sheet sheet-3"></div>
-
-
-                    <!-- KERTAS TENGAH -->
-
-                    <div class="calendar-sheet sheet-2"></div>
-
-
-                    <!-- KERTAS DEPAN BELAKANG -->
-
-                    <div class="calendar-sheet sheet-1"></div>
-
-
-                    <!-- KERTAS UTAMA -->
-
-                    <div class="calendar-sheet sheet-front">
+    <div class="calendar-sheet sheet-12"></div>
+    <div class="calendar-sheet sheet-11"></div>
+    <div class="calendar-sheet sheet-10"></div>
+    <div class="calendar-sheet sheet-9"></div>
+    <div class="calendar-sheet sheet-8"></div>
+    <div class="calendar-sheet sheet-7"></div>
+    <div class="calendar-sheet sheet-6"></div>
+    <div class="calendar-sheet sheet-5"></div>
+    <div class="calendar-sheet sheet-4"></div>
+    <div class="calendar-sheet sheet-3"></div>
+    <div class="calendar-sheet sheet-2"></div>
+    <div class="calendar-sheet sheet-1"></div>
 
 
-                        <!-- HARI -->
+    <!-- KERTAS UTAMA -->
 
-                        <div id="calendar-weekday">
-                            SENIN
-                        </div>
+    <div class="calendar-sheet sheet-front">
 
+        <div id="calendar-weekday">
+            SENIN
+        </div>
 
-                        <!-- TANGGAL -->
+        <div id="calendar-day">
+            16
+        </div>
 
-                        <div id="calendar-day">
-                            16
-                        </div>
+        <div id="calendar-month">
+            JULI
+        </div>
 
+    </div>
 
-                        <!-- BULAN -->
-
-                        <div id="calendar-month">
-                            JULI
-                        </div>
-
-
-                    </div>
-
-                </div>
-
+</div>
 
                 <!-- =========================
                      JAM ANALOG
@@ -7085,7 +7294,7 @@ function updateAirLegend(type) {
 }
 function updateDateTime() {
 
-
+updateCalendarBackground();
     const sekarang =
         new Date();
 
@@ -7272,6 +7481,81 @@ function updateDateTime() {
 
 
     /* ==========================================
+       TUMPUKAN 12 LAPISAN KALENDER
+    ========================================== */
+
+
+    const semuaSheet =
+
+
+        document.querySelectorAll(
+
+            '.calendar-stack .calendar-sheet:not(.sheet-front)'
+
+        );
+
+
+    const bulanSekarang =
+
+
+        sekarang.getMonth();
+
+
+    /*
+        JANUARI   = 0 → 11 LAPISAN
+        FEBRUARI  = 1 → 10 LAPISAN
+        MARET     = 2 → 9 LAPISAN
+        APRIL     = 3 → 8 LAPISAN
+        MEI       = 4 → 7 LAPISAN
+        JUNI      = 5 → 6 LAPISAN
+        JULI      = 6 → 5 LAPISAN
+        AGUSTUS   = 7 → 4 LAPISAN
+        SEPTEMBER = 8 → 3 LAPISAN
+        OKTOBER   = 9 → 2 LAPISAN
+        NOVEMBER  = 10 → 1 LAPISAN
+        DESEMBER  = 11 → 0 LAPISAN
+    */
+
+
+    const jumlahLapisan =
+
+
+        11 - bulanSekarang;
+
+
+    semuaSheet.forEach(
+
+        function(sheet) {
+
+
+            const nomorSheet =
+
+
+                parseInt(
+
+                    sheet.className.match(
+                        /sheet-(\d+)/
+                    )[1]
+
+                );
+
+
+            sheet.style.display =
+
+
+                nomorSheet <= jumlahLapisan
+
+                    ? 'block'
+
+                    : 'none';
+
+
+        }
+
+    );
+
+
+    /* ==========================================
        WARNA MERAH SAAT HARI MINGGU
     ========================================== */
 
@@ -7437,7 +7721,6 @@ setInterval(
 
 
 updateDateTime();
-
 
 /* ==========================================
    FLIP MANUAL KARTU TANGGAL
@@ -13027,6 +13310,70 @@ function toggleAnalysis(header){
 
 }
 
-</script>
+function updateCalendarBackground() {
+
+
+    const sekarang =
+        new Date();
+
+
+    const jam =
+        sekarang.getHours();
+
+
+    const paperCalendar =
+        document.querySelector(
+            '.paper-calendar'
+        );
+
+
+    if (!paperCalendar) {
+
+        return;
+
+    }
+
+
+    /*
+    ==========================================
+       SIANG
+       06:00 - 17:59
+    ==========================================
+    */
+
+    if (
+        jam >= 6 &&
+        jam < 18
+    ) {
+
+
+        paperCalendar.style.backgroundImage =
+
+            'url("https://png.pngtree.com/thumb_back/fh260/background/20210902/pngtree-shockingly-overlook-the-day-to-night-city-scenery-of-chengdu-339-image_787294.jpg")';
+
+
+    }
+
+
+    /*
+    ==========================================
+       MALAM
+       18:00 - 05:59
+    ==========================================
+    */
+
+    else {
+
+
+        paperCalendar.style.backgroundImage =
+
+            'url("https://images.unsplash.com/photo-1735669356374-8ea7506cd1d2?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")';
+
+
+    }
+
+}
+
+</script> 
 </body>
 </html>
