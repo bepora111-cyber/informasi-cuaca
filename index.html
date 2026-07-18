@@ -673,7 +673,7 @@ h2{
 
     background-image:
 
-        url("https://png.pngtree.com/thumb_back/fh260/background/20210902/pngtree-shockingly-overlook-the-day-to-night-city-scenery-of-chengdu-339-image_787294.jpg");
+        var(--calendar-background);
 
     background-size:cover;
 
@@ -746,7 +746,6 @@ h2{
     }
 
 }
-
 /* ==========================================
    TUMPUKAN KALENDER
 ========================================== */
@@ -13342,14 +13341,20 @@ function updateCalendarBackground() {
     */
 
     if (
+
         jam >= 6 &&
         jam < 18
+
     ) {
 
 
-        paperCalendar.style.backgroundImage =
+        paperCalendar.style.setProperty(
 
-            'url("https://png.pngtree.com/thumb_back/fh260/background/20210902/pngtree-shockingly-overlook-the-day-to-night-city-scenery-of-chengdu-339-image_787294.jpg")';
+            '--calendar-background',
+
+            'url("https://png.pngtree.com/thumb_back/fh260/background/20210902/pngtree-shockingly-overlook-the-day-to-night-city-scenery-of-chengdu-339-image_787294.jpg")'
+
+        );
 
 
     }
@@ -13365,15 +13370,18 @@ function updateCalendarBackground() {
     else {
 
 
-        paperCalendar.style.backgroundImage =
+        paperCalendar.style.setProperty(
 
-            'url("https://images.unsplash.com/photo-1735669356374-8ea7506cd1d2?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")';
+            '--calendar-background',
+
+            'url("https://images.unsplash.com/photo-1735669356374-8ea7506cd1d2?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")'
+
+        );
 
 
     }
 
 }
-
 </script> 
 </body>
 </html>
