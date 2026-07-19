@@ -6878,7 +6878,7 @@ body.halloween-mode .section-summary{
 let globalWeatherData = null;
 let globalAirData = null;
 let temperatureUnit = "C"; // C, F, R, K
-let windUnit = "kmh"; // kmh atau ms
+let windUnit = "kmh"; // kmh atau ms atau mph
 let myChart = null;
 let currentChartType = "temp";
 let currentChartStyle = 'line'; // Menyimpan tipe grafik yang sedang aktif (line / surface)
@@ -10356,9 +10356,15 @@ function toCelsius(temp, unit){
 }
 
 function windToKmh(val, unit){
+
     if(unit === "kmh") return val;
+
     if(unit === "ms") return val * 3.6;
+
+    if(unit === "mph") return val * 1.60934;
+
     return val;
+
 }
 function getWeatherData(){
     const tempVal = parseFloat(document.getElementById("temp").innerText);
