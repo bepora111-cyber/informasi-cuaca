@@ -1239,6 +1239,25 @@ h2{
 
 
 /* ==========================================
+   JARUM MILIDETIK
+========================================== */
+
+.millisecond-hand{
+
+    width:.5px;
+
+    height:21px;
+
+    margin-left:-.25px;
+
+    background:#1976d2;
+
+    z-index:7;
+
+}
+
+
+/* ==========================================
    TITIK TENGAH
 ========================================== */
 
@@ -1263,7 +1282,6 @@ h2{
     z-index:10;
 
 }
-
 /* ==========================================
    STYLE POP-UP MODAL GRAFIK
 ========================================== */
@@ -6520,9 +6538,12 @@ body.halloween-mode .section-summary{
     <select id="windUnit"
         onclick="event.stopPropagation()"
         onchange="changeWindUnit()">
-        <option value="kmh">km/j</option>
-        <option value="ms">m/s</option>
-    </select>
+
+    <option value="kmh">km/j</option>
+    <option value="ms">m/s</option>
+    <option value="mph">mph</option>
+
+</select>
 
     <div class="value" id="wind">-</div>
 </div>
@@ -9007,10 +9028,22 @@ function getTemperatureUnitName() {
     }
 }
 function convertWind(speed) {
+
     if (windUnit === "ms") {
+
         return speed / 3.6;
+
     }
+
+    if (windUnit === "mph") {
+
+        return speed / 1.609344;
+
+    }
+
+    // km/j
     return speed;
+
 }
 function getWindDirectionEmoji(deg) {
     // ubah ke arah tujuan angin
@@ -9076,9 +9109,22 @@ function getWindDirectionName(deg) {
     return "Utara Barat Laut";
 }
 function getWindUnit() {
-    return windUnit === "ms" ? " m/s" : " km/j";
+
+    if (windUnit === "ms") {
+        return " m/s";
+    }
+
+    if (windUnit === "mph") {
+        return " mph";
+    }
+
+    return " km/j";
+
 }
+
+
 function changeWindUnit() {
+
     windUnit =
         document.getElementById("windUnit").value;
 
@@ -9088,8 +9134,11 @@ function changeWindUnit() {
         document.getElementById("detailModal").style.display === "flex" &&
         currentChartType === "wind"
     ) {
+
         renderChartData();
+
     }
+
 }
 function updateWindDisplay(){
     if (!globalWeatherData) return;
