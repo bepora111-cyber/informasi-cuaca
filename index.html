@@ -2691,7 +2691,10 @@ body.golden-mode .section-summary{
     box-shadow:
         0 6px 18px rgba(0,0,0,.16);
 
+    perspective:1000px;
+
 }
+
 
 /* =========================
    BACKGROUND IMAGE
@@ -2715,7 +2718,10 @@ body.golden-mode .section-summary{
 
 }
 
-/* Ken Burns */
+
+/* =========================
+   KEN BURNS
+========================= */
 
 @keyframes kenBurns{
 
@@ -2737,6 +2743,7 @@ body.golden-mode .section-summary{
 
 }
 
+
 /* =========================
    OVERLAY
 ========================= */
@@ -2753,8 +2760,9 @@ body.golden-mode .section-summary{
 
 }
 
+
 /* =========================
-   TEXT
+   FLIP CONTAINER
 ========================= */
 
 .info-content{
@@ -2765,21 +2773,135 @@ body.golden-mode .section-summary{
 
     z-index:3;
 
+    transform-style:preserve-3d;
+
+    transition:transform .65s ease;
+
+}
+
+
+/* =========================
+   SISI FLIP
+========================= */
+
+.info-face{
+
+    position:absolute;
+
+    inset:0;
+
+    padding:20px 24px;
+
+    box-sizing:border-box;
+
+    color:#fff;
+
+    backface-visibility:hidden;
+
+    -webkit-backface-visibility:hidden;
+
+}
+
+
+/* =========================
+   SISI DEPAN
+========================= */
+
+.info-front{
+
+    transform:rotateY(0deg);
+
+}
+
+
+/* =========================
+   SUNRISE — POJOK KIRI ATAS
+========================= */
+
+.sunrise-info{
+
+    position:absolute;
+
+    top:20px;
+
+    left:24px;
+
+}
+
+
+/* =========================
+   SUNSET — POJOK KANAN BAWAH
+========================= */
+
+.sunset-info{
+
+    position:absolute;
+
+    right:24px;
+
+    bottom:20px;
+
+    text-align:right;
+
+}
+
+
+/* =========================
+   LABEL
+========================= */
+
+.sun-info span{
+
+    display:block;
+
+    font-size:14px;
+
+    opacity:.75;
+
+    margin-bottom:4px;
+
+}
+
+
+/* =========================
+   JAM
+========================= */
+
+.sun-info strong{
+
+    display:block;
+
+    font-size:28px;
+
+    font-weight:600;
+
+    letter-spacing:1px;
+
+}
+
+
+/* =========================
+   SISI BELAKANG
+========================= */
+
+.info-back{
+
     display:flex;
 
     justify-content:center;
 
     align-items:center;
 
-    padding:20px 24px;
-
-    color:#fff;
-
     text-align:center;
 
-    box-sizing:border-box;
+    transform:rotateY(180deg);
 
 }
+
+
+/* =========================
+   TEKS INFO
+========================= */
 
 .info-content p{
 
@@ -2793,7 +2915,21 @@ body.golden-mode .section-summary{
 
 }
 
-/* Cursor */
+
+/* =========================
+   FLIP
+========================= */
+
+.info-card.flipped .info-content{
+
+    transform:rotateY(180deg);
+
+}
+
+
+/* =========================
+   CURSOR
+========================= */
 
 #infoText::after{
 
@@ -2822,6 +2958,53 @@ body.golden-mode .section-summary{
     }
 
 }
+
+
+/* =========================
+   HP
+========================= */
+
+@media (max-width:768px){
+
+    .info-face{
+
+        padding:12px;
+
+    }
+
+    .info-content p{
+
+        max-width:100%;
+
+        font-size:15px;
+
+        line-height:1.5;
+
+    }
+
+    .sunrise-info{
+
+        top:14px;
+
+        left:16px;
+
+    }
+
+    .sunset-info{
+
+        right:16px;
+
+        bottom:14px;
+
+    }
+
+    .sun-info strong{
+
+        font-size:24px;
+
+    }
+
+}
 #lastUpdated{
     margin:8px 0 15px;
     text-align:center;
@@ -2829,19 +3012,6 @@ body.golden-mode .section-summary{
     font-size:14px;
     font-weight:500;
     letter-spacing:0.3px;
-}
-@media (max-width:768px){
-
-    .info-content{
-        padding:12px;
-    }
-
-    .info-content p{
-        max-width:100%;
-        font-size:15px;
-        line-height:1.5;
-    }
-
 }
 
 /* ===========================
@@ -6615,11 +6785,33 @@ body.halloween-mode .section-summary{
 
     <div class="info-overlay"></div>
 
-<div class="info-content">
+    <div class="info-content">
 
-    <p id="infoText"></p>
+        <!-- DEPAN -->
+        <div class="info-face info-front">
 
-</div>
+            <div class="sun-info sunrise-info">
+                <span>Sunrise</span>
+                <strong id="sunriseTime">--:--</strong>
+            </div>
+
+            <div class="sun-info sunset-info">
+                <span>Sunset</span>
+                <strong id="sunsetTime">--:--</strong>
+            </div>
+
+        </div>
+
+
+        <!-- BELAKANG -->
+        <div class="info-face info-back">
+
+            <p id="infoText"></p>
+
+        </div>
+
+    </div>
+
 </div>
 
 <h2 style="margin:40px 0 20px;">
@@ -7823,13 +8015,56 @@ console.log("co-box:", document.getElementById("co-box"));
 console.log("no2-box:", document.getElementById("no2-box"));
 console.log("so2-box:", document.getElementById("so2-box"));
 console.log("aqi-box:", document.getElementById("aqi-box"));
+
     try {
-        const weatherRes = await fetch("https://api.open-meteo.com/v1/forecast?latitude=-6.9175&longitude=107.6191&timezone=Asia%2FJakarta&current=temperature_2m,relative_humidity_2m,precipitation,weather_code,wind_speed_10m,wind_direction_10m,uv_index,visibility&hourly=temperature_2m,relative_humidity_2m,precipitation,precipitation_probability,wind_speed_10m,wind_direction_10m,uv_index,visibility&daily=weather_code,temperature_2m_max,temperature_2m_min,uv_index_max&forecast_days=8");
+       const weatherRes = await fetch(
+    "https://api.open-meteo.com/v1/forecast" +
+    "?latitude=-6.9175" +
+    "&longitude=107.6191" +
+    "&timezone=Asia%2FJakarta" +
+
+    "&current=" +
+    "temperature_2m," +
+    "relative_humidity_2m," +
+    "precipitation," +
+    "weather_code," +
+    "wind_speed_10m," +
+    "wind_direction_10m," +
+    "uv_index," +
+    "visibility" +
+
+    "&hourly=" +
+    "temperature_2m," +
+    "relative_humidity_2m," +
+    "precipitation," +
+    "precipitation_probability," +
+    "wind_speed_10m," +
+    "wind_direction_10m," +
+    "uv_index," +
+    "visibility" +
+
+    "&daily=" +
+    "weather_code," +
+    "temperature_2m_max," +
+    "temperature_2m_min," +
+    "uv_index_max," +
+    "sunrise," +
+    "sunset" +
+
+    "&forecast_days=8"
+);
         const weather = await weatherRes.json();
 
         const airRes = await fetch("https://air-quality-api.open-meteo.com/v1/air-quality?latitude=-6.9175&longitude=107.6191&timezone=Asia%2FJakarta&hourly=pm10,pm2_5,carbon_monoxide,nitrogen_dioxide,sulphur_dioxide,us_aqi");
         const air = await airRes.json();
         const hour = new Date().getHours();
+
+const sunriseTime = weather.daily.sunrise[0].slice(11, 16);
+const sunsetTime = weather.daily.sunset[0].slice(11, 16);
+
+
+document.getElementById("sunriseTime").textContent = sunriseTime;
+document.getElementById("sunsetTime").textContent = sunsetTime;
 
         globalWeatherData = weather;
         globalAirData = air;
@@ -13437,6 +13672,16 @@ function updateCalendarBackground() {
     }
 
 }
+
+const infoCard = document.querySelector(".info-card");
+
+infoCard.addEventListener("click", () => {
+
+    infoCard.classList.toggle("flipped");
+
+});
+
+
 </script> 
 </body>
 </html>
