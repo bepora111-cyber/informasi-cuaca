@@ -6784,6 +6784,1048 @@ body.popup-open {
 
 }
 
+
+/* ==========================================
+   IKLAN BAWAH LAYAR
+========================================== */
+
+.bottom-ad {
+
+    position: fixed;
+
+    left: 50%;
+
+    bottom: 20px;
+
+    transform: translateX(-50%);
+
+
+    width: min(600px, 92vw);
+
+
+    z-index: 999999;
+
+
+    /* TOMBOL X BOLEH KELUAR */
+
+    overflow: visible;
+
+}
+
+
+/* ==========================================
+   LINK SEBAGAI KOTAK IKLAN
+========================================== */
+
+.bottom-ad a {
+
+    position: relative;
+
+    display: block;
+
+
+    height: 140px;
+
+
+    overflow: hidden;
+
+
+    border-radius: 12px;
+
+}
+
+
+/* ==========================================
+   GAMBAR BACKGROUND UTAMA
+========================================== */
+
+.bottom-ad a > img:first-of-type {
+
+    display: block;
+
+
+    width: 100%;
+
+    height: 100%;
+
+
+    object-fit: cover;
+
+}
+
+
+/* ==========================================
+   GRADIENT DI ATAS GAMBAR
+========================================== */
+
+.bottom-ad a::after {
+
+    content: "";
+
+
+    position: absolute;
+
+    inset: 0;
+
+
+    z-index: 1;
+
+
+    background: linear-gradient(
+
+        120deg,
+
+        rgba(100, 10, 10, 0.78),
+
+        rgba(180, 30, 15, 0.60),
+
+        rgba(230, 90, 20, 0.45),
+
+        rgba(255, 190, 40, 0.55)
+
+    );
+
+
+    pointer-events: none;
+
+}
+
+/* ==========================================
+   LABEL DASAR
+========================================== */
+
+.bottom-ad-label {
+
+    position: absolute;
+
+    z-index: 6;
+
+    pointer-events: none;
+
+}
+
+
+/* ==========================================
+   RECOMMENDED
+   PITA GOLD DIAGONAL
+========================================== */
+
+.bottom-ad-label.recommended {
+
+    left: -42px;
+
+    top: 30px;
+
+
+    width: 165px;
+
+    height: 27px;
+
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+
+    background: linear-gradient(
+
+        90deg,
+
+        #8a5a00 0%,
+
+        #b8860b 12%,
+
+        #d4af37 25%,
+
+        #ffd84d 50%,
+
+        #d4af37 75%,
+
+        #b8860b 88%,
+
+        #8a5a00 100%
+
+    );
+
+
+    color: #ffffff;
+
+
+    font-family:
+
+        Georgia,
+
+        serif;
+
+
+    font-size: 9px;
+
+
+    font-weight: 600;
+
+
+    letter-spacing: 1.5px;
+
+
+    white-space: nowrap;
+
+
+    transform: rotate(-45deg);
+
+
+    box-shadow:
+
+        0 0 4px rgba(
+
+            255,
+
+            200,
+
+            40,
+
+            0.8
+
+        ),
+
+        0 0 9px rgba(
+
+            255,
+
+            180,
+
+            20,
+
+            0.45
+
+        );
+
+}
+
+
+/* ==========================================
+   TOP MENU
+   STEMPEL BULAT
+========================================== */
+
+.bottom-ad-label.top-menu {
+
+    left: 10px;
+
+    top: 15px;
+
+
+    width: 82px;
+
+    height: 82px;
+
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+
+    border: 3px solid rgba(
+
+        255,
+
+        255,
+
+        255,
+
+        0.75
+
+    );
+
+
+    border-radius: 50%;
+
+
+    color: rgba(
+
+        255,
+
+        255,
+
+        255,
+
+        0.85
+
+    );
+
+
+    font-family:
+
+        Georgia,
+
+        serif;
+
+
+    font-size: 12px;
+
+
+    font-weight: 700;
+
+
+    letter-spacing: 1px;
+
+
+    text-align: center;
+
+
+    transform:
+
+        rotate(-18deg)
+
+        scale(2);
+
+
+    opacity: 0;
+
+
+    animation:
+
+        stampIn
+
+        0.45s
+
+        cubic-bezier(
+
+            0.2,
+
+            1.4,
+
+            0.4,
+
+            1
+
+        )
+
+        forwards;
+
+}
+
+
+/* ==========================================
+   GARIS DALAM STEMPEL
+========================================== */
+
+.bottom-ad-label.top-menu::before {
+
+    content: "";
+
+
+    position: absolute;
+
+
+    inset: 5px;
+
+
+    border: 1px dashed rgba(
+
+        255,
+
+        255,
+
+        255,
+
+        0.65
+
+    );
+
+
+    border-radius: 50%;
+
+
+    opacity: 0.7;
+
+}
+
+
+/* ==========================================
+   ANIMASI STEMPEL
+========================================== */
+
+@keyframes stampIn {
+
+    0% {
+
+        opacity: 0;
+
+
+        transform:
+
+            rotate(-25deg)
+
+            scale(2.5);
+
+    }
+
+
+    60% {
+
+        opacity: 0.9;
+
+
+        transform:
+
+            rotate(-18deg)
+
+            scale(0.92);
+
+    }
+
+
+    80% {
+
+        transform:
+
+            rotate(-18deg)
+
+            scale(1.05);
+
+    }
+
+
+    100% {
+
+        opacity: 0.85;
+
+
+        transform:
+
+            rotate(-18deg)
+
+            scale(1);
+
+    }
+
+}
+/* ==========================================
+   CONTAINER TEKS
+========================================== */
+
+.bottom-ad-content {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 3;
+
+    pointer-events: none;
+
+}
+
+
+/* ==========================================
+   NAMA RESTORAN
+   TETAP DI TENGAH
+========================================== */
+
+.bottom-ad-brand {
+
+    position: absolute;
+
+    top: 8px;
+
+    left: 50%;
+
+
+    transform: translateX(-50%);
+
+
+    width: 100%;
+
+
+    color: #ffffff;
+
+
+    font-family:
+
+        Georgia,
+
+        serif;
+
+
+    font-size: clamp(
+
+        10px,
+
+        1.8vw,
+
+        12px
+
+    );
+
+
+    font-weight: 500;
+
+
+    letter-spacing: 1.5px;
+
+
+    text-align: center;
+
+}
+
+
+/* ==========================================
+   GARIS
+   TETAP DI BAWAH NAMA RESTORAN
+========================================== */
+
+.bottom-ad-line {
+
+    position: absolute;
+
+
+    top: 27.5px;
+
+
+    left: 50%;
+
+
+    transform: translateX(-50%);
+
+
+    width: 75px;
+
+
+    height: 1px;
+
+
+    background: rgba(
+
+        255,
+
+        255,
+
+        255,
+
+        0.85
+
+    );
+
+}
+
+
+/* ==========================================
+   TYPEWRITER
+   TETAP DI TENGAH
+========================================== */
+
+.bottom-ad-typewriter {
+
+    position: absolute;
+
+
+    top: 62%;
+
+
+    left: 50%;
+
+
+    transform: translate(
+
+        -50%,
+
+        -50%
+
+    );
+
+
+    width: 70%;
+
+
+    color: #ffffff;
+
+
+    font-family:
+
+        "Fredoka",
+
+        sans-serif;
+
+
+    font-size: clamp(
+
+        18px,
+
+        4vw,
+
+        28px
+
+    );
+
+
+    font-weight: 500;
+
+
+    line-height: 1.25;
+
+
+    text-align: center;
+
+
+    white-space: normal;
+
+
+    overflow-wrap: break-word;
+
+
+    word-break: normal;
+
+
+    pointer-events: none;
+
+}
+/* ==========================================
+   GAMBAR MENU DI KANAN
+========================================== */
+
+.bottom-ad-menu {
+
+    position: absolute;
+
+    right: 8px;
+
+    top: 50%;
+
+
+    width: 80px !important;
+
+    height: 80px !important;
+
+
+    object-fit: contain !important;
+
+
+    z-index: 3;
+
+
+    pointer-events: none;
+
+
+    /* POSISI AWAL */
+
+    opacity: 0;
+
+    transform:
+
+        translateY(-50%)
+
+        scale(0.15);
+
+
+    /* GPU OPTIMIZATION */
+
+    will-change:
+
+        transform,
+
+        opacity;
+
+
+    animation:
+
+        menuPopIn
+
+        0.75s
+
+        cubic-bezier(
+
+            0.34,
+
+            1.56,
+
+            0.64,
+
+            1
+
+        )
+
+        forwards;
+
+}
+
+
+/* ==========================================
+   ANIMASI POP
+========================================== */
+
+@keyframes menuPopIn {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+
+            translateY(-50%)
+
+            scale(0.15);
+
+    }
+
+
+    55% {
+
+        opacity: 1;
+
+        transform:
+
+            translateY(-50%)
+
+            scale(1.12);
+
+    }
+
+
+    75% {
+
+        transform:
+
+            translateY(-50%)
+
+            scale(0.96);
+
+    }
+
+
+    100% {
+
+        opacity: 1;
+
+        transform:
+
+            translateY(-50%)
+
+            scale(1);
+
+    }
+
+}
+
+/* ==========================================
+   TOMBOL CLOSE
+========================================== */
+
+.bottom-ad-close {
+
+    position: absolute;
+
+
+    top: -12px;
+
+
+    right: -12px;
+
+
+    z-index: 5;
+
+
+    width: 30px;
+
+
+    height: 30px;
+
+
+    border: none;
+
+
+    border-radius: 50%;
+
+
+    background: #000;
+
+
+    color: #fff;
+
+
+    font-size: 22px;
+
+
+    line-height: 30px;
+
+
+    cursor: pointer;
+
+}
+
+
+/* ==========================================
+   RESPONSIVE HP
+========================================== */
+
+@media (max-width: 600px) {
+
+
+    .bottom-ad {
+
+        width: 94vw;
+
+    }
+
+
+    .bottom-ad a {
+
+        height: 110px;
+
+    }
+
+
+     .bottom-ad-menu {
+
+        width: 80px !important;
+
+        height: 80px !important;
+
+        right: 5px;
+
+    }
+
+
+    .bottom-ad-typewriter {
+
+        width: 70%;
+
+
+        font-size: clamp(
+
+            15px,
+
+            4vw,
+
+            21px
+
+        );
+
+    }
+
+
+    .bottom-ad-brand {
+
+        top: 6px;
+
+
+        font-size: 10px;
+
+    }
+
+
+    .bottom-ad-line {
+
+        top: 25px;
+
+
+        width: 65px;
+
+    }
+
+}
+
+/* ==========================================
+   AREA DEKORASI
+========================================== */
+
+.bottom-ad-decor {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 1;
+
+    pointer-events: none;
+
+}
+
+
+/* ==========================================
+   SEMUA DEKORASI
+========================================== */
+
+.decor-item {
+
+    position: absolute;
+
+    object-fit: contain;
+
+    opacity: 0.1;
+
+    pointer-events: none;
+
+}
+
+
+/* ==========================================
+   UKURAN LEBIH BESAR
+========================================== */
+
+.decor-fork,
+.decor-spoon {
+
+    width: 52px;
+
+    height: 52px;
+
+}
+
+
+.decor-plate {
+
+    width: 68px;
+
+    height: 68px;
+
+}
+
+/* ==========================================
+   POSISI DEKORASI
+========================================== */
+
+
+/* ---------- ATAS ---------- */
+
+.fork-1 {
+
+    left: -1%;
+
+    top: -10%;
+
+    transform: rotate(-35deg);
+
+}
+
+
+.spoon-1 {
+
+    left: 17%;
+
+    top: -12%;
+
+    transform: rotate(38deg);
+
+}
+
+
+.plate-1 {
+
+    left: 34%;
+
+    top: -15%;
+
+    transform: rotate(-20deg);
+
+}
+
+
+.fork-2 {
+
+    left: 52%;
+
+    top: -10%;
+
+    transform: rotate(28deg);
+
+}
+
+
+/* ---------- TENGAH ---------- */
+
+.spoon-2 {
+
+    left: -3%;
+
+    top: 38%;
+
+    transform: rotate(-30deg);
+
+}
+
+
+.plate-2 {
+
+    left: 22%;
+
+    top: 32%;
+
+    transform: rotate(25deg);
+
+}
+
+
+.fork-3 {
+
+    right: 30%;
+
+    top: 35%;
+
+    transform: rotate(-38deg);
+
+}
+
+
+.spoon-3 {
+
+    right: 10%;
+
+    top: 38%;
+
+    transform: rotate(32deg);
+
+}
+
+
+/* ---------- BAWAH ---------- */
+
+.plate-3 {
+
+    left: 2%;
+
+    bottom: -18%;
+
+    transform: rotate(-25deg);
+
+}
+
+
+.fork-4 {
+
+    left: 23%;
+
+    bottom: -16%;
+
+    transform: rotate(38deg);
+
+}
+
+
+.spoon-4 {
+
+    right: 23%;
+
+    bottom: -15%;
+
+    transform: rotate(-35deg);
+
+}
+
+
+.plate-4 {
+
+    right: 2%;
+
+    bottom: -18%;
+
+    transform: rotate(28deg);
+
+}
+
 </style>
 </head>
 <body>
@@ -7361,6 +8403,14 @@ body.popup-open {
     rel="stylesheet"
     href="/static/css/popup.css"
 >
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+>
+
 
 
 <!-- JAVASCRIPT POPUP -->
@@ -13985,92 +15035,178 @@ infoCard.addEventListener("click", () => {
 
 });
 
+
 document.addEventListener(
 
     "DOMContentLoaded",
 
     function () {
 
-/* ==========================================
-   DAFTAR GAMBAR POPUP
-========================================== */
 
-const popupImages = [
+        /* ==========================================
+           DAFTAR GAMBAR POPUP UTAMA
+        ========================================== */
 
-    "images/campurpremium2.webp",
+        const popupImages = [
 
-    "images/campurpremium.webp",
+            "images/campurpremium2.webp",
 
-    "images/siomaymedium.webp",
+            "images/campurpremium.webp",
 
-    "images/batagorsahabatpromo.webp",
+            "images/siomaymedium.webp",
 
-    "images/batagorpremium.webp",
+            "images/batagorsahabatpromo.webp",
 
-    "images/batagorpremium2.webp",
+            "images/batagorpremium.webp",
 
-    "images/siomaypremium.webp",
+            "images/batagorpremium2.webp",
 
-    "images/siomaypremium2.webp",
+            "images/siomaypremium.webp",
 
-    "images/basogoreng.webp",
+            "images/siomaypremium2.webp",
 
-    "images/basogoreng2.webp"
+            "images/basogoreng.webp",
 
-];
+            "images/basogoreng2.webp"
 
-
-/* ==========================================
-   LINK TUJUAN
-========================================== */
-
-const popupLinks = [
-
-    "https://gofood.co.id/bandung/restaurant/batagor-sahabat-jalan-jenderal-sudirman-e3ed831c-be13-44c8-9ed0-c8284fd00388?as=gmaps",
-
-    "https://food.grab.com/id/id/restaurant/batagor-sahabat-jamika-delivery/6-C26YLGAKFGCALA?sourceID=20260528_182926_a66383272f4040d0ad2e61b0cd8e66e9_MEXMPS"
-
-];
+        ];
 
 
-/* ==========================================
-   ACAK GAMBAR
-========================================== */
+        /* ==========================================
+           LINK TUJUAN POPUP
+        ========================================== */
 
-const randomImageIndex = Math.floor(
+        const popupLinks = [
 
-    Math.random() *
+            "https://gofood.co.id/bandung/restaurant/batagor-sahabat-jalan-jenderal-sudirman-e3ed831c-be13-44c8-9ed0-c8284fd00388?as=gmaps",
 
-    popupImages.length
+            "https://food.grab.com/id/id/restaurant/batagor-sahabat-jamika-delivery/6-C26YLGAKFGCALA?sourceID=20260528_182926_a66383272f4040d0ad2e61b0cd8e66e9_MEXMPS"
 
-);
-
-
-/* ==========================================
-   ACAK LINK
-========================================== */
-
-const randomLinkIndex = Math.floor(
-
-    Math.random() *
-
-    popupLinks.length
-
-);
+        ];
 
 
-/* ==========================================
-   HASIL AKHIR
-========================================== */
+        /* ==========================================
+           GAMBAR BOTTOM AD
+        ========================================== */
 
-const popupImage =
+        const bottomAdImage =
 
-    popupImages[randomImageIndex];
+            "images/unnamed.webp";
 
 
-const popupLink =
+        /* ==========================================
+           DAFTAR GAMBAR MENU BOTTOM AD
+        ========================================== */
 
-    popupLinks[randomLinkIndex];
+        const menuImages = [
+
+            "images/basogoreng-removebg-preview.png",
+
+            "images/batagormedium-removebg-preview.png",
+
+            "images/siomaymedium-removebg-preview.png",
+
+            "images/campurtanpabackground.png",
+
+
+
+        ];
+
+
+        /* ==========================================
+           TEKS TYPEWRITER BOTTOM AD
+        ========================================== */
+
+        const bottomAdTexts = [
+
+            "Buruan order Batagor Sahabat sekarang 😋",
+
+            "Lagi lapar? Yuk, pesan sekarang!",
+
+            "Cita rasa favorit Bandung!",
+
+            "Cita rasa autentik yang bikin nagih!",
+
+            "Pesan sekarang, jangan sampai kehabisan!"
+
+        ];
+
+
+        /* ==========================================
+           ACAK GAMBAR POPUP
+        ========================================== */
+
+        const randomImageIndex = Math.floor(
+
+            Math.random() *
+
+            popupImages.length
+
+        );
+
+
+        /* ==========================================
+           ACAK LINK POPUP
+        ========================================== */
+
+        const randomLinkIndex = Math.floor(
+
+            Math.random() *
+
+            popupLinks.length
+
+        );
+
+
+        /* ==========================================
+           ACAK TEKS BOTTOM AD
+        ========================================== */
+
+        const randomTextIndex = Math.floor(
+
+            Math.random() *
+
+            bottomAdTexts.length
+
+        );
+
+
+        /* ==========================================
+           ACAK GAMBAR MENU
+        ========================================== */
+
+        const randomMenuIndex = Math.floor(
+
+            Math.random() *
+
+            menuImages.length
+
+        );
+
+
+        /* ==========================================
+           HASIL AKHIR
+        ========================================== */
+
+        const popupImage =
+
+            popupImages[randomImageIndex];
+
+
+        const popupLink =
+
+            popupLinks[randomLinkIndex];
+
+
+        const randomBottomText =
+
+            bottomAdTexts[randomTextIndex];
+
+
+        const randomMenuImage =
+
+            menuImages[randomMenuIndex];
+
 
         /* ==========================================
            PENGATURAN TAMPILAN
@@ -14119,7 +15255,11 @@ const popupLink =
 
         const popup =
 
-            document.createElement("div");
+            document.createElement(
+
+                "div"
+
+            );
 
 
         popup.className =
@@ -14128,6 +15268,7 @@ const popupLink =
 
 
         popup.innerHTML = `
+
 
             <div class="modern-popup-backdrop"></div>
 
@@ -14162,6 +15303,7 @@ const popupLink =
 
                 >
 
+
                     <img
 
                         src="${popupImage}"
@@ -14174,10 +15316,12 @@ const popupLink =
 
                     >
 
+
                 </a>
 
 
                 <div class="modern-popup-footer">
+
 
                     <span>
 
@@ -14185,20 +15329,30 @@ const popupLink =
 
                     </span>
 
+
                 </div>
 
 
             </div>
 
+
         `;
 
 
-        /* MASUKKAN POPUP KE BODY */
+        /* ==========================================
+           MASUKKAN POPUP KE BODY
+        ========================================== */
 
-        document.body.appendChild(popup);
+        document.body.appendChild(
+
+            popup
+
+        );
 
 
-        /* KUNCI SCROLL */
+        /* ==========================================
+           KUNCI SCROLL
+        ========================================== */
 
         document.body.classList.add(
 
@@ -14207,7 +15361,9 @@ const popupLink =
         );
 
 
-        /* SIMPAN TANGGAL */
+        /* ==========================================
+           SIMPAN TANGGAL
+        ========================================== */
 
         localStorage.setItem(
 
@@ -14225,12 +15381,33 @@ const popupLink =
         function closePopup() {
 
 
+            /* CEGAH DIPANGGIL BERULANG */
+
+            if (
+
+                popup.classList.contains(
+
+                    "closing"
+
+                )
+
+            ) {
+
+                return;
+
+            }
+
+
+            /* TAMBAHKAN ANIMASI CLOSE */
+
             popup.classList.add(
 
                 "closing"
 
             );
 
+
+            /* BUKA KEMBALI SCROLL */
 
             document.body.classList.remove(
 
@@ -14239,11 +15416,53 @@ const popupLink =
             );
 
 
+            /* TUNGGU ANIMASI SELESAI */
+
             setTimeout(
 
                 function () {
 
+
+                    /* HAPUS POPUP */
+
                     popup.remove();
+
+
+                    console.log(
+
+                        "Popup sudah dihapus"
+
+                    );
+
+
+                    /* ==========================================
+                       TUNGGU 5 MENIT
+                    ========================================== */
+
+                    setTimeout(
+
+                        function () {
+
+
+                            showBottomAd(
+
+                                bottomAdImage,
+
+                                popupLink,
+
+                                randomBottomText,
+
+                                randomMenuImage
+
+                            );
+
+
+                        },
+
+                        300
+
+                    );
+
 
                 },
 
@@ -14251,10 +15470,13 @@ const popupLink =
 
             );
 
+
         }
 
 
-        /* TOMBOL CLOSE */
+        /* ==========================================
+           TOMBOL CLOSE
+        ========================================== */
 
         popup
 
@@ -14273,7 +15495,9 @@ const popupLink =
             );
 
 
-        /* KLIK AREA GELAP */
+        /* ==========================================
+           KLIK AREA GELAP
+        ========================================== */
 
         popup
 
@@ -14292,7 +15516,9 @@ const popupLink =
             );
 
 
-        /* TOMBOL ESC */
+        /* ==========================================
+           TOMBOL ESC
+        ========================================== */
 
         document.addEventListener(
 
@@ -14307,38 +15533,445 @@ const popupLink =
 
                 ) {
 
+
                     closePopup();
 
+
                 }
+
 
             }
 
         );
 
 
-        /* TAMPILKAN POPUP */
+        /* ==========================================
+           TAMPILKAN POPUP
+        ========================================== */
 
-setTimeout(function () {
+        setTimeout(
 
-    popup.classList.add("show");
-
-
-    /* AUTO CLOSE 30 DETIK SETELAH POPUP MUNCUL */
-
-    setTimeout(function () {
-
-        closePopup();
-
-    }, 30000);
+            function () {
 
 
-}, 500);
+                popup.classList.add(
+
+                    "show"
+
+                );
+
+
+                /* ==========================================
+                   AUTO CLOSE SETELAH 30 DETIK
+                ========================================== */
+
+                setTimeout(
+
+                    function () {
+
+
+                        closePopup();
+
+
+                    },
+
+                    30000
+
+                );
+
+
+            },
+
+            500
+
+        );
 
 
     }
 
 );
 
-</script> 
+
+/* ==========================================
+   FUNGSI BOTTOM AD
+========================================== */
+
+function showBottomAd(
+
+    image,
+
+    link,
+
+    text,
+
+    menuImage
+
+) {
+
+
+    console.log(
+
+        "showBottomAd dijalankan"
+
+    );
+
+
+   /* ==========================================
+   BUAT ELEMEN BOTTOM AD
+========================================== */
+
+const bottomAd = document.createElement("div");
+
+bottomAd.className = "bottom-ad";
+
+
+/* ==========================================
+   ACAK LABEL IKLAN
+========================================== */
+
+const labelType = Math.random() < 0.5
+
+    ? "recommended"
+
+    : "top-menu";
+
+
+bottomAd.innerHTML = `
+
+
+    <!-- TOMBOL CLOSE -->
+
+    <button
+
+        class="bottom-ad-close"
+
+        aria-label="Tutup iklan"
+
+    >
+
+        ×
+
+    </button>
+
+
+    <!-- LINK IKLAN -->
+
+    <a
+
+        href="${link}"
+
+        target="_blank"
+
+        rel="noopener noreferrer"
+
+    >
+
+
+        <!-- LABEL ACAK -->
+
+        <div class="bottom-ad-label ${labelType}">
+
+            ${
+
+                labelType === "recommended"
+
+                    ? "RECOMMENDED"
+
+                    : "TOP MENU"
+
+            }
+
+        </div>
+
+
+        <!-- GAMBAR BACKGROUND -->
+
+        <img
+
+            src="${image}"
+
+            alt="Batagor Sahabat"
+
+            class="bottom-ad-background"
+
+        >
+
+
+        <!-- GAMBAR MENU ACAK -->
+
+        <img
+
+            src="${menuImage}"
+
+            alt="Menu"
+
+            class="bottom-ad-menu"
+
+        >
+
+
+        <!-- KONTEN IKLAN -->
+
+        <div class="bottom-ad-content">
+
+
+            <!-- DEKORASI TERSEBAR -->
+
+            <div class="bottom-ad-decor">
+
+
+                <!-- ATAS -->
+
+                <img
+
+                    src="images/photo-stainless-steel-pastry-fork-260nw-2746443277-removebg-preview.png"
+
+                    class="decor-item decor-fork fork-1"
+
+                    alt=""
+
+                >
+
+
+                <img
+
+                    src="images/pngtree-sendok-spoon-png-image_4546385-removebg-preview.png"
+
+                    class="decor-item decor-spoon spoon-1"
+
+                    alt=""
+
+                >
+
+
+                <img
+
+                    src="images/19580666b301299-removebg-preview.png"
+
+                    class="decor-item decor-plate plate-1"
+
+                    alt=""
+
+                >
+
+
+                <img
+
+                    src="images/photo-stainless-steel-pastry-fork-260nw-2746443277-removebg-preview.png"
+
+                    class="decor-item decor-fork fork-2"
+
+                    alt=""
+
+                >
+
+
+                <!-- TENGAH -->
+
+                <img
+
+                    src="images/pngtree-sendok-spoon-png-image_4546385-removebg-preview.png"
+
+                    class="decor-item decor-spoon spoon-2"
+
+                    alt=""
+
+                >
+
+
+                <img
+
+                    src="images/19580666b301299-removebg-preview.png"
+
+                    class="decor-item decor-plate plate-2"
+
+                    alt=""
+
+                >
+
+
+                <img
+
+                    src="images/photo-stainless-steel-pastry-fork-260nw-2746443277-removebg-preview.png"
+
+                    class="decor-item decor-fork fork-3"
+
+                    alt=""
+
+                >
+
+
+                <img
+
+                    src="images/pngtree-sendok-spoon-png-image_4546385-removebg-preview.png"
+
+                    class="decor-item decor-spoon spoon-3"
+
+                    alt=""
+
+                >
+
+
+                <!-- BAWAH -->
+
+                <img
+
+                    src="images/19580666b301299-removebg-preview.png"
+
+                    class="decor-item decor-plate plate-3"
+
+                    alt=""
+
+                >
+
+
+                <img
+
+                    src="images/photo-stainless-steel-pastry-fork-260nw-2746443277-removebg-preview.png"
+
+                    class="decor-item decor-fork fork-4"
+
+                    alt=""
+
+                >
+
+
+                <img
+
+                    src="images/pngtree-sendok-spoon-png-image_4546385-removebg-preview.png"
+
+                    class="decor-item decor-spoon spoon-4"
+
+                    alt=""
+
+                >
+
+
+                <img
+
+                    src="images/19580666b301299-removebg-preview.png"
+
+                    class="decor-item decor-plate plate-4"
+
+                    alt=""
+
+                >
+
+
+            </div>
+
+
+            <!-- NAMA RESTORAN -->
+
+            <div class="bottom-ad-brand">
+
+                BATAGOR SAHABAT
+
+            </div>
+
+
+            <!-- GARIS -->
+
+            <div class="bottom-ad-line"></div>
+
+
+            <!-- TYPEWRITER -->
+
+            <div class="bottom-ad-typewriter"></div>
+
+
+        </div>
+
+
+    </a>
+
+
+`;
+
+    /* ==========================================
+       MASUKKAN KE BODY
+    ========================================== */
+
+    document.body.appendChild(
+
+        bottomAd
+
+    );
+
+
+    /* ==========================================
+       TYPEWRITER
+    ========================================== */
+
+    const typewriter =
+
+        bottomAd.querySelector(
+
+            ".bottom-ad-typewriter"
+
+        );
+
+
+    let index = 0;
+
+
+    function typeWriter() {
+
+    if (index < text.length) {
+
+        typewriter.textContent +=
+
+            text.charAt(index);
+
+
+        index++;
+
+
+        setTimeout(
+
+            typeWriter,
+
+            70
+
+        );
+
+    }
+
+}
+    typeWriter();
+
+
+    /* ==========================================
+       TOMBOL CLOSE BOTTOM AD
+    ========================================== */
+
+    bottomAd
+
+        .querySelector(
+
+            ".bottom-ad-close"
+
+        )
+
+        .addEventListener(
+
+            "click",
+
+            function () {
+
+
+                bottomAd.remove();
+
+
+            }
+
+        );
+
+
+}
+
+</script>
+
 </body>
+
 </html>
