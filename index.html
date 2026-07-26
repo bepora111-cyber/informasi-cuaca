@@ -1487,70 +1487,289 @@ h2{
 body.dark-mode::before{
 
     background-image:
-    linear-gradient(
-        rgba(0,0,0,0.65),
-        rgba(0,0,0,0.65)
-    ),
-    url('images/unnamed.webp');
-
+        linear-gradient(
+            rgba(0,0,0,0.65),
+            rgba(0,0,0,0.65)
+        ),
+        url('images/unnamed.webp');
 
     background-size:cover;
-
 
     background-position:center;
 
 }
 
+
+/* ================= CARD LIQUID ================= */
+
 body.dark-mode .box,
 body.dark-mode .day,
 body.dark-mode .datetime-container,
-body.dark-mode .modal-content,
-body.dark-mode .learn-modal-content,
 body.dark-mode .learn-card,
-body.dark-mode .temperature-calculator{
-    background: rgba(15,15,15,0.85);
-    border: 1px solid rgba(255,255,255,0.08);
-    backdrop-filter: blur(15px);
+body.dark-mode .temperature-calculator,
+body.dark-mode #ai-analysis-box,
+body.dark-mode .history-card,
+body.dark-mode .loading-card{
+
+    background:
+
+        radial-gradient(
+            ellipse at 20% 20%,
+            rgba(255,255,255,.10),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 80% 70%,
+            rgba(80,80,80,.30),
+            transparent 45%
+        ),
+
+        linear-gradient(
+            145deg,
+            rgba(15,15,15,.96),
+            rgba(35,35,35,.90)
+        );
+
+    background-size:
+        180% 180%,
+        160% 160%,
+        100% 100%;
+
+    animation:
+        darkLiquidBackground
+        20s
+        ease-in-out
+        infinite
+        alternate;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:blur(15px);
+
+    -webkit-backdrop-filter:blur(15px);
+
 }
 
+
+/* ================= MODAL ================= */
+
+body.dark-mode .modal-content,
+body.dark-mode .learn-modal-content{
+
+    background:rgba(15,15,15,.85);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:blur(15px);
+
+    -webkit-backdrop-filter:blur(15px);
+
+}
+
+
+/* ================= LIQUID ANIMATION ================= */
+
+@keyframes darkLiquidBackground{
+
+    0%{
+
+        background-position:
+            0% 20%,
+            100% 80%,
+            center;
+
+    }
+
+    50%{
+
+        background-position:
+            80% 60%,
+            20% 30%,
+            center;
+
+    }
+
+    100%{
+
+        background-position:
+            30% 100%,
+            70% 0%,
+            center;
+
+    }
+
+}
+
+
+/* ================= LEARN ================= */
+
 body.dark-mode .learn-header{
-    background: rgba(255,255,255,0.08);
+
+    background:rgba(255,255,255,0.08);
+
 }
 
 body.dark-mode .learn-body{
-    background: rgba(255,255,255,0.04);
+
+    background:rgba(255,255,255,0.04);
+
 }
+
+
+/* ================= DOT ================= */
 
 body.dark-mode .dot.active{
+
     background:#ffffff;
+
 }
 
+
+/* ================= BOX ================= */
+
 body.dark-mode .box.active{
-    background: rgba(35,35,35,0.95);
-    border: 1px solid rgba(255,255,255,0.18);
-    box-shadow:0 0 15px rgba(255,255,255,0.12);
+
+    background:
+
+        radial-gradient(
+            ellipse at 25% 20%,
+            rgba(255,255,255,.12),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 80% 75%,
+            rgba(80,80,80,.30),
+            transparent 45%
+        ),
+
+        rgba(35,35,35,.95);
+
+    background-size:
+        180% 180%,
+        160% 160%,
+        100% 100%;
+
+    animation:
+        darkLiquidBackground
+        20s
+        ease-in-out
+        infinite
+        alternate;
+
+    border:1px solid rgba(255,255,255,.18);
+
+    box-shadow:
+        0 0 15px rgba(255,255,255,.12);
+
 }
 
 body.dark-mode .box.side{
-    background: rgba(15,15,15,0.75);
+
+    background:
+
+        radial-gradient(
+            ellipse at 20% 30%,
+            rgba(255,255,255,.06),
+            transparent 35%
+        ),
+
+        linear-gradient(
+            145deg,
+            rgba(15,15,15,.90),
+            rgba(30,30,30,.85)
+        );
+
+    background-size:
+        180% 180%,
+        100% 100%;
+
+    animation:
+        darkLiquidBackground
+        20s
+        ease-in-out
+        infinite
+        alternate;
+
 }
 
 body.dark-mode .box:not(.active):hover,
 body.dark-mode .learn-card:hover{
-    background: rgba(25,25,25,0.9);
+
+    background:
+
+        radial-gradient(
+            ellipse at 25% 20%,
+            rgba(255,255,255,.12),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 80% 70%,
+            rgba(80,80,80,.35),
+            transparent 45%
+        ),
+
+        rgba(25,25,25,.90);
+
+    background-size:
+        180% 180%,
+        160% 160%,
+        100% 100%;
+
 }
+
+
+/* ================= AI ================= */
+
 body.dark-mode #ai-analysis-box{
-    background: rgba(15,15,15,0.85);
-    border: 1px solid rgba(255,255,255,0.08);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+
+    background:
+
+        radial-gradient(
+            ellipse at 20% 20%,
+            rgba(255,255,255,.10),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 80% 70%,
+            rgba(80,80,80,.30),
+            transparent 45%
+        ),
+
+        rgba(15,15,15,.85);
+
+    background-size:
+        180% 180%,
+        160% 160%,
+        100% 100%;
+
+    animation:
+        darkLiquidBackground
+        20s
+        ease-in-out
+        infinite
+        alternate;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:blur(18px);
+
+    -webkit-backdrop-filter:blur(18px);
+
 }
 
 body.dark-mode #ai-analysis-box:hover{
+
     box-shadow:
-        0 12px 35px rgba(255,255,255,0.08);
+        0 12px 35px rgba(255,255,255,.08);
+
 }
-/* ========= Flip Card Dark Mode ========= */
+
+
+/* ================= FLIP CARD ================= */
 
 body.dark-mode .temp-front{
 
@@ -1568,23 +1787,25 @@ body.dark-mode .temp-front{
 body.dark-mode .temp-front::before,
 body.dark-mode .temp-back::before{
 
-    background:linear-gradient(
-        135deg,
-        rgba(255,255,255,.16) 0%,
-        rgba(255,255,255,.08) 20%,
-        rgba(255,255,255,0) 45%,
-        rgba(255,255,255,.04) 100%
-    );
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.16) 0%,
+            rgba(255,255,255,.08) 20%,
+            rgba(255,255,255,0) 45%,
+            rgba(255,255,255,.04) 100%
+        );
 
 }
 
 body.dark-mode .temp-back{
 
-    background:linear-gradient(
-        145deg,
-        #232b38,
-        #151b25
-    );
+    background:
+        linear-gradient(
+            145deg,
+            #232b38,
+            #151b25
+        );
 
     color:#f5f5f5;
 
@@ -1596,7 +1817,9 @@ body.dark-mode .temp-back{
         0 6px 16px rgba(0,0,0,.28);
 
 }
-/* ================= SEARCH DARK MODE ================= */
+
+
+/* ================= SEARCH ================= */
 
 body.dark-mode .learn-search input{
 
@@ -1612,13 +1835,11 @@ body.dark-mode .learn-search input{
 
 }
 
-
 body.dark-mode .learn-search input::placeholder{
 
     color:rgba(255,255,255,.5);
 
 }
-
 
 body.dark-mode .learn-search input:focus{
 
@@ -1627,24 +1848,54 @@ body.dark-mode .learn-search input:focus{
     border-color:rgba(255,255,255,.3);
 
     box-shadow:
-    0 0 15px rgba(255,255,255,.1);
+        0 0 15px rgba(255,255,255,.1);
 
 }
+
 body.dark-mode .search-icon svg{
 
     stroke:#ffffff !important;
 
     filter:
-    drop-shadow(0 0 5px rgba(255,255,255,.8));
+        drop-shadow(
+            0 0 5px
+            rgba(255,255,255,.8)
+        );
 
 }
-/* =========================
-   HISTORY CARD - DARK MODE
-========================= */
+
+
+/* ================= HISTORY ================= */
 
 body.dark-mode .history-card{
 
-    background:rgba(15,15,15,.82);
+    background:
+
+        radial-gradient(
+            ellipse at 20% 20%,
+            rgba(255,255,255,.08),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 80% 70%,
+            rgba(80,80,80,.25),
+            transparent 45%
+        ),
+
+        rgba(15,15,15,.82);
+
+    background-size:
+        180% 180%,
+        160% 160%,
+        100% 100%;
+
+    animation:
+        darkLiquidBackground
+        20s
+        ease-in-out
+        infinite
+        alternate;
 
     border:1px solid rgba(255,255,255,.08);
 
@@ -1657,7 +1908,6 @@ body.dark-mode .history-card{
 
 }
 
-
 body.dark-mode .history-card:hover{
 
     box-shadow:
@@ -1666,9 +1916,7 @@ body.dark-mode .history-card:hover{
 }
 
 
-/* =========================
-   TEXT
-========================= */
+/* ================= TEXT ================= */
 
 body.dark-mode .history-meta{
 
@@ -1676,13 +1924,11 @@ body.dark-mode .history-meta{
 
 }
 
-
 body.dark-mode .history-title{
 
     color:#fff;
 
 }
-
 
 body.dark-mode .history-description{
 
@@ -1691,24 +1937,58 @@ body.dark-mode .history-description{
 }
 
 
-/* =========================
-   LOADING
-========================= */
+/* ================= LOADING ================= */
 
 body.dark-mode .loading-card{
-
-    background:rgba(15,15,15,.82);
-
-    border:1px solid rgba(255,255,255,.08);
 
     color:#fff;
 
 }
 
 
-/* =========================
-   MOBILE
-========================= */
+/* ================= SUMMARY ================= */
+
+body.dark-mode .section-summary{
+
+    background:
+
+        radial-gradient(
+            ellipse at 20% 20%,
+            rgba(255,82,82,.18),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 80% 70%,
+            rgba(120,30,30,.25),
+            transparent 45%
+        ),
+
+        rgba(180,35,35,.12);
+
+    background-size:
+        180% 180%,
+        160% 160%,
+        100% 100%;
+
+    animation:
+        darkLiquidBackground
+        20s
+        ease-in-out
+        infinite
+        alternate;
+
+    border-left:4px solid #ff5252;
+
+    color:rgba(255,255,255,.92);
+
+    box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,.05);
+
+}
+
+
+/* ================= MOBILE ================= */
 
 @media(max-width:768px){
 
@@ -1724,20 +2004,7 @@ body.dark-mode .loading-card{
     }
 
 }
-/* ================= SUMMARY - DARK MODE ================= */
 
-body.dark-mode .section-summary{
-
-    background:rgba(180,35,35,.12);
-
-    border-left:4px solid #ff5252;
-
-    color:rgba(255,255,255,.92);
-
-    box-shadow:
-        inset 0 0 0 1px rgba(255,255,255,.05);
-
-}
 #chartLegend{
     margin-top:20px;
     padding-top:15px;
@@ -2384,62 +2651,151 @@ body.dark-mode .section-summary{
 }
 /* ==========================================
    GOLDEN MODE
-   (Navy Edition)
+   (Liquid Navy Edition)
 ========================================== */
 
 body.golden-mode::before{
 
     background-image:
 
-        /* LAPISAN GRADASI */
+        /* LAPISAN GRADASI GOLDEN HOUR */
+
         linear-gradient(
             to bottom,
 
-            /* ATAS: hampir transparan,
-               warna merah dari gambar tetap terlihat */
             rgba(255,245,200,0.05) 0%,
             rgba(255,224,102,0.08) 20%,
 
-            /* TENGAH: mulai masuk warna gold */
             rgba(255,193,7,0.28) 45%,
             rgba(212,175,55,0.55) 65%,
 
-            /* BAWAH: gold lebih kuat */
             rgba(180,130,20,0.78) 82%,
             rgba(120,85,20,0.92) 100%
+
         ),
 
         url('images/unnamed.webp');
 
-    background-size: cover;
+    background-size:cover;
 
-    background-position: center;
+    background-position:center;
 
 }
 
 
 /* ==========================================
-   CARD
+   CARD LIQUID
 ========================================== */
 
 body.golden-mode .box,
 body.golden-mode .day,
 body.golden-mode .datetime-container,
-body.golden-mode .modal-content,
-body.golden-mode .learn-modal-content,
 body.golden-mode .learn-card,
 body.golden-mode .temperature-calculator,
 body.golden-mode #ai-analysis-box,
 body.golden-mode .history-card,
 body.golden-mode .loading-card{
 
-    background: rgba(22,28,46,.82);
-    border: 1px solid rgba(212,175,55,.42);
+    background:
 
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
+        radial-gradient(
+            ellipse at 20% 20%,
+            rgba(255,215,0,.18),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 80% 70%,
+            rgba(20,55,120,.45),
+            transparent 45%
+        ),
+
+        linear-gradient(
+            145deg,
+            rgba(22,28,46,.95),
+            rgba(70,52,15,.85)
+        );
+
+    background-size:
+
+        180% 180%,
+        160% 160%,
+        100% 100%;
+
+    animation:
+
+        goldenLiquidBackground
+        20s
+        ease-in-out
+        infinite
+        alternate;
+
+    border:1px solid rgba(212,175,55,.42);
+
+    backdrop-filter:blur(15px);
+
+    -webkit-backdrop-filter:blur(15px);
 
 }
+
+
+/* ==========================================
+   MODAL
+   TETAP TIDAK LIQUID
+========================================== */
+
+body.golden-mode .modal-content,
+body.golden-mode .learn-modal-content{
+
+    background:rgba(22,28,46,.82);
+
+    border:1px solid rgba(212,175,55,.42);
+
+    backdrop-filter:blur(15px);
+
+    -webkit-backdrop-filter:blur(15px);
+
+}
+
+
+/* ==========================================
+   GOLDEN LIQUID ANIMATION
+========================================== */
+
+@keyframes goldenLiquidBackground{
+
+    0%{
+
+        background-position:
+
+            0% 20%,
+            100% 80%,
+            center;
+
+    }
+
+    50%{
+
+        background-position:
+
+            80% 60%,
+            20% 30%,
+            center;
+
+    }
+
+    100%{
+
+        background-position:
+
+            30% 100%,
+            70% 0%,
+            center;
+
+    }
+
+}
+
 
 /* ==========================================
    HEADERS
@@ -2447,18 +2803,21 @@ body.golden-mode .loading-card{
 
 body.golden-mode .learn-header{
 
-background:
-    linear-gradient(
-        180deg,
-        rgba(255,193,7,.46),
-        rgba(255,255,255,.06)
-    );
+    background:
+
+        linear-gradient(
+            180deg,
+            rgba(255,193,7,.46),
+            rgba(255,255,255,.06)
+        );
 
 }
+
 
 body.golden-mode .learn-body{
 
     background:
+
         linear-gradient(
             180deg,
             rgba(255,245,200,.08),
@@ -2467,6 +2826,7 @@ body.golden-mode .learn-body{
 
 }
 
+
 /* ==========================================
    DOT
 ========================================== */
@@ -2474,6 +2834,7 @@ body.golden-mode .learn-body{
 body.golden-mode .dot.active{
 
     background:
+
         linear-gradient(
             180deg,
             #ffd700,
@@ -2481,36 +2842,123 @@ body.golden-mode .dot.active{
         );
 
     box-shadow:
-        0 0 10px rgba(255,215,0,.60);
+
+        0 0 10px
+        rgba(255,215,0,.60);
 
 }
 
+
 /* ==========================================
-   BOX
+   BOX ACTIVE
 ========================================== */
 
 body.golden-mode .box.active{
 
-    background: #0b1f4d;
+    background:
 
-    color: #ffffff;
+        radial-gradient(
+            ellipse at 25% 20%,
+            rgba(255,215,0,.18),
+            transparent 35%
+        ),
 
-    border: 1px solid rgba(255,255,255,.20);
+        radial-gradient(
+            ellipse at 80% 75%,
+            rgba(30,65,140,.45),
+            transparent 45%
+        ),
+
+        #0b1f4d;
+
+    background-size:
+
+        180% 180%,
+        160% 160%,
+        100% 100%;
+
+    animation:
+
+        goldenLiquidBackground
+        20s
+        ease-in-out
+        infinite
+        alternate;
+
+    color:#ffffff;
+
+    border:1px solid rgba(255,255,255,.20);
 
     box-shadow:
-        0 0 18px rgba(11,31,77,.35),
-        0 0 35px rgba(11,31,77,.15);
+
+        0 0 18px
+        rgba(11,31,77,.35),
+
+        0 0 35px
+        rgba(11,31,77,.15);
 
 }
+
 
 body.golden-mode .box.side{
-    background: rgba(22,28,46,.72);
+
+    background:
+
+        radial-gradient(
+            ellipse at 20% 30%,
+            rgba(255,215,0,.10),
+            transparent 35%
+        ),
+
+        linear-gradient(
+            145deg,
+            rgba(22,28,46,.90),
+            rgba(70,52,15,.75)
+        );
+
+    background-size:
+
+        180% 180%,
+        100% 100%;
+
+    animation:
+
+        goldenLiquidBackground
+        20s
+        ease-in-out
+        infinite
+        alternate;
+
 }
+
 
 body.golden-mode .box:not(.active):hover,
 body.golden-mode .learn-card:hover{
-    background: rgba(34,42,64,.92);
+
+    background:
+
+        radial-gradient(
+            ellipse at 30% 20%,
+            rgba(255,215,0,.20),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 80% 70%,
+            rgba(30,70,150,.45),
+            transparent 45%
+        ),
+
+        rgba(34,42,64,.92);
+
+    background-size:
+
+        180% 180%,
+        160% 160%,
+        100% 100%;
+
 }
+
 
 /* ==========================================
    AI
@@ -2519,6 +2967,19 @@ body.golden-mode .learn-card:hover{
 body.golden-mode #ai-analysis-box{
 
     background:
+
+        radial-gradient(
+            ellipse at 20% 20%,
+            rgba(255,215,0,.24),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 80% 75%,
+            rgba(30,65,140,.35),
+            transparent 45%
+        ),
+
         linear-gradient(
             180deg,
             rgba(255,215,0,.16) 0%,
@@ -2526,58 +2987,97 @@ body.golden-mode #ai-analysis-box{
             rgba(255,255,255,.08) 100%
         );
 
+    background-size:
+
+        180% 180%,
+        160% 160%,
+        100% 100%;
+
+    animation:
+
+        goldenLiquidBackground
+        20s
+        ease-in-out
+        infinite
+        alternate;
+
 }
+
 
 body.golden-mode #ai-analysis-box:hover{
 
     box-shadow:
-        0 12px 35px rgba(255,215,0,.22);
+
+        0 12px 35px
+        rgba(255,215,0,.22);
 
 }
 
+
 /* ==========================================
-   FLIP
+   FLIP CARD
+   16 CARD TETAP MEMPERTAHANKAN WARNA ASLI
 ========================================== */
 
 body.golden-mode .temp-front{
 
-    filter: brightness(.95);
+    filter:brightness(.95);
 
-    border: 1.5px solid rgba(255,215,0,.22);
+    border:1.5px solid
+        rgba(255,215,0,.22);
 
     box-shadow:
-        inset 0 1px 2px rgba(255,255,255,.06),
-        inset 0 -2px 6px rgba(0,0,0,.35),
-        0 6px 16px rgba(255,215,0,.12);
+
+        inset 0 1px 2px
+        rgba(255,255,255,.06),
+
+        inset 0 -2px 6px
+        rgba(0,0,0,.35),
+
+        0 6px 16px
+        rgba(255,215,0,.12);
 
 }
+
 
 body.golden-mode .temp-front::before,
 body.golden-mode .temp-back::before{
 
-    background: linear-gradient(
-        135deg,
-        rgba(255,255,255,.18),
-        rgba(255,215,0,.10) 25%,
-        rgba(255,255,255,0) 55%,
-        rgba(255,255,255,.05)
-    );
+    background:
+
+        linear-gradient(
+            135deg,
+
+            rgba(255,255,255,.18),
+
+            rgba(255,215,0,.10) 25%,
+
+            rgba(255,255,255,0) 55%,
+
+            rgba(255,255,255,.05)
+
+        );
 
 }
+
 
 body.golden-mode .temp-back{
 
-    background: linear-gradient(
-        145deg,
-        #28314a,
-        #171d2d
-    );
+    background:
 
-    color: #f5f5f5;
+        linear-gradient(
+            145deg,
+            #28314a,
+            #171d2d
+        );
 
-    border: 1.5px solid rgba(255,215,0,.18);
+    color:#f5f5f5;
+
+    border:1.5px solid
+        rgba(255,215,0,.18);
 
 }
+
 
 /* ==========================================
    SEARCH
@@ -2585,38 +3085,51 @@ body.golden-mode .temp-back{
 
 body.golden-mode .learn-search input{
 
-    background: rgba(25,28,45,.88);
-    color: #f8f8f8;
+    background:
+        rgba(25,28,45,.88);
 
-    border: 1px solid rgba(255,215,0,.18);
+    color:#f8f8f8;
+
+    border:1px solid
+        rgba(255,215,0,.18);
 
 }
+
 
 body.golden-mode .learn-search input::placeholder{
-    color: rgba(255,255,255,.45);
+
+    color:
+        rgba(255,255,255,.45);
+
 }
+
 
 body.golden-mode .learn-search input:focus{
 
     background:
+
         linear-gradient(
             180deg,
             rgba(255,215,0,.20),
             rgba(255,255,255,.12)
         );
 
-    border-color: #ffd700;
+    border-color:#ffd700;
 
     box-shadow:
-        0 0 15px rgba(255,215,0,.20);
+
+        0 0 15px
+        rgba(255,215,0,.20);
 
 }
+
 
 body.golden-mode .search-icon svg{
 
-    stroke: #ffd700 !important;
+    stroke:#ffd700 !important;
 
 }
+
 
 /* ==========================================
    HISTORY
@@ -2624,19 +3137,21 @@ body.golden-mode .search-icon svg{
 
 body.golden-mode .history-title{
 
-    color: #ffe066;
+    color:#ffe066;
 
 }
+
 
 body.golden-mode .history-meta{
 
-    color: #f4d35e;
+    color:#f4d35e;
 
 }
 
+
 body.golden-mode .history-description{
 
-    color: #f3f3f3;
+    color:#f3f3f3;
 
 }
 
@@ -2647,33 +3162,75 @@ body.golden-mode .history-description{
 
 body.golden-mode .section-summary{
 
-    background: rgba(255,224,102,.20);
+    background:
 
-    border-left:4px solid rgba(212,175,55,.90);
+        radial-gradient(
+            ellipse at 20% 20%,
+            rgba(255,215,0,.22),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 80% 70%,
+            rgba(120,80,10,.30),
+            transparent 45%
+        ),
+
+        linear-gradient(
+            180deg,
+            rgba(255,224,102,.20),
+            rgba(212,175,55,.12)
+        );
+
+    background-size:
+
+        180% 180%,
+        160% 160%,
+        100% 100%;
+
+    animation:
+
+        goldenLiquidBackground
+        20s
+        ease-in-out
+        infinite
+        alternate;
+
+    border-left:
+        4px solid
+        rgba(212,175,55,.90);
 
     color:#f5f5f5;
 
     box-shadow:
-        inset 0 0 0 1px rgba(255,224,102,.20);
+
+        inset 0 0 0 1px
+        rgba(255,224,102,.20);
 
 }
+
+
 /* ==========================================
    MOBILE
 ========================================== */
 
-@media (max-width:768px){
+@media(max-width:768px){
 
     body.golden-mode .history-card{
 
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
+        backdrop-filter:blur(8px);
+
+        -webkit-backdrop-filter:blur(8px);
 
         box-shadow:
-            0 6px 16px rgba(255,215,0,.10);
+
+            0 6px 16px
+            rgba(255,215,0,.10);
 
     }
 
 }
+
 .info-card{
 
     position:relative;
@@ -3922,9 +4479,6 @@ body.golden-mode .section-summary{
     background:#43a047;
 }
 
-
-/* ================= TAMBAHAN ================= */
-
 .temp-flip-card:nth-child(9) .temp-front{
     background:#c2185b;
 }
@@ -3955,6 +4509,69 @@ body.golden-mode .section-summary{
 
 .temp-flip-card:nth-child(16) .temp-front{
     background:#388e3c;
+}
+
+
+/* ================= LIQUID EFFECT ================= */
+
+.temp-flip-card .temp-front{
+
+    background-image:
+
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(255,255,255,.28),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            circle at 80% 80%,
+            rgba(0,0,0,.20),
+            transparent 45%
+        );
+
+    background-size:
+        180% 180%,
+        160% 160%;
+
+    animation:
+        tempLiquid
+        18s
+        ease-in-out
+        infinite
+        alternate;
+
+}
+
+
+/* ================= ANIMASI ================= */
+
+@keyframes tempLiquid{
+
+    0%{
+
+        background-position:
+            0% 20%,
+            100% 80%;
+
+    }
+
+    50%{
+
+        background-position:
+            80% 60%,
+            20% 30%;
+
+    }
+
+    100%{
+
+        background-position:
+            30% 100%,
+            70% 0%;
+
+    }
+
 }
 
 /* ================= MOBILE ================= */
@@ -4529,194 +5146,486 @@ mark{
 
 /* ==========================================
    NEW YEAR MODE
+   (Liquid Gold & Midnight Edition)
 ========================================== */
 
 body.newyear-mode::before{
 
     background-image:
+
         linear-gradient(
             rgba(20,20,20,0.48),
             rgba(255,215,0,0.18)
         ),
+
         url('images/unnamed.webp');
+
     background-size:cover;
+
     background-position:center;
 
 }
-/* =========================
-   CARD
-========================= */
+
+
+/* ==========================================
+   CARD LIQUID
+========================================== */
 
 body.newyear-mode .box,
 body.newyear-mode .day,
 body.newyear-mode .datetime-container,
-body.newyear-mode .modal-content,
-body.newyear-mode .learn-modal-content,
 body.newyear-mode .learn-card,
-body.newyear-mode .temperature-calculator{
+body.newyear-mode .temperature-calculator,
+body.newyear-mode #ai-analysis-box,
+body.newyear-mode .history-card,
+body.newyear-mode .loading-card{
 
-    background:rgba(18,22,38,.82);
+    background:
 
-    border:1px solid rgba(255,215,0,.18);
+        radial-gradient(
+            ellipse at 20% 20%,
+            rgba(255,215,0,.20),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 80% 70%,
+            rgba(30,55,120,.48),
+            transparent 45%
+        ),
+
+        linear-gradient(
+            145deg,
+            rgba(18,22,38,.96),
+            rgba(55,45,15,.88)
+        );
+
+    background-size:
+
+        180% 180%,
+        160% 160%,
+        100% 100%;
+
+    animation:
+
+        newyearLiquidBackground
+        20s
+        ease-in-out
+        infinite
+        alternate;
+
+    border:1px solid
+        rgba(255,215,0,.18);
 
     backdrop-filter:blur(15px);
+
     -webkit-backdrop-filter:blur(15px);
 
 }
 
-body.newyear-mode .learn-header{
 
-    background:rgba(255,215,0,.08);
+/* ==========================================
+   MODAL
+   TETAP TIDAK LIQUID
+========================================== */
+
+body.newyear-mode .modal-content,
+body.newyear-mode .learn-modal-content{
+
+    background:rgba(18,22,38,.82);
+
+    border:1px solid
+        rgba(255,215,0,.18);
+
+    backdrop-filter:blur(15px);
+
+    -webkit-backdrop-filter:blur(15px);
 
 }
+
+
+/* ==========================================
+   NEW YEAR LIQUID ANIMATION
+========================================== */
+
+@keyframes newyearLiquidBackground{
+
+    0%{
+
+        background-position:
+
+            0% 20%,
+            100% 80%,
+            center;
+
+    }
+
+    50%{
+
+        background-position:
+
+            80% 60%,
+            20% 30%,
+            center;
+
+    }
+
+    100%{
+
+        background-position:
+
+            30% 100%,
+            70% 0%,
+            center;
+
+    }
+
+}
+
+
+/* ==========================================
+   HEADERS
+========================================== */
+
+body.newyear-mode .learn-header{
+
+    background:
+
+        linear-gradient(
+            180deg,
+            rgba(255,215,0,.18),
+            rgba(30,55,120,.12)
+        );
+
+}
+
 
 body.newyear-mode .learn-body{
 
-    background:rgba(255,255,255,.04);
+    background:
+
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,.04),
+            rgba(255,215,0,.06)
+        );
 
 }
 
-/* =========================
+
+/* ==========================================
    DOT
-========================= */
+========================================== */
 
 body.newyear-mode .dot.active{
 
-    background:#ffd700;
+    background:
+
+        linear-gradient(
+            180deg,
+            #ffd700,
+            #ffffff
+        );
+
+    box-shadow:
+
+        0 0 12px
+        rgba(255,215,0,.80);
 
 }
 
-/* =========================
-   BOX
-========================= */
+
+/* ==========================================
+   ACTIVE BOX
+========================================== */
 
 body.newyear-mode .box.active{
 
-    background:#0b1f4d;
+    background:
+
+        radial-gradient(
+            ellipse at 25% 20%,
+            rgba(255,215,0,.22),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 80% 75%,
+            rgba(40,75,160,.45),
+            transparent 45%
+        ),
+
+        #0b1f4d;
+
+    background-size:
+
+        180% 180%,
+        160% 160%,
+        100% 100%;
+
+    animation:
+
+        newyearLiquidBackground
+        20s
+        ease-in-out
+        infinite
+        alternate;
 
     color:#ffffff;
 
-    border:1px solid rgba(255,255,255,.20);
+    border:1px solid
+        rgba(255,255,255,.20);
 
     box-shadow:
-        0 0 18px rgba(11,31,77,.35),
-        0 0 35px rgba(11,31,77,.15);
+
+        0 0 18px
+        rgba(11,31,77,.35),
+
+        0 0 35px
+        rgba(11,31,77,.15);
 
 }
+
 
 body.newyear-mode .box.side{
 
-    background:rgba(18,22,38,.72);
+    background:
+
+        radial-gradient(
+            ellipse at 20% 30%,
+            rgba(255,215,0,.12),
+            transparent 35%
+        ),
+
+        linear-gradient(
+            145deg,
+            rgba(18,22,38,.90),
+            rgba(55,45,15,.78)
+        );
+
+    background-size:
+
+        180% 180%,
+        100% 100%;
+
+    animation:
+
+        newyearLiquidBackground
+        20s
+        ease-in-out
+        infinite
+        alternate;
 
 }
+
 
 body.newyear-mode .box:not(.active):hover,
 body.newyear-mode .learn-card:hover{
 
-    background:rgba(28,34,55,.92);
+    background:
+
+        radial-gradient(
+            ellipse at 30% 20%,
+            rgba(255,215,0,.22),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 80% 70%,
+            rgba(40,75,160,.42),
+            transparent 45%
+        ),
+
+        rgba(28,34,55,.92);
+
+    background-size:
+
+        180% 180%,
+        160% 160%,
+        100% 100%;
 
 }
 
-/* =========================
+
+/* ==========================================
    AI BOX
-========================= */
+========================================== */
 
 body.newyear-mode #ai-analysis-box{
 
-    background:rgba(18,22,38,.82);
+    background:
 
-    border:1px solid rgba(255,215,0,.18);
+        radial-gradient(
+            ellipse at 20% 20%,
+            rgba(255,215,0,.24),
+            transparent 35%
+        ),
 
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
+        radial-gradient(
+            ellipse at 80% 75%,
+            rgba(30,55,120,.40),
+            transparent 45%
+        ),
+
+        linear-gradient(
+            145deg,
+            rgba(18,22,38,.90),
+            rgba(55,45,15,.78)
+        );
+
+    background-size:
+
+        180% 180%,
+        160% 160%,
+        100% 100%;
+
+    animation:
+
+        newyearLiquidBackground
+        20s
+        ease-in-out
+        infinite
+        alternate;
 
 }
+
 
 body.newyear-mode #ai-analysis-box:hover{
 
     box-shadow:
-        0 12px 35px rgba(255,215,0,.18);
+
+        0 12px 35px
+        rgba(255,215,0,.18);
 
 }
 
-/* ========= Flip Card ========= */
+
+/* ==========================================
+   FLIP CARD
+   16 CARD TETAP MEMPERTAHANKAN
+   WARNA ASLI MASING-MASING
+========================================== */
 
 body.newyear-mode .temp-front{
 
     filter:brightness(.95);
 
-    border:1.5px solid rgba(255,215,0,.22);
+    border:1.5px solid
+        rgba(255,215,0,.22);
 
     box-shadow:
-        inset 0 1px 2px rgba(255,255,255,.06),
-        inset 0 -2px 6px rgba(0,0,0,.35),
-        0 6px 16px rgba(255,215,0,.12);
+
+        inset 0 1px 2px
+        rgba(255,255,255,.06),
+
+        inset 0 -2px 6px
+        rgba(0,0,0,.35),
+
+        0 6px 16px
+        rgba(255,215,0,.12);
 
 }
+
 
 body.newyear-mode .temp-front::before,
 body.newyear-mode .temp-back::before{
 
-    background:linear-gradient(
-        135deg,
-        rgba(255,255,255,.18) 0%,
-        rgba(255,215,0,.10) 20%,
-        rgba(255,255,255,0) 45%,
-        rgba(255,255,255,.05) 100%
-    );
+    background:
+
+        linear-gradient(
+            135deg,
+
+            rgba(255,255,255,.18) 0%,
+
+            rgba(255,215,0,.10) 20%,
+
+            rgba(255,255,255,0) 45%,
+
+            rgba(255,255,255,.05) 100%
+
+        );
 
 }
+
 
 body.newyear-mode .temp-back{
 
-    background:linear-gradient(
-        145deg,
-        #28314a,
-        #171d2d
-    );
+    background:
+
+        linear-gradient(
+            145deg,
+            #28314a,
+            #171d2d
+        );
 
     color:#f5f5f5;
 
-    border:1.5px solid rgba(255,215,0,.15);
+    border:1.5px solid
+        rgba(255,215,0,.15);
 
     box-shadow:
-        inset 0 1px 2px rgba(255,255,255,.06),
-        inset 0 -2px 6px rgba(0,0,0,.35),
-        0 6px 16px rgba(255,215,0,.12);
+
+        inset 0 1px 2px
+        rgba(255,255,255,.06),
+
+        inset 0 -2px 6px
+        rgba(0,0,0,.35),
+
+        0 6px 16px
+        rgba(255,215,0,.12);
 
 }
 
-/* ================= SEARCH ================= */
+
+/* ==========================================
+   SEARCH
+========================================== */
 
 body.newyear-mode .learn-search input{
 
-    background:rgba(25,28,45,.88);
+    background:
 
-    border:1px solid rgba(255,215,0,.18);
+        rgba(25,28,45,.88);
+
+    border:1px solid
+        rgba(255,215,0,.18);
 
     color:#fff;
 
     backdrop-filter:blur(15px);
+
     -webkit-backdrop-filter:blur(15px);
 
 }
 
+
 body.newyear-mode .learn-search input::placeholder{
 
-    color:rgba(255,255,255,.55);
+    color:
+        rgba(255,255,255,.55);
 
 }
 
+
 body.newyear-mode .learn-search input:focus{
 
-    background:rgba(35,40,60,.95);
+    background:
+
+        linear-gradient(
+            180deg,
+            rgba(255,215,0,.18),
+            rgba(35,40,60,.95)
+        );
 
     border-color:#ffd700;
 
     box-shadow:
-        0 0 15px rgba(255,215,0,.18);
+
+        0 0 15px
+        rgba(255,215,0,.18);
 
 }
+
 
 body.newyear-mode .search-icon svg{
 
@@ -4724,40 +5633,79 @@ body.newyear-mode .search-icon svg{
 
 }
 
-/* =========================
+
+/* ==========================================
    HISTORY CARD
-========================= */
+========================================== */
 
 body.newyear-mode .history-card{
 
-    background:rgba(18,22,38,.82);
+    background:
 
-    border:1px solid rgba(255,215,0,.18);
+        radial-gradient(
+            ellipse at 20% 20%,
+            rgba(255,215,0,.16),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 80% 70%,
+            rgba(30,55,120,.38),
+            transparent 45%
+        ),
+
+        rgba(18,22,38,.82);
+
+    background-size:
+
+        180% 180%,
+        160% 160%,
+        100% 100%;
+
+    animation:
+
+        newyearLiquidBackground
+        20s
+        ease-in-out
+        infinite
+        alternate;
+
+    border:1px solid
+        rgba(255,215,0,.18);
 
     backdrop-filter:blur(12px);
+
     -webkit-backdrop-filter:blur(12px);
 
     box-shadow:
-        0 8px 18px rgba(255,215,0,.10);
+
+        0 8px 18px
+        rgba(255,215,0,.10);
 
 }
+
 
 body.newyear-mode .history-card:hover{
 
     box-shadow:
-        0 12px 24px rgba(255,215,0,.18);
+
+        0 12px 24px
+        rgba(255,215,0,.18);
 
 }
 
-/* =========================
+
+/* ==========================================
    TEXT
-========================= */
+========================================== */
 
 body.newyear-mode .history-meta{
 
-    color:rgba(255,215,0,.80);
+    color:
+        rgba(255,215,0,.80);
 
 }
+
 
 body.newyear-mode .history-title{
 
@@ -4765,74 +5713,150 @@ body.newyear-mode .history-title{
 
 }
 
+
 body.newyear-mode .history-description{
 
-    color:rgba(255,255,255,.82);
+    color:
+        rgba(255,255,255,.82);
 
 }
 
-/* =========================
+
+/* ==========================================
    LOADING
-========================= */
+========================================== */
 
 body.newyear-mode .loading-card{
-
-    background:rgba(18,22,38,.82);
-
-    border:1px solid rgba(255,215,0,.18);
 
     color:#fff;
 
 }
 
-/* =========================
+
+/* ==========================================
    SUMMARY
-========================= */
+========================================== */
 
 body.newyear-mode .section-summary{
 
-    background:rgba(255,215,0,.08);
+    background:
 
-    border-left:4px solid #ffd700;
+        radial-gradient(
+            ellipse at 20% 20%,
+            rgba(255,215,0,.20),
+            transparent 35%
+        ),
 
-    color:rgba(255,255,255,.92);
+        radial-gradient(
+            ellipse at 80% 70%,
+            rgba(30,55,120,.28),
+            transparent 45%
+        ),
+
+        linear-gradient(
+            145deg,
+            rgba(255,215,0,.08),
+            rgba(18,22,38,.18)
+        );
+
+    background-size:
+
+        180% 180%,
+        160% 160%,
+        100% 100%;
+
+    animation:
+
+        newyearLiquidBackground
+        20s
+        ease-in-out
+        infinite
+        alternate;
+
+    border-left:
+        4px solid
+        #ffd700;
+
+    color:
+        rgba(255,255,255,.92);
 
     box-shadow:
-        inset 0 0 0 1px rgba(255,215,0,.08);
+
+        inset 0 0 0 1px
+        rgba(255,215,0,.08);
 
 }
 
-/* =========================
+
+/* ==========================================
    MOBILE
-========================= */
+========================================== */
 
 @media(max-width:768px){
 
     body.newyear-mode .history-card{
 
         backdrop-filter:blur(8px);
+
         -webkit-backdrop-filter:blur(8px);
 
         box-shadow:
-            0 6px 16px rgba(255,215,0,.10);
+
+            0 6px 16px
+            rgba(255,215,0,.10);
 
     }
 
+
     body.newyear-mode .box.active{
 
-        background:#0b1f4d;
+        background:
+
+            radial-gradient(
+                ellipse at 25% 20%,
+                rgba(255,215,0,.22),
+                transparent 35%
+            ),
+
+            radial-gradient(
+                ellipse at 80% 75%,
+                rgba(40,75,160,.45),
+                transparent 45%
+            ),
+
+            #0b1f4d;
+
+        background-size:
+
+            180% 180%,
+            160% 160%,
+            100% 100%;
+
+        animation:
+
+            newyearLiquidBackground
+            20s
+            ease-in-out
+            infinite
+            alternate;
 
         color:#ffffff;
 
-        border:1px solid rgba(255,255,255,.20);
+        border:1px solid
+            rgba(255,255,255,.20);
 
         box-shadow:
-            0 0 18px rgba(11,31,77,.35),
-            0 0 35px rgba(11,31,77,.15);
+
+            0 0 18px
+            rgba(11,31,77,.35),
+
+            0 0 35px
+            rgba(11,31,77,.15);
 
     }
 
 }
+
 /* ==========================================
    WEEKEND MODE
    (Navy Edition)
@@ -4857,21 +5881,105 @@ body.weekend-mode::before{
 body.weekend-mode .box,
 body.weekend-mode .day,
 body.weekend-mode .datetime-container,
-body.weekend-mode .modal-content,
-body.weekend-mode .learn-modal-content,
 body.weekend-mode .learn-card,
 body.weekend-mode .temperature-calculator,
 body.weekend-mode #ai-analysis-box,
 body.weekend-mode .history-card,
 body.weekend-mode .loading-card{
 
-    background:rgba(22,28,46,.82);
+    background:
+
+        radial-gradient(
+            ellipse at 20% 20%,
+            rgba(255,215,0,.18),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 80% 70%,
+            rgba(20,55,120,.45),
+            transparent 45%
+        ),
+
+        linear-gradient(
+            145deg,
+            rgba(22,28,46,.95),
+            rgba(11,31,77,.90)
+        );
+
+    background-size:
+        180% 180%,
+        160% 160%,
+        100% 100%;
+
+    animation:
+        weekendLiquidBackground
+        12s
+        ease-in-out
+        infinite
+        alternate;
+
     border:1px solid rgba(255,215,0,.22);
 
     backdrop-filter:blur(15px);
     -webkit-backdrop-filter:blur(15px);
 
 }
+
+
+/* ==========================================
+   MODAL
+   TETAP TIDAK LIQUID
+========================================== */
+
+body.weekend-mode .modal-content,
+body.weekend-mode .learn-modal-content{
+
+    background:rgba(22,28,46,.82);
+
+    border:1px solid rgba(255,215,0,.22);
+
+    backdrop-filter:blur(15px);
+    -webkit-backdrop-filter:blur(15px);
+
+}
+
+
+/* ==========================================
+   LIQUID BACKGROUND ANIMATION
+========================================== */
+
+@keyframes weekendLiquidBackground{
+
+    0%{
+
+        background-position:
+            0% 20%,
+            100% 80%,
+            center;
+
+    }
+
+    50%{
+
+        background-position:
+            80% 60%,
+            20% 30%,
+            center;
+
+    }
+
+    100%{
+
+        background-position:
+            30% 100%,
+            70% 0%,
+            center;
+
+    }
+
+}
+
 
 /* ==========================================
    HEADERS
@@ -4899,6 +6007,7 @@ body.weekend-mode .learn-body{
 
 }
 
+
 /* ==========================================
    DOT
 ========================================== */
@@ -4917,13 +6026,40 @@ body.weekend-mode .dot.active{
 
 }
 
+
 /* ==========================================
    BOX
 ========================================== */
 
 body.weekend-mode .box.active{
 
-    background:#0b1f4d;
+    background:
+
+        radial-gradient(
+            ellipse at 30% 20%,
+            rgba(255,215,0,.16),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 80% 80%,
+            rgba(20,60,140,.45),
+            transparent 45%
+        ),
+
+        #0b1f4d;
+
+    background-size:
+        180% 180%,
+        160% 160%,
+        100% 100%;
+
+    animation:
+        weekendLiquidBackground
+        12s
+        ease-in-out
+        infinite
+        alternate;
 
     color:#ffffff;
 
@@ -4936,13 +6072,60 @@ body.weekend-mode .box.active{
 }
 
 body.weekend-mode .box.side{
-    background:rgba(22,28,46,.72);
+
+    background:
+
+        radial-gradient(
+            ellipse at 20% 30%,
+            rgba(255,215,0,.10),
+            transparent 35%
+        ),
+
+        linear-gradient(
+            145deg,
+            rgba(22,28,46,.90),
+            rgba(18,35,70,.85)
+        );
+
+    background-size:
+        180% 180%,
+        100% 100%;
+
+    animation:
+        weekendLiquidBackground
+        12s
+        ease-in-out
+        infinite
+        alternate;
+
 }
 
 body.weekend-mode .box:not(.active):hover,
 body.weekend-mode .learn-card:hover{
-    background:rgba(34,42,64,.92);
+
+    background:
+
+        radial-gradient(
+            ellipse at 30% 20%,
+            rgba(255,215,0,.20),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 80% 70%,
+            rgba(30,70,150,.45),
+            transparent 45%
+        ),
+
+        rgba(34,42,64,.92);
+
+    background-size:
+        180% 180%,
+        160% 160%,
+        100% 100%;
+
 }
+
 
 /* ==========================================
    AI
@@ -4951,12 +6134,37 @@ body.weekend-mode .learn-card:hover{
 body.weekend-mode #ai-analysis-box{
 
     background:
+
+        radial-gradient(
+            ellipse at 20% 20%,
+            rgba(255,215,0,.24),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 80% 75%,
+            rgba(30,65,140,.35),
+            transparent 45%
+        ),
+
         linear-gradient(
             180deg,
             rgba(255,215,0,.16) 0%,
             rgba(255,245,200,.10) 45%,
             rgba(255,255,255,.08) 100%
         );
+
+    background-size:
+        180% 180%,
+        160% 160%,
+        100% 100%;
+
+    animation:
+        weekendLiquidBackground
+        12s
+        ease-in-out
+        infinite
+        alternate;
 
 }
 
@@ -4967,7 +6175,10 @@ body.weekend-mode #ai-analysis-box:hover{
 
 }
 
-/* FLIP */
+
+/* ==========================================
+   FLIP
+========================================== */
 
 body.weekend-mode .temp-front{
 
@@ -4985,23 +6196,25 @@ body.weekend-mode .temp-front{
 body.weekend-mode .temp-front::before,
 body.weekend-mode .temp-back::before{
 
-    background:linear-gradient(
-        135deg,
-        rgba(255,255,255,.18),
-        rgba(255,215,0,.10) 25%,
-        rgba(255,255,255,0) 55%,
-        rgba(255,255,255,.05)
-    );
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.18),
+            rgba(255,215,0,.10) 25%,
+            rgba(255,255,255,0) 55%,
+            rgba(255,255,255,.05)
+        );
 
 }
 
 body.weekend-mode .temp-back{
 
-    background:linear-gradient(
-        145deg,
-        #28314a,
-        #171d2d
-    );
+    background:
+        linear-gradient(
+            145deg,
+            #28314a,
+            #171d2d
+        );
 
     color:#f5f5f5;
 
@@ -5009,11 +6222,15 @@ body.weekend-mode .temp-back{
 
 }
 
-/* SEARCH */
+
+/* ==========================================
+   SEARCH
+========================================== */
 
 body.weekend-mode .learn-search input{
 
     background:rgba(25,28,45,.88);
+
     color:#f8f8f8;
 
     border:1px solid rgba(255,215,0,.18);
@@ -5021,7 +6238,9 @@ body.weekend-mode .learn-search input{
 }
 
 body.weekend-mode .learn-search input::placeholder{
+
     color:rgba(255,255,255,.45);
+
 }
 
 
@@ -5047,6 +6266,7 @@ body.weekend-mode .search-icon svg{
 
 }
 
+
 /* ==========================================
    HISTORY
 ========================================== */
@@ -5069,6 +6289,7 @@ body.weekend-mode .history-description{
 
 }
 
+
 /* ==========================================
    SUMMARY
 ========================================== */
@@ -5076,12 +6297,37 @@ body.weekend-mode .history-description{
 body.weekend-mode .section-summary{
 
     background:
+
+        radial-gradient(
+            ellipse at 20% 20%,
+            rgba(255,215,0,.22),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 80% 70%,
+            rgba(30,70,150,.35),
+            transparent 45%
+        ),
+
         linear-gradient(
             180deg,
             rgba(255,215,0,.18) 0%,
             rgba(255,245,200,.12) 45%,
             rgba(255,255,255,.08) 100%
         );
+
+    background-size:
+        180% 180%,
+        160% 160%,
+        100% 100%;
+
+    animation:
+        weekendLiquidBackground
+        12s
+        ease-in-out
+        infinite
+        alternate;
 
     border-left:4px solid #ffd700;
 
@@ -5092,13 +6338,17 @@ body.weekend-mode .section-summary{
 
 }
 
-/* MOBILE */
+
+/* ==========================================
+   MOBILE
+========================================== */
 
 @media(max-width:768px){
 
     body.weekend-mode .history-card{
 
         backdrop-filter:blur(8px);
+
         -webkit-backdrop-filter:blur(8px);
 
         box-shadow:
@@ -5110,74 +6360,222 @@ body.weekend-mode .section-summary{
 
 /* ==========================================
    CHRISTMAS MODE
+   (Liquid Christmas Edition)
 ========================================== */
 
 body.christmas-mode::before{
 
     background-image:
+
         linear-gradient(
             rgba(18,40,22,.45),
             rgba(70,8,8,.40)
         ),
+
         url('images/unnamed.webp');
 
     background-size:cover;
+
     background-position:center;
 
 }
 
-/* CARD */
+
+/* ==========================================
+   CARD LIQUID
+========================================== */
 
 body.christmas-mode .box,
 body.christmas-mode .day,
 body.christmas-mode .datetime-container,
-body.christmas-mode .modal-content,
-body.christmas-mode .learn-modal-content,
 body.christmas-mode .learn-card,
 body.christmas-mode .temperature-calculator,
 body.christmas-mode #ai-analysis-box,
 body.christmas-mode .history-card,
 body.christmas-mode .loading-card{
 
+    background:
+
+        radial-gradient(
+            ellipse at 20% 20%,
+            rgba(220,30,45,.22),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 80% 70%,
+            rgba(27,94,32,.42),
+            transparent 45%
+        ),
+
+        linear-gradient(
+            145deg,
+            rgba(20,45,30,.95),
+            rgba(70,12,15,.88)
+        );
+
+    background-size:
+
+        180% 180%,
+        160% 160%,
+        100% 100%;
+
+    animation:
+
+        christmasLiquidBackground
+        20s
+        ease-in-out
+        infinite
+        alternate;
+
+    border:1px solid rgba(255,255,255,.18);
+
+    backdrop-filter:blur(15px);
+
+    -webkit-backdrop-filter:blur(15px);
+
+}
+
+
+/* ==========================================
+   MODAL
+   TETAP TIDAK LIQUID
+========================================== */
+
+body.christmas-mode .modal-content,
+body.christmas-mode .learn-modal-content{
+
     background:rgba(20,45,30,.82);
 
     border:1px solid rgba(255,255,255,.18);
 
     backdrop-filter:blur(15px);
+
     -webkit-backdrop-filter:blur(15px);
 
 }
 
-/* HEADERS */
+
+/* ==========================================
+   CHRISTMAS LIQUID ANIMATION
+========================================== */
+
+@keyframes christmasLiquidBackground{
+
+    0%{
+
+        background-position:
+
+            0% 20%,
+            100% 80%,
+            center;
+
+    }
+
+    50%{
+
+        background-position:
+
+            80% 60%,
+            20% 30%,
+            center;
+
+    }
+
+    100%{
+
+        background-position:
+
+            30% 100%,
+            70% 0%,
+            center;
+
+    }
+
+}
+
+
+/* ==========================================
+   HEADERS
+========================================== */
 
 body.christmas-mode .learn-header{
 
-    background:rgba(183,28,28,.18);
+    background:
+
+        linear-gradient(
+            180deg,
+            rgba(183,28,28,.28),
+            rgba(27,94,32,.18)
+        );
 
 }
+
 
 body.christmas-mode .learn-body{
 
-    background:rgba(255,255,255,.05);
+    background:
+
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,.05),
+            rgba(27,94,32,.08)
+        );
 
 }
 
-/* DOT */
+
+/* ==========================================
+   DOT
+========================================== */
 
 body.christmas-mode .dot.active{
 
     background:#ffffff;
 
     box-shadow:
-        0 0 12px rgba(255,255,255,.8);
+
+        0 0 12px
+        rgba(255,255,255,.8);
 
 }
 
-/* ACTIVE BOX */
+
+/* ==========================================
+   ACTIVE BOX
+========================================== */
 
 body.christmas-mode .box.active{
 
-    background:#0b1f4d;
+    background:
+
+        radial-gradient(
+            ellipse at 25% 20%,
+            rgba(220,30,45,.22),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 80% 75%,
+            rgba(27,94,32,.45),
+            transparent 45%
+        ),
+
+        #0b1f4d;
+
+    background-size:
+
+        180% 180%,
+        160% 160%,
+        100% 100%;
+
+    animation:
+
+        christmasLiquidBackground
+        20s
+        ease-in-out
+        infinite
+        alternate;
 
     color:#ffffff;
 
@@ -5186,64 +6584,181 @@ body.christmas-mode .box.active{
     border:1px solid rgba(255,255,255,.20);
 
     box-shadow:
-        0 0 18px rgba(11,31,77,.35),
-        0 0 35px rgba(11,31,77,.15);
+
+        0 0 18px
+        rgba(11,31,77,.35),
+
+        0 0 35px
+        rgba(11,31,77,.15);
 
 }
+
+
 body.christmas-mode .box.side{
 
-    background:rgba(20,45,30,.72);
+    background:
+
+        radial-gradient(
+            ellipse at 20% 30%,
+            rgba(183,28,28,.14),
+            transparent 35%
+        ),
+
+        linear-gradient(
+            145deg,
+            rgba(20,45,30,.90),
+            rgba(70,12,15,.78)
+        );
+
+    background-size:
+
+        180% 180%,
+        100% 100%;
+
+    animation:
+
+        christmasLiquidBackground
+        20s
+        ease-in-out
+        infinite
+        alternate;
 
 }
+
 
 body.christmas-mode .box:not(.active):hover,
 body.christmas-mode .learn-card:hover{
 
-    background:rgba(32,58,41,.94);
+    background:
+
+        radial-gradient(
+            ellipse at 30% 20%,
+            rgba(220,30,45,.25),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 80% 70%,
+            rgba(27,94,32,.48),
+            transparent 45%
+        ),
+
+        rgba(32,58,41,.94);
+
+    background-size:
+
+        180% 180%,
+        160% 160%,
+        100% 100%;
 
 }
 
-/* AI */
+
+/* ==========================================
+   AI
+========================================== */
+
+body.christmas-mode #ai-analysis-box{
+
+    background:
+
+        radial-gradient(
+            ellipse at 20% 20%,
+            rgba(183,28,28,.25),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 80% 75%,
+            rgba(27,94,32,.38),
+            transparent 45%
+        ),
+
+        linear-gradient(
+            145deg,
+            rgba(20,45,30,.88),
+            rgba(70,12,15,.75)
+        );
+
+    background-size:
+
+        180% 180%,
+        160% 160%,
+        100% 100%;
+
+    animation:
+
+        christmasLiquidBackground
+        20s
+        ease-in-out
+        infinite
+        alternate;
+
+}
+
 
 body.christmas-mode #ai-analysis-box:hover{
 
     box-shadow:
-        0 12px 35px rgba(183,28,28,.20);
+
+        0 12px 35px
+        rgba(183,28,28,.20);
 
 }
 
-/* FLIP CARD */
+
+/* ==========================================
+   FLIP CARD
+   16 CARD TETAP MEMPERTAHANKAN
+   WARNA ASLI MASING-MASING
+========================================== */
 
 body.christmas-mode .temp-front{
 
     filter:brightness(.96);
 
-    border:1.5px solid rgba(255,255,255,.18);
+    border:1.5px solid
+        rgba(255,255,255,.18);
 
     box-shadow:
-        inset 0 1px 2px rgba(255,255,255,.06),
-        inset 0 -2px 6px rgba(0,0,0,.35),
-        0 6px 16px rgba(27,94,32,.18);
+
+        inset 0 1px 2px
+        rgba(255,255,255,.06),
+
+        inset 0 -2px 6px
+        rgba(0,0,0,.35),
+
+        0 6px 16px
+        rgba(27,94,32,.18);
 
 }
+
 
 body.christmas-mode .temp-front::before,
 body.christmas-mode .temp-back::before{
 
     background:
+
         linear-gradient(
             135deg,
+
             rgba(255,255,255,.18),
+
             rgba(183,28,28,.12) 30%,
+
             rgba(27,94,32,.12) 60%,
+
             rgba(255,255,255,.05)
+
         );
 
 }
 
+
 body.christmas-mode .temp-back{
 
     background:
+
         linear-gradient(
             145deg,
             #1d4727,
@@ -5252,38 +6767,56 @@ body.christmas-mode .temp-back{
 
     color:#f8f8f8;
 
-    border:1.5px solid rgba(255,255,255,.15);
+    border:1.5px solid
+        rgba(255,255,255,.15);
 
 }
 
-/* SEARCH */
+
+/* ==========================================
+   SEARCH
+========================================== */
 
 body.christmas-mode .learn-search input{
 
-    background:rgba(22,40,28,.92);
+    background:
+        rgba(22,40,28,.92);
 
     color:#ffffff;
 
-    border:1px solid rgba(255,255,255,.15);
+    border:1px solid
+        rgba(255,255,255,.15);
 
 }
+
 
 body.christmas-mode .learn-search input::placeholder{
 
-    color:rgba(255,255,255,.55);
+    color:
+        rgba(255,255,255,.55);
 
 }
 
+
 body.christmas-mode .learn-search input:focus{
 
-    background:rgba(30,55,37,.96);
+    background:
+
+        linear-gradient(
+            180deg,
+            rgba(183,28,28,.20),
+            rgba(27,94,32,.18)
+        );
 
     border-color:#ffffff;
 
     box-shadow:
-        0 0 15px rgba(255,255,255,.18);
+
+        0 0 15px
+        rgba(255,255,255,.18);
 
 }
+
 
 body.christmas-mode .search-icon svg{
 
@@ -5291,7 +6824,10 @@ body.christmas-mode .search-icon svg{
 
 }
 
-/* HISTORY */
+
+/* ==========================================
+   HISTORY
+========================================== */
 
 body.christmas-mode .history-title{
 
@@ -5299,11 +6835,13 @@ body.christmas-mode .history-title{
 
 }
 
+
 body.christmas-mode .history-meta{
 
     color:#d7d7d7;
 
 }
+
 
 body.christmas-mode .history-description{
 
@@ -5311,185 +6849,532 @@ body.christmas-mode .history-description{
 
 }
 
-/* SUMMARY */
+
+/* ==========================================
+   SUMMARY
+========================================== */
 
 body.christmas-mode .section-summary{
 
-    background:rgba(183,28,28,.15);
+    background:
 
-    border-left:4px solid #ffffff;
+        radial-gradient(
+            ellipse at 20% 20%,
+            rgba(183,28,28,.22),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 80% 70%,
+            rgba(27,94,32,.30),
+            transparent 45%
+        ),
+
+        linear-gradient(
+            145deg,
+            rgba(183,28,28,.15),
+            rgba(27,94,32,.12)
+        );
+
+    background-size:
+
+        180% 180%,
+        160% 160%,
+        100% 100%;
+
+    animation:
+
+        christmasLiquidBackground
+        20s
+        ease-in-out
+        infinite
+        alternate;
+
+    border-left:
+        4px solid
+        #ffffff;
 
     color:#ffffff;
 
     box-shadow:
-        inset 0 0 0 1px rgba(255,255,255,.08);
+
+        inset 0 0 0 1px
+        rgba(255,255,255,.08);
 
 }
 
-/* MOBILE */
+
+/* ==========================================
+   MOBILE
+========================================== */
 
 @media(max-width:768px){
 
     body.christmas-mode .history-card{
 
         backdrop-filter:blur(8px);
+
         -webkit-backdrop-filter:blur(8px);
 
         box-shadow:
-            0 6px 16px rgba(27,94,32,.15);
+
+            0 6px 16px
+            rgba(27,94,32,.15);
 
     }
 
+
     body.christmas-mode .box.active{
 
-        background:#0b1f4d;
+        background:
+
+            radial-gradient(
+                ellipse at 25% 20%,
+                rgba(220,30,45,.22),
+                transparent 35%
+            ),
+
+            radial-gradient(
+                ellipse at 80% 75%,
+                rgba(27,94,32,.45),
+                transparent 45%
+            ),
+
+            #0b1f4d;
+
+        background-size:
+
+            180% 180%,
+            160% 160%,
+            100% 100%;
+
+        animation:
+
+            christmasLiquidBackground
+            20s
+            ease-in-out
+            infinite
+            alternate;
 
         color:#ffffff;
 
         text-shadow:none;
 
-        border:1px solid rgba(255,255,255,.20);
+        border:1px solid
+            rgba(255,255,255,.20);
 
         box-shadow:
-            0 0 18px rgba(11,31,77,.35),
-            0 0 35px rgba(11,31,77,.15);
+
+            0 0 18px
+            rgba(11,31,77,.35),
+
+            0 0 35px
+            rgba(11,31,77,.15);
 
     }
 
 }
+
 /* ==========================================
    INDEPENDENCE MODE
+   (Liquid Red & Black Edition)
 ========================================== */
 
 body.independence-mode::before{
 
     background-image:
+
         linear-gradient(
             rgba(15,15,15,.55),
             rgba(120,0,0,.38)
         ),
+
         url('images/unnamed.webp');
 
     background-size:cover;
+
     background-position:center;
 
 }
 
-/* CARD */
+
+/* ==========================================
+   CARD LIQUID
+========================================== */
 
 body.independence-mode .box,
 body.independence-mode .day,
 body.independence-mode .datetime-container,
-body.independence-mode .modal-content,
-body.independence-mode .learn-modal-content,
 body.independence-mode .learn-card,
 body.independence-mode .temperature-calculator,
 body.independence-mode #ai-analysis-box,
 body.independence-mode .history-card,
 body.independence-mode .loading-card{
 
-    background:rgba(18,18,18,.82);
+    background:
 
-    border:1px solid rgba(255,255,255,.14);
+        radial-gradient(
+            ellipse at 20% 20%,
+            rgba(213,0,0,.24),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 80% 70%,
+            rgba(255,255,255,.07),
+            transparent 40%
+        ),
+
+        linear-gradient(
+            145deg,
+            rgba(18,18,18,.96),
+            rgba(75,5,5,.88)
+        );
+
+    background-size:
+
+        180% 180%,
+        160% 160%,
+        100% 100%;
+
+    animation:
+
+        independenceLiquidBackground
+        20s
+        ease-in-out
+        infinite
+        alternate;
+
+    border:1px solid
+        rgba(255,255,255,.14);
 
     backdrop-filter:blur(15px);
+
     -webkit-backdrop-filter:blur(15px);
 
 }
 
-/* HEADERS */
+
+/* ==========================================
+   MODAL
+   TETAP TIDAK LIQUID
+========================================== */
+
+body.independence-mode .modal-content,
+body.independence-mode .learn-modal-content{
+
+    background:rgba(18,18,18,.82);
+
+    border:1px solid
+        rgba(255,255,255,.14);
+
+    backdrop-filter:blur(15px);
+
+    -webkit-backdrop-filter:blur(15px);
+
+}
+
+
+/* ==========================================
+   INDEPENDENCE LIQUID ANIMATION
+========================================== */
+
+@keyframes independenceLiquidBackground{
+
+    0%{
+
+        background-position:
+
+            0% 20%,
+            100% 80%,
+            center;
+
+    }
+
+    50%{
+
+        background-position:
+
+            80% 60%,
+            20% 30%,
+            center;
+
+    }
+
+    100%{
+
+        background-position:
+
+            30% 100%,
+            70% 0%,
+            center;
+
+    }
+
+}
+
+
+/* ==========================================
+   HEADERS
+========================================== */
 
 body.independence-mode .learn-header{
 
-    background:rgba(213,0,0,.18);
+    background:
+
+        linear-gradient(
+            180deg,
+            rgba(213,0,0,.28),
+            rgba(255,255,255,.06)
+        );
 
 }
+
 
 body.independence-mode .learn-body{
 
-    background:rgba(255,255,255,.04);
+    background:
+
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,.04),
+            rgba(213,0,0,.08)
+        );
 
 }
 
-/* DOT */
+
+/* ==========================================
+   DOT
+========================================== */
 
 body.independence-mode .dot.active{
 
     background:#ffffff;
 
     box-shadow:
-        0 0 12px rgba(255,255,255,.8);
+
+        0 0 12px
+        rgba(255,255,255,.8);
 
 }
 
-/* BOX */
+
+/* ==========================================
+   ACTIVE BOX
+========================================== */
 
 body.independence-mode .box.active{
 
-    background:#0b1f4d;
+    background:
+
+        radial-gradient(
+            ellipse at 25% 20%,
+            rgba(213,0,0,.22),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 80% 75%,
+            rgba(255,255,255,.08),
+            transparent 45%
+        ),
+
+        #0b1f4d;
+
+    background-size:
+
+        180% 180%,
+        160% 160%,
+        100% 100%;
+
+    animation:
+
+        independenceLiquidBackground
+        20s
+        ease-in-out
+        infinite
+        alternate;
 
     color:#ffffff;
 
-    border:1px solid rgba(255,255,255,.20);
+    border:1px solid
+        rgba(255,255,255,.20);
 
     box-shadow:
-        0 0 18px rgba(11,31,77,.35),
-        0 0 35px rgba(11,31,77,.15);
+
+        0 0 18px
+        rgba(11,31,77,.35),
+
+        0 0 35px
+        rgba(11,31,77,.15);
 
 }
+
+
 body.independence-mode .box.side{
 
-    background:rgba(24,24,24,.75);
+    background:
+
+        radial-gradient(
+            ellipse at 20% 30%,
+            rgba(213,0,0,.15),
+            transparent 35%
+        ),
+
+        linear-gradient(
+            145deg,
+            rgba(24,24,24,.92),
+            rgba(75,5,5,.78)
+        );
+
+    background-size:
+
+        180% 180%,
+        100% 100%;
+
+    animation:
+
+        independenceLiquidBackground
+        20s
+        ease-in-out
+        infinite
+        alternate;
 
 }
+
 
 body.independence-mode .box:not(.active):hover,
 body.independence-mode .learn-card:hover{
 
-    background:rgba(38,38,38,.95);
+    background:
+
+        radial-gradient(
+            ellipse at 30% 20%,
+            rgba(213,0,0,.28),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 80% 70%,
+            rgba(255,255,255,.08),
+            transparent 45%
+        ),
+
+        rgba(38,38,38,.95);
+
+    background-size:
+
+        180% 180%,
+        160% 160%,
+        100% 100%;
 
 }
 
-/* AI */
+
+/* ==========================================
+   AI
+========================================== */
+
+body.independence-mode #ai-analysis-box{
+
+    background:
+
+        radial-gradient(
+            ellipse at 20% 20%,
+            rgba(213,0,0,.28),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 80% 75%,
+            rgba(255,255,255,.06),
+            transparent 45%
+        ),
+
+        linear-gradient(
+            145deg,
+            rgba(18,18,18,.90),
+            rgba(75,5,5,.78)
+        );
+
+    background-size:
+
+        180% 180%,
+        160% 160%,
+        100% 100%;
+
+    animation:
+
+        independenceLiquidBackground
+        20s
+        ease-in-out
+        infinite
+        alternate;
+
+}
+
 
 body.independence-mode #ai-analysis-box:hover{
 
     box-shadow:
-        0 12px 35px rgba(211,47,47,.30);
+
+        0 12px 35px
+        rgba(211,47,47,.30);
 
 }
 
-/* FLIP */
+
+/* ==========================================
+   FLIP CARD
+   16 CARD TETAP MEMPERTAHANKAN
+   WARNA ASLI MASING-MASING
+========================================== */
 
 body.independence-mode .temp-front{
 
     filter:brightness(.96);
 
-    border:1.5px solid rgba(255,255,255,.15);
+    border:1.5px solid
+        rgba(255,255,255,.15);
 
     box-shadow:
-        inset 0 1px 2px rgba(255,255,255,.06),
-        inset 0 -2px 6px rgba(0,0,0,.45),
-        0 6px 16px rgba(213,0,0,.15);
+
+        inset 0 1px 2px
+        rgba(255,255,255,.06),
+
+        inset 0 -2px 6px
+        rgba(0,0,0,.45),
+
+        0 6px 16px
+        rgba(213,0,0,.15);
 
 }
+
 
 body.independence-mode .temp-front::before,
 body.independence-mode .temp-back::before{
 
     background:
+
         linear-gradient(
             135deg,
+
             rgba(255,255,255,.18),
+
             rgba(213,0,0,.14) 35%,
+
             rgba(255,255,255,0) 70%
+
         );
 
 }
 
+
 body.independence-mode .temp-back{
 
     background:
+
         linear-gradient(
             145deg,
             #2b2b2b,
@@ -5498,37 +7383,56 @@ body.independence-mode .temp-back{
 
     color:#ffffff;
 
-    border:1.5px solid rgba(255,255,255,.15);
+    border:1.5px solid
+        rgba(255,255,255,.15);
 
 }
-/* SEARCH */
+
+
+/* ==========================================
+   SEARCH
+========================================== */
 
 body.independence-mode .learn-search input{
 
-    background:rgba(20,20,20,.92);
+    background:
+        rgba(20,20,20,.92);
 
     color:#ffffff;
 
-    border:1px solid rgba(255,255,255,.15);
+    border:1px solid
+        rgba(255,255,255,.15);
 
 }
+
 
 body.independence-mode .learn-search input::placeholder{
 
-    color:rgba(255,255,255,.50);
+    color:
+        rgba(255,255,255,.50);
 
 }
 
+
 body.independence-mode .learn-search input:focus{
 
-    background:rgba(30,30,30,.96);
+    background:
+
+        linear-gradient(
+            180deg,
+            rgba(213,0,0,.20),
+            rgba(255,255,255,.06)
+        );
 
     border-color:#d32f2f;
 
     box-shadow:
-        0 0 15px rgba(211,47,47,.35);
+
+        0 0 15px
+        rgba(211,47,47,.35);
 
 }
+
 
 body.independence-mode .search-icon svg{
 
@@ -5536,7 +7440,10 @@ body.independence-mode .search-icon svg{
 
 }
 
-/* HISTORY */
+
+/* ==========================================
+   HISTORY
+========================================== */
 
 body.independence-mode .history-title{
 
@@ -5544,11 +7451,13 @@ body.independence-mode .history-title{
 
 }
 
+
 body.independence-mode .history-meta{
 
     color:#ffb3b3;
 
 }
+
 
 body.independence-mode .history-description{
 
@@ -5556,50 +7465,130 @@ body.independence-mode .history-description{
 
 }
 
-/* SUMMARY */
+
+/* ==========================================
+   SUMMARY
+========================================== */
 
 body.independence-mode .section-summary{
 
-    background:rgba(211,47,47,.12);
+    background:
 
-    border-left:4px solid #ffffff;
+        radial-gradient(
+            ellipse at 20% 20%,
+            rgba(213,0,0,.24),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 80% 70%,
+            rgba(255,255,255,.06),
+            transparent 45%
+        ),
+
+        linear-gradient(
+            145deg,
+            rgba(211,47,47,.15),
+            rgba(20,20,20,.18)
+        );
+
+    background-size:
+
+        180% 180%,
+        160% 160%,
+        100% 100%;
+
+    animation:
+
+        independenceLiquidBackground
+        20s
+        ease-in-out
+        infinite
+        alternate;
+
+    border-left:
+        4px solid
+        #ffffff;
 
     color:#ffffff;
 
     box-shadow:
-        inset 0 0 0 1px rgba(255,255,255,.06);
+
+        inset 0 0 0 1px
+        rgba(255,255,255,.06);
 
 }
 
-/* MOBILE */
+
+/* ==========================================
+   MOBILE
+========================================== */
 
 @media(max-width:768px){
 
     body.independence-mode .history-card{
 
         backdrop-filter:blur(8px);
+
         -webkit-backdrop-filter:blur(8px);
 
         box-shadow:
-            0 6px 16px rgba(211,47,47,.15);
+
+            0 6px 16px
+            rgba(211,47,47,.15);
 
     }
 
+
     body.independence-mode .box.active{
 
-        background:#0b1f4d;
+        background:
+
+            radial-gradient(
+                ellipse at 25% 20%,
+                rgba(213,0,0,.22),
+                transparent 35%
+            ),
+
+            radial-gradient(
+                ellipse at 80% 75%,
+                rgba(255,255,255,.08),
+                transparent 45%
+            ),
+
+            #0b1f4d;
+
+        background-size:
+
+            180% 180%,
+            160% 160%,
+            100% 100%;
+
+        animation:
+
+            independenceLiquidBackground
+            20s
+            ease-in-out
+            infinite
+            alternate;
 
         color:#ffffff;
 
-        border:1px solid rgba(255,255,255,.20);
+        border:1px solid
+            rgba(255,255,255,.20);
 
         box-shadow:
-            0 0 18px rgba(11,31,77,.35),
-            0 0 35px rgba(11,31,77,.15);
+
+            0 0 18px
+            rgba(11,31,77,.35),
+
+            0 0 35px
+            rgba(11,31,77,.15);
 
     }
 
 }
+
 /* ==================================
    LOWER THIRD
 ================================== */
@@ -5923,145 +7912,412 @@ body.independence-mode .section-summary{
     }
 
 }
+
 /* ==========================================
    VALENTINE MODE
+   (Liquid Pink & Midnight Edition)
 ========================================== */
 
 body.valentine-mode::before{
 
     background-image:
+
         linear-gradient(
             rgba(15,15,15,.55),
             rgba(255,105,180,.32)
         ),
+
         url('images/unnamed.webp');
 
     background-size:cover;
+
     background-position:center;
 
 }
 
 
-/* CARD */
+/* ==========================================
+   CARD LIQUID
+========================================== */
 
 body.valentine-mode .box,
 body.valentine-mode .day,
 body.valentine-mode .datetime-container,
-body.valentine-mode .modal-content,
-body.valentine-mode .learn-modal-content,
 body.valentine-mode .learn-card,
 body.valentine-mode .temperature-calculator,
 body.valentine-mode #ai-analysis-box,
 body.valentine-mode .history-card,
 body.valentine-mode .loading-card{
 
-    background:rgba(18,18,18,.82);
+    background:
 
-    border:1px solid rgba(255,255,255,.14);
+        radial-gradient(
+            ellipse at 20% 20%,
+            rgba(255,105,180,.22),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 80% 70%,
+            rgba(130,30,90,.42),
+            transparent 45%
+        ),
+
+        linear-gradient(
+            145deg,
+            rgba(25,18,35,.96),
+            rgba(65,25,50,.88)
+        );
+
+    background-size:
+
+        180% 180%,
+        160% 160%,
+        100% 100%;
+
+    animation:
+
+        valentineLiquidBackground
+        20s
+        ease-in-out
+        infinite
+        alternate;
+
+    border:1px solid
+        rgba(255,182,193,.22);
 
     backdrop-filter:blur(15px);
+
     -webkit-backdrop-filter:blur(15px);
 
 }
 
 
-/* HEADERS */
+/* ==========================================
+   MODAL
+   TETAP TIDAK LIQUID
+========================================== */
+
+body.valentine-mode .modal-content,
+body.valentine-mode .learn-modal-content{
+
+    background:rgba(18,18,18,.82);
+
+    border:1px solid
+        rgba(255,255,255,.14);
+
+    backdrop-filter:blur(15px);
+
+    -webkit-backdrop-filter:blur(15px);
+
+}
+
+
+/* ==========================================
+   LIQUID ANIMATION
+========================================== */
+
+@keyframes valentineLiquidBackground{
+
+    0%{
+
+        background-position:
+
+            0% 20%,
+            100% 80%,
+            center;
+
+    }
+
+    50%{
+
+        background-position:
+
+            80% 60%,
+            20% 30%,
+            center;
+
+    }
+
+    100%{
+
+        background-position:
+
+            30% 100%,
+            70% 0%,
+            center;
+
+    }
+
+}
+
+
+/* ==========================================
+   HEADERS
+========================================== */
 
 body.valentine-mode .learn-header{
 
-    background:rgba(255,105,180,.18);
+    background:
+
+        linear-gradient(
+            180deg,
+            rgba(255,105,180,.24),
+            rgba(255,255,255,.06)
+        );
 
 }
+
 
 body.valentine-mode .learn-body{
 
-    background:rgba(255,255,255,.04);
+    background:
+
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,.04),
+            rgba(255,105,180,.06)
+        );
 
 }
 
 
-/* DOT */
+/* ==========================================
+   DOT
+========================================== */
 
 body.valentine-mode .dot.active{
 
-    background:#ffd9ea;
+    background:
+
+        linear-gradient(
+            180deg,
+            #ffd9ea,
+            #ffffff
+        );
 
     box-shadow:
-        0 0 12px rgba(255,182,193,.85);
+
+        0 0 12px
+        rgba(255,182,193,.85);
 
 }
 
 
-/* BOX */
+/* ==========================================
+   ACTIVE BOX
+========================================== */
 
 body.valentine-mode .box.active{
 
-    background:#0b1f4d;
+    background:
+
+        radial-gradient(
+            ellipse at 25% 20%,
+            rgba(255,105,180,.25),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 80% 75%,
+            rgba(100,40,130,.42),
+            transparent 45%
+        ),
+
+        #0b1f4d;
+
+    background-size:
+
+        180% 180%,
+        160% 160%,
+        100% 100%;
+
+    animation:
+
+        valentineLiquidBackground
+        20s
+        ease-in-out
+        infinite
+        alternate;
 
     color:#ffffff;
 
-    border:1px solid rgba(255,255,255,.20);
+    border:1px solid
+        rgba(255,255,255,.20);
 
     box-shadow:
-        0 0 18px rgba(11,31,77,.35),
-        0 0 35px rgba(11,31,77,.15);
+
+        0 0 18px
+        rgba(11,31,77,.35),
+
+        0 0 35px
+        rgba(11,31,77,.15);
 
 }
+
+
 body.valentine-mode .box.side{
 
-    background:rgba(24,24,24,.75);
+    background:
+
+        radial-gradient(
+            ellipse at 20% 30%,
+            rgba(255,105,180,.14),
+            transparent 35%
+        ),
+
+        linear-gradient(
+            145deg,
+            rgba(25,18,35,.90),
+            rgba(65,25,50,.78)
+        );
+
+    background-size:
+
+        180% 180%,
+        100% 100%;
+
+    animation:
+
+        valentineLiquidBackground
+        20s
+        ease-in-out
+        infinite
+        alternate;
 
 }
+
 
 body.valentine-mode .box:not(.active):hover,
 body.valentine-mode .learn-card:hover{
 
-    background:rgba(40,30,35,.95);
+    background:
+
+        radial-gradient(
+            ellipse at 30% 20%,
+            rgba(255,105,180,.24),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 80% 70%,
+            rgba(130,30,90,.42),
+            transparent 45%
+        ),
+
+        rgba(40,30,35,.95);
+
+    background-size:
+
+        180% 180%,
+        160% 160%,
+        100% 100%;
 
 }
 
 
-/* AI */
+/* ==========================================
+   AI
+========================================== */
+
+body.valentine-mode #ai-analysis-box{
+
+    background:
+
+        radial-gradient(
+            ellipse at 20% 20%,
+            rgba(255,105,180,.24),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 80% 75%,
+            rgba(130,30,90,.38),
+            transparent 45%
+        ),
+
+        linear-gradient(
+            145deg,
+            rgba(25,18,35,.90),
+            rgba(65,25,50,.78)
+        );
+
+    background-size:
+
+        180% 180%,
+        160% 160%,
+        100% 100%;
+
+    animation:
+
+        valentineLiquidBackground
+        20s
+        ease-in-out
+        infinite
+        alternate;
+
+}
+
 
 body.valentine-mode #ai-analysis-box:hover{
 
     box-shadow:
-        0 12px 35px rgba(255,105,180,.30);
+
+        0 12px 35px
+        rgba(255,105,180,.30);
 
 }
 
 
-/* FLIP */
+/* ==========================================
+   FLIP CARD
+   16 CARD TETAP WARNA ASLI
+========================================== */
 
 body.valentine-mode .temp-front{
 
     filter:brightness(.96);
 
-    border:1.5px solid rgba(255,255,255,.15);
+    border:1.5px solid
+        rgba(255,255,255,.15);
 
     box-shadow:
-        inset 0 1px 2px rgba(255,255,255,.06),
-        inset 0 -2px 6px rgba(0,0,0,.45),
-        0 6px 16px rgba(255,105,180,.18);
+
+        inset 0 1px 2px
+        rgba(255,255,255,.06),
+
+        inset 0 -2px 6px
+        rgba(0,0,0,.45),
+
+        0 6px 16px
+        rgba(255,105,180,.18);
 
 }
+
 
 body.valentine-mode .temp-front::before,
 body.valentine-mode .temp-back::before{
 
     background:
+
         linear-gradient(
             135deg,
+
             rgba(255,255,255,.18),
+
             rgba(255,105,180,.15) 35%,
+
             rgba(255,255,255,0) 70%
+
         );
 
 }
 
+
 body.valentine-mode .temp-back{
 
     background:
+
         linear-gradient(
             145deg,
             #2a2a2a,
@@ -6070,39 +8326,57 @@ body.valentine-mode .temp-back{
 
     color:#ffffff;
 
-    border:1.5px solid rgba(255,255,255,.15);
+    border:1.5px solid
+        rgba(255,255,255,.15);
 
 }
 
 
-/* SEARCH */
+/* ==========================================
+   SEARCH
+========================================== */
 
 body.valentine-mode .learn-search input{
 
-    background:rgba(20,20,20,.92);
+    background:
+
+        rgba(20,20,20,.92);
 
     color:#ffffff;
 
-    border:1px solid rgba(255,255,255,.15);
+    border:1px solid
+        rgba(255,255,255,.15);
 
 }
+
 
 body.valentine-mode .learn-search input::placeholder{
 
-    color:rgba(255,255,255,.50);
+    color:
+        rgba(255,255,255,.50);
 
 }
 
+
 body.valentine-mode .learn-search input:focus{
 
-    background:rgba(30,30,30,.96);
+    background:
+
+        linear-gradient(
+            180deg,
+            rgba(255,105,180,.16),
+            rgba(30,30,30,.96)
+        );
 
     border-color:#ff7eb3;
 
     box-shadow:
-        0 0 15px rgba(255,105,180,.35);
+
+        0 0 15px
+        rgba(255,105,180,.35);
 
 }
+
 
 body.valentine-mode .search-icon svg{
 
@@ -6111,7 +8385,9 @@ body.valentine-mode .search-icon svg{
 }
 
 
-/* HISTORY */
+/* ==========================================
+   HISTORY
+========================================== */
 
 body.valentine-mode .history-title{
 
@@ -6119,11 +8395,13 @@ body.valentine-mode .history-title{
 
 }
 
+
 body.valentine-mode .history-meta{
 
     color:#ffc1da;
 
 }
+
 
 body.valentine-mode .history-description{
 
@@ -6132,51 +8410,129 @@ body.valentine-mode .history-description{
 }
 
 
-/* SUMMARY */
+/* ==========================================
+   SUMMARY
+========================================== */
 
 body.valentine-mode .section-summary{
 
-    background:rgba(255,105,180,.12);
+    background:
 
-    border-left:4px solid #ffd6e7;
+        radial-gradient(
+            ellipse at 20% 20%,
+            rgba(255,105,180,.20),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 80% 70%,
+            rgba(130,30,90,.28),
+            transparent 45%
+        ),
+
+        linear-gradient(
+            145deg,
+            rgba(255,105,180,.10),
+            rgba(18,18,18,.18)
+        );
+
+    background-size:
+
+        180% 180%,
+        160% 160%,
+        100% 100%;
+
+    animation:
+
+        valentineLiquidBackground
+        20s
+        ease-in-out
+        infinite
+        alternate;
+
+    border-left:
+        4px solid
+        #ffd6e7;
 
     color:#ffffff;
 
     box-shadow:
-        inset 0 0 0 1px rgba(255,255,255,.06);
+
+        inset 0 0 0 1px
+        rgba(255,255,255,.06);
 
 }
 
 
-/* MOBILE */
+/* ==========================================
+   MOBILE
+========================================== */
 
 @media(max-width:768px){
 
     body.valentine-mode .history-card{
 
         backdrop-filter:blur(8px);
+
         -webkit-backdrop-filter:blur(8px);
 
         box-shadow:
-            0 6px 16px rgba(255,105,180,.18);
+
+            0 6px 16px
+            rgba(255,105,180,.18);
 
     }
 
+
     body.valentine-mode .box.active{
 
-        background:#0b1f4d;
+        background:
+
+            radial-gradient(
+                ellipse at 25% 20%,
+                rgba(255,105,180,.25),
+                transparent 35%
+            ),
+
+            radial-gradient(
+                ellipse at 80% 75%,
+                rgba(100,40,130,.42),
+                transparent 45%
+            ),
+
+            #0b1f4d;
+
+        background-size:
+
+            180% 180%,
+            160% 160%,
+            100% 100%;
+
+        animation:
+
+            valentineLiquidBackground
+            20s
+            ease-in-out
+            infinite
+            alternate;
 
         color:#ffffff;
 
-        border:1px solid rgba(255,255,255,.20);
+        border:1px solid
+            rgba(255,255,255,.20);
 
         box-shadow:
-            0 0 18px rgba(11,31,77,.35),
-            0 0 35px rgba(11,31,77,.15);
+
+            0 0 18px
+            rgba(11,31,77,.35),
+
+            0 0 35px
+            rgba(11,31,77,.15);
 
     }
 
 }
+
 /* ==========================
    LAZY RENDER
 ========================== */
@@ -6194,63 +8550,152 @@ body.valentine-mode .section-summary{
 
 /* ==========================================
    HALLOWEEN MODE
+   (Liquid Orange & Dark Night Edition)
 ========================================== */
 
 body.halloween-mode::before{
 
-   background-image:
+    background-image:
 
-    linear-gradient(
-        to bottom,
+        linear-gradient(
+            to bottom,
 
-        /* ATAS
-           gambar asli tetap dominan / merah tetap terlihat */
-        rgba(0,0,0,0.00) 0%,
-        rgba(120,20,10,0.05) 18%,
+            rgba(0,0,0,0.00) 0%,
 
-        /* MULAI MASUK MERAH-ORANYE */
-        rgba(190,55,10,0.22) 35%,
+            rgba(120,20,10,0.05) 18%,
 
-        /* TENGAH: ORANYE */
-        rgba(235,95,10,0.55) 52%,
+            rgba(190,55,10,0.22) 35%,
 
-        /* BAWAH TENGAH: ORANYE LEBIH KUAT */
-        rgba(220,75,5,0.78) 68%,
+            rgba(235,95,10,0.55) 52%,
 
-        /* TRANSISI ORANYE KE HITAM */
-        rgba(100,30,10,0.88) 82%,
+            rgba(220,75,5,0.78) 68%,
 
-        /* PALING BAWAH: HITAM */
-        rgba(0,0,0,0.98) 100%
-    ),
+            rgba(100,30,10,0.88) 82%,
 
-    url('images/unnamed.webp');
+            rgba(0,0,0,0.98) 100%
+        ),
 
-background-size:cover;
+        url('images/unnamed.webp');
 
-background-position:center;
+    background-size:cover;
+
+    background-position:center;
+
 }
 
+
 /* ==========================================
-   CARD
+   CARD LIQUID
 ========================================== */
 
 body.halloween-mode .box,
 body.halloween-mode .day,
 body.halloween-mode .datetime-container,
-body.halloween-mode .modal-content,
-body.halloween-mode .learn-modal-content,
 body.halloween-mode .learn-card,
 body.halloween-mode .temperature-calculator,
 body.halloween-mode #ai-analysis-box,
 body.halloween-mode .history-card,
 body.halloween-mode .loading-card{
 
-    background: rgba(22,28,46,.82);
-    border: 1px solid rgba(212,175,55,.42);
+    background:
 
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
+        radial-gradient(
+            ellipse at 20% 20%,
+            rgba(255,95,10,.25),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 80% 70%,
+            rgba(90,20,130,.42),
+            transparent 45%
+        ),
+
+        linear-gradient(
+            145deg,
+            rgba(28,18,20,.96),
+            rgba(60,25,10,.88)
+        );
+
+    background-size:
+
+        180% 180%,
+        160% 160%,
+        100% 100%;
+
+    animation:
+
+        halloweenLiquidBackground
+        20s
+        ease-in-out
+        infinite
+        alternate;
+
+    border:1px solid
+        rgba(255,120,30,.25);
+
+    backdrop-filter:blur(15px);
+
+    -webkit-backdrop-filter:blur(15px);
+
+}
+
+
+/* ==========================================
+   MODAL
+   TETAP TIDAK LIQUID
+========================================== */
+
+body.halloween-mode .modal-content,
+body.halloween-mode .learn-modal-content{
+
+    background:rgba(22,18,20,.88);
+
+    border:1px solid
+        rgba(255,120,30,.18);
+
+    backdrop-filter:blur(15px);
+
+    -webkit-backdrop-filter:blur(15px);
+
+}
+
+
+/* ==========================================
+   LIQUID ANIMATION
+========================================== */
+
+@keyframes halloweenLiquidBackground{
+
+    0%{
+
+        background-position:
+
+            0% 20%,
+            100% 80%,
+            center;
+
+    }
+
+    50%{
+
+        background-position:
+
+            80% 60%,
+            20% 30%,
+            center;
+
+    }
+
+    100%{
+
+        background-position:
+
+            30% 100%,
+            70% 0%,
+            center;
+
+    }
 
 }
 
@@ -6261,25 +8706,29 @@ body.halloween-mode .loading-card{
 
 body.halloween-mode .learn-header{
 
-background:
-    linear-gradient(
-        180deg,
-        rgba(255,193,7,.46),
-        rgba(255,255,255,.06)
-    );
+    background:
+
+        linear-gradient(
+            180deg,
+            rgba(235,95,10,.28),
+            rgba(90,20,130,.16)
+        );
 
 }
+
 
 body.halloween-mode .learn-body{
 
     background:
+
         linear-gradient(
             180deg,
-            rgba(255,245,200,.08),
-            rgba(255,255,255,.04)
+            rgba(255,140,40,.06),
+            rgba(0,0,0,.12)
         );
 
 }
+
 
 /* ==========================================
    DOT
@@ -6288,43 +8737,132 @@ body.halloween-mode .learn-body{
 body.halloween-mode .dot.active{
 
     background:
+
         linear-gradient(
             180deg,
-            #ffd700,
+            #ff9d32,
             #ffffff
         );
 
     box-shadow:
-        0 0 10px rgba(255,215,0,.60);
+
+        0 0 12px
+        rgba(255,95,10,.80);
 
 }
 
+
 /* ==========================================
-   BOX
+   ACTIVE BOX
 ========================================== */
 
 body.halloween-mode .box.active{
 
-    background: #0b1f4d;
+    background:
 
-    color: #ffffff;
+        radial-gradient(
+            ellipse at 25% 20%,
+            rgba(255,95,10,.25),
+            transparent 35%
+        ),
 
-    border: 1px solid rgba(255,255,255,.20);
+        radial-gradient(
+            ellipse at 80% 75%,
+            rgba(90,20,130,.42),
+            transparent 45%
+        ),
+
+        #0b1f4d;
+
+    background-size:
+
+        180% 180%,
+        160% 160%,
+        100% 100%;
+
+    animation:
+
+        halloweenLiquidBackground
+        20s
+        ease-in-out
+        infinite
+        alternate;
+
+    color:#ffffff;
+
+    border:1px solid
+        rgba(255,255,255,.20);
 
     box-shadow:
-        0 0 18px rgba(11,31,77,.35),
-        0 0 35px rgba(11,31,77,.15);
+
+        0 0 18px
+        rgba(11,31,77,.35),
+
+        0 0 35px
+        rgba(11,31,77,.15);
 
 }
+
 
 body.halloween-mode .box.side{
-    background: rgba(22,28,46,.72);
+
+    background:
+
+        radial-gradient(
+            ellipse at 20% 30%,
+            rgba(255,95,10,.14),
+            transparent 35%
+        ),
+
+        linear-gradient(
+            145deg,
+            rgba(28,18,20,.90),
+            rgba(60,25,10,.78)
+        );
+
+    background-size:
+
+        180% 180%,
+        100% 100%;
+
+    animation:
+
+        halloweenLiquidBackground
+        20s
+        ease-in-out
+        infinite
+        alternate;
+
 }
+
 
 body.halloween-mode .box:not(.active):hover,
 body.halloween-mode .learn-card:hover{
-    background: rgba(34,42,64,.92);
+
+    background:
+
+        radial-gradient(
+            ellipse at 30% 20%,
+            rgba(255,95,10,.25),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 80% 70%,
+            rgba(90,20,130,.42),
+            transparent 45%
+        ),
+
+        rgba(34,24,25,.95);
+
+    background-size:
+
+        180% 180%,
+        160% 160%,
+        100% 100%;
+
 }
+
 
 /* ==========================================
    AI
@@ -6333,65 +8871,116 @@ body.halloween-mode .learn-card:hover{
 body.halloween-mode #ai-analysis-box{
 
     background:
+
+        radial-gradient(
+            ellipse at 20% 20%,
+            rgba(255,95,10,.25),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 80% 75%,
+            rgba(90,20,130,.38),
+            transparent 45%
+        ),
+
         linear-gradient(
-            180deg,
-            rgba(255,215,0,.16) 0%,
-            rgba(255,245,200,.10) 45%,
-            rgba(255,255,255,.08) 100%
+            145deg,
+            rgba(28,18,20,.90),
+            rgba(60,25,10,.78)
         );
 
+    background-size:
+
+        180% 180%,
+        160% 160%,
+        100% 100%;
+
+    animation:
+
+        halloweenLiquidBackground
+        20s
+        ease-in-out
+        infinite
+        alternate;
+
 }
+
 
 body.halloween-mode #ai-analysis-box:hover{
 
     box-shadow:
-        0 12px 35px rgba(255,215,0,.22);
+
+        0 12px 35px
+        rgba(255,95,10,.30);
 
 }
 
+
 /* ==========================================
-   FLIP
+   FLIP CARD
+   16 CARD TETAP WARNA ASLI
 ========================================== */
 
 body.halloween-mode .temp-front{
 
-    filter: brightness(.95);
+    filter:brightness(.95);
 
-    border: 1.5px solid rgba(255,215,0,.22);
+    border:1.5px solid
+        rgba(255,120,30,.22);
 
     box-shadow:
-        inset 0 1px 2px rgba(255,255,255,.06),
-        inset 0 -2px 6px rgba(0,0,0,.35),
-        0 6px 16px rgba(255,215,0,.12);
+
+        inset 0 1px 2px
+        rgba(255,255,255,.06),
+
+        inset 0 -2px 6px
+        rgba(0,0,0,.35),
+
+        0 6px 16px
+        rgba(255,95,10,.18);
 
 }
+
 
 body.halloween-mode .temp-front::before,
 body.halloween-mode .temp-back::before{
 
-    background: linear-gradient(
-        135deg,
-        rgba(255,255,255,.18),
-        rgba(255,215,0,.10) 25%,
-        rgba(255,255,255,0) 55%,
-        rgba(255,255,255,.05)
-    );
+    background:
+
+        linear-gradient(
+            135deg,
+
+            rgba(255,255,255,.18),
+
+            rgba(255,95,10,.14) 30%,
+
+            rgba(100,20,130,.12) 60%,
+
+            rgba(255,255,255,0) 75%
+
+        );
 
 }
+
 
 body.halloween-mode .temp-back{
 
-    background: linear-gradient(
-        145deg,
-        #28314a,
-        #171d2d
-    );
+    background:
 
-    color: #f5f5f5;
+        linear-gradient(
+            145deg,
+            #30202d,
+            #110d12
+        );
 
-    border: 1.5px solid rgba(255,215,0,.18);
+    color:#f5f5f5;
+
+    border:1.5px solid
+        rgba(255,120,30,.18);
 
 }
+
 
 /* ==========================================
    SEARCH
@@ -6399,38 +8988,52 @@ body.halloween-mode .temp-back{
 
 body.halloween-mode .learn-search input{
 
-    background: rgba(25,28,45,.88);
-    color: #f8f8f8;
+    background:
 
-    border: 1px solid rgba(255,215,0,.18);
+        rgba(25,20,22,.90);
+
+    color:#f8f8f8;
+
+    border:1px solid
+        rgba(255,120,30,.20);
 
 }
+
 
 body.halloween-mode .learn-search input::placeholder{
-    color: rgba(255,255,255,.45);
+
+    color:
+        rgba(255,255,255,.45);
+
 }
+
 
 body.halloween-mode .learn-search input:focus{
 
     background:
+
         linear-gradient(
             180deg,
-            rgba(255,215,0,.20),
-            rgba(255,255,255,.12)
+            rgba(255,95,10,.18),
+            rgba(35,25,28,.95)
         );
 
-    border-color: #ffd700;
+    border-color:#ff7a18;
 
     box-shadow:
-        0 0 15px rgba(255,215,0,.20);
+
+        0 0 15px
+        rgba(255,95,10,.28);
 
 }
+
 
 body.halloween-mode .search-icon svg{
 
-    stroke: #ffd700 !important;
+    stroke:#ff8a24 !important;
 
 }
+
 
 /* ==========================================
    HISTORY
@@ -6438,19 +9041,21 @@ body.halloween-mode .search-icon svg{
 
 body.halloween-mode .history-title{
 
-    color: #ffe066;
+    color:#ffb347;
 
 }
+
 
 body.halloween-mode .history-meta{
 
-    color: #f4d35e;
+    color:#e69a45;
 
 }
 
+
 body.halloween-mode .history-description{
 
-    color: #f3f3f3;
+    color:#f3f3f3;
 
 }
 
@@ -6461,14 +9066,50 @@ body.halloween-mode .history-description{
 
 body.halloween-mode .section-summary{
 
-    background: rgba(255,224,102,.20);
+    background:
 
-    border-left:4px solid rgba(212,175,55,.90);
+        radial-gradient(
+            ellipse at 20% 20%,
+            rgba(255,95,10,.22),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 80% 70%,
+            rgba(90,20,130,.28),
+            transparent 45%
+        ),
+
+        linear-gradient(
+            145deg,
+            rgba(255,95,10,.10),
+            rgba(20,15,18,.20)
+        );
+
+    background-size:
+
+        180% 180%,
+        160% 160%,
+        100% 100%;
+
+    animation:
+
+        halloweenLiquidBackground
+        20s
+        ease-in-out
+        infinite
+        alternate;
+
+    border-left:
+        4px solid
+        #ff8a24;
 
     color:#f5f5f5;
 
     box-shadow:
-        inset 0 0 0 1px rgba(255,224,102,.20);
+
+        inset 0 0 0 1px
+        rgba(255,120,30,.14);
 
 }
 
@@ -6477,15 +9118,66 @@ body.halloween-mode .section-summary{
    MOBILE
 ========================================== */
 
-@media (max-width:768px){
+@media(max-width:768px){
 
     body.halloween-mode .history-card{
 
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
+        backdrop-filter:blur(8px);
+
+        -webkit-backdrop-filter:blur(8px);
 
         box-shadow:
-            0 6px 16px rgba(255,215,0,.10);
+
+            0 6px 16px
+            rgba(255,95,10,.12);
+
+    }
+
+
+    body.halloween-mode .box.active{
+
+        background:
+
+            radial-gradient(
+                ellipse at 25% 20%,
+                rgba(255,95,10,.25),
+                transparent 35%
+            ),
+
+            radial-gradient(
+                ellipse at 80% 75%,
+                rgba(90,20,130,.42),
+                transparent 45%
+            ),
+
+            #0b1f4d;
+
+        background-size:
+
+            180% 180%,
+            160% 160%,
+            100% 100%;
+
+        animation:
+
+            halloweenLiquidBackground
+            20s
+            ease-in-out
+            infinite
+            alternate;
+
+        color:#ffffff;
+
+        border:1px solid
+            rgba(255,255,255,.20);
+
+        box-shadow:
+
+            0 0 18px
+            rgba(11,31,77,.35),
+
+            0 0 35px
+            rgba(11,31,77,.15);
 
     }
 
@@ -7844,6 +10536,162 @@ body.popup-open {
     bottom: -18%;
 
     transform: rotate(28deg);
+
+}
+
+/* ==========================================
+   NORMAL MODE
+   LIQUID CARD
+========================================== */
+
+body:not(
+    .dark-mode,
+    .weekend-mode,
+    .golden-mode,
+    .christmas-mode,
+    .independence-mode,
+    .newyear-mode,
+    .valentine-mode,
+    .halloween-mode
+) .box,
+body:not(
+    .dark-mode,
+    .weekend-mode,
+    .golden-mode,
+    .christmas-mode,
+    .independence-mode,
+    .newyear-mode,
+    .valentine-mode,
+    .halloween-mode
+) .day,
+body:not(
+    .dark-mode,
+    .weekend-mode,
+    .golden-mode,
+    .christmas-mode,
+    .independence-mode,
+    .newyear-mode,
+    .valentine-mode,
+    .halloween-mode
+) .datetime-container,
+body:not(
+    .dark-mode,
+    .weekend-mode,
+    .golden-mode,
+    .christmas-mode,
+    .independence-mode,
+    .newyear-mode,
+    .valentine-mode,
+    .halloween-mode
+) .learn-card,
+body:not(
+    .dark-mode,
+    .weekend-mode,
+    .golden-mode,
+    .christmas-mode,
+    .independence-mode,
+    .newyear-mode,
+    .valentine-mode,
+    .halloween-mode
+) .temperature-calculator,
+body:not(
+    .dark-mode,
+    .weekend-mode,
+    .golden-mode,
+    .christmas-mode,
+    .independence-mode,
+    .newyear-mode,
+    .valentine-mode,
+    .halloween-mode
+) #ai-analysis-box,
+body:not(
+    .dark-mode,
+    .weekend-mode,
+    .golden-mode,
+    .christmas-mode,
+    .independence-mode,
+    .newyear-mode,
+    .valentine-mode,
+    .halloween-mode
+) .history-card,
+body:not(
+    .dark-mode,
+    .weekend-mode,
+    .golden-mode,
+    .christmas-mode,
+    .independence-mode,
+    .newyear-mode,
+    .valentine-mode,
+    .halloween-mode
+) .loading-card{
+
+    background:
+
+        radial-gradient(
+            ellipse at 20% 20%,
+            rgba(255,255,255,.22),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 80% 70%,
+            rgba(80,130,255,.18),
+            transparent 45%
+        ),
+
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.82),
+            rgba(220,230,255,.75)
+        );
+
+    background-size:
+        180% 180%,
+        160% 160%,
+        100% 100%;
+
+    animation:
+        normalLiquidBackground
+        20s
+        ease-in-out
+        infinite
+        alternate;
+
+}
+
+
+/* ==========================================
+   LIQUID ANIMATION
+========================================== */
+
+@keyframes normalLiquidBackground{
+
+    0%{
+
+        background-position:
+            0% 20%,
+            100% 80%,
+            center;
+
+    }
+
+    50%{
+
+        background-position:
+            80% 60%,
+            20% 30%,
+            center;
+
+    }
+
+    100%{
+
+        background-position:
+            30% 100%,
+            70% 0%,
+            center;
+
+    }
 
 }
 
