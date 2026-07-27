@@ -4413,6 +4413,7 @@ body.golden-mode .section-summary{
 
 }
 
+
 /* ================= FRONT ================= */
 
 .temp-front{
@@ -4479,6 +4480,9 @@ body.golden-mode .section-summary{
     background:#43a047;
 }
 
+
+/* ================= TAMBAHAN ================= */
+
 .temp-flip-card:nth-child(9) .temp-front{
     background:#c2185b;
 }
@@ -4511,68 +4515,6 @@ body.golden-mode .section-summary{
     background:#388e3c;
 }
 
-
-/* ================= LIQUID EFFECT ================= */
-
-.temp-flip-card .temp-front{
-
-    background-image:
-
-        radial-gradient(
-            circle at 20% 20%,
-            rgba(255,255,255,.28),
-            transparent 35%
-        ),
-
-        radial-gradient(
-            circle at 80% 80%,
-            rgba(0,0,0,.20),
-            transparent 45%
-        );
-
-    background-size:
-        180% 180%,
-        160% 160%;
-
-    animation:
-        tempLiquid
-        18s
-        ease-in-out
-        infinite
-        alternate;
-
-}
-
-
-/* ================= ANIMASI ================= */
-
-@keyframes tempLiquid{
-
-    0%{
-
-        background-position:
-            0% 20%,
-            100% 80%;
-
-    }
-
-    50%{
-
-        background-position:
-            80% 60%,
-            20% 30%;
-
-    }
-
-    100%{
-
-        background-position:
-            30% 100%,
-            70% 0%;
-
-    }
-
-}
 
 /* ================= MOBILE ================= */
 
@@ -10541,7 +10483,7 @@ body.popup-open {
 
 /* ==========================================
    NORMAL MODE
-   LIQUID CARD
+   OCEAN TEAL LIQUID CARD
 ========================================== */
 
 body:not(
@@ -10627,23 +10569,29 @@ body:not(
 
     background:
 
+        /* CAHAYA TEAL */
+
         radial-gradient(
             ellipse at 20% 20%,
-            rgba(0,210,255,.55),
+            rgba(45,212,191,.42),
             transparent 38%
         ),
 
+        /* TEAL LIQUID */
+
         radial-gradient(
             ellipse at 80% 70%,
-            rgba(120,70,255,.48),
+            rgba(13,148,136,.38),
             transparent 45%
         ),
 
+        /* DASAR OCEAN TEAL */
+
         linear-gradient(
             145deg,
-            #075985,
-            #164e63,
-            #312e81
+            #07505a,
+            #0d766e,
+            #164f4b
         );
 
     background-size:
@@ -10652,6 +10600,7 @@ body:not(
         100% 100%;
 
     animation:
+
         normalLiquidBackground
         20s
         ease-in-out
