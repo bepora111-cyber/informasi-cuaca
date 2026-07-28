@@ -1331,7 +1331,7 @@ h2{
 }
 #modalTitle{
     white-space: nowrap;
-    font-size: clamp(20px, 4vw, 28px);
+    font-size: clamp(16px, 3vw, 20px);
 }
 .close-btn {
     position: absolute;
@@ -17774,27 +17774,65 @@ function toggleAnalysis(header){
 
 function updateCalendarBackground() {
 
+    const sekarang = new Date();
 
-    const sekarang =
-        new Date();
+    const jam = sekarang.getHours();
 
-
-    const jam =
-        sekarang.getHours();
-
-
-    const paperCalendar =
-        document.querySelector(
-            '.paper-calendar'
-        );
-
+    const paperCalendar = document.querySelector(
+        '.paper-calendar'
+    );
 
     if (!paperCalendar) {
-
         return;
-
     }
 
+    /*
+    ==========================================
+       STOK FOTO SIANG
+    ==========================================
+    */
+
+    const siangPhotos = [
+
+        'images/pngtree-shockingly-overlook-the-day-to-night-city-scenery-of-chengdu-339-image_787294.jpg',
+
+        'images/kotasiang.jfif',
+
+        'images/pngtree-city-noon-liuzhou-city-scenery-rooftop-drone-photography-picture-with-picture-image_795871.jpg',
+
+        'images/kotasianghari.jfif',
+
+        'images/kotasianghari2.jfif'
+
+    ];
+
+    /*
+    ==========================================
+       STOK FOTO MALAM
+    ==========================================
+    */
+
+    const malamPhotos = [
+
+        'images/cityofnight.jfif',
+
+        'images/kotamalamhari.jfif',
+
+        'images/buildings-647400_640.jpg',
+
+        'images/kotamalamhari2.jfif',
+
+        'images/kotamalamhari3.jfif'
+
+    ];
+
+    /*
+    ==========================================
+       TANGGAL HARI INI
+    ==========================================
+    */
+
+    const today = sekarang.toISOString().split("T")[0];
 
     /*
     ==========================================
@@ -17803,25 +17841,62 @@ function updateCalendarBackground() {
     ==========================================
     */
 
-    if (
+    if (jam >= 6 && jam < 18) {
 
-        jam >= 6 &&
-        jam < 18
+        let savedDate =
+            localStorage.getItem(
+                "calendarDayDate"
+            );
 
-    ) {
+        let savedImage =
+            localStorage.getItem(
+                "calendarDayImage"
+            );
 
+        if (
+
+            savedDate !== today ||
+
+            !savedImage
+
+        ) {
+
+            savedImage =
+
+                siangPhotos[
+                    Math.floor(
+                        Math.random() *
+                        siangPhotos.length
+                    )
+                ];
+
+            localStorage.setItem(
+
+                "calendarDayDate",
+
+                today
+
+            );
+
+            localStorage.setItem(
+
+                "calendarDayImage",
+
+                savedImage
+
+            );
+
+        }
 
         paperCalendar.style.setProperty(
 
             '--calendar-background',
 
-            'url("images/pngtree-shockingly-overlook-the-day-to-night-city-scenery-of-chengdu-339-image_787294.jpg")'
+            `url("${savedImage}")`
 
         );
 
-
     }
-
 
     /*
     ==========================================
@@ -17832,20 +17907,62 @@ function updateCalendarBackground() {
 
     else {
 
+        let savedDate =
+            localStorage.getItem(
+                "calendarNightDate"
+            );
+
+        let savedImage =
+            localStorage.getItem(
+                "calendarNightImage"
+            );
+
+        if (
+
+            savedDate !== today ||
+
+            !savedImage
+
+        ) {
+
+            savedImage =
+
+                malamPhotos[
+                    Math.floor(
+                        Math.random() *
+                        malamPhotos.length
+                    )
+                ];
+
+            localStorage.setItem(
+
+                "calendarNightDate",
+
+                today
+
+            );
+
+            localStorage.setItem(
+
+                "calendarNightImage",
+
+                savedImage
+
+            );
+
+        }
 
         paperCalendar.style.setProperty(
 
             '--calendar-background',
 
-            'url("images/cityofnight.jfif")'
+            `url("${savedImage}")`
 
         );
-
 
     }
 
 }
-
 const infoCard = document.querySelector(".info-card");
 
 infoCard.addEventListener("click", () => {
@@ -17939,8 +18056,6 @@ document.addEventListener(
         const bottomAdTexts = [
 
             "Buruan order Batagor Sahabat sekarang 😋",
-
-            "Lagi lapar? Yuk, pesan sekarang!",
 
             "Cita rasa favorit Bandung!",
 
