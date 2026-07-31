@@ -9575,6 +9575,7 @@ body:not(
 
 /* =========================================================
    STICKY GLASS NAVIGATION
+   PREMIUM • SMOOTH • LIGHTWEIGHT
 ========================================================= */
 
 .main-nav{
@@ -9585,6 +9586,11 @@ body:not(
 
     z-index:9999;
 
+
+    /* =====================================================
+       UKURAN
+    ===================================================== */
+
     width:fit-content;
 
     max-width:
@@ -9593,9 +9599,17 @@ body:not(
     margin:
         10px auto 25px;
 
-    border-radius:24px;
+    padding:
+        6px 10px;
 
-    padding:6px 10px;
+    border-radius:
+        24px;
+
+
+    /* =====================================================
+       GLASS BACKGROUND
+       Tetap premium tetapi lebih ringan
+    ===================================================== */
 
     background:
         linear-gradient(
@@ -9604,46 +9618,161 @@ body:not(
             rgba(255,255,255,.06)
         );
 
+
+    /* =====================================================
+       BORDER
+    ===================================================== */
+
     border:
         1px solid
         rgba(255,255,255,.20);
 
-    box-shadow:
-        0 8px 28px
-        rgba(0,0,0,.16),
 
-        inset 0 1px 0
-        rgba(255,255,255,.16);
+    /* =====================================================
+       SHADOW
+       Dirancang supaya tidak terlalu berat
+       di HP spek rendah
+    ===================================================== */
+
+    box-shadow:
+
+        0 6px 20px
+        rgba(0,0,0,.14),
+
+        inset
+        0 1px 0
+        rgba(255,255,255,.15);
+
+
+    /* =====================================================
+       GLASS BLUR
+       9px lebih ringan daripada 14px
+    ===================================================== */
 
     backdrop-filter:
-        blur(14px);
+        blur(9px);
 
     -webkit-backdrop-filter:
-        blur(14px);
+        blur(9px);
+
+
+    /* =====================================================
+       GPU COMPOSITING
+    ===================================================== */
+
+    transform:
+        translate3d(
+            0,
+            0,
+            0
+        );
+
+    -webkit-transform:
+        translate3d(
+            0,
+            0,
+            0
+        );
+
+
+    backface-visibility:
+        hidden;
+
+    -webkit-backface-visibility:
+        hidden;
+
+
+    /* =====================================================
+       HANYA ANIMASIKAN PROPERTI RINGAN
+    ===================================================== */
+
+    transition:
+
+        transform
+        .30s
+        cubic-bezier(
+            .22,
+            1,
+            .36,
+            1
+        ),
+
+        opacity
+        .22s
+        ease;
+
+
+    /*
+     * GPU hanya diprioritaskan selama
+     * nav sedang melakukan transisi.
+     */
+
+    will-change:
+        transform,
+        opacity;
 
 }
 
 
 /* =========================================================
-   SCROLL
+   NAVIGATION SAAT MODAL TERBUKA
+========================================================= */
+
+.main-nav.modal-hidden{
+
+    transform:
+        translate3d(
+            0,
+            -18px,
+            0
+        );
+
+    -webkit-transform:
+        translate3d(
+            0,
+            -18px,
+            0
+        );
+
+    opacity:
+        0;
+
+    visibility:
+        hidden;
+
+    pointer-events:
+        none;
+
+}
+
+/* =========================================================
+   SCROLL AREA
 ========================================================= */
 
 .nav-scroll{
 
-    width:100%;
+    width:
+        100%;
 
-    overflow-x:auto;
-    overflow-y:hidden;
+    overflow-x:
+        auto;
 
-    scrollbar-width:none;
+    overflow-y:
+        hidden;
 
-    -webkit-overflow-scrolling:touch;
+    scrollbar-width:
+        none;
+
+    -webkit-overflow-scrolling:
+        touch;
 
 }
 
+
 .nav-scroll::-webkit-scrollbar{
 
-    display:none;
+    display:
+        none;
 
 }
 
@@ -9654,155 +9783,305 @@ body:not(
 
 .nav-menu{
 
-    position:relative;
+    position:
+        relative;
 
-    display:flex;
+    display:
+        flex;
 
-    align-items:center;
+    align-items:
+        center;
 
-    justify-content:center;
+    justify-content:
+        center;
 
-    width:max-content;
+    width:
+        max-content;
 
-    min-width:0;
+    min-width:
+        0;
 
-    gap:10px;
+    gap:
+        10px;
 
 }
 
 
 /* =========================================================
-   BUTTON
+   NAV BUTTON
 ========================================================= */
 
 .nav-item{
 
-    position:relative;
+    position:
+        relative;
 
-    display:flex;
+    display:
+        flex;
 
-    align-items:center;
+    align-items:
+        center;
 
-    justify-content:center;
+    justify-content:
+        center;
 
-    width:auto;
 
-    min-width:100px;
+    /* =====================================================
+       UKURAN
+    ===================================================== */
 
-    height:42px;
+    width:
+        auto;
 
-    border:0;
+    min-width:
+        100px;
 
-    outline:none;
+    height:
+        42px;
 
-    background:transparent;
 
-    color:inherit;
+    /* =====================================================
+       RESET BUTTON
+    ===================================================== */
 
-    font-family:inherit;
+    border:
+        0;
 
-    font-size:14px;
+    outline:
+        none;
 
-    font-weight:600;
+    background:
+        transparent;
 
-    white-space:nowrap;
+    color:
+        inherit;
 
-    padding:7px 16px;
+    font-family:
+        inherit;
 
-    border-radius:17px;
+    font-size:
+        14px;
 
-    cursor:pointer;
+    font-weight:
+        600;
 
-    opacity:.72;
+    white-space:
+        nowrap;
 
-    perspective:700px;
+    padding:
+        7px 16px;
 
-    transform-style:preserve-3d;
+    border-radius:
+        17px;
+
+    cursor:
+        pointer;
+
+
+    /* =====================================================
+       OPACITY
+    ===================================================== */
+
+    opacity:
+        .72;
+
+
+    /* =====================================================
+       3D FLIP
+    ===================================================== */
+
+    perspective:
+        600px;
+
+    transform-style:
+        preserve-3d;
+
+
+    /* =====================================================
+       TRANSISI RINGAN
+    ===================================================== */
 
     transition:
-        opacity .25s ease,
-        background .25s ease;
+
+        opacity
+        .20s
+        ease,
+
+        background-color
+        .20s
+        ease;
 
 }
 
 
 /* =========================================================
-   TEXT
+   TEXT MENU
 ========================================================= */
 
 .nav-text{
 
-    display:block;
+    display:
+        block;
 
-    white-space:nowrap;
+    white-space:
+        nowrap;
 
-    opacity:1;
+
+    /* =====================================================
+       POSISI AWAL
+    ===================================================== */
+
+    opacity:
+        1;
 
     transform:
+
         translateZ(0)
+
         rotateX(0deg)
+
         scale(1);
 
-    transform-origin:center center;
 
-    backface-visibility:hidden;
+    transform-origin:
+        center center;
 
-    -webkit-backface-visibility:hidden;
+
+    /* =====================================================
+       HILANGKAN BACKFACE
+    ===================================================== */
+
+    backface-visibility:
+        hidden;
+
+    -webkit-backface-visibility:
+        hidden;
+
+
+    /* =====================================================
+       FLIP TRANSITION
+    ===================================================== */
 
     transition:
-        transform .42s
-        cubic-bezier(.22,1,.36,1),
 
-        opacity .18s ease;
+        transform
+        .38s
+        cubic-bezier(
+            .22,
+            1,
+            .36,
+            1
+        ),
+
+        opacity
+        .16s
+        ease;
 
 }
 
 
 /* =========================================================
-   SVG
+   SVG ICON
 ========================================================= */
 
 .nav-icon{
 
-    position:absolute;
+    position:
+        absolute;
 
-    top:50%;
+    top:
+        50%;
 
-    left:50%;
+    left:
+        50%;
 
-    width:25px;
 
-    height:25px;
+    /* =====================================================
+       UKURAN
+    ===================================================== */
 
-    fill:none;
+    width:
+        25px;
 
-    stroke:currentColor;
+    height:
+        25px;
 
-    stroke-width:2.2;
 
-    stroke-linecap:round;
+    /* =====================================================
+       SVG STYLE
+    ===================================================== */
 
-    stroke-linejoin:round;
+    fill:
+        none;
 
-    opacity:0;
+    stroke:
+        currentColor;
+
+    stroke-width:
+        2.2;
+
+    stroke-linecap:
+        round;
+
+    stroke-linejoin:
+        round;
+
+
+    /* =====================================================
+       KONDISI AWAL
+       SVG masih di belakang
+    ===================================================== */
+
+    opacity:
+        0;
 
     transform:
-        translate(-50%,-50%)
+
+        translate(
+            -50%,
+            -50%
+        )
+
         translateZ(0)
+
         rotateX(-90deg)
-        scale(.72);
 
-    transform-origin:center center;
+        scale(.78);
 
-    backface-visibility:hidden;
 
-    -webkit-backface-visibility:hidden;
+    transform-origin:
+        center center;
+
+
+    /* =====================================================
+       BACKFACE
+    ===================================================== */
+
+    backface-visibility:
+        hidden;
+
+    -webkit-backface-visibility:
+        hidden;
+
+
+    /* =====================================================
+       FLIP TRANSITION
+    ===================================================== */
 
     transition:
-        transform .48s
-        cubic-bezier(.22,1,.36,1),
 
-        opacity .18s ease;
+        transform
+        .42s
+        cubic-bezier(
+            .22,
+            1,
+            .36,
+            1
+        ),
+
+        opacity
+        .16s
+        ease;
 
 }
 
@@ -9813,39 +10092,54 @@ body:not(
 
 .nav-item.active{
 
-    opacity:1;
+    opacity:
+        1;
 
 }
 
 
 /* =========================================================
-   TEXT → FLIP KELUAR
+   ACTIVE
+   TEXT FLIP KELUAR
 ========================================================= */
 
 .nav-item.active .nav-text{
 
-    opacity:0;
+    opacity:
+        0;
 
     transform:
+
         translateZ(0)
+
         rotateX(90deg)
-        scale(.72);
+
+        scale(.78);
 
 }
 
 
 /* =========================================================
-   SVG → FLIP MASUK
+   ACTIVE
+   SVG FLIP MASUK
 ========================================================= */
 
 .nav-item.active .nav-icon{
 
-    opacity:1;
+    opacity:
+        1;
 
     transform:
-        translate(-50%,-50%)
+
+        translate(
+            -50%,
+            -50%
+        )
+
         translateZ(0)
+
         rotateX(0deg)
+
         scale(1);
 
 }
@@ -9857,10 +10151,23 @@ body:not(
 
 .nav-item:hover{
 
-    opacity:1;
+    opacity:
+        1;
 
-    background:
+    background-color:
         rgba(255,255,255,.08);
+
+}
+
+
+/* =========================================================
+   ACTIVE + HOVER
+========================================================= */
+
+.nav-item.active:hover{
+
+    background-color:
+        rgba(255,255,255,.06);
 
 }
 
@@ -9871,34 +10178,82 @@ body:not(
 
 .nav-underline{
 
-    position:absolute;
+    position:
+        absolute;
 
-    left:0;
+    left:
+        0;
 
-    bottom:3px;
+    bottom:
+        3px;
 
-    width:0;
+    width:
+        0;
 
-    height:2px;
+    height:
+        2px;
 
-    border-radius:999px;
+    border-radius:
+        999px;
+
+
+    /* =====================================================
+       WARNA
+    ===================================================== */
 
     background:
         rgba(255,255,255,.68);
 
-    box-shadow:
-        0 1px 3px
-        rgba(0,0,0,.18);
 
-    pointer-events:none;
+    /* =====================================================
+       SHADOW RINGAN
+    ===================================================== */
+
+    box-shadow:
+
+        0 1px 3px
+        rgba(0,0,0,.15);
+
+
+    pointer-events:
+        none;
+
+
+    /* =====================================================
+       GPU
+    ===================================================== */
+
+    transform:
+        translate3d(
+            0,
+            0,
+            0
+        );
+
+
+    /* =====================================================
+       TRANSISI
+    ===================================================== */
 
     transition:
 
-        left .42s
-        cubic-bezier(.22,1,.36,1),
+        left
+        .38s
+        cubic-bezier(
+            .22,
+            1,
+            .36,
+            1
+        ),
 
-        width .42s
-        cubic-bezier(.22,1,.36,1);
+        width
+        .38s
+        cubic-bezier(
+            .22,
+            1,
+            .36,
+            1
+        );
 
 }
 
@@ -9922,7 +10277,8 @@ body:not(
 
     .nav-item{
 
-        min-width:90px;
+        min-width:
+            90px;
 
     }
 
@@ -9937,7 +10293,8 @@ body:not(
 
     .main-nav{
 
-        top:7px;
+        top:
+            7px;
 
         max-width:
             calc(100% - 16px);
@@ -9945,28 +10302,44 @@ body:not(
         margin:
             7px auto 20px;
 
-        border-radius:21px;
+        border-radius:
+            21px;
 
         padding:
             5px 7px;
+
+
+        /* =========================
+           BLUR MOBILE
+        ========================= */
+
+        backdrop-filter:
+            blur(8px);
+
+        -webkit-backdrop-filter:
+            blur(8px);
 
     }
 
 
     .nav-menu{
 
-        gap:4px;
+        gap:
+            4px;
 
     }
 
 
     .nav-item{
 
-        min-width:75px;
+        min-width:
+            75px;
 
-        height:40px;
+        height:
+            40px;
 
-        font-size:13px;
+        font-size:
+            13px;
 
         padding:
             7px 12px;
@@ -9976,9 +10349,27 @@ body:not(
 
     .nav-icon{
 
-        width:23px;
+        width:
+            23px;
 
-        height:23px;
+        height:
+            23px;
+
+    }
+
+
+    /* =========================
+       MODAL MOBILE
+    ========================= */
+
+    .main-nav.modal-hidden{
+
+        transform:
+            translate3d(
+                0,
+                -14px,
+                0
+            );
 
     }
 
@@ -10001,18 +10392,22 @@ body:not(
 
     .nav-menu{
 
-        justify-content:flex-start;
+        justify-content:
+            flex-start;
 
     }
 
 
     .nav-item{
 
-        min-width:68px;
+        min-width:
+            68px;
 
-        height:38px;
+        height:
+            38px;
 
-        font-size:12px;
+        font-size:
+            12px;
 
         padding:
             7px 10px;
@@ -10022,9 +10417,39 @@ body:not(
 
     .nav-icon{
 
-        width:21px;
+        width:
+            21px;
 
-        height:21px;
+        height:
+            21px;
+
+    }
+
+
+    /* =====================================================
+       HP SANGAT KECIL
+       BLUR LEBIH RINGAN
+    ===================================================== */
+
+    .main-nav{
+
+        backdrop-filter:
+            blur(6px);
+
+        -webkit-backdrop-filter:
+            blur(6px);
+
+    }
+
+
+    .main-nav.modal-hidden{
+
+        transform:
+            translate3d(
+                0,
+                -12px,
+                0
+            );
 
     }
 
@@ -10037,12 +10462,25 @@ body:not(
 
 @media(prefers-reduced-motion:reduce){
 
+    .main-nav,
     .nav-underline,
     .nav-item,
     .nav-text,
     .nav-icon{
 
-        transition:none !important;
+        transition:
+            none !important;
+
+    }
+
+
+    .main-nav{
+
+        transform:
+            none !important;
+
+        opacity:
+            1 !important;
 
     }
 
@@ -12117,19 +12555,37 @@ function safeInitParticle(boxId, key, type, getValueFn) {
     particleInitState[key] = true;
 }
 function showDetail(type) {
+
+
     if (!globalWeatherData || !globalAirData) return;
+
     isForecastSummary = false;
 
     currentChartType = type;
-    const modal = document.getElementById("detailModal");
+
+    const modal =
+        document.getElementById("detailModal");
+
+
+    document.querySelector(".main-nav")
+        .classList.add("modal-hidden");
+
+
     modal.style.display = "flex";
-    document.getElementById("chartLegend").style.display = "block";
+
+
+    document.getElementById("chartLegend")
+        .style.display = "block";
+
 
     // Reset tombol ke pilihan 'line' setiap kali modal baru dibuka
+
     currentChartStyle = 'line';
+
     resetTabStyles();
 
     renderChartData();
+
 }
 function showForecastDetail(dayIndex){
 
@@ -12290,6 +12746,22 @@ startForecastAnimation();
 
 const modal = document.getElementById("detailModal");
 modal.style.display = "flex";
+
+/* =========================================================
+   SEMBUNYIKAN NAVIGATION
+========================================================= */
+
+const mainNav =
+    document.getElementById("mainNav");
+
+if(mainNav){
+
+    mainNav.classList.add(
+        "modal-hidden"
+    );
+
+}
+
     document.querySelector(".chart-tabs").style.display = "none";
 document.getElementById("container-2d").style.display = "none";
 document.getElementById("container-3d").style.display = "none";
@@ -12965,16 +13437,58 @@ function getHeatColor(value, type){
     return `hsl(0,0%,10%)`;
 }
 function closeModal() {
-    clearInterval(forecastInterval); // hentikan animasi tabel
-    document.getElementById("detailModal").style.display = "none";
 
-    document.querySelector(".chart-tabs").style.display = "flex";
-    document.getElementById("container-2d").style.display = "block";
-    document.getElementById("container-3d").style.display = "none";
-    document.getElementById("container-heatmap").style.display = "none";
-    document.getElementById("chartTitle").style.display = "block";
-    document.getElementById("airLegend").style.display = "none";
+    const modal =
+        document.getElementById("detailModal");
+
+
+    modal.style.display =
+        "none";
+
+
+    document.querySelector(".main-nav")
+        .classList.remove("modal-hidden");
+
+
+    clearInterval(forecastInterval); // hentikan animasi tabel
+
+
+    document.getElementById("detailModal")
+        .style.display =
+        "none";
+
+
+    document.querySelector(".chart-tabs")
+        .style.display =
+        "flex";
+
+
+    document.getElementById("container-2d")
+        .style.display =
+        "block";
+
+
+    document.getElementById("container-3d")
+        .style.display =
+        "none";
+
+
+    document.getElementById("container-heatmap")
+        .style.display =
+        "none";
+
+
+    document.getElementById("chartTitle")
+        .style.display =
+        "block";
+
+
+    document.getElementById("airLegend")
+        .style.display =
+        "none";
+
 }
+
 window.onclick = function(e) { if (e.target == document.getElementById("detailModal")) closeModal(); }
 
 loadData();
@@ -14237,7 +14751,7 @@ const backgrounds = [
 
 "images/al-jabar.jpeg",
 
-"images/Sri_Baduga_Museum.jfif",
+"images/museumsribaduga.jpeg",
 
 "images/stasiun-bandung_169.jpeg",
 
@@ -18464,6 +18978,7 @@ document.addEventListener(
 
 
 })();
+
 
 </script>
 
