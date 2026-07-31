@@ -432,28 +432,15 @@ h2{
 }
 
 
-/* ==========================================
-   KARTU FLIP UTAMA
-========================================== */
-
 .datetime-flip-card{
-
     position:absolute;
-
-    top:20px;
-
-    right:20px;
-
+    top: 70px;
+    right:25px;
     width:280px;
-
     height:100px;
-
     perspective:1000px;
-
     cursor:pointer;
-
     z-index:1000;
-
 }
 
 
@@ -566,6 +553,8 @@ h2{
     border-radius:10px;
 
     backdrop-filter:blur(5px);
+
+    -webkit-backdrop-filter:blur(5px);
 
 }
 
@@ -691,7 +680,6 @@ h2{
     will-change:transform;
 
     transform:
-
         translate3d(0,0,0);
 
     z-index:0;
@@ -718,34 +706,30 @@ h2{
 
 @keyframes calendarBackgroundMove{
 
-
     0%{
 
         transform:
-
             translate3d(-4%,0,0);
 
     }
 
-
     50%{
 
         transform:
-
             translate3d(4%,0,0);
 
     }
 
-
     100%{
 
         transform:
-
             translate3d(-4%,0,0);
 
     }
 
 }
+
+
 /* ==========================================
    TUMPUKAN KALENDER
 ========================================== */
@@ -782,11 +766,6 @@ h2{
 
 /* ==========================================
    LAPISAN KALENDER
-========================================== */
-
-
-/* ==========================================
-   PALING BELAKANG
 ========================================== */
 
 .sheet-12{
@@ -1065,6 +1044,8 @@ h2{
     color:#d32f2f;
 
 }
+
+
 /* ==========================================
    JAM ANALOG
 ========================================== */
@@ -1112,7 +1093,9 @@ h2{
 }
 
 
-/* ANGKA 12 */
+/* ==========================================
+   ANGKA 12
+========================================== */
 
 .number-12{
 
@@ -1125,7 +1108,9 @@ h2{
 }
 
 
-/* ANGKA 3 */
+/* ==========================================
+   ANGKA 3
+========================================== */
 
 .number-3{
 
@@ -1138,7 +1123,9 @@ h2{
 }
 
 
-/* ANGKA 6 */
+/* ==========================================
+   ANGKA 6
+========================================== */
 
 .number-6{
 
@@ -1151,7 +1138,9 @@ h2{
 }
 
 
-/* ANGKA 9 */
+/* ==========================================
+   ANGKA 9
+========================================== */
 
 .number-9{
 
@@ -1282,6 +1271,8 @@ h2{
     z-index:10;
 
 }
+
+
 /* ==========================================
    STYLE POP-UP MODAL GRAFIK
 ========================================== */
@@ -9418,1069 +9409,6 @@ body.popup-open {
 
 }
 
-
-/* ==========================================
-   IKLAN BAWAH LAYAR
-========================================== */
-
-.bottom-ad {
-
-    position: fixed;
-
-    left: 50%;
-
-    bottom: 20px;
-
-    transform: translateX(-50%);
-
-
-    width: min(600px, 92vw);
-
-
-    z-index: 999999;
-
-
-    /* TOMBOL X BOLEH KELUAR */
-
-    overflow: visible;
-
-}
-
-
-/* ==========================================
-   LINK SEBAGAI KOTAK IKLAN
-========================================== */
-
-.bottom-ad a {
-
-    position: relative;
-
-    display: block;
-
-
-    height: 140px;
-
-
-    overflow: hidden;
-
-
-    border-radius: 12px;
-
-}
-
-
-/* ==========================================
-   GAMBAR BACKGROUND UTAMA
-========================================== */
-
-.bottom-ad a > img:first-of-type {
-
-    display: block;
-
-
-    width: 100%;
-
-    height: 100%;
-
-
-    object-fit: cover;
-
-}
-
-
-/* ==========================================
-   GRADIENT DI ATAS GAMBAR
-========================================== */
-
-.bottom-ad a::after {
-
-    content: "";
-
-
-    position: absolute;
-
-    inset: 0;
-
-
-    z-index: 1;
-
-
-    background: linear-gradient(
-
-        120deg,
-
-        rgba(100, 10, 10, 0.78),
-
-        rgba(180, 30, 15, 0.60),
-
-        rgba(230, 90, 20, 0.45),
-
-        rgba(255, 190, 40, 0.55)
-
-    );
-
-
-    pointer-events: none;
-
-}
-
-/* ==========================================
-   LABEL DASAR
-========================================== */
-
-.bottom-ad-label {
-
-    position: absolute;
-
-    z-index: 6;
-
-    pointer-events: none;
-
-}
-
-
-/* ==========================================
-   RECOMMENDED
-   PITA GOLD DIAGONAL
-========================================== */
-
-.bottom-ad-label.recommended {
-
-    left: -42px;
-
-    top: 30px;
-
-
-    width: 165px;
-
-    height: 27px;
-
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-
-    background: linear-gradient(
-
-        90deg,
-
-        #8a5a00 0%,
-
-        #b8860b 12%,
-
-        #d4af37 25%,
-
-        #ffd84d 50%,
-
-        #d4af37 75%,
-
-        #b8860b 88%,
-
-        #8a5a00 100%
-
-    );
-
-
-    color: #ffffff;
-
-
-    font-family:
-
-        Georgia,
-
-        serif;
-
-
-    font-size: 9px;
-
-
-    font-weight: 600;
-
-
-    letter-spacing: 1.5px;
-
-
-    white-space: nowrap;
-
-
-    transform: rotate(-45deg);
-
-
-    box-shadow:
-
-        0 0 4px rgba(
-
-            255,
-
-            200,
-
-            40,
-
-            0.8
-
-        ),
-
-        0 0 9px rgba(
-
-            255,
-
-            180,
-
-            20,
-
-            0.45
-
-        );
-
-}
-
-
-/* ==========================================
-   TOP MENU
-   STEMPEL BULAT
-========================================== */
-
-.bottom-ad-label.top-menu {
-
-    left: 10px;
-
-    top: 15px;
-
-
-    width: 82px;
-
-    height: 82px;
-
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-
-    border: 3px solid rgba(
-
-        255,
-
-        255,
-
-        255,
-
-        0.75
-
-    );
-
-
-    border-radius: 50%;
-
-
-    color: rgba(
-
-        255,
-
-        255,
-
-        255,
-
-        0.85
-
-    );
-
-
-    font-family:
-
-        Georgia,
-
-        serif;
-
-
-    font-size: 12px;
-
-
-    font-weight: 700;
-
-
-    letter-spacing: 1px;
-
-
-    text-align: center;
-
-
-    transform:
-
-        rotate(-18deg)
-
-        scale(2);
-
-
-    opacity: 0;
-
-
-    animation:
-
-        stampIn
-
-        0.45s
-
-        cubic-bezier(
-
-            0.2,
-
-            1.4,
-
-            0.4,
-
-            1
-
-        )
-
-        forwards;
-
-}
-
-
-/* ==========================================
-   GARIS DALAM STEMPEL
-========================================== */
-
-.bottom-ad-label.top-menu::before {
-
-    content: "";
-
-
-    position: absolute;
-
-
-    inset: 5px;
-
-
-    border: 1px dashed rgba(
-
-        255,
-
-        255,
-
-        255,
-
-        0.65
-
-    );
-
-
-    border-radius: 50%;
-
-
-    opacity: 0.7;
-
-}
-
-
-/* ==========================================
-   ANIMASI STEMPEL
-========================================== */
-
-@keyframes stampIn {
-
-    0% {
-
-        opacity: 0;
-
-
-        transform:
-
-            rotate(-25deg)
-
-            scale(2.5);
-
-    }
-
-
-    60% {
-
-        opacity: 0.9;
-
-
-        transform:
-
-            rotate(-18deg)
-
-            scale(0.92);
-
-    }
-
-
-    80% {
-
-        transform:
-
-            rotate(-18deg)
-
-            scale(1.05);
-
-    }
-
-
-    100% {
-
-        opacity: 0.85;
-
-
-        transform:
-
-            rotate(-18deg)
-
-            scale(1);
-
-    }
-
-}
-/* ==========================================
-   CONTAINER TEKS
-========================================== */
-
-.bottom-ad-content {
-
-    position: absolute;
-
-    inset: 0;
-
-    z-index: 3;
-
-    pointer-events: none;
-
-}
-
-
-/* ==========================================
-   NAMA RESTORAN
-   TETAP DI TENGAH
-========================================== */
-
-.bottom-ad-brand {
-
-    position: absolute;
-
-    top: 8px;
-
-    left: 50%;
-
-
-    transform: translateX(-50%);
-
-
-    width: 100%;
-
-
-    color: #ffffff;
-
-
-    font-family:
-
-        Georgia,
-
-        serif;
-
-
-    font-size: clamp(
-
-        10px,
-
-        1.8vw,
-
-        12px
-
-    );
-
-
-    font-weight: 500;
-
-
-    letter-spacing: 1.5px;
-
-
-    text-align: center;
-
-}
-
-
-/* ==========================================
-   GARIS
-   TETAP DI BAWAH NAMA RESTORAN
-========================================== */
-
-.bottom-ad-line {
-
-    position: absolute;
-
-
-    top: 27.5px;
-
-
-    left: 50%;
-
-
-    transform: translateX(-50%);
-
-
-    width: 75px;
-
-
-    height: 1px;
-
-
-    background: rgba(
-
-        255,
-
-        255,
-
-        255,
-
-        0.85
-
-    );
-
-}
-
-
-/* ==========================================
-   TYPEWRITER
-   TETAP DI TENGAH
-========================================== */
-
-.bottom-ad-typewriter {
-
-    position: absolute;
-
-
-    top: 62%;
-
-
-    left: 50%;
-
-
-    transform: translate(
-
-        -50%,
-
-        -50%
-
-    );
-
-
-    width: 70%;
-
-
-    color: #ffffff;
-
-
-    font-family:
-
-        "Fredoka",
-
-        sans-serif;
-
-
-    font-size: clamp(
-
-        18px,
-
-        4vw,
-
-        28px
-
-    );
-
-
-    font-weight: 500;
-
-
-    line-height: 1.25;
-
-
-    text-align: center;
-
-
-    white-space: normal;
-
-
-    overflow-wrap: break-word;
-
-
-    word-break: normal;
-
-
-    pointer-events: none;
-
-}
-/* ==========================================
-   GAMBAR MENU DI KANAN
-========================================== */
-
-.bottom-ad-menu {
-
-    position: absolute;
-
-    right: 8px;
-
-    top: 50%;
-
-
-    width: 80px !important;
-
-    height: 80px !important;
-
-
-    object-fit: contain !important;
-
-
-    z-index: 3;
-
-
-    pointer-events: none;
-
-
-    /* POSISI AWAL */
-
-    opacity: 0;
-
-    transform:
-
-        translateY(-50%)
-
-        scale(0.15);
-
-
-    /* GPU OPTIMIZATION */
-
-    will-change:
-
-        transform,
-
-        opacity;
-
-
-    animation:
-
-        menuPopIn
-
-        0.75s
-
-        cubic-bezier(
-
-            0.34,
-
-            1.56,
-
-            0.64,
-
-            1
-
-        )
-
-        forwards;
-
-}
-
-
-/* ==========================================
-   ANIMASI POP
-========================================== */
-
-@keyframes menuPopIn {
-
-    0% {
-
-        opacity: 0;
-
-        transform:
-
-            translateY(-50%)
-
-            scale(0.15);
-
-    }
-
-
-    55% {
-
-        opacity: 1;
-
-        transform:
-
-            translateY(-50%)
-
-            scale(1.12);
-
-    }
-
-
-    75% {
-
-        transform:
-
-            translateY(-50%)
-
-            scale(0.96);
-
-    }
-
-
-    100% {
-
-        opacity: 1;
-
-        transform:
-
-            translateY(-50%)
-
-            scale(1);
-
-    }
-
-}
-
-/* ==========================================
-   TOMBOL CLOSE
-========================================== */
-
-.bottom-ad-close {
-
-    position: absolute;
-
-
-    top: -12px;
-
-
-    right: -12px;
-
-
-    z-index: 5;
-
-
-    width: 30px;
-
-
-    height: 30px;
-
-
-    border: none;
-
-
-    border-radius: 50%;
-
-
-    background: #000;
-
-
-    color: #fff;
-
-
-    font-size: 22px;
-
-
-    line-height: 30px;
-
-
-    cursor: pointer;
-
-}
-
-
-/* ==========================================
-   RESPONSIVE HP
-========================================== */
-
-@media (max-width: 600px) {
-
-
-    .bottom-ad {
-
-        width: 94vw;
-
-    }
-
-
-    .bottom-ad a {
-
-        height: 110px;
-
-    }
-
-
-     .bottom-ad-menu {
-
-        width: 80px !important;
-
-        height: 80px !important;
-
-        right: 5px;
-
-    }
-
-
-     .bottom-ad-typewriter {
-
-        width: 55%;
-
-        left: 52%;
-
-        top: 60%;
-
-
-        font-size: clamp(
-            14px,
-            4vw,
-            19px
-        );
- line-height: 1.2;
-
-
-        padding-left: 10px;
-
-        padding-right: 10px;
-
-
-        box-sizing: border-box;
-
-    }
-
-
-    .bottom-ad-brand {
-
-        top: 6px;
-
-
-        font-size: 10px;
-
-    }
-
-
-    .bottom-ad-line {
-
-        top: 25px;
-
-
-        width: 65px;
-
-    }
-
-}
- .bottom-ad-menu {
-
-        width: 65px !important;
-
-        height: 65px !important;
-
-        right: 5px;
-
-    }
-
-
-
-
-/* ==========================================
-   AREA DEKORASI
-========================================== */
-
-.bottom-ad-decor {
-
-    position: absolute;
-
-    inset: 0;
-
-    z-index: 1;
-
-    pointer-events: none;
-
-}
-
-
-/* ==========================================
-   SEMUA DEKORASI
-========================================== */
-
-.decor-item {
-
-    position: absolute;
-
-    object-fit: contain;
-
-    opacity: 0.1;
-
-    pointer-events: none;
-
-}
-
-
-/* ==========================================
-   UKURAN LEBIH BESAR
-========================================== */
-
-.decor-fork,
-.decor-spoon {
-
-    width: 52px;
-
-    height: 52px;
-
-}
-
-
-.decor-plate {
-
-    width: 68px;
-
-    height: 68px;
-
-}
-
-/* ==========================================
-   POSISI DEKORASI
-========================================== */
-
-
-/* ---------- ATAS ---------- */
-
-.fork-1 {
-
-    left: -1%;
-
-    top: -10%;
-
-    transform: rotate(-35deg);
-
-}
-
-
-.spoon-1 {
-
-    left: 17%;
-
-    top: -12%;
-
-    transform: rotate(38deg);
-
-}
-
-
-.plate-1 {
-
-    left: 34%;
-
-    top: -15%;
-
-    transform: rotate(-20deg);
-
-}
-
-
-.fork-2 {
-
-    left: 52%;
-
-    top: -10%;
-
-    transform: rotate(28deg);
-
-}
-
-
-/* ---------- TENGAH ---------- */
-
-.spoon-2 {
-
-    left: -3%;
-
-    top: 38%;
-
-    transform: rotate(-30deg);
-
-}
-
-
-.plate-2 {
-
-    left: 22%;
-
-    top: 32%;
-
-    transform: rotate(25deg);
-
-}
-
-
-.fork-3 {
-
-    right: 30%;
-
-    top: 35%;
-
-    transform: rotate(-38deg);
-
-}
-
-
-.spoon-3 {
-
-    right: 10%;
-
-    top: 38%;
-
-    transform: rotate(32deg);
-
-}
-
-
-/* ---------- BAWAH ---------- */
-
-.plate-3 {
-
-    left: 2%;
-
-    bottom: -18%;
-
-    transform: rotate(-25deg);
-
-}
-
-
-.fork-4 {
-
-    left: 23%;
-
-    bottom: -16%;
-
-    transform: rotate(38deg);
-
-}
-
-
-.spoon-4 {
-
-    right: 23%;
-
-    bottom: -15%;
-
-    transform: rotate(-35deg);
-
-}
-
-
-.plate-4 {
-
-    right: 2%;
-
-    bottom: -18%;
-
-    transform: rotate(28deg);
-
-}
-
 /* ==========================================
    NORMAL MODE
    OCEAN TEAL LIQUID CARD
@@ -10645,23 +9573,780 @@ body:not(
 
 }
 
+/* =========================================================
+   STICKY GLASS NAVIGATION
+========================================================= */
+
+.main-nav{
+
+    position:sticky;
+
+    top:10px;
+
+    z-index:9999;
+
+    width:fit-content;
+
+    max-width:
+        calc(100% - 30px);
+
+    margin:
+        10px auto 25px;
+
+    border-radius:24px;
+
+    padding:6px 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.16),
+            rgba(255,255,255,.06)
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,.20);
+
+    box-shadow:
+        0 8px 28px
+        rgba(0,0,0,.16),
+
+        inset 0 1px 0
+        rgba(255,255,255,.16);
+
+    backdrop-filter:
+        blur(14px);
+
+    -webkit-backdrop-filter:
+        blur(14px);
+
+}
+
+
+/* =========================================================
+   SCROLL
+========================================================= */
+
+.nav-scroll{
+
+    width:100%;
+
+    overflow-x:auto;
+    overflow-y:hidden;
+
+    scrollbar-width:none;
+
+    -webkit-overflow-scrolling:touch;
+
+}
+
+.nav-scroll::-webkit-scrollbar{
+
+    display:none;
+
+}
+
+
+/* =========================================================
+   MENU
+========================================================= */
+
+.nav-menu{
+
+    position:relative;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:max-content;
+
+    min-width:0;
+
+    gap:10px;
+
+}
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+.nav-item{
+
+    position:relative;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:auto;
+
+    min-width:100px;
+
+    height:42px;
+
+    border:0;
+
+    outline:none;
+
+    background:transparent;
+
+    color:inherit;
+
+    font-family:inherit;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    white-space:nowrap;
+
+    padding:7px 16px;
+
+    border-radius:17px;
+
+    cursor:pointer;
+
+    opacity:.72;
+
+    perspective:700px;
+
+    transform-style:preserve-3d;
+
+    transition:
+        opacity .25s ease,
+        background .25s ease;
+
+}
+
+
+/* =========================================================
+   TEXT
+========================================================= */
+
+.nav-text{
+
+    display:block;
+
+    white-space:nowrap;
+
+    opacity:1;
+
+    transform:
+        translateZ(0)
+        rotateX(0deg)
+        scale(1);
+
+    transform-origin:center center;
+
+    backface-visibility:hidden;
+
+    -webkit-backface-visibility:hidden;
+
+    transition:
+        transform .42s
+        cubic-bezier(.22,1,.36,1),
+
+        opacity .18s ease;
+
+}
+
+
+/* =========================================================
+   SVG
+========================================================= */
+
+.nav-icon{
+
+    position:absolute;
+
+    top:50%;
+
+    left:50%;
+
+    width:25px;
+
+    height:25px;
+
+    fill:none;
+
+    stroke:currentColor;
+
+    stroke-width:2.2;
+
+    stroke-linecap:round;
+
+    stroke-linejoin:round;
+
+    opacity:0;
+
+    transform:
+        translate(-50%,-50%)
+        translateZ(0)
+        rotateX(-90deg)
+        scale(.72);
+
+    transform-origin:center center;
+
+    backface-visibility:hidden;
+
+    -webkit-backface-visibility:hidden;
+
+    transition:
+        transform .48s
+        cubic-bezier(.22,1,.36,1),
+
+        opacity .18s ease;
+
+}
+
+
+/* =========================================================
+   ACTIVE
+========================================================= */
+
+.nav-item.active{
+
+    opacity:1;
+
+}
+
+
+/* =========================================================
+   TEXT → FLIP KELUAR
+========================================================= */
+
+.nav-item.active .nav-text{
+
+    opacity:0;
+
+    transform:
+        translateZ(0)
+        rotateX(90deg)
+        scale(.72);
+
+}
+
+
+/* =========================================================
+   SVG → FLIP MASUK
+========================================================= */
+
+.nav-item.active .nav-icon{
+
+    opacity:1;
+
+    transform:
+        translate(-50%,-50%)
+        translateZ(0)
+        rotateX(0deg)
+        scale(1);
+
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+.nav-item:hover{
+
+    opacity:1;
+
+    background:
+        rgba(255,255,255,.08);
+
+}
+
+
+/* =========================================================
+   UNDERLINE
+========================================================= */
+
+.nav-underline{
+
+    position:absolute;
+
+    left:0;
+
+    bottom:3px;
+
+    width:0;
+
+    height:2px;
+
+    border-radius:999px;
+
+    background:
+        rgba(255,255,255,.68);
+
+    box-shadow:
+        0 1px 3px
+        rgba(0,0,0,.18);
+
+    pointer-events:none;
+
+    transition:
+
+        left .42s
+        cubic-bezier(.22,1,.36,1),
+
+        width .42s
+        cubic-bezier(.22,1,.36,1);
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media(max-width:900px){
+
+    .main-nav{
+
+        max-width:
+            calc(100% - 24px);
+
+        padding:
+            5px 8px;
+
+    }
+
+
+    .nav-item{
+
+        min-width:90px;
+
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:600px){
+
+    .main-nav{
+
+        top:7px;
+
+        max-width:
+            calc(100% - 16px);
+
+        margin:
+            7px auto 20px;
+
+        border-radius:21px;
+
+        padding:
+            5px 7px;
+
+    }
+
+
+    .nav-menu{
+
+        gap:4px;
+
+    }
+
+
+    .nav-item{
+
+        min-width:75px;
+
+        height:40px;
+
+        font-size:13px;
+
+        padding:
+            7px 12px;
+
+    }
+
+
+    .nav-icon{
+
+        width:23px;
+
+        height:23px;
+
+    }
+
+}
+
+
+/* =========================================================
+   HP KECIL
+========================================================= */
+
+@media(max-width:380px){
+
+    .main-nav{
+
+        max-width:
+            calc(100% - 12px);
+
+    }
+
+
+    .nav-menu{
+
+        justify-content:flex-start;
+
+    }
+
+
+    .nav-item{
+
+        min-width:68px;
+
+        height:38px;
+
+        font-size:12px;
+
+        padding:
+            7px 10px;
+
+    }
+
+
+    .nav-icon{
+
+        width:21px;
+
+        height:21px;
+
+    }
+
+}
+
+
+/* =========================================================
+   REDUCE MOTION
+========================================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+    .nav-underline,
+    .nav-item,
+    .nav-text,
+    .nav-icon{
+
+        transition:none !important;
+
+    }
+
+}
+
 </style>
 </head>
 <body>
 
+<!-- =========================
+     STICKY GLASS NAVIGATION
+========================= -->
 
-<h1>Informasi Cuaca</h1>
-<h2>Kota Bandung</h2>
+<nav class="main-nav" id="mainNav">
 
-<div class="datetime-flip-card" id="datetimeFlipCard">
+    <div class="nav-scroll">
 
-    <div class="datetime-flip-inner">
+        <div class="nav-menu">
+
+            <!-- ================= CUACA ================= -->
+
+            <button
+                class="nav-item active"
+                data-target="weatherSection"
+                aria-label="Cuaca">
+
+                <span class="nav-text">
+                    Cuaca
+                </span>
+
+                <svg
+                    class="nav-icon"
+                    viewBox="0 0 64 64"
+                    aria-hidden="true">
+
+                    <circle
+                        cx="32"
+                        cy="32"
+                        r="9">
+                    </circle>
+
+                    <path d="M32 7v8"></path>
+                    <path d="M32 49v8"></path>
+                    <path d="M7 32h8"></path>
+                    <path d="M49 32h8"></path>
+
+                    <path d="M14 14l6 6"></path>
+                    <path d="M44 44l6 6"></path>
+                    <path d="M50 14l-6 6"></path>
+                    <path d="M20 44l-6 6"></path>
+
+                    <path
+                        d="M18 43
+                           C18 37 22 34 27 34
+                           C29 28 34 25 40 27
+                           C45 28 48 32 48 37
+                           C52 37 55 40 55 44
+                           C55 48 52 51 48 51
+                           H24
+                           C20 51 18 48 18 43Z">
+                    </path>
+
+                </svg>
+
+            </button>
 
 
-        <!-- =========================
+            <!-- ================= PREDIKSI ================= -->
+
+            <button
+                class="nav-item"
+                data-target="forecastSection"
+                aria-label="Prediksi">
+
+                <span class="nav-text">
+                    Prediksi
+                </span>
+
+                <svg
+                    class="nav-icon"
+                    viewBox="0 0 64 64"
+                    aria-hidden="true">
+
+                    <path d="M9 51V13"></path>
+
+                    <path d="M9 51h47"></path>
+
+                    <path
+                        d="M15 42
+                           L25 33
+                           L33 38
+                           L43 22
+                           L54 28">
+                    </path>
+
+                    <circle cx="15" cy="42" r="2"></circle>
+                    <circle cx="25" cy="33" r="2"></circle>
+                    <circle cx="33" cy="38" r="2"></circle>
+                    <circle cx="43" cy="22" r="2"></circle>
+                    <circle cx="54" cy="28" r="2"></circle>
+
+                </svg>
+
+            </button>
+
+
+            <!-- ================= INFORMASI ================= -->
+
+            <button
+                class="nav-item"
+                data-target="infoSection"
+                aria-label="Informasi">
+
+                <span class="nav-text">
+                    Informasi
+                </span>
+
+                <svg
+                    class="nav-icon"
+                    viewBox="0 0 64 64"
+                    aria-hidden="true">
+
+                    <circle
+                        cx="32"
+                        cy="32"
+                        r="24">
+                    </circle>
+
+                    <path d="M32 28v17"></path>
+
+                    <circle
+                        cx="32"
+                        cy="19"
+                        r="2">
+                    </circle>
+
+                </svg>
+
+            </button>
+
+
+            <!-- ================= PELAJARI ================= -->
+
+            <button
+                class="nav-item"
+                data-target="learnSection"
+                aria-label="Pelajari">
+
+                <span class="nav-text">
+                    Pelajari
+                </span>
+
+                <svg
+                    class="nav-icon"
+                    viewBox="0 0 64 64"
+                    aria-hidden="true">
+
+                    <path
+                        d="M10 13
+                           C18 10 25 12 32 17
+                           V53
+                           C25 48 18 47 10 50
+                           Z">
+                    </path>
+
+                    <path
+                        d="M54 13
+                           C46 10 39 12 32 17
+                           V53
+                           C39 48 46 47 54 50
+                           Z">
+                    </path>
+
+                    <path d="M32 17v36"></path>
+
+                </svg>
+
+            </button>
+
+
+            <!-- ================= ON THIS DAY ================= -->
+
+            <button
+                class="nav-item"
+                data-target="onThisDaySection"
+                aria-label="On This Day">
+
+                <span class="nav-text">
+                    On This Day
+                </span>
+
+                <svg
+                    class="nav-icon"
+                    viewBox="0 0 64 64"
+                    aria-hidden="true">
+
+                    <circle
+                        cx="32"
+                        cy="34"
+                        r="21">
+                    </circle>
+
+                    <path d="M32 21v14"></path>
+
+                    <path d="M32 34l10 7"></path>
+
+                    <path d="M13 24H5"></path>
+
+                    <path
+                        d="M5 24
+                           C9 12 20 7 32 7
+                           C42 7 51 12 56 20">
+                    </path>
+
+                    <path d="M5 24l6-6"></path>
+                    <path d="M5 24l7 4"></path>
+
+                </svg>
+
+            </button>
+
+
+            <!-- ================= WORLD TODAY ================= -->
+
+            <button
+                class="nav-item"
+                data-target="worldTodaySection"
+                aria-label="World Today">
+
+                <span class="nav-text">
+                    World Today
+                </span>
+
+                <svg
+                    class="nav-icon"
+                    viewBox="0 0 64 64"
+                    aria-hidden="true">
+
+                    <circle
+                        cx="32"
+                        cy="32"
+                        r="24">
+                    </circle>
+
+                    <path d="M9 32h46"></path>
+
+                    <path
+                        d="M32 8
+                           C23 15 20 23 20 32
+                           C20 41 23 49 32 56">
+                    </path>
+
+                    <path
+                        d="M32 8
+                           C41 15 44 23 44 32
+                           C44 41 41 49 32 56">
+                    </path>
+
+                    <path
+                        d="M13 20
+                           C24 24 40 24 51 20">
+                    </path>
+
+                    <path
+                        d="M13 44
+                           C24 40 40 40 51 44">
+                    </path>
+
+                </svg>
+
+            </button>
+
+
+            <!-- ================= UNDERLINE ================= -->
+
+            <div class="nav-underline"></div>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- =========================
+     WEATHER SECTION
+========================= -->
+
+<section id="weatherSection">
+
+    <h1>Informasi Cuaca</h1>
+
+    <h2>Kota Bandung</h2>
+
+
+    <div
+        class="datetime-flip-card"
+        id="datetimeFlipCard">
+
+        <div class="datetime-flip-inner">
+
+            <!-- =========================
              SISI DEPAN
         ========================== -->
-
         <div class="datetime-face datetime-front">
 
             <div class="datetime-container">
@@ -10919,17 +10604,27 @@ body:not(
     <p id="ai-analysis-text">Menunggu data...</p>
 </div>
 
-<h2 style="margin:40px 0 25px;">Prediksi 7 Hari Ke Depan</h2>
+<section id="forecastSection">
+
+<h2 style="margin:40px 0 25px;">
+    Prediksi 7 Hari Ke Depan
+</h2>
 
 <div class="forecast">
     <div class="forecast-grid" id="forecast"></div>
 </div>
 
+</section>
+
 <!-- =========================
      INFORMASI UMUM
 ========================= -->
 
-<h2 style="margin:40px 0 20px;">Informasi Umum</h2>
+<section id="infoSection">
+
+<h2 style="margin:40px 0 20px;">
+    Informasi Umum
+</h2>
 
 <div class="info-card">
 
@@ -10940,7 +10635,6 @@ body:not(
 
     <div class="info-content">
 
-        <!-- DEPAN -->
         <div class="info-face info-front">
 
             <div class="sun-info sunrise-info">
@@ -10955,8 +10649,6 @@ body:not(
 
         </div>
 
-
-        <!-- BELAKANG -->
         <div class="info-face info-back">
 
             <p id="infoText"></p>
@@ -10966,6 +10658,10 @@ body:not(
     </div>
 
 </div>
+
+</section>
+
+<section id="learnSection">
 
 <h2 style="margin:40px 0 20px;">
     Pelajari Lebih Lanjut
@@ -10992,6 +10688,8 @@ body:not(
     </div>
 
 </div>
+
+</section>
 <div id="learnModal" class="learn-modal">
 
     <div class="learn-modal-content">
@@ -11009,21 +10707,36 @@ body:not(
          ON THIS DAY
     ========================== -->
 
-    <h2 style="margin:20px 0 20px;">On This Day</h2>
+ <section id="onThisDaySection">
 
-    <div id="onThisDayContainer" class="onthisday-grid">
-        <div class="loading-card">Memuat peristiwa hari ini...</div>
+<h2 style="margin:20px 0 20px;">
+    On This Day
+</h2>
+
+<div id="onThisDayContainer" class="onthisday-grid">
+    <div class="loading-card">
+        Memuat peristiwa hari ini...
     </div>
+</div>
 
+</section>
     <!-- =========================
          WORLD TODAY
     ========================== -->
 
-    <h2 style="margin:60px 0 20px;">🌍 World Today</h2>
+   <section id="worldTodaySection">
 
-    <div id="worldTodayContainer" class="onthisday-grid">
-        <div class="loading-card">Memuat berita dunia...</div>
+<h2 style="margin:60px 0 20px;">
+    🌍 World Today
+</h2>
+
+<div id="worldTodayContainer" class="onthisday-grid">
+    <div class="loading-card">
+        Memuat berita dunia...
     </div>
+</div>
+
+</section>
 
 </div> <!-- AKHIR CONTAINER -->
 
@@ -18020,52 +17733,6 @@ document.addEventListener(
 
         ];
 
-
-        /* ==========================================
-           GAMBAR BOTTOM AD
-        ========================================== */
-
-        const bottomAdImage =
-
-            "images/unnamed.webp";
-
-
-        /* ==========================================
-           DAFTAR GAMBAR MENU BOTTOM AD
-        ========================================== */
-
-        const menuImages = [
-
-            "images/basogoreng-removebg-preview.png",
-
-            "images/batagormedium-removebg-preview.png",
-
-            "images/siomaymedium-removebg-preview.png",
-
-            "images/campurtanpabackground.png",
-
-
-
-        ];
-
-
-        /* ==========================================
-           TEKS TYPEWRITER BOTTOM AD
-        ========================================== */
-
-        const bottomAdTexts = [
-
-            "Buruan order Batagor Sahabat sekarang 😋",
-
-            "Cita rasa favorit Bandung!",
-
-            "Cita rasa autentik yang bikin nagih!",
-
-            "Pesan sekarang, jangan sampai kehabisan!"
-
-        ];
-
-
         /* ==========================================
            ACAK GAMBAR POPUP
         ========================================== */
@@ -18092,31 +17759,6 @@ document.addEventListener(
         );
 
 
-        /* ==========================================
-           ACAK TEKS BOTTOM AD
-        ========================================== */
-
-        const randomTextIndex = Math.floor(
-
-            Math.random() *
-
-            bottomAdTexts.length
-
-        );
-
-
-        /* ==========================================
-           ACAK GAMBAR MENU
-        ========================================== */
-
-        const randomMenuIndex = Math.floor(
-
-            Math.random() *
-
-            menuImages.length
-
-        );
-
 
         /* ==========================================
            HASIL AKHIR
@@ -18131,15 +17773,6 @@ document.addEventListener(
 
             popupLinks[randomLinkIndex];
 
-
-        const randomBottomText =
-
-            bottomAdTexts[randomTextIndex];
-
-
-        const randomMenuImage =
-
-            menuImages[randomMenuIndex];
 
 
         /* ==========================================
@@ -18369,35 +18002,6 @@ document.addEventListener(
                     );
 
 
-                    /* ==========================================
-                       TUNGGU 5 MENIT
-                    ========================================== */
-
-                    setTimeout(
-
-                        function () {
-
-
-                            showBottomAd(
-
-                                bottomAdImage,
-
-                                popupLink,
-
-                                randomBottomText,
-
-                                randomMenuImage
-
-                            );
-
-
-                        },
-
-                        300000
-
-                    );
-
-
                 },
 
                 450
@@ -18526,383 +18130,340 @@ document.addEventListener(
 );
 
 
-/* ==========================================
-   FUNGSI BOTTOM AD
-========================================== */
+/* =========================================================
+   STICKY GLASS NAVIGATION
+========================================================= */
 
-function showBottomAd(
+(function(){
 
-    image,
+    const nav =
+        document.getElementById('mainNav');
 
-    link,
+    if(!nav) return;
 
-    text,
 
-    menuImage
+    const navScroll =
+        nav.querySelector('.nav-scroll');
 
-) {
+    const navMenu =
+        nav.querySelector('.nav-menu');
 
+    const navItems =
+        [...nav.querySelectorAll('.nav-item')];
 
-    console.log(
+    const underline =
+        nav.querySelector('.nav-underline');
 
-        "showBottomAd dijalankan"
 
-    );
+    if(
+        !navScroll ||
+        !navMenu ||
+        !underline ||
+        !navItems.length
+    ){
 
-
-   /* ==========================================
-   BUAT ELEMEN BOTTOM AD
-========================================== */
-
-const bottomAd = document.createElement("div");
-
-bottomAd.className = "bottom-ad";
-
-
-/* ==========================================
-   ACAK LABEL IKLAN
-========================================== */
-
-const labelType = Math.random() < 0.5
-
-    ? "recommended"
-
-    : "top-menu";
-
-
-bottomAd.innerHTML = `
-
-
-    <!-- TOMBOL CLOSE -->
-
-    <button
-
-        class="bottom-ad-close"
-
-        aria-label="Tutup iklan"
-
-    >
-
-        ×
-
-    </button>
-
-
-    <!-- LINK IKLAN -->
-
-    <a
-
-        href="${link}"
-
-        target="_blank"
-
-        rel="noopener noreferrer"
-
-    >
-
-
-        <!-- LABEL ACAK -->
-
-        <div class="bottom-ad-label ${labelType}">
-
-            ${
-
-                labelType === "recommended"
-
-                    ? "RECOMMENDED"
-
-                    : "TOP MENU"
-
-            }
-
-        </div>
-
-
-        <!-- GAMBAR BACKGROUND -->
-
-        <img
-
-            src="${image}"
-
-            alt="Batagor Sahabat"
-
-            class="bottom-ad-background"
-
-        >
-
-
-        <!-- GAMBAR MENU ACAK -->
-
-        <img
-
-            src="${menuImage}"
-
-            alt="Menu"
-
-            class="bottom-ad-menu"
-
-        >
-
-
-        <!-- KONTEN IKLAN -->
-
-        <div class="bottom-ad-content">
-
-
-            <!-- DEKORASI TERSEBAR -->
-
-            <div class="bottom-ad-decor">
-
-
-                <!-- ATAS -->
-
-                <img
-
-                    src="images/photo-stainless-steel-pastry-fork-260nw-2746443277-removebg-preview.png"
-
-                    class="decor-item decor-fork fork-1"
-
-                    alt=""
-
-                >
-
-
-                <img
-
-                    src="images/pngtree-sendok-spoon-png-image_4546385-removebg-preview.png"
-
-                    class="decor-item decor-spoon spoon-1"
-
-                    alt=""
-
-                >
-
-
-                <img
-
-                    src="images/19580666b301299-removebg-preview.png"
-
-                    class="decor-item decor-plate plate-1"
-
-                    alt=""
-
-                >
-
-
-                <img
-
-                    src="images/photo-stainless-steel-pastry-fork-260nw-2746443277-removebg-preview.png"
-
-                    class="decor-item decor-fork fork-2"
-
-                    alt=""
-
-                >
-
-
-                <!-- TENGAH -->
-
-                <img
-
-                    src="images/pngtree-sendok-spoon-png-image_4546385-removebg-preview.png"
-
-                    class="decor-item decor-spoon spoon-2"
-
-                    alt=""
-
-                >
-
-
-                <img
-
-                    src="images/19580666b301299-removebg-preview.png"
-
-                    class="decor-item decor-plate plate-2"
-
-                    alt=""
-
-                >
-
-
-                <img
-
-                    src="images/photo-stainless-steel-pastry-fork-260nw-2746443277-removebg-preview.png"
-
-                    class="decor-item decor-fork fork-3"
-
-                    alt=""
-
-                >
-
-
-                <img
-
-                    src="images/pngtree-sendok-spoon-png-image_4546385-removebg-preview.png"
-
-                    class="decor-item decor-spoon spoon-3"
-
-                    alt=""
-
-                >
-
-
-                <!-- BAWAH -->
-
-                <img
-
-                    src="images/19580666b301299-removebg-preview.png"
-
-                    class="decor-item decor-plate plate-3"
-
-                    alt=""
-
-                >
-
-
-                <img
-
-                    src="images/photo-stainless-steel-pastry-fork-260nw-2746443277-removebg-preview.png"
-
-                    class="decor-item decor-fork fork-4"
-
-                    alt=""
-
-                >
-
-
-                <img
-
-                    src="images/pngtree-sendok-spoon-png-image_4546385-removebg-preview.png"
-
-                    class="decor-item decor-spoon spoon-4"
-
-                    alt=""
-
-                >
-
-
-                <img
-
-                    src="images/19580666b301299-removebg-preview.png"
-
-                    class="decor-item decor-plate plate-4"
-
-                    alt=""
-
-                >
-
-
-            </div>
-
-
-            <!-- NAMA RESTORAN -->
-
-            <div class="bottom-ad-brand">
-
-                BATAGOR SAHABAT
-
-            </div>
-
-
-            <!-- GARIS -->
-
-            <div class="bottom-ad-line"></div>
-
-
-            <!-- TYPEWRITER -->
-
-            <div class="bottom-ad-typewriter"></div>
-
-
-        </div>
-
-
-    </a>
-
-
-`;
-
-    /* ==========================================
-       MASUKKAN KE BODY
-    ========================================== */
-
-    document.body.appendChild(
-
-        bottomAd
-
-    );
-
-
-    /* ==========================================
-       TYPEWRITER
-    ========================================== */
-
-    const typewriter =
-
-        bottomAd.querySelector(
-
-            ".bottom-ad-typewriter"
-
-        );
-
-
-    let index = 0;
-
-
-    function typeWriter() {
-
-    if (index < text.length) {
-
-        typewriter.textContent +=
-
-            text.charAt(index);
-
-
-        index++;
-
-
-        setTimeout(
-
-            typeWriter,
-
-            70
-
-        );
+        return;
 
     }
 
+
+    /* =====================================================
+       UNDERLINE
+    ===================================================== */
+
+    function moveUnderline(item){
+
+        if(!item) return;
+
+
+        const menuRect =
+            navMenu.getBoundingClientRect();
+
+        const itemRect =
+            item.getBoundingClientRect();
+
+
+        underline.style.left =
+            (
+                itemRect.left -
+                menuRect.left
+            ) + 'px';
+
+
+        underline.style.width =
+            itemRect.width + 'px';
+
+    }
+
+
+    /* =====================================================
+       CENTER MENU
+    ===================================================== */
+
+    function centerNavItem(item){
+
+        if(!item) return;
+
+
+        const scrollLeft =
+            item.offsetLeft
+            -
+            (
+                navScroll.clientWidth / 2
+            )
+            +
+            (
+                item.offsetWidth / 2
+            );
+
+
+        navScroll.scrollTo({
+
+            left:
+                scrollLeft,
+
+            behavior:
+                'smooth'
+
+        });
+
+    }
+
+
+    /* =====================================================
+       ACTIVE
+    ===================================================== */
+
+    function setActive(item){
+
+    if(!item) return;
+
+
+    navItems.forEach(function(button){
+
+        button.classList.remove('active');
+
+    });
+
+
+    item.classList.add('active');
+
+
+    moveUnderline(item);
+
+
+    centerNavItem(item);
+
 }
-    typeWriter();
+
+    /* =====================================================
+       CLICK
+    ===================================================== */
+
+    navItems.forEach(function(item){
+
+        item.addEventListener(
+            'click',
+            function(){
+
+                const targetId =
+                    item.dataset.target;
 
 
-    /* ==========================================
-       TOMBOL CLOSE BOTTOM AD
-    ========================================== */
-
-    bottomAd
-
-        .querySelector(
-
-            ".bottom-ad-close"
-
-        )
-
-        .addEventListener(
-
-            "click",
-
-            function () {
+                const target =
+                    document.getElementById(
+                        targetId
+                    );
 
 
-                bottomAd.remove();
+                if(!target) return;
 
+
+                setActive(item);
+
+
+                const navHeight =
+                    nav.offsetHeight;
+
+
+                const targetPosition =
+                    target
+                        .getBoundingClientRect()
+                        .top
+                    +
+                    window.scrollY
+                    -
+                    navHeight
+                    -
+                    15;
+
+
+                window.scrollTo({
+
+                    top:
+                        targetPosition,
+
+                    behavior:
+                        'smooth'
+
+                });
+
+            }
+        );
+
+    });
+
+
+    /* =====================================================
+       SECTION
+    ===================================================== */
+
+    const sections =
+        navItems
+        .map(function(item){
+
+            return document.getElementById(
+                item.dataset.target
+            );
+
+        })
+        .filter(Boolean);
+
+
+    /* =====================================================
+       ACTIVE SAAT SCROLL
+    ===================================================== */
+
+    function updateActiveOnScroll(){
+
+        const trigger =
+            nav.offsetHeight + 100;
+
+
+        let currentSection =
+            sections[0];
+
+
+        sections.forEach(function(section){
+
+            const rect =
+                section.getBoundingClientRect();
+
+
+            if(
+                rect.top <= trigger
+            ){
+
+                currentSection =
+                    section;
 
             }
 
-        );
+        });
 
 
-}
+        if(!currentSection) return;
+
+
+        const activeItem =
+            navItems.find(function(item){
+
+                return (
+                    item.dataset.target ===
+                    currentSection.id
+                );
+
+            });
+
+
+        if(
+            activeItem &&
+            !activeItem.classList.contains(
+                'active'
+            )
+        ){
+
+            setActive(activeItem);
+
+        }
+
+    }
+
+
+    /* =====================================================
+       OPTIMIZED SCROLL
+    ===================================================== */
+
+    let ticking = false;
+
+
+    window.addEventListener(
+        'scroll',
+        function(){
+
+            if(ticking) return;
+
+
+            ticking = true;
+
+
+            requestAnimationFrame(
+                function(){
+
+                    updateActiveOnScroll();
+
+                    ticking = false;
+
+                }
+            );
+
+        },
+        {
+            passive:true
+        }
+    );
+
+
+    /* =====================================================
+       RESIZE
+    ===================================================== */
+
+    window.addEventListener(
+        'resize',
+        function(){
+
+            const active =
+                nav.querySelector(
+                    '.nav-item.active'
+                );
+
+
+            if(active){
+
+                moveUnderline(active);
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       INITIAL
+    ===================================================== */
+
+    const initial =
+        nav.querySelector(
+            '.nav-item.active'
+        )
+        ||
+        navItems[0];
+
+
+    setActive(initial);
+
+
+})();
 
 </script>
 
