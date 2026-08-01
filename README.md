@@ -1,7 +1,7 @@
 # ☀️ Informasi Cuaca
 
 <p align="center">
-  <img src="images/ss1.png" width="90%">
+  <img src="images/ss1.webp" width="90%">
 </p>
 
 <h3 align="center">
