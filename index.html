@@ -11,7 +11,7 @@
 <style>
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
 }
 *{
     margin:0;
@@ -434,7 +434,7 @@ h2{
 
 .datetime-flip-card{
     position:absolute;
-    top: 70px;
+    top: 80px;
     right:25px;
     width:280px;
     height:100px;
@@ -10486,6 +10486,369 @@ body:not(
 
 }
 
+/* =========================================================
+   COLLAPSE BUTTON
+========================================================= */
+
+.nav-collapse-btn{
+
+    width:42px;
+    height:42px;
+
+    border:none;
+    outline:none;
+
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    flex-shrink:0;
+
+    position:relative;
+
+    font-size:26px;
+    font-weight:600;
+
+    color:#fff;
+
+    cursor:pointer;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.18),
+            rgba(255,255,255,.08)
+        );
+
+    border:1px solid rgba(255,255,255,.20);
+
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+
+    box-shadow:
+        0 8px 18px rgba(0,0,0,.16),
+        inset 0 1px 0 rgba(255,255,255,.14);
+
+    transition:
+        transform .25s ease,
+        background .25s ease;
+
+}
+
+.nav-collapse-btn:hover{
+
+    transform:scale(1.05);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.22),
+            rgba(255,255,255,.10)
+        );
+
+}
+
+
+/* =========================================================
+   MAIN NAV
+========================================================= */
+
+.main-nav{
+
+    overflow:hidden;
+
+    position:relative;
+
+    transition:
+        width .35s cubic-bezier(.22,1,.36,1),
+        height .35s cubic-bezier(.22,1,.36,1),
+        padding .35s cubic-bezier(.22,1,.36,1),
+        border-radius .35s cubic-bezier(.22,1,.36,1);
+
+}
+
+
+/* =========================================================
+   COLLAPSED
+========================================================= */
+
+.main-nav.collapsed{
+
+    width:60px;
+
+    height:60px;
+
+    padding:0;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+
+/* =========================================================
+   SEMBUNYIKAN MENU
+========================================================= */
+
+.main-nav.collapsed .nav-scroll{
+
+    width:0;
+
+    opacity:0;
+
+    overflow:hidden;
+
+    pointer-events:none;
+
+}
+
+
+.main-nav.collapsed .nav-item,
+
+.main-nav.collapsed .nav-underline{
+
+    opacity:0;
+
+    transform:scale(.85);
+
+    pointer-events:none;
+
+}
+
+
+/* =========================================================
+   TOMBOL DI TENGAH
+========================================================= */
+
+.main-nav.collapsed .nav-collapse-btn{
+
+    position:absolute;
+
+    inset:0;
+
+    margin:auto;
+
+}
+
+
+/* =========================================================
+   BORDER GLASS
+========================================================= */
+
+.main-nav.collapsed::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    border-radius:50%;
+
+    border:1.5px solid rgba(255,255,255,.22);
+
+    box-shadow:
+
+        inset 0 1px 0 rgba(255,255,255,.18),
+
+        0 0 18px rgba(255,255,255,.05);
+
+    pointer-events:none;
+
+}
+
+
+/* =========================================================
+   GLASS
+========================================================= */
+
+.main-nav.collapsed::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:2px;
+
+    border-radius:50%;
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            rgba(255,255,255,.18),
+
+            rgba(255,255,255,.08)
+
+        );
+
+    backdrop-filter:blur(10px);
+
+    -webkit-backdrop-filter:blur(10px);
+
+    box-shadow:
+
+        inset 0 1px 0 rgba(255,255,255,.14);
+
+    z-index:-1;
+
+}
+
+
+/* =========================================================
+   OPTIMASI HP
+========================================================= */
+
+@media (max-width:768px){
+
+    .main-nav{
+
+        backdrop-filter:blur(8px);
+
+        -webkit-backdrop-filter:blur(8px);
+
+    }
+
+    .nav-collapse-btn{
+
+        backdrop-filter:blur(8px);
+
+        -webkit-backdrop-filter:blur(8px);
+
+    }
+
+}
+
+/* =========================================================
+   COLLAPSE BUTTON SEJAJAR DENGAN MENU
+========================================================= */
+
+.main-nav{
+
+    position:sticky;
+    top:10px;
+    z-index:9999;
+
+    display:flex;
+    align-items:center;
+    flex-wrap:nowrap;
+
+    gap:8px;
+
+}
+
+
+/* area menu tetap bisa scroll */
+.nav-scroll{
+
+    flex:1;
+    min-width:0;
+
+}
+
+
+/* tombol - selalu kanan */
+.nav-collapse-btn{
+
+    flex-shrink:0;
+
+}
+
+/* =========================================================
+   OPTIMASI BACKDROP FILTER & SCROLL
+========================================================= */
+
+/* HP */
+@media (max-width:768px){
+
+    .day,
+    .datetime-container,
+    .learn-card,
+    .history-card,
+    .temperature-calculator,
+    .modal-content,
+    .learn-modal-content,
+    #ai-analysis-box{
+
+        backdrop-filter:blur(4px) !important;
+        -webkit-backdrop-filter:blur(4px) !important;
+
+    }
+
+}
+
+/* PC */
+@media (min-width:769px){
+
+    .day,
+    .datetime-container,
+    .learn-card,
+    .history-card,
+    .temperature-calculator,
+    .modal-content,
+    .learn-modal-content,
+    #ai-analysis-box{
+
+        backdrop-filter:blur(6px) !important;
+        -webkit-backdrop-filter:blur(6px) !important;
+
+    }
+
+}
+
+/* Optimasi Rendering */
+
+.box,
+.day,
+.learn-card,
+.history-card,
+.temperature-calculator,
+.modal-content,
+.learn-modal-content,
+#ai-analysis-box{
+
+    will-change:unset !important;
+
+}
+
+.day,
+.learn-card,
+.history-card,
+.temperature-calculator,
+.box{
+
+    content-visibility:auto;
+    contain-intrinsic-size:500px;
+
+}
+
+.box,
+.day,
+.learn-card,
+.history-card,
+.temperature-calculator{
+
+    contain:layout paint;
+
+}
+
+.box,
+.day,
+.learn-card,
+.history-card{
+
+    transform:translateZ(0);
+}
+
 </style>
 </head>
 <body>
@@ -10761,6 +11124,16 @@ body:not(
         </div>
 
     </div>
+  <!-- COLLAPSE BUTTON -->
+    <button
+        type="button"
+        class="nav-collapse-btn"
+        id="navCollapseBtn"
+        aria-label="Collapse Navigation">
+
+        <span id="collapseIcon">−</span>
+
+    </button>
 
 </nav>
 
@@ -18978,7 +19351,30 @@ document.addEventListener(
 
 
 })();
+const nav = document.getElementById("mainNav");
+const btn = document.getElementById("navCollapseBtn");
+const icon = document.getElementById("collapseIcon");
 
+btn.addEventListener("click", function(e){
+
+    e.stopPropagation();
+
+    nav.classList.toggle("collapsed");
+
+    const collapsed =
+        nav.classList.contains("collapsed");
+
+    icon.textContent =
+        collapsed ? "+" : "−";
+
+    btn.setAttribute(
+        "aria-label",
+        collapsed
+            ? "Expand Navigation"
+            : "Collapse Navigation"
+    );
+
+});
 
 </script>
 
