@@ -13195,6 +13195,7 @@ const blinkingPointPlugin = {
     }
 };
 Chart.register(blinkingPointPlugin);
+
 function renderChartData() {
     
     if (!currentChartType) return;
@@ -13382,22 +13383,26 @@ if (type === "temp") {
         penjelasanIndikator[type] || "";
 }
 
-   let chartLabels = [], chartData = [];
+  let chartLabels = [];
+let chartData = [];
+
 for (let i = 0; i < 24; i++) {
+
     if (hourlyArray[i] === undefined || !timesArray[i]) break;
 
-    chartLabels.push(new Date(timesArray[i]).toLocaleTimeString("id-ID", {
-        hour: "2-digit",
-        minute: "2-digit"
-    }));
+    chartLabels.push(
+        new Date(timesArray[i]).toLocaleTimeString("id-ID", {
+            hour: "2-digit",
+            minute: "2-digit"
+        })
+    );
 
     if (type === "aqi") {
-    chartData.push(Math.round(hourlyArray[i]));
-} else {
-    chartData.push(Number(hourlyArray[i].toFixed(2)));
+        chartData.push(Math.round(hourlyArray[i]));
+    } else {
+        chartData.push(Number(hourlyArray[i].toFixed(2)));
+    }
 }
-}
-
     if (myChart) myChart.destroy();
 
     let backgroundColorSetting =
@@ -13412,7 +13417,69 @@ for (let i = 0; i < 24; i++) {
 
     setTimeout(() => {
         const ctx = document.getElementById('hourlyChart').getContext('2d');
+
+        const predictionOverlayPlugin = {
+    id: 'predictionOverlay',
+
+    afterDatasetsDraw(chart) {
+
+        if (currentChartStyle !== 'surface') return;
+
+        const {
+            ctx,
+            chartArea,
+            scales: { x }
+        } = chart;
+
+        const currentHour = new Date().getHours();
+
+        const startX = x.getPixelForValue(currentHour);
+
+        const meta = chart.getDatasetMeta(0);
+
+        if (!meta || !meta.data.length) return;
+
+        const points = meta.data;
+
+        ctx.save();
+
+        // ==========================
+        // Clip mengikuti area grafik
+        // ==========================
+        ctx.beginPath();
+
+        ctx.moveTo(startX, chartArea.bottom);
+
+        for (let i = currentHour; i < points.length; i++) {
+            ctx.lineTo(points[i].x, points[i].y);
+        }
+
+        ctx.lineTo(chartArea.right, chartArea.bottom);
+        ctx.closePath();
+        ctx.clip();
+
+        // ==========================
+        // Arsiran
+        // ==========================
+        ctx.strokeStyle = "rgba(255,255,255,0.28)";
+        ctx.lineWidth = 1;
+
+        for (
+            let i = chartArea.top - 300;
+            i < chartArea.bottom + 300;
+            i += 12
+        ) {
+            ctx.beginPath();
+            ctx.moveTo(startX, i);
+            ctx.lineTo(chartArea.right, i + (chartArea.right - startX));
+            ctx.stroke();
+        }
+
+        ctx.restore();
+    }
+};
         myChart = new Chart(ctx, {
+            plugins: [predictionOverlayPlugin],
             type: 'line',
             data: {
                 labels: chartLabels,
@@ -13517,6 +13584,7 @@ scales: {
         });
     }, 50);
 }
+
 
 // --- FUNGSI BARU UNTUK MERENDER GRAFIK 3D SURFACE ---
 function render3DChart(type) {
@@ -19375,6 +19443,24 @@ btn.addEventListener("click", function(e){
     );
 
 });
+
+function updatePredictionOverlay(){
+
+    if(myChart){
+        myChart.draw();
+    }
+
+    const now = new Date();
+
+    const ms =
+        (60 - now.getMinutes()) * 60000 -
+        now.getSeconds()*1000 -
+        now.getMilliseconds();
+
+    setTimeout(updatePredictionOverlay, ms);
+}
+
+updatePredictionOverlay();
 
 </script>
 
