@@ -12819,17 +12819,17 @@ if (coEl) {
     coEl.style.color = getAirColor(co, "co");
 }
 
-const no2 = Math.round(air.hourly.nitrogen_dioxide?.[hour] ?? 0);
+const no2 = air.hourly.nitrogen_dioxide?.[hour] ?? 0;
 const no2El = document.getElementById("no2");
 if (no2El) {
-    no2El.innerHTML = no2;
+    no2El.innerHTML = no2.toFixed(1);
     no2El.style.color = getAirColor(no2, "no2");
 }
 
-const so2 = Math.round(air.hourly.sulphur_dioxide?.[hour] ?? 0);
+const so2 = air.hourly.sulphur_dioxide?.[hour] ?? 0;
 const so2El = document.getElementById("so2");
 if (so2El) {
-    so2El.innerHTML = so2;
+    so2El.innerHTML = so2.toFixed(1);
     so2El.style.color = getAirColor(so2, "so2");
 }
 
@@ -13431,51 +13431,86 @@ for (let i = 0; i < 24; i++) {
             scales: { x }
         } = chart;
 
-        const currentHour = new Date().getHours();
+       // ==========================
+// Posisi realtime mengikuti jam + menit
+// ==========================
+const currentHour = new Date().getHours();
 
-        const startX = x.getPixelForValue(currentHour);
+const startX = x.getPixelForValue(currentHour);
+const meta = chart.getDatasetMeta(0);
 
-        const meta = chart.getDatasetMeta(0);
+if (!meta || !meta.data.length) return;
 
-        if (!meta || !meta.data.length) return;
+const points = meta.data;
 
-        const points = meta.data;
+ctx.save();
 
-        ctx.save();
+// ==========================
+// Clip mengikuti area grafik
+// ==========================
+ctx.beginPath();
 
-        // ==========================
-        // Clip mengikuti area grafik
-        // ==========================
-        ctx.beginPath();
+ctx.moveTo(startX, chartArea.bottom);
 
-        ctx.moveTo(startX, chartArea.bottom);
+// Hubungkan dari posisi batas ke titik data pertama
+ctx.lineTo(points[currentHour].x, points[currentHour].y);
 
-        for (let i = currentHour; i < points.length; i++) {
-            ctx.lineTo(points[i].x, points[i].y);
-        }
+for (let i = currentHour + 1; i < points.length; i++) {
+    ctx.lineTo(points[i].x, points[i].y);
+}
 
-        ctx.lineTo(chartArea.right, chartArea.bottom);
-        ctx.closePath();
-        ctx.clip();
+ctx.lineTo(chartArea.right, chartArea.bottom);
+ctx.closePath();
+ctx.clip();
 
-        // ==========================
-        // Arsiran
-        // ==========================
-        ctx.strokeStyle = "rgba(255,255,255,0.28)";
-        ctx.lineWidth = 1;
+// ==========================
+// Garis pemisah realtime & prediksi
+// ==========================
+ctx.save();
 
-        for (
-            let i = chartArea.top - 300;
-            i < chartArea.bottom + 300;
-            i += 12
-        ) {
-            ctx.beginPath();
-            ctx.moveTo(startX, i);
-            ctx.lineTo(chartArea.right, i + (chartArea.right - startX));
-            ctx.stroke();
-        }
+ctx.beginPath();
+ctx.strokeStyle = "rgba(255,255,255,0.95)";
+ctx.lineWidth = 2;
 
-        ctx.restore();
+ctx.shadowColor = "rgba(255,255,255,0.8)";
+ctx.shadowBlur = 12;
+
+ctx.moveTo(startX, chartArea.top);
+ctx.lineTo(startX, chartArea.bottom);
+
+ctx.stroke();
+
+ctx.restore();
+
+// ==========================
+// Arsiran
+// ==========================
+ctx.strokeStyle = "rgba(255,255,255,0.28)";
+ctx.lineWidth = 1;
+
+for (
+    let i = chartArea.top - 300;
+    i < chartArea.bottom + 300;
+    i += 12
+) {
+    ctx.beginPath();
+    ctx.moveTo(startX, i);
+    ctx.lineTo(chartArea.right, i + (chartArea.right - startX));
+    ctx.stroke();
+}
+
+// ==========================
+// Redupkan area prediksi
+// ==========================
+ctx.fillStyle = "rgba(0, 0, 0, 0.20)";
+ctx.fillRect(
+    startX,
+    chartArea.top,
+    chartArea.right - startX,
+    chartArea.bottom - chartArea.top
+);
+
+ctx.restore();
     }
 };
         myChart = new Chart(ctx, {
@@ -13568,15 +13603,13 @@ scales: {
     ticks: {
     color: '#bbb',
     callback: function(value) {
-        if (
-            currentChartType === 'precip' ||
-            currentChartType === 'wind'
-        ) {
-            return Number(value).toFixed(2);
-        }
 
-        return Math.round(value);
+    if (currentChartType === 'precip') {
+        return Number(value).toFixed(2);
     }
+
+    return Math.round(value);
+}
     }
 }
                 }
