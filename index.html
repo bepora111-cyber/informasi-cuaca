@@ -10764,6 +10764,29 @@ body:not(
 }
 
 /* =========================================================
+   TOMBOL + REDUP SETELAH 6 DETIK
+========================================================= */
+
+.nav-collapse-btn{
+    opacity:1;
+
+    transition:
+        opacity .35s ease,
+        transform .25s ease,
+        background .25s ease;
+}
+
+.nav-collapse-btn.dimmed{
+    opacity:.5;
+}
+
+/* Saat disentuh / diarahkan kursor, kembali jelas */
+.nav-collapse-btn:hover,
+.nav-collapse-btn:active{
+    opacity:1;
+}
+
+/* =========================================================
    OPTIMASI BACKDROP FILTER & SCROLL
 ========================================================= */
 
@@ -10848,6 +10871,7 @@ body:not(
 
     transform:translateZ(0);
 }
+
 
 </style>
 </head>
@@ -12798,47 +12822,132 @@ safeSet("precip", `${precip.toFixed(2)}`);
 
         updateWindDisplay();
 
-       const pm25 = air.hourly.pm2_5?.[hour] ?? 0;
+// ================================
+// KUALITAS UDARA
+// ANGKA PUTIH • BOX SESUAI INDIKATOR
+// ================================
+
+
+// PM2.5
+const pm25 = air.hourly.pm2_5?.[hour] ?? 0;
+
+
 const pm25El = document.getElementById("pm25");
+const pm25Box = document.getElementById("pm25-box");
+
+
 if (pm25El) {
-    pm25El.innerHTML = pm25.toFixed(1);
-    pm25El.style.color = getAirColor(pm25, "pm25");
+    pm25El.innerHTML = pm25.toFixed(1);
+    pm25El.style.color = "#ffffff";
 }
 
+
+if (pm25Box) {
+    pm25Box.style.background = getAirColor(pm25, "pm25");
+}
+
+
+
+// PM10
 const pm10 = air.hourly.pm10?.[hour] ?? 0;
+
+
 const pm10El = document.getElementById("pm10");
+const pm10Box = document.getElementById("pm10-box");
+
+
 if (pm10El) {
-    pm10El.innerHTML = pm10.toFixed(1);
-    pm10El.style.color = getAirColor(pm10, "pm10");
+    pm10El.innerHTML = pm10.toFixed(1);
+    pm10El.style.color = "#ffffff";
 }
 
-const co = Math.round(air.hourly.carbon_monoxide?.[hour] ?? 0);
+
+if (pm10Box) {
+    pm10Box.style.background = getAirColor(pm10, "pm10");
+}
+
+
+
+// CO
+const co = Math.round(
+    air.hourly.carbon_monoxide?.[hour] ?? 0
+);
+
+
 const coEl = document.getElementById("co");
+const coBox = document.getElementById("co-box");
+
+
 if (coEl) {
-    coEl.innerHTML = co;
-    coEl.style.color = getAirColor(co, "co");
+    coEl.innerHTML = co;
+    coEl.style.color = "#ffffff";
 }
 
+
+if (coBox) {
+    coBox.style.background = getAirColor(co, "co");
+}
+
+
+
+// NO₂
 const no2 = air.hourly.nitrogen_dioxide?.[hour] ?? 0;
+
+
 const no2El = document.getElementById("no2");
+const no2Box = document.getElementById("no2-box");
+
+
 if (no2El) {
-    no2El.innerHTML = no2.toFixed(1);
-    no2El.style.color = getAirColor(no2, "no2");
+    no2El.innerHTML = no2.toFixed(1);
+    no2El.style.color = "#ffffff";
 }
 
+
+if (no2Box) {
+    no2Box.style.background = getAirColor(no2, "no2");
+}
+
+
+
+// SO₂
 const so2 = air.hourly.sulphur_dioxide?.[hour] ?? 0;
+
+
 const so2El = document.getElementById("so2");
+const so2Box = document.getElementById("so2-box");
+
+
 if (so2El) {
-    so2El.innerHTML = so2.toFixed(1);
-    so2El.style.color = getAirColor(so2, "so2");
+    so2El.innerHTML = so2.toFixed(1);
+    so2El.style.color = "#ffffff";
 }
 
-const aqi = air.hourly.us_aqi?.[hour] ?? 0;
-const aqiEl = document.getElementById("aqi");
-if (aqiEl) {
-    aqiEl.innerHTML = aqi;
-    aqiEl.style.color = getAirColor(aqi, "aqi");
+
+if (so2Box) {
+    so2Box.style.background = getAirColor(so2, "so2");
 }
+
+
+
+// AQI
+const aqi = air.hourly.us_aqi?.[hour] ?? 0;
+
+
+const aqiEl = document.getElementById("aqi");
+const aqiBox = document.getElementById("aqi-box");
+
+
+if (aqiEl) {
+    aqiEl.innerHTML = aqi;
+    aqiEl.style.color = "#ffffff";
+}
+
+
+if (aqiBox) {
+    aqiBox.style.background = getAirColor(aqi, "aqi");
+} 
+
 let html = ""; 
 for(let i = 1; i <= 7; i++){
     const hari = new Date(weather.daily.time[i]).toLocaleDateString("id-ID", {
@@ -19494,6 +19603,57 @@ function updatePredictionOverlay(){
 }
 
 updatePredictionOverlay();
+
+/* =========================================================
+   TOMBOL + REDUP SETELAH 6 DETIK
+========================================================= */
+
+const collapseBtn = document.querySelector('.nav-collapse-btn');
+
+let collapseOpacityTimer;
+
+function resetCollapseOpacity(){
+
+    if (!collapseBtn) return;
+
+    collapseBtn.classList.remove('dimmed');
+
+    clearTimeout(collapseOpacityTimer);
+
+    collapseOpacityTimer = setTimeout(() => {
+
+        collapseBtn.classList.add('dimmed');
+
+    }, 6000);
+}
+
+
+/* Saat halaman pertama dibuka */
+resetCollapseOpacity();
+
+
+/* Laptop: saat mouse menyentuh tombol */
+collapseBtn?.addEventListener('mouseenter', () => {
+
+    resetCollapseOpacity();
+
+});
+
+
+/* HP: saat tombol disentuh */
+collapseBtn?.addEventListener('touchstart', () => {
+
+    resetCollapseOpacity();
+
+}, { passive:true });
+
+
+/* Klik juga mereset timer */
+collapseBtn?.addEventListener('click', () => {
+
+    resetCollapseOpacity();
+
+});
 
 </script>
 
