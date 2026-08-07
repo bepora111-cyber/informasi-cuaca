@@ -10873,6 +10873,7 @@ body:not(
 }
 
 
+
 </style>
 </head>
 <body>
@@ -12083,8 +12084,9 @@ function getAirEmoji(value, type){
     if (value <= moderate) return "🟡";
     if (value <= sensitive) return "🟠";
     if (value <= unhealthy) return "🔴";
-    return "⚫";
+    return "🟣";
 }
+
 function getAirColor(value, type){
     let good, moderate, sensitive, unhealthy;
 
@@ -12133,10 +12135,10 @@ function getAirColor(value, type){
     }
 
     if (value <= good) return "#00c853";
-    if (value <= moderate) return "#ffd600";
-    if (value <= sensitive) return "#ff9100";
-    if (value <= unhealthy) return "#ff1744";
-    return "#000000";
+    if (value <= moderate) return "#FFC107";
+    if (value <= sensitive) return "#FF8C00";
+    if (value <= unhealthy) return "#E60032";
+    return "#9500B2";
 }
 function updateAirLegend(type) {
     const legend = document.getElementById("airLegend");
@@ -12217,7 +12219,7 @@ function updateAirLegend(type) {
         </tr>
 
         <tr class="${activeCategory === 'sangatTidakSehat' ? 'blink-row' : ''}">
-            <td>⚫ Sangat Tidak Sehat</td>
+            <td>🟣 Sangat Tidak Sehat</td>
             <td>> ${unhealthy} ${unit}</td>
         </tr>
     </table>
@@ -13983,42 +13985,43 @@ function getHeatColor(value, type){
 
     const [good, moderate, sensitive, unhealthy] = ranges;
 
-    // 🟢 Hijau
-    if(value <= good){
-        const p = value / good;
-        return `hsl(120,100%,${65 - p*20}%)`;
-    }
-
-    // 🟡 Kuning
-    if(value <= moderate){
-        const p =
-            (value - good) /
-            (moderate - good);
-
-        return `hsl(55,100%,${65 - p*20}%)`;
-    }
-
-    // 🟠 Oranye
-    if(value <= sensitive){
-        const p =
-            (value - moderate) /
-            (sensitive - moderate);
-
-        return `hsl(30,100%,${65 - p*20}%)`;
-    }
-
-    // 🔴 Merah
-    if(value <= unhealthy){
-        const p =
-            (value - sensitive) /
-            (unhealthy - sensitive);
-
-        return `hsl(0,100%,${65 - p*20}%)`;
-    }
-
-    // ⚫ Sangat tidak sehat
-    return `hsl(0,0%,10%)`;
+    // 🟢 Hijau — patokan #00c853
+if(value <= good){
+    const p = value / good;
+    return `hsl(149,100%,${65 - p*20}%)`;
 }
+
+// 🟡 Kuning — patokan #FFC107
+if(value <= moderate){
+    const p =
+        (value - good) /
+        (moderate - good);
+
+    return `hsl(45,100%,${65 - p*20}%)`;
+}
+
+// 🟠 Oranye — patokan #FF8C00
+if(value <= sensitive){
+    const p =
+        (value - moderate) /
+        (sensitive - moderate);
+
+    return `hsl(33,100%,${65 - p*20}%)`;
+}
+
+// 🔴 Merah — patokan #E60032
+if(value <= unhealthy){
+    const p =
+        (value - sensitive) /
+        (unhealthy - sensitive);
+
+    return `hsl(347,100%,${65 - p*20}%)`;
+}
+
+// 🟣 Sangat tidak sehat
+return `hsl(280,100%,45%)`;
+}
+
 function closeModal() {
 
     const modal =
@@ -14064,6 +14067,7 @@ function closeModal() {
     document.getElementById("chartTitle")
         .style.display =
         "block";
+
 
 
     document.getElementById("airLegend")
